@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/07/31 15:43:34 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/07/31 17:55:33 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c exec/execution.c builtin/pwd.c builtin/env.c
+SRCS	=	main.c init.c exec/execution.c builtin/pwd.c builtin/env.c env/getenv.c
 
 SRC			= $(addprefix $(SRCDIR)/, $(SRCS))
 
@@ -96,23 +96,23 @@ readline :
 		mkdir ../libs/readline/inc > /dev/null 2>&1; \
 		mv ./*.h ../libs/readline/inc > /dev/null 2>&1; \
 		rm -rf ../$(LIBRLINE); \
-		echo "${BLUE}Readline successfully created 🗄${WHITE}"; \
+		echo "${BLUE}Readline successfully created 🗄${DEFAULT}"; \
 		fi
 
 ${NAME}	:	${BIN}
 	@${MAKELIB}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
-	@echo "${GREEN}Minishell successfully created. 📂${WHITE}"
+	@echo "${GREEN}Minishell successfully created. 📂${DEFAULT}"
 
 clean			:
 	@${MAKELIB} clean
 	@${RM} ${BINDIR}
-	@echo "${YELLOW}Minishell binary files successfully removed 🗑${WHITE}"
+	@echo "${YELLOW}Minishell binary files successfully removed 🗑${DEFAULT}"
 
 fclean			:	clean
 	@${MAKELIB} fclean
 	@${RM} ${NAME}
-	@echo "${RED}Minishell executable successfully removed 🗑${WHITE}"
+	@echo "${RED}Minishell executable successfully removed 🗑${DEFAULT}"
 
 re	 			:	fclean all
 

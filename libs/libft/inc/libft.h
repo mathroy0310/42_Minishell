@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/07/31 14:16:08 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/07/31 17:46:10 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ char				*get_next_line(int fd);
 
 void				ft_free(void **ptr);
 
-//doubbly list dlist
 
+//doubbly list , dlist
 typedef struct s_dlist
 {
 	void			*content;

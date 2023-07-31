@@ -6,13 +6,12 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/07/31 15:50:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/07/31 17:51:20 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
-
 
 typedef enum e_token_type
 {
@@ -51,6 +50,7 @@ typedef struct token
 {
     char *value;
     t_token_type type;
+    t_shell_redirect redirect;
     struct t_token *next;
     struct t_token *prev;
 }           t_token;
@@ -59,9 +59,10 @@ typedef struct minishell
 {
     t_env *env;
     t_token token;
-    signed char exit_status;
+    int  exit_status;
     char **path;
     char *cmd;
+    t_dlist *cmd_list;
     char *pwd;
     char *oldpwd;
 }           t_minishell;
