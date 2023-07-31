@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/07/31 12:15:30 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/07/31 14:16:08 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				**ft_split(char const *s, char c);
-char				*ft_strchr(char *s, int c);
+char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s1);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -102,5 +102,7 @@ void				ft_dlstdelone(t_dlist *lst, void (*del)(void *));
 void				ft_dlstpop_front(t_dlist **head, void (*del)(void *));
 void				ft_dlstpop_back(t_dlist **head, void (*del)(void *));
 void				ft_dlstclearback_addr(t_dlist **lst, void (*del)(void **));
+
+char				*ft_strtok(char *str, const char *delim);
 
 #endif

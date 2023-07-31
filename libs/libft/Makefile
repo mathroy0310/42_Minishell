@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/14 21:56:43 by maroy                                     #
-#    Updated: 2023/07/31 12:34:47 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/07/31 14:14:01 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_SRC		= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 			ft_lstnew.c ft_lstadd_back.c ft_lstdelone.c ft_lstiter.c \
 			ft_dlstnew.c ft_dlstadd_back.c ft_dlstadd_front.c ft_dlstlast.c ft_dlstfirst.c \
 			ft_dlstclear.c ft_dlstdelone.c ft_dlstpop_front.c ft_dlstpop_back.c ft_dlstclearback_addr.c\
-			ft_free.c
+			ft_free.c ft_strtok.c
 SRC			= $(addprefix $(SRC_DIR), $(SRC_SRC))
 
 #--- OBJECTS ---#

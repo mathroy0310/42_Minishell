@@ -6,28 +6,13 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/07/31 12:30:22 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/07/31 15:43:34 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
 
 NAME		=	minishell
-
-#--- LIBRARIES AND HEADERS ---#
-
-LIBDIR	=	libs
-LIBFT	=	${LIBDIR}/libft
-MAKELIB	=	${MAKE} -C ${LIBFT}
-
-HEADER_DIR		= inc/
-HEADER_SRC		= minishell.h
-HEADERS			= $(addprefix $(HEADER_DIR), $(HEADER_SRC))
-LIBFT_HEADER	=	${LIBFT}/libft.h
-
-LIBRLINE = readline-8.2
-LIBRLINE_DIR = ./libs/readline/
-RLINE = $(LIBRLINE_DIR)libreadline.a
 
 #--- COLORS ---#
 
@@ -42,6 +27,24 @@ YELLOW = \033[1;33m
 DARKGRAY= \033[1;30m
 
 DEFAULT = \033[1;30m
+
+#--- LIBRARIES AND HEADERS ---#
+
+HEADER_FILES		= minishell.h typedefs.h
+
+HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
+
+LIBFT	=	${LIBDIR}/libft
+
+MAKELIB	=	${MAKE} -C ${LIBFT}
+
+SLIB_LIBFT	=	${LIBFT}/libft.a
+
+LIBRLINE = readline-8.2
+
+LIBRLINE_DIR = ./libs/readline/
+
+SLIB_RLINE = $(LIBRLINE_DIR)libreadline.a
 
 #--- COMMAND VARIABLES ---#
 
@@ -59,21 +62,25 @@ RM		=	rm -rf
 
 INCDIR	=	inc
 
-SRCDIR	=	src
+LIBDIR	=	libs
 
-SRCS	=	main.c
+SRCDIR	=	src
 
 BINDIR	=	bin
 
-BIN		=	$(addprefix ${BINDIR}/, ${SRCS:.c=.o})
+#--- SOURCES ---#
+SRCS	=	main.c exec/execution.c builtin/pwd.c builtin/env.c
 
-VPATH	=	${SRCDIR}
+SRC			= $(addprefix $(SRCDIR)/, $(SRCS))
+
+BIN         = $(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 #--- RULES ---#
 
-${BINDIR}/%.o	: %.c
-	@echo "${DARKGRAY}Compiling${WHITE}... $(@F)"
-	@${CC} ${CFLAGS} -I${INCDIR} -I${LIBDIR} -I${LIBFT}/inc -c $< -o $@
+bin/%.o: $(SRCDIR)%.c  $(HEADERS)
+	@mkdir -p $(@D)
+	@echo "${DARKGRAY}Compiling${DEFAULT}... $(@F)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all				: readline ${NAME}
 
@@ -92,13 +99,10 @@ readline :
 		echo "${BLUE}Readline successfully created 🗄${WHITE}"; \
 		fi
 
-${NAME}			:	${BINDIR} ${BIN} ${HEADERS} ${LIBDIR_HEADER}
+${NAME}	:	${BIN}
 	@${MAKELIB}
-	@${CC} ${CFLAGS} ${BIN} ${RLLIB} ${RLFLAGS} -o ${NAME} ${LIBFT}/libft.a
+	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
 	@echo "${GREEN}Minishell successfully created. 📂${WHITE}"
-
-${BINDIR}		:
-	@${MK} ${BINDIR}
 
 clean			:
 	@${MAKELIB} clean

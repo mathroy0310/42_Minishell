@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   main.c                                            ██   ██      ██        */
+/*   pwd.c                                             ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/07/31 15:51:18 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/07/31 15:20:18 by maroy                                    */
+/*   Updated: 2023/07/31 15:26:12 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
+int exec_pwd(void)
+{
+    char cwd[PATH_MAX];
 
-/*
-	TODO parsing -> cmds -> shell redirection -> flags - quotes - env - pipes
-*/
-
-
-
-int	main(void)
-{	
-	//t_minishell minishell;
-
-	//minishell.env->value = getenv("PATH");
-
-	//getenv tests
-	printf("PATH : %s\n", getenv("PATH"));
-   	printf("HOME : %s\n", getenv("HOME"));
-   	printf("ROOT : %s\n", getenv("ROOT"));
-	//exec_env(minishell.env);
-	
-	printf("PWD");
-	exec_pwd();
-	return (0);
+    if (getcwd(cwd, PATH_MAX))
+    {
+        ft_putendl_fd(cwd, 1);
+        return (EXIT_SUCCESS);
+    }
+    return (EXIT_FAILURE);
 }
