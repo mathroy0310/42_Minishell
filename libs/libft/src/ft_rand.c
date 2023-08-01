@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   ft_rand.c                                         ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:56:10 by maroy                                    */
+/*   Updated: 2023/08/01 15:56:44 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../inc/libft.h"
 
-int8_t exec_pwd(void)
+int	ft_rand(int min, int max)
 {
-    char cwd[PATH_MAX];
+	int	rand;
+	int	diff;
+	int	div;
+	int	mod;
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+	diff = max - min;
+	div = RAND_MAX / diff;
+	mod = RAND_MAX % diff;
+	rand = min + (int)(random() / div);
+	while (rand > max)
+		rand = min + (int)(random() / div);
+	return (rand);
 }

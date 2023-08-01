@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   signal.c                                          ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 13:25:54 by maroy                                    */
+/*   Updated: 2023/08/01 14:10:17 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+# include "../inc/minishell.h"
 
-int8_t exec_pwd(void)
+static void	signal_handler(int sig)
 {
-    char cwd[PATH_MAX];
+	if (sig == SIGINT)
+		printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+void	set_signal(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
 }

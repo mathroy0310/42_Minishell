@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   ft_pow.c                                          ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:22:09 by maroy                                    */
+/*   Updated: 2023/08/01 15:22:23 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../inc/libft.h"
 
-int8_t exec_pwd(void)
+double	ft_pow(double x, double y)
 {
-    char cwd[PATH_MAX];
+	double result;
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+	result = 1;
+	while (y > 0)
+	{
+		result *= x;
+		y--;
+	}
+	return (result);
 }

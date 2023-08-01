@@ -6,13 +6,22 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 16:21:04 by maroy                                    */
-/*   Updated: 2023/07/31 16:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/01 12:52:59 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+typedef enum e_builtin
+{
+    ENV,
+    EXPORT,
+    UNSET,
+    CD,
+    PWD,
+    EXIT
+}			t_builtin;
 
-static int is_builtin(char * cmd)
+static int8_t is_builtin(char * cmd)
 {
 	if (ft_strcmp(cmd, "env") == 0)
 		return (ENV);
@@ -26,11 +35,11 @@ static int is_builtin(char * cmd)
 		return (PWD);
 	else if (ft_strcmp(cmd, "exit") == 0)
 		return (EXIT);
-	return (-1);
+	return (NONE);
 }
 
 //TODO -- fonction pour chaque builtin
-static int	exec_builtin(t_minishell *minishell, int builtin_type)
+static int8_t	exec_builtin(t_minishell *minishell, int builtin_type)
 {
 	int result;
 
@@ -51,12 +60,12 @@ static int	exec_builtin(t_minishell *minishell, int builtin_type)
 	return (result);
 }
 
-int	exec_cmd(t_minishell *minishell)
+int8_t	exec_cmd(t_minishell *minishell)
 {
-	int builtin_type;
+	int8_t builtin_type;
 	
 	builtin_type = is_builtin(minishell->cmd);
-	if (builtin_type > 0)
+	if (builtin_type == NONE)
 		return (exec_builtin(minishell, builtin_type));
 	else
 		return (exec_bin());

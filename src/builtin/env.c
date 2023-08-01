@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 15:20:11 by maroy                                    */
-/*   Updated: 2023/07/31 17:42:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/01 12:40:54 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int exec_env(t_env *env)
+int8_t exec_env(t_env *env)
 {
     while (env && env->next != NULL)
     {

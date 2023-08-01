@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   ft_sqrt.c                                         ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:22:36 by maroy                                    */
+/*   Updated: 2023/08/01 15:25:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../inc/libft.h"
 
-int8_t exec_pwd(void)
+double	ft_sqrt(double nb)
 {
-    char cwd[PATH_MAX];
+	int	i;
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+	i = 1;
+	if (nb <= 0)
+		return (0);
+	while (i * i < nb && i < 46341)
+		i++;
+	if (i * i == nb)
+		return (i);
+	return (0);
 }

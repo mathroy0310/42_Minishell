@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/07/31 17:55:33 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/08/01 14:59:21 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SLIB_RLINE = $(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 -fsanitize=address
 
 RLFLAGS	=	-lreadline -lcurses
 
@@ -69,7 +69,10 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c exec/execution.c builtin/pwd.c builtin/env.c env/getenv.c
+SRCS	=	main.c init.c signal.c \
+			exec/execution.c \
+			builtin/pwd.c builtin/env.c \
+			env/getenv.c
 
 SRC			= $(addprefix $(SRCDIR)/, $(SRCS))
 

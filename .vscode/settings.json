@@ -23,9 +23,18 @@
         "system_error": "c",
         "tuple": "c",
         "type_traits": "c",
-        "vector": "c"
+        "vector": "c",
+        "_size_t.h": "c",
+        "__locale": "c",
+        "cstdlib": "c",
+        "ostream": "c",
+        "typeinfo": "c",
+        "complex": "c",
+        "new": "c"
     },
     "cSpell.words": [
+        "dlist",
+        "dlstclearback",
         "minishell"
     ]
 }

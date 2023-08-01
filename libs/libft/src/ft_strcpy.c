@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   ft_strcpy.c                                       ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:41:01 by maroy                                    */
+/*   Updated: 2023/08/01 15:41:16 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../inc/libft.h"
 
-int8_t exec_pwd(void)
+char	*ft_strcpy(char *dest, const char *src)
 {
-    char cwd[PATH_MAX];
+	size_t	i;
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

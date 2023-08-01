@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   pwd.c                                             ██   ██      ██        */
+/*   ft_strcmp.c                                       ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/08/01 12:40:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:44:45 by maroy                                    */
+/*   Updated: 2023/08/01 15:45:03 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../inc/libft.h"
 
-int8_t exec_pwd(void)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    char cwd[PATH_MAX];
+	size_t i;
+	size_t s1_len;
+	size_t s2_len;
 
-    if (getcwd(cwd, PATH_MAX))
-    {
-        ft_putendl_fd(cwd, 1);
-        return (EXIT_SUCCESS);
-    }
-    return (EXIT_FAILURE);
+	i = 0;
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	while (i < s1_len && i < s2_len)
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i] < 0 ? -1 : 1);
+		++i;
+	}
+	if (s1_len != s2_len)
+		return (s1_len - s2_len < 0 ? -1 : 1);
+	return (0);
 }
