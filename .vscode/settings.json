@@ -30,7 +30,8 @@
         "ostream": "c",
         "typeinfo": "c",
         "complex": "c",
-        "new": "c"
+        "new": "c",
+        "_mcontext.h": "c"
     },
     "cSpell.words": [
         "dlist",

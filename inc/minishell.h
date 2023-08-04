@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/01 13:58:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/04 13:33:26 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@
  *-- Error messages -- 
  */
 
-# define ERROR_RL_H "\033[1;31m ERROR 🛑 : Failed to read history file \n\033[0m"
 
 /* 
 * -- Global defines -- 
 */
 
-# define HISTORY_FILE ".minishell_history"
 # define PROMPT "minishell$ "
 # define NONE -1
+
 # define OK 1
 # define KO 0
 
@@ -40,11 +39,12 @@
 * -- libc Includes -- 
 */
 
+# include <errno.h> // pour errno
 # include <stdint.h>
-# include <limits.h> // Inclusion de <limits.h> pour PATH_MAX
+# include <limits.h> // pour PATH_MAX
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
+# include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <termios.h>
 
 /*
@@ -69,10 +69,10 @@
 */
 
 // Getenv
-void init_env(t_env *env);
+void init_env(t_minishell *minishell, char **envp);
 
 // Init
-int8_t init(t_minishell *minishell);
+int8_t init(t_minishell *minishell, char **envp);
 
 // Builtins
 int8_t exec_env(t_env *env);

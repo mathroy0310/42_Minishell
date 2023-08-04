@@ -6,23 +6,23 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/08/01 14:59:21 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/08/03 11:55:55 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
 
-NAME		=	minishell
+NAME	=	minishell
 
 #--- COLORS ---#
 
-RED = \033[1;31m
+RED		= \033[1;31m
 
-GREEN = \033[1;32m
+GREEN	= \033[1;32m
 
-BLUE = \033[1;34m
+BLUE	= \033[1;34m
 
-YELLOW = \033[1;33m
+YELLOW	= \033[1;33m
 
 DARKGRAY= \033[1;30m
 
@@ -30,21 +30,21 @@ DEFAULT = \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES		= minishell.h typedefs.h
+HEADER_FILES	= minishell.h typedefs.h
 
 HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
 
-LIBFT	=	${LIBDIR}/libft
+LIBFT			=	${LIBDIR}/libft
 
-MAKELIB	=	${MAKE} -C ${LIBFT}
+MAKELIB			=	${MAKE} -C ${LIBFT}
 
-SLIB_LIBFT	=	${LIBFT}/libft.a
+SLIB_LIBFT		=	${LIBFT}/libft.a
 
-LIBRLINE = readline-8.2
+LIBRLINE 		= readline-8.2
 
-LIBRLINE_DIR = ./libs/readline/
+LIBRLINE_DIR 	= ./libs/readline/
 
-SLIB_RLINE = $(LIBRLINE_DIR)libreadline.a
+SLIB_RLINE 		= $(LIBRLINE_DIR)libreadline.a
 
 #--- COMMAND VARIABLES ---#
 
@@ -69,25 +69,25 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c signal.c \
+SRCS	=	main.c init.c signals.c \
 			exec/execution.c \
 			builtin/pwd.c builtin/env.c \
 			env/getenv.c
 
-SRC			= $(addprefix $(SRCDIR)/, $(SRCS))
+SRC		= $(addprefix $(SRCDIR)/, $(SRCS))
 
-BIN         = $(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
+BIN     = $(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 #--- RULES ---#
 
-bin/%.o: $(SRCDIR)%.c  $(HEADERS)
+bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@mkdir -p $(@D)
-	@echo "${DARKGRAY}Compiling${DEFAULT}... $(@F)"
+	@echo "${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all				: readline ${NAME}
+all			: readline ${NAME}
 
-readline :
+readline	:
 	@if [ ! -f ./libs/readline/libreadline.a ]; then \
 		echo "${BLUE}Installing Readline ... ${DARKGRAY}"; \
 		mkdir -p $(LIBRLINE_DIR); \
@@ -102,27 +102,28 @@ readline :
 		echo "${BLUE}Readline successfully created 🗄${DEFAULT}"; \
 		fi
 
-${NAME}	:	${BIN}
+${NAME}		:	${BIN}
 	@${MAKELIB}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
 	@echo "${GREEN}Minishell successfully created. 📂${DEFAULT}"
 
-clean			:
+clean		:
 	@${MAKELIB} clean
 	@${RM} ${BINDIR}
 	@echo "${YELLOW}Minishell binary files successfully removed 🗑${DEFAULT}"
 
-fclean			:	clean
+fclean		:	clean
 	@${MAKELIB} fclean
 	@${RM} ${NAME}
 	@echo "${RED}Minishell executable successfully removed 🗑${DEFAULT}"
 
-re	 			:	fclean all
+re	 		:	fclean all
 
-bonus			:	all
+bonus		:	all
 
-norm:
+norm		:
 	@echo "$(DARKGRAY)norminette! $(DEFAULT)"
 	@norminette $(INCDIR) $(SRCDIR) $(LIBFT)/src $(LIBFT)/inc
 
-.PHONY	 		:	all clean fclean re readline norm bonus
+#--- PHONY ---#
+.PHONY	 	:	all clean fclean re readline norm bonus
