@@ -33,7 +33,7 @@ SRC_SRC		= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 			ft_dlstclear.c ft_dlstdelone.c ft_dlstpop_front.c ft_dlstpop_back.c ft_dlstclearback_addr.c\
 			ft_free.c ft_free_arr.c ft_strtok.c ft_abs.c ft_atof.c ft_atol.c ft_floor.c ft_ceil.c ft_free_arr.c \
 			ft_iscntrl.c ft_isgraph.c ft_ispunct.c ft_isxdigit.c ft_malloc.c ft_pow.c ft_rand.c ft_realloc.c ft_sqrt.c \
-			ft_strcat.c ft_strcpy.c ft_strncpy.c ft_isspace.c
+			ft_strcat.c ft_strcpy.c ft_strncpy.c ft_isspace.c ft_strcmp.c
 SRC			= $(addprefix $(SRC_DIR), $(SRC_SRC))
 
 #--- OBJECTS ---#

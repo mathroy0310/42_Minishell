@@ -19,29 +19,32 @@
 int8_t master(t_minishell *minishell)
 {
     char* input;
-	
+
 	while (1)
     {
 		//! ca vrm pas rapport ici
 		input = readline("minishell$ ");
         if (input == NULL)
 		{
+			free_env(minishell->env);
 			ft_putstr_fd("exit", STDOUT_FILENO);
-			return (EXIT_SUCCESS);
+			exit(EXIT_SUCCESS);
 		}
     	add_history(input);	
-		if (strcmp(input, "exit") == 0)
-			break;
 		if (strcmp(input, "pwd") == 0)
 		{
 			exec_pwd();
-			master(minishell);
 		}
 		if (strcmp(input, "env") == 0)
 		{
 			exec_env(minishell->env);
-			master(minishell);
 		}
+		//! DEBUG
+		if (strcmp(input, "$USER") == 0)
+		{
+			printf("DEBUG <%s>\n", get_env_value("USER", minishell->env));
+		}
+			//free_env(minishell->env);
         free(input);
 		//! 
     }
@@ -54,10 +57,13 @@ int main(int argc, char **argv, char **envp)
 	struct termios	term;
 
 	(void)argc;
-	(void)argv; // on pourrait checker pour le -c flag ici
+	(void)argv; 
+	// on pourrait checker pour le -c flag ici
 	tcgetattr(STDIN_FILENO, &term);
 
     using_history();
+
+	
 	if (init(&minishell, envp))
 	{
 		ft_putstr_fd("minishell: init failed\n", STDERR_FILENO);

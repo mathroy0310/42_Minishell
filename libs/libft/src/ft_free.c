@@ -12,8 +12,12 @@
 
 #include "../inc/libft.h"
 
-void	ft_free(void **ptr)
+void	*ft_free(void *ptr)
 {
-	free(*ptr);
-	*ptr = NULL;
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+	return (NULL);
 }

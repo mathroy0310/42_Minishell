@@ -31,7 +31,8 @@
         "typeinfo": "c",
         "complex": "c",
         "new": "c",
-        "_mcontext.h": "c"
+        "_mcontext.h": "c",
+        "string.h": "c"
     },
     "cSpell.words": [
         "dlist",

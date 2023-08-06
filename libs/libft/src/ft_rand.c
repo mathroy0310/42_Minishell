@@ -17,11 +17,9 @@ int	ft_rand(int min, int max)
 	int	rand;
 	int	diff;
 	int	div;
-	int	mod;
 
 	diff = max - min;
 	div = RAND_MAX / diff;
-	mod = RAND_MAX % diff;
 	rand = min + (int)(random() / div);
 	while (rand > max)
 		rand = min + (int)(random() / div);
