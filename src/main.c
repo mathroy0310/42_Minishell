@@ -14,39 +14,28 @@
 
 /*
 	TODO parsing -> cmds -> shell redirection -> flags - quotes - env - pipes
+
+	fonctionnes :
+	exec_pwd()
+	exec_env()
+	get_env_value()
+
 */
 
 int8_t master(t_minishell *minishell)
 {
-    char* input;
+	char	buffer[BUFFER_SIZE];
+	int 	status;
 
-	while (1)
-    {
-		//! ca vrm pas rapport ici
-		input = readline("minishell$ ");
-        if (input == NULL)
-		{
-			free_env(minishell->env);
-			ft_putstr_fd("exit", STDOUT_FILENO);
-			exit(EXIT_SUCCESS);
-		}
-    	add_history(input);	
-		if (strcmp(input, "pwd") == 0)
-		{
-			exec_pwd();
-		}
-		if (strcmp(input, "env") == 0)
-		{
-			exec_env(minishell->env);
-		}
-		//! DEBUG
-		if (strcmp(input, "$USER") == 0)
-		{
-			printf("DEBUG <%s>\n", get_env_value("USER", minishell->env));
-		}
-			//free_env(minishell->env);
-        free(input);
-		//! 
+	status = 1;
+	signal(SIGQUIT, SIG_IGN);
+	while (status)
+    {	
+		signal(SIGINT, sig_interrupt);
+		if (take_input(buffer))
+			break ;
+		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
+			continue ;
     }
 	return (EXIT_SUCCESS);
 }

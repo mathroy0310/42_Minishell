@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 4096 //4K is the cluster size on a disk drive
+# define BUFFER_SIZE 1024 //4K is the cluster size on a disk drive
 
 //linked list
 typedef struct s_list

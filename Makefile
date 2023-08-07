@@ -69,9 +69,9 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c signals.c \
+SRCS	=	main.c init.c signals.c readline.c valid.c error.c \
 			exec/execution.c \
-			builtin/pwd.c builtin/env.c \
+			builtins/pwd.c builtins/env.c \
 			env/getenv.c
 
 SRC		= $(addprefix $(SRCDIR)/, $(SRCS))

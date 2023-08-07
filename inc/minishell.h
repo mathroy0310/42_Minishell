@@ -99,7 +99,16 @@ int8_t exec_env(t_env *env);
 int8_t exec_pwd(void);
 
 // Signal
-void	set_signal(void);
+void	sig_interrupt(int sig);
 
+// Readline
+int take_input(char *buffer);
+
+//valid
+int	using_valid_characters(char *buff, t_minishell *minishell);
+
+//error
+int	print_token_error(t_minishell *minishell, char c);
+int print_msg_error(t_minishell *minishell, char *msg);
 
 #endif

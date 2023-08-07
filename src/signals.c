@@ -12,17 +12,13 @@
 
 #include "../inc/minishell.h"
 
-static void	signal_handler(int sig)
+void	sig_interrupt(int sig)
 {
 	if (sig == SIGINT)
+	{
 		ft_putstr_fd("\n", STDERR_FILENO);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	set_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
