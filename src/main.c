@@ -36,6 +36,7 @@ int8_t master(t_minishell *minishell)
 			break ;
 		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
 			continue ;
+		status = exec_cmd(buffer, minishell);
     }
 	return (EXIT_SUCCESS);
 }
@@ -51,7 +52,6 @@ int main(int argc, char **argv, char **envp)
 	tcgetattr(STDIN_FILENO, &term);
 
     using_history();
-
 	
 	if (init(&minishell, envp))
 	{

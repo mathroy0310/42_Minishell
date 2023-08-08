@@ -30,12 +30,6 @@ typedef enum e_shell_redirect
 	HEREDOC
 }			t_shell_redirect;
 
-typedef struct s_env
-{
-	char *value;
-	struct s_env *next;
-}        t_env; 
-
 typedef struct token
 {
 	char *value;
@@ -47,15 +41,12 @@ typedef struct token
 
 typedef struct minishell
 {
-	t_env *env;
+	t_list *env;
 	t_token token;
 	int  exit_status;
-	char **path;
-	char *cmd;
-	char *pwd;
-	char *oldpwd;
-	int  fd_in;
-	int  fd_out;
+	char **envp;
+	int s_quotes;
+	int d_quotes;
 }           t_minishell;
 
 #endif

@@ -14,7 +14,7 @@
 
 
 
-int		env_value_len(const char *env)
+static int		env_content_len(const char *env)
 {
 	int		i;
 	int		size_name;
@@ -46,13 +46,13 @@ char		*get_env_name(char *dest, const char *src)
 	return (dest);
 }
 
-char	*env_value(char *env)
+char	*env_content(char *env)
 {
 	int		i;
 	int		j;
 	char	*env_value;
 
-	env_value = ft_malloc(sizeof(char) * env_value_len(env) + 1);
+	env_value = ft_malloc(sizeof(char) * env_content_len(env) + 1);
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
@@ -64,7 +64,7 @@ char	*env_value(char *env)
 	return (env_value);
 }
 
-char* get_env_value(char* arg, t_env* env) 
+char* get_env_content(char* arg, t_list* env) 
 {
     char env_name[BUFFER_SIZE];
     char* env_val;
@@ -72,13 +72,13 @@ char* get_env_value(char* arg, t_env* env)
     env_val = (char*)ft_malloc(sizeof(char));
     ft_strcpy(env_val, "");
 
-    while (env && env->value) 
+    while (env && env->content) 
     {
-        get_env_name(env_name, env->value);
+        get_env_name(env_name, env->content);
         if (ft_strcmp(arg, env_name) == 0) 
         {
             free(env_val);
-            env_val = env_value(env->value);
+            env_val = env_content(env->content);
             return env_val;
         }
         env = env->next;
@@ -87,36 +87,37 @@ char* get_env_value(char* arg, t_env* env)
     return env_val;
 }
 
-void	free_env(t_env *env)
+void	free_env(t_list *env)
 {
-	t_env	*tmp;
+	t_list	*tmp;
 
 	while (env && env->next)
 	{
 		tmp = env;
 		env = env->next;
-		ft_free(tmp->value);
+		ft_free(tmp->content);
 		ft_free(tmp);
 	}
-	ft_free(env->value);
+	ft_free(env->content);
 	ft_free(env);
 }
 
 void init_env(t_minishell *minishell, char **envp )
 {
-    t_env *env;
-    t_env *tmp;
+    t_list *env;
+    t_list *tmp;
     int i;
     
-    env = ft_malloc(sizeof(t_env));
-    env->value = ft_strdup(envp[0]);
+	
+    env = ft_malloc(sizeof(t_list));
+    env->content = ft_strdup(envp[0]);
     env->next = NULL;
     minishell->env = env;
     i = 1;
     while (envp && envp[0] && envp[i])
     {
-        tmp = ft_malloc(sizeof(t_env));
-        tmp->value = ft_strdup(envp[i]);
+        tmp = ft_malloc(sizeof(t_list));
+        tmp->content = ft_strdup(envp[i]);
         tmp->next = NULL;
         env->next = tmp;
         env = tmp;

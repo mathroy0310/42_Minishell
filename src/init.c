@@ -25,7 +25,8 @@ int8_t init(t_minishell *minishell, char **envp)
 	term.c_lflag &= ~(ECHONL);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) == -1)
 		return(0);
-
+	
+	minishell->envp = envp;
 	minishell->exit_status = 0;
 	minishell->cmd = NULL;
 	minishell->pwd = NULL;

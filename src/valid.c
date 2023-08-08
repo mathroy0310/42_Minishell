@@ -12,7 +12,7 @@
 
 #include "../inc/minishell.h"
 
-static int	check_redir(t_minishell *minishell, const char *buff)
+static int8_t	check_redir(t_minishell *minishell, const char *buff)
 {
 	int	nb_redir;
 
@@ -23,10 +23,10 @@ static int	check_redir(t_minishell *minishell, const char *buff)
 		if (nb_redir > 2)
 			return (print_msg_error(minishell, "minishell: syntax error near unexpected token `>\'"));
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
-static int	check_pipes(t_minishell *minishell, const char *buff)
+static int8_t	check_pipes(t_minishell *minishell, const char *buff)
 {
 	int		nb_pipes;
 
@@ -37,10 +37,10 @@ static int	check_pipes(t_minishell *minishell, const char *buff)
 		if (nb_pipes > 1)
 			return (print_msg_error(minishell, "minishell: syntax error near unexpected token `|\'"));
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
-int	using_valid_characters(char *buff, t_minishell *minishell)
+int8_t	using_valid_characters(char *buff, t_minishell *minishell)
 {
 	int		i;
 
@@ -60,5 +60,5 @@ int	using_valid_characters(char *buff, t_minishell *minishell)
 		if (buff[i] == ';' || buff[i] == '\\' || buff[i] == '&')
 			return (print_token_error(minishell, buff[i]));
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

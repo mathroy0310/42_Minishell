@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   error.c                                           ██   ██      ██        */
+/*   file.c                                            ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 17:43:00 by maroy                                    */
-/*   Updated: 2023/08/04 13:33:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/07/14 21:56:43 by maroy                                    */
+/*   Updated: 2023/08/04 13:36:27 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//on garde le format print_<type erreur>_error
-
-int8_t print_msg_error(t_minishell *minishell, char *msg)
+int8_t read_file(char *filename)
 {
-    ft_putendl_fd(msg, STDERR_FILENO);
-    minishell->exit_status = 2;
-    return (EXIT_FAILURE);
-}
+    int fd;
 
-int8_t	print_token_error(t_minishell *minishell, char c)
-{
-	ft_putstr_fd("minishell: syntax error: `", STDERR_FILENO);
-	ft_putchar_fd(c, STDERR_FILENO);
-	ft_putendl_fd("` is not a valid token", STDERR_FILENO);
-	minishell->exit_status = 127;
-	return (EXIT_FAILURE);
+    fd = open(filename, O_RDONLY, 0644);
+    if (fd == -1)
+    {
+        print_msg_error(NULL, "minishell: no such file or directory: %s");
+        return (EXIT_FAILURE);
+    }
+    dup2(fd, 0);
+    close(fd);
+    return(fd);
 }

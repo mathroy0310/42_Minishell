@@ -49,6 +49,7 @@
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <termios.h>
 # include <signal.h>
+#include <fcntl.h>
 
 /*
 * -- Color Codes for users -- 
@@ -88,14 +89,14 @@
 
 // Getenv
 void    init_env(t_minishell *minishell, char **envp);
-char*   get_env_value(char* arg, t_env* env);
-void	free_env(t_env *env);
+char*   get_env_value(char* arg, t_list* env);
+void	free_env(t_list *env);
 
 // Init
 int8_t init(t_minishell *minishell, char **envp);
 
 // Builtins
-int8_t exec_env(t_env *env);
+int8_t exec_env(t_list *env);
 int8_t exec_pwd(void);
 
 // Signal
@@ -105,10 +106,10 @@ void	sig_interrupt(int sig);
 int take_input(char *buffer);
 
 //valid
-int	using_valid_characters(char *buff, t_minishell *minishell);
+int8_t	using_valid_characters(char *buff, t_minishell *minishell);
 
 //error
-int	print_token_error(t_minishell *minishell, char c);
-int print_msg_error(t_minishell *minishell, char *msg);
+int8_t	print_token_error(t_minishell *minishell, char c);
+int8_t print_msg_error(t_minishell *minishell, char *msg);
 
 #endif

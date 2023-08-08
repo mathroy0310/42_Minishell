@@ -12,14 +12,14 @@
 
 #include "../../inc/minishell.h"
 
-int8_t exec_env(t_env *env)
+int8_t exec_env(t_list *env)
 {
     while (env && env->next != NULL)
     {
-        ft_putendl_fd(env->value, 1);
+        ft_putendl_fd(env->content, 1);
         env = env->next;
     }
     if (env)
-        ft_putendl_fd(env->value, 1);
+        ft_putendl_fd(env->content, 1);
     return (EXIT_SUCCESS);
 }

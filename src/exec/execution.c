@@ -12,6 +12,20 @@
 
 #include "../../inc/minishell.h"
 
+
+int handle_execution(t_minishell *minishell
+{
+    int fds[4];
+    int pipe_stdin;
+    int i;
+
+    pipe_stdin = dup(STDIN_FILENO);
+    i = 0;
+    pipe(fds);
+    pipe(fds + 2);
+}
+
+
 // static int is_builtin(char * cmd)
 // {
 // 	if (ft_strcmp(cmd, "env") == 0)
