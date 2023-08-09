@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 09:37:42 by maroy                                    */
-/*   Updated: 2023/07/31 12:16:02 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 16:09:19 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	ft_dlstadd_back(t_dlist **alst, t_dlist *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
-	new->previous = tmp;
+	new->prev = tmp;
 }

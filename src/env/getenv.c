@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 16:14:52 by maroy                                    */
-/*   Updated: 2023/08/04 13:33:18 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 12:47:14 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	free_env(t_list *env)
 	{
 		tmp = env;
 		env = env->next;
-		ft_free(tmp->content);
-		ft_free(tmp);
+		free(tmp->content);
+		free(tmp);
 	}
-	ft_free(env->content);
-	ft_free(env);
+	free(env->content);
+	free(env);
 }
 
 void init_env(t_minishell *minishell, char **envp )

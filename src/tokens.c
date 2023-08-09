@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   file.c                                            ██   ██      ██        */
+/*   tokens.c                                          ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/09 13:29:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/09 13:36:25 by maroy                                    */
+/*   Updated: 2023/08/09 14:33:22 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int8_t read_file(char *filename)
+int8_t init_token(t_minishell *minishell, char *buffer)
 {
-    int fd;
+    t_dlist *tokens;
+    t_dlist *tmp;
+    char    *tok;
 
-    fd = open(filename, O_RDONLY, 0644);
-    if (fd == -1)
+    tokens = ft_malloc(sizeof(t_dlist));
+    tokens->content = NULL;
+    tokens->next = NULL;
+    tokens->prev = NULL;
+    minishell->tokens = tokens;
+    tok = ft_strtok(buffer, " \t\n");
+    while (tok != NULL)
     {
-        print_msg_error(NULL, "no such file or directory: %s");
-        return (EXIT_FAILURE);
+        printf("tok = %s\n", tok);
+        tok = ft_strtok(NULL, " \t\n");
     }
-    dup2(fd, 0);
-    close(fd);
-    return(fd);
 }

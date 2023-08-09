@@ -6,23 +6,28 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/07/31 15:40:35 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 12:41:04 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 
-int handle_execution(t_minishell *minishell
+int handle_execution(t_minishell *minishell)
 {
     int fds[4];
     int pipe_stdin;
     int i;
+    
+    (void)minishell;
+
 
     pipe_stdin = dup(STDIN_FILENO);
     i = 0;
     pipe(fds);
     pipe(fds + 2);
+
+    return (0);
 }
 
 

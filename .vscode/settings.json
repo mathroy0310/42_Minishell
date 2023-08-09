@@ -32,7 +32,12 @@
         "complex": "c",
         "new": "c",
         "_mcontext.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "__hash_table": "c",
+        "__string": "c",
+        "string": "c",
+        "string_view": "c",
+        "unordered_map": "c"
     },
     "cSpell.words": [
         "dlist",

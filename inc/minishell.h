@@ -6,28 +6,27 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/04 13:33:26 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 12:37:46 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-/* 
-* -- Libraries Defines -- 
-*/ 
+/*
+ * -- Libraries Defines --
+ */
 
 # define READLINE_LIBRARY
 # define HISTORY_LIBRARY
 
 /*
- *-- Error messages -- 
+ *-- Error messages --
  */
 
-
-/* 
-* -- Global defines -- 
-*/
+/*
+ * -- Global defines --
+ */
 
 # define PROMPT "minishell$ "
 # define NONE -1
@@ -36,24 +35,29 @@
 # define KO 0
 
 /*
-* -- libc Includes -- 
-*/
+ * -- libc Includes --
+ */
+
+# ifdef __APPLE__
+#  include <limits.h> // pour PATH_MAX
+# endif
+
+# ifdef __linux__
+#  include <linux/limits.h>
+# endif
 
 # include <errno.h> // pour errno
+# include <fcntl.h>
+# include <signal.h>
 # include <stdint.h>
-
-# include <linux/limits.h>
-# include <limits.h> // pour PATH_MAX
-# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <termios.h>
-# include <signal.h>
-#include <fcntl.h>
+# include <unistd.h>
 
 /*
-* -- Color Codes for users -- 
-*/
+ * -- Color Codes for users --
+ */
 
 # define DEFAULT "\001\033[0;39m\002"
 # define GRAY "\001\033[1;90m\002"
@@ -65,10 +69,9 @@
 # define CYAN "\001\033[1;96m\002"
 # define WHITE "\001\033[0;97m\002"
 
-
 /*
-* -- Libs Includes -- 
-*/
+ * -- Libs Includes --
+ */
 
 //  Readline
 # include "../libs/readline/inc/history.h"
@@ -76,40 +79,39 @@
 //  Libft
 # include "../libs/libft/inc/libft.h"
 
-/* 
-* -- Local Includes -- 
-*/
+/*
+ * -- Local Includes --
+ */
 
 # include "typedefs.h"
 
-
 /*
-* -- Prototypes -- 
-*/
+ * -- Prototypes --
+ */
 
 // Getenv
-void    init_env(t_minishell *minishell, char **envp);
-char*   get_env_value(char* arg, t_list* env);
+void	init_env(t_minishell *minishell, char **envp);
+char	*get_env_value(char *arg, t_list *env);
 void	free_env(t_list *env);
 
 // Init
-int8_t init(t_minishell *minishell, char **envp);
+int8_t	init(t_minishell *minishell, char **envp);
 
 // Builtins
-int8_t exec_env(t_list *env);
-int8_t exec_pwd(void);
+int8_t	exec_env(t_list *env);
+int8_t	exec_pwd(void);
 
 // Signal
 void	sig_interrupt(int sig);
 
 // Readline
-int take_input(char *buffer);
+int		take_input(char *buffer);
 
-//valid
+// valid
 int8_t	using_valid_characters(char *buff, t_minishell *minishell);
 
-//error
+// error
 int8_t	print_token_error(t_minishell *minishell, char c);
-int8_t print_msg_error(t_minishell *minishell, char *msg);
+int8_t	print_msg_error(t_minishell *minishell, char *msg);
 
 #endif

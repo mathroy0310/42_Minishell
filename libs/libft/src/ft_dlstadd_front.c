@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:41:22 by maroy                                    */
-/*   Updated: 2023/07/31 11:38:08 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 16:09:22 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_dlstadd_front(t_dlist **alst, t_dlist *new)
 		return ;
 	if (*alst)
 	{
-		(*alst)->previous = new;
+		(*alst)->prev = new;
 		new->next = *alst;
 	}
 	*alst = new;

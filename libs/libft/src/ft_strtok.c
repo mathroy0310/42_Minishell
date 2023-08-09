@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/27 13:04:42 by maroy                                    */
-/*   Updated: 2023/07/31 14:15:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 13:06:37 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 char	*ft_strtok(char *str, const char *delim)
 {
-	static char	*last_token;
-	char		*end_token;
+	static char	*save = NULL;
+	char		*tmp;
+	int			i;
 
-	last_token = NULL;
-	if (str == NULL)
-		str = last_token;
-	while (*str && ft_strchr(delim, *str))
-		++str;
-	if (!*str)
+	i = 0;
+	if (str)
+		save = str;
+	if (!save)
 		return (NULL);
-	end_token = str;
-	while (*end_token && !ft_strchr(delim, *end_token))
-		++end_token;
-	if (!*end_token)
-		last_token = NULL;
-	else
+	tmp = save;
+	while (tmp[i] && !ft_strchr(delim, tmp[i]))
+		i++;
+	if (tmp[i])
 	{
-		*end_token = '\0';
-		last_token = end_token + 1;
+		tmp[i] = '\0';
+		save = &tmp[i + 1];
 	}
-	return (str);
+	else
+		save = NULL;
+	return (tmp);
 }

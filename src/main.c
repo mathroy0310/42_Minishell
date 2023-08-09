@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/04 13:36:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 16:08:41 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	fonctionnes :
 	exec_pwd()
 	exec_env()
-	get_env_value()
+	get_env_content()
 
 */
 
@@ -26,7 +26,8 @@ int8_t master(t_minishell *minishell)
 {
 	char	buffer[BUFFER_SIZE];
 	int 	status;
-
+	//char 	*tok;
+	
 	status = 1;
 	signal(SIGQUIT, SIG_IGN);
 	while (status)
@@ -36,7 +37,7 @@ int8_t master(t_minishell *minishell)
 			break ;
 		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
 			continue ;
-		status = exec_cmd(buffer, minishell);
+		//status = exec_cmd(buffer, minishell);
     }
 	return (EXIT_SUCCESS);
 }
@@ -49,9 +50,9 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv; 
 	// on pourrait checker pour le -c flag ici
+	// pour command line execution ca serait comique
 	tcgetattr(STDIN_FILENO, &term);
-
-    using_history();
+	using_history();
 	
 	if (init(&minishell, envp))
 	{

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:41:39 by maroy                                    */
-/*   Updated: 2023/07/31 11:38:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 16:09:26 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_dlstclear(t_dlist **lst, void (*del)(void *))
 	current = *lst;
 	while (current)
 	{
-		then = current->previous;
+		then = current->prev;
 		ft_dlstdelone(current, del);
 		current = then;
 	}

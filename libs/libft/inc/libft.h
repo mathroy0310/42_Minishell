@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/08/01 16:09:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/09 14:41:26 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 1024 //4K is the cluster size on a disk drive
+# define BUFFER_SIZE 1024 
 
 //linked list
 typedef struct s_list
@@ -127,15 +127,12 @@ typedef struct s_dlist
 {
 	void			*content;
 	struct s_dlist	*next;
-	struct s_dlist	*previous;
+	struct s_dlist	*prev;
 }					t_dlist;
 
 t_dlist				*ft_dlstnew(void *content);
-
 void				ft_dlstadd_back(t_dlist **alst, t_dlist *new);
-
 void				ft_dlstadd_front(t_dlist **alst, t_dlist *new);
-
 t_dlist				*ft_dlstlast(t_dlist *lst);
 t_dlist				*ft_dlstfirst(t_dlist *lst);
 void				ft_dlstclear(t_dlist **lst, void (*del)(void *));
