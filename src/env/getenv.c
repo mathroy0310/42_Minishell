@@ -6,18 +6,16 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 16:14:52 by maroy                                    */
-/*   Updated: 2023/08/09 12:47:14 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 15:56:14 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-
-
-static int		env_content_len(const char *env)
+static int	env_content_len(const char *env)
 {
-	int		i;
-	int		size_name;
+	int	i;
+	int	size_name;
 
 	size_name = 0;
 	i = 0;
@@ -32,9 +30,9 @@ static int		env_content_len(const char *env)
 	return (size_name);
 }
 
-char		*get_env_name(char *dest, const char *src)
+char	*get_env_name(char *dest, const char *src)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (src[i] && src[i] != '=' && ft_strlen(src) < BUFFER_SIZE)
@@ -64,63 +62,45 @@ char	*env_content(char *env)
 	return (env_value);
 }
 
-char* get_env_content(char* arg, t_list* env) 
+char	*get_env_content(char *arg, t_list *env)
 {
-    char env_name[BUFFER_SIZE];
-    char* env_val;
+	char	env_name[BUFFER_SIZE];
+	char	*env_val;
 
-    env_val = (char*)ft_malloc(sizeof(char));
-    ft_strcpy(env_val, "");
-
-    while (env && env->content) 
-    {
-        get_env_name(env_name, env->content);
-        if (ft_strcmp(arg, env_name) == 0) 
-        {
-            free(env_val);
-            env_val = env_content(env->content);
-            return env_val;
-        }
-        env = env->next;
-    }
-
-    return env_val;
-}
-
-void	free_env(t_list *env)
-{
-	t_list	*tmp;
-
-	while (env && env->next)
+	env_val = (char *)ft_malloc(sizeof(char));
+	ft_strcpy(env_val, "");
+	while (env && env->content)
 	{
-		tmp = env;
+		get_env_name(env_name, env->content);
+		if (ft_strcmp(arg, env_name) == 0)
+		{
+			free(env_val);
+			env_val = env_content(env->content);
+			return (env_val);
+		}
 		env = env->next;
-		free(tmp->content);
-		free(tmp);
 	}
-	free(env->content);
-	free(env);
+	return (env_val);
 }
 
-void init_env(t_minishell *minishell, char **envp )
+void	init_env(t_minishell *minishell, char **envp)
 {
-    t_list *env;
-    t_list *tmp;
-    int i;
-    
-	
-    env = ft_malloc(sizeof(t_list));
-    env->content = ft_strdup(envp[0]);
-    env->next = NULL;
-    minishell->env = env;
-    i = 1;
-    while (envp && envp[0] && envp[i])
-    {
-        tmp = ft_malloc(sizeof(t_list));
-        tmp->content = ft_strdup(envp[i]);
-        tmp->next = NULL;
-        env->next = tmp;
-        env = tmp;
-        i++;
-    }
+	t_list	*env;
+	t_list	*tmp;
+	int		i;
+
+	env = ft_malloc(sizeof(t_list));
+	env->content = ft_strdup(envp[0]);
+	env->next = NULL;
+	minishell->env = env;
+	i = 1;
+	while (envp && envp[0] && envp[i])
+	{
+		tmp = ft_malloc(sizeof(t_list));
+		tmp->content = ft_strdup(envp[i]);
+		tmp->next = NULL;
+		env->next = tmp;
+		env = tmp;
+		i++;
+	}
 }

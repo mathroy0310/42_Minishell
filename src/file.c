@@ -6,23 +6,23 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/09 13:29:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 15:55:15 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int8_t read_file(char *filename)
+int8_t	read_file(char *filename)
 {
-    int fd;
+	int	fd;
 
-    fd = open(filename, O_RDONLY, 0644);
-    if (fd == -1)
-    {
-        print_msg_error(NULL, "no such file or directory: %s");
-        return (EXIT_FAILURE);
-    }
-    dup2(fd, 0);
-    close(fd);
-    return(fd);
+	fd = open(filename, O_RDONLY, 0644);
+	if (fd == -1)
+	{
+		print_msg_error(NULL, "no such file or directory: %s");
+		return (EXIT_FAILURE);
+	}
+	dup2(fd, 0);
+	close(fd);
+	return (fd);
 }

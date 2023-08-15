@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/09 12:37:46 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 15:58:03 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@
 // Getenv
 void	init_env(t_minishell *minishell, char **envp);
 char	*get_env_value(char *arg, t_list *env);
-void	free_env(t_list *env);
+
 
 // Init
 int8_t	init(t_minishell *minishell, char **envp);
@@ -105,7 +105,7 @@ int8_t	exec_pwd(void);
 void	sig_interrupt(int sig);
 
 // Readline
-int		take_input(char *buffer);
+int8_t	take_input(char *buffer);
 
 // valid
 int8_t	using_valid_characters(char *buff, t_minishell *minishell);
@@ -114,4 +114,6 @@ int8_t	using_valid_characters(char *buff, t_minishell *minishell);
 int8_t	print_token_error(t_minishell *minishell, char c);
 int8_t	print_msg_error(t_minishell *minishell, char *msg);
 
+// free
+void	free_env(t_list *env);
 #endif

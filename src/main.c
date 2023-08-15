@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/09 16:08:41 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 15:54:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -22,29 +22,29 @@
 
 */
 
-int8_t master(t_minishell *minishell)
+int8_t	master(t_minishell *minishell)
 {
 	char	buffer[BUFFER_SIZE];
-	int 	status;
+	int		status;
+
 	//char 	*tok;
-	
 	status = 1;
 	signal(SIGQUIT, SIG_IGN);
 	while (status)
-    {	
+	{
 		signal(SIGINT, sig_interrupt);
 		if (take_input(buffer))
 			break ;
 		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
 			continue ;
 		//status = exec_cmd(buffer, minishell);
-    }
+	}
 	return (EXIT_SUCCESS);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_minishell minishell;
+	t_minishell		minishell;
 	struct termios	term;
 
 	(void)argc;
@@ -53,15 +53,15 @@ int main(int argc, char **argv, char **envp)
 	// pour command line execution ca serait comique
 	tcgetattr(STDIN_FILENO, &term);
 	using_history();
-	
+
 	if (init(&minishell, envp))
 	{
 		ft_putstr_fd("minishell: init failed\n", STDERR_FILENO);
-		return (EXIT_FAILURE);		
+		return (EXIT_FAILURE);
 	}
 	minishell.exit_status = master(&minishell);
-		
+
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	
-    return (minishell.exit_status);
+
+	return (minishell.exit_status);
 }

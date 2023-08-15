@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   realdine.c                                        ██   ██      ██        */
+/*   readline.c                                        ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/04 13:36:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 16:12:50 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void save_history(char *input)
+static void	save_history(char *input)
 {
 	if (input && *input)
 		add_history(input);
 }
 
-int take_input(char *buffer)
+int8_t	take_input(char *buffer)
 {
 	char	*trimmed;
 	char	*input;
+
 	input = readline("minishell$ ");
 	if (input == NULL)
 	{

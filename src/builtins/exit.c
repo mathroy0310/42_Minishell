@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 15:20:13 by maroy                                    */
-/*   Updated: 2023/07/31 16:24:30 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/15 16:05:34 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int exec_exit(void)
+int	exec_exit(void)
 {
 	return (0);
 }
