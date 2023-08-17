@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/27 13:04:42 by maroy                                    */
-/*   Updated: 2023/08/09 13:06:37 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/16 20:40:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 char	*ft_strtok(char *str, const char *delim)
 {
-	static char	*save = NULL;
+	static char	*save;
 	char		*tmp;
 	int			i;
 
+	save = NULL;
 	i = 0;
 	if (str)
 		save = str;

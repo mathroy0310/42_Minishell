@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/15 15:58:03 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/16 19:25:12 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int8_t	exec_pwd(void);
 
 // Signal
 void	sig_interrupt(int sig);
+
+int8_t	init_token(t_minishell *minishell, char *buffer);
 
 // Readline
 int8_t	take_input(char *buffer);

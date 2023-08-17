@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/15 15:54:35 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/16 19:24:53 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 	TODO parsing -> cmds -> shell redirection -> flags - quotes - env - pipes
 
-	fonctionnes :
 	exec_pwd()
 	exec_env()
 	get_env_content()
@@ -37,6 +36,8 @@ int8_t	master(t_minishell *minishell)
 			break ;
 		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
 			continue ;
+        if (init_token(minishell, buffer) == 0)
+            continue ; 
 		//status = exec_cmd(buffer, minishell);
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/15 15:59:11 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/16 19:53:10 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -16,19 +16,15 @@
 typedef enum e_token_type
 {
 	CMD,
-	SHELL_REDIRECT,
 	FLAG,
-	QUOTE,
-	DOUBLE_QUOTE
-}			t_token_type;
-
-typedef enum e_shell_redirect
-{
 	PIPE,
 	REDIRECT,
 	APPEND,
-	HEREDOC
-}			t_shell_redirect;
+	QUOTE,
+	DOUBLE_QUOTE,
+	HEREDOC,
+	END
+}			t_token_type;
 
 typedef struct minishell
 {
