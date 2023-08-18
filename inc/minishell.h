@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/16 19:25:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/17 15:16:17 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 
 # define PROMPT "minishell$ "
 # define NONE -1
+
+# define BUFFER_SIZE 1024
+# define MAX_TOKENS 1024
+
+# define DELIM_CHAR 29
 
 # define OK 1
 # define KO 0

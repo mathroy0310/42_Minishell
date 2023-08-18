@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/08/09 14:41:26 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/18 12:48:00 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 1024 
+# define BUFFER_SIZE 1024
 
-//linked list
+// linked list
 typedef struct s_list
 {
 	void			*content;
@@ -118,6 +118,9 @@ char				*ft_strtok(char *str, const char *delim);
 // atol , atof
 float				ft_atof(const char *str);
 long				ft_atol(const char *str);
+
+// custom
+int					ft_count_char(char *s, char c);
 
 // Random
 int					ft_rand(int min, int max);
