@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/17 15:16:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/21 16:04:04 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@
  * -- Prototypes --
  */
 
+//DEBUG
+void    DEBUG_print_token_type(t_token *tokens);
+
 // Getenv
 void	init_env(t_minishell *minishell, char **envp);
-char	*get_env_value(char *arg, t_list *env);
-
+char	*get_env_content(char *arg, t_list *env);
 
 // Init
 int8_t	init(t_minishell *minishell, char **envp);
