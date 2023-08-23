@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/21 16:04:04 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/23 16:43:31 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -96,10 +96,16 @@
 
 //DEBUG
 void    DEBUG_print_token_type(t_token *tokens);
+void    DEBUG_print_msg(char *msg, char *arg);
 
 // Getenv
 void	init_env(t_minishell *minishell, char **envp);
 char	*get_env_content(char *arg, t_list *env);
+
+//parsing
+void parse_tokens(t_token *tokens);
+int8_t case_dollar_sign(t_minishell *minishell, t_token *tokens);
+int8_t case_quoted_string(t_minishell *minishell, t_token *tokens);
 
 // Init
 int8_t	init(t_minishell *minishell, char **envp);

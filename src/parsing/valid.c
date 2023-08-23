@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/16 16:35:15 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/23 17:06:02 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 static int8_t	check_quotes(t_minishell *minishell, const char *buff)
 {
@@ -44,8 +44,6 @@ static int8_t	check_quotes(t_minishell *minishell, const char *buff)
 			}
 		}
 	}
-	// printf("s_quotes = %d\n", s_quotes);
-	// printf("d_quotes = %d\n", d_quotes);
 	if (s_quotes % 2 != 0)
 		return (print_msg_error(minishell, "missing a closing quote"));
 	if (d_quotes % 2 != 0)

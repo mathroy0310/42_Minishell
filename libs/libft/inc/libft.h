@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/08/21 14:47:01 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/23 12:52:25 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void				*ft_memcpy(void *dst, const void *src, size_t len);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
 size_t				ft_strlen(const char *s);
+// Returns a pointer to the first occurrence of character in the C string str.
+// The terminating null-character is considered part of the C string. Therefore, it can also be located in order to retrieve a pointer to the end of a string.
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

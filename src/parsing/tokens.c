@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/09 13:36:25 by maroy                                    */
-/*   Updated: 2023/08/21 16:06:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/23 16:42:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 #include <stdbool.h>
 
 static int	count_redirections(char *input)
@@ -56,51 +56,6 @@ char	*normalize_redirection(char *input)
 	return (modified);
 }
 
-void parse_tokens(t_token *tokens)
-{
-	if (tokens->content[0] == '-')
-		tokens->type = FLAG;
-	else if (tokens->content[0] == '|')
-		tokens->type = PIPE;
-	else if (tokens->content[0] == '>' || tokens->content[0] == '<')
-		tokens->type = REDIRECT;
-	else if (tokens->content[0] == '\'' || tokens->content[0] == '\"')
-		tokens->type = QUOTED_STRING;
-	else if (tokens->content[0] == '\"' && tokens->content[1] == '$')
-		tokens->type = ENV_VAR;
-	else if (tokens->content[0] == '$')
-		tokens->type = ENV_VAR;
-	else
-		tokens->type = CMD;
-}
-
-int8_t case_dollar_sign(t_minishell*minishell, t_token *tokens)
-{
-	char *trimmed_content;
-	int i;
-
-	i = -1;
-	if (tokens->type == ENV_VAR)
-	{
-		trimmed_content = ft_strtrim(tokens->content, "$");
-		
-		while (trimmed_content[++i])
-		   trimmed_content[i] = ft_toupper(trimmed_content[i]);
-		if (trimmed_content[0] == '?')
-		{
-			tokens->content = ft_itoa(minishell->exit_status);
-			tokens->type = ARG;
-		}
-		else
-		{
-			tokens->content = get_env_content(trimmed_content, minishell->env);
-			tokens->type = ARG;
-		}
-	}
-	return (OK);
-	
-}
-
 int8_t	split_tokens(t_minishell *minishell, char *buffer)
 {
 	t_token	*tokens;
@@ -125,9 +80,9 @@ int8_t	split_tokens(t_minishell *minishell, char *buffer)
 		tokens->next = tmp;
 		tokens = tmp;
 		parse_tokens(tokens);
-		if (case_dollar_sign(minishell, tokens) == KO)
-			ft_putendl_fd("DEBUG : case dollar sign failed", 2);
-		printf("DEBUG : token  %s\n", tokens->content);
+		if (case_quoted_string(minishell, tokens) == KO || case_dollar_sign(minishell, tokens) == KO)
+			ft_putendl_fd("DEBUG : gros fail", 2);
+        DEBUG_print_msg("token is", tokens->content);
 		DEBUG_print_token_type(tokens);
 		free(tmp->content);
 		tok = ft_strtok(NULL, delim);
@@ -135,8 +90,6 @@ int8_t	split_tokens(t_minishell *minishell, char *buffer)
 	minishell->tokens = tokens;
 	return (OK);
 }
-
-
 
 int8_t	init_token(t_minishell *minishell, char *buffer)
 {

@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/08/21 16:04:44 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/08/23 16:40:13 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c debug.c signals.c readline.c valid.c error.c tokens.c\
+SRCS	=	main.c init.c debug.c signals.c readline.c error.c \
+			parsing/valid.c parsing/tokens.c parsing/parser.c \
 			exec/execution.c \
 			builtins/pwd.c builtins/env.c \
 			env/getenv.c
