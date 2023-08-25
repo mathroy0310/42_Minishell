@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/21 16:06:35 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/24 16:34:02 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef enum e_token_type
 	FLAG,
 	PIPE,
 	REDIRECT,
-    QUOTED_STRING,
+    D_QUOTED_STRING,
+    S_QUOTED_STRING,
     ENV_VAR,
 	END
 }			t_token_type;
@@ -34,13 +35,21 @@ typedef struct s_token
 }					t_token;
 
 
+typedef struct s_cmd
+{
+    int     s_quotes;
+    int     d_quotes;
+}           t_cmd;
+
 typedef struct minishell
 {
 	t_list	*env;
 	t_token	*tokens;
+    t_cmd   *cmd;
 	int		exit_status;
 	char	**envp;
-	char	*cmd;
+    char    **argv;
+    int    argc;
 	int		fd_in;
 	int		fd_out;
 	char	*pwd;

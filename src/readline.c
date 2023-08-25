@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/15 16:12:50 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/24 18:31:39 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int8_t	take_input(char *buffer)
 	char	*trimmed;
 	char	*input;
 
-	input = readline("minishell$ ");
+	input = readline(PROMPT);
 	if (input == NULL)
 	{
 		ft_putstr_fd("exit", STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/16 19:24:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/24 20:14:49 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@
 
 */
 
+
+int8_t read_input(char *buffer, t_minishell *minishell)
+{
+    int i;
+
+    if (init_token(minishell, buffer) == EXIT_FAILURE)
+        return (EXIT_FAILURE);
+    i = -1;
+    while (minishell->argv[++i])
+    {
+        if (ft_strncmp(minishell->argv[i], "<<", 3) == 0 && minishell->argv[i + 1])
+        {
+            DEBUG_print_msg("here doc", NULL);
+        } 
+    }
+    return (EXIT_SUCCESS);
+    
+}
+
 int8_t	master(t_minishell *minishell)
 {
 	char	buffer[BUFFER_SIZE];
@@ -34,11 +53,8 @@ int8_t	master(t_minishell *minishell)
 		signal(SIGINT, sig_interrupt);
 		if (take_input(buffer))
 			break ;
-		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell))
+		if (ft_strlen(buffer) == 0 || using_valid_characters(buffer, minishell) || read_input(buffer, minishell))
 			continue ;
-        if (init_token(minishell, buffer) == 0)
-            continue ; 
-		//status = exec_cmd(buffer, minishell);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -57,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (init(&minishell, envp))
 	{
-		ft_putstr_fd("minishell: init failed\n", STDERR_FILENO);
+		print_msg_error("init failed");
 		return (EXIT_FAILURE);
 	}
 	minishell.exit_status = master(&minishell);

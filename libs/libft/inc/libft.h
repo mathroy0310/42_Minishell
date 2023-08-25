@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/08/23 12:52:25 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/24 16:29:15 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ long				ft_atol(const char *str);
 
 // custom
 int					ft_count_char(char *s, char c);
+int             	ft_count_words(char *str, char *charset);
 
 // Random
 int					ft_rand(int min, int max);

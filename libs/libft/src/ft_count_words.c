@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   ft_isspace.c                                      ██   ██      ██        */
+/*   ft_count_words.c                                  ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/01 16:08:21 by maroy                                    */
-/*   Updated: 2023/08/24 20:44:58 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/24 16:27:15 by maroy                                    */
+/*   Updated: 2023/08/24 16:28:51 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-int	ft_isspace(int c)
+int	ft_count_words(char *str, char *charset)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
+    int	i;
+    int	count;
+
+    i = 0;
+    count = 0;
+    while (str[i])
+    {
+        if (ft_strchr(charset, str[i])  == NULL)
+        {
+            count++;
+            while (ft_strchr(charset, str[i]) == NULL && str[i])
+                i++;
+        }
+        else
+            i++;
+    }
+    return (count);
 }

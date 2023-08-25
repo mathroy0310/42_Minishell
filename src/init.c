@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 17:43:00 by maroy                                    */
-/*   Updated: 2023/08/15 15:55:00 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/24 18:42:37 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ int8_t	init(t_minishell *minishell, char **envp)
 	minishell->oldpwd = NULL;
 	minishell->fd_in = dup(STDIN_FILENO);
 	minishell->fd_out = dup(STDOUT_FILENO);
+    minishell->cmd = malloc(sizeof(t_cmd));
+    minishell->cmd->s_quotes = 0;
+    minishell->cmd->d_quotes = 0;
 	return (EXIT_SUCCESS);
 }
