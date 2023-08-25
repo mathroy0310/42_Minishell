@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   ft_free_arr.c                                     ██   ██      ██        */
+/*   ft_lstpush.c                                      ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/01 15:03:44 by maroy                                    */
-/*   Updated: 2023/08/01 15:04:02 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/24 16:27:15 by maroy                                    */
+/*   Updated: 2023/08/24 16:28:51 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-void	free_arr(char **arr)
+void	ft_lstpush(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list	*tmp;
 
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
+	if (new == NULL)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	tmp = ft_lstlast(*lst);
+	tmp->next = new;
 }

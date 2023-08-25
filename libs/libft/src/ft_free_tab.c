@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                     ██   ██ ██████         */
-/*   free.c                                            ██   ██      ██        */
+/*   ft_free_tab.c                                     ██   ██      ██        */
 /*                                                     ███████  █████         */
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/15 15:56:17 by maroy                                    */
-/*   Updated: 2023/08/15 16:15:06 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Created: 2023/08/01 15:03:44 by maroy                                    */
+/*   Updated: 2023/08/01 15:04:02 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/libft.h"
 
-void	destroy_program(t_minishell *minishell)
+void	ft_free_tab(char **tab)
 {
-	ft_lstclear(minishell->env, free);
-	free(minishell);
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }

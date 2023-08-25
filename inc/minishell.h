@@ -60,6 +60,7 @@
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <termios.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 /*
@@ -102,18 +103,15 @@ void    DEBUG_print_tab(char **tab);
 void    DEBUG_print_msg(char *msg, char *arg);
 
 // Getenv
-void	init_env(t_minishell *minishell, char **envp);
-char	*get_env_content(char *arg, t_list *env);
 
 //parsing
-void parse(char *src, char **dest);
+void parsing(char *src, char **dest);
 
 void parse_tokens(t_token *tokens);
-int8_t case_dollar_sign(t_minishell *minishell, t_token *tokens);
-int8_t case_quoted_string(t_minishell *minishell, t_token *tokens);
-
 // Init
-int8_t	init(t_minishell *minishell, char **envp);
+t_minishell	*init(char **envp);
+
+t_minishell	*init_env(char *envp[]);
 
 // Builtins
 int8_t	exec_env(t_list *env);
@@ -122,10 +120,10 @@ int8_t	exec_pwd(void);
 // Signal
 void	sig_interrupt(int sig);
 
-int8_t	init_token(t_minishell *minishell, char *buffer);
+int8_t	handle_tokens(char *str, t_minishell *minishell);
 
 // Readline
-int8_t	take_input(char *buffer);
+int8_t	take_input(char *buffer, t_minishell *minishell);
 
 // valid
 int8_t	using_valid_characters(char *buff, t_minishell *minishell);
@@ -135,5 +133,6 @@ int8_t	print_token_error(char c);
 int8_t	print_msg_error(char *msg);
 
 // free
-void	free_env(t_list *env);
+void	destroy_program(t_minishell *minishell);
+
 #endif

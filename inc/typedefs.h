@@ -34,18 +34,12 @@ typedef struct s_token
     enum e_token_type    type;
 }					t_token;
 
-
-typedef struct s_cmd
-{
-    int     s_quotes;
-    int     d_quotes;
-}           t_cmd;
-
 typedef struct minishell
 {
-	t_list	*env;
+	t_list	**env;
 	t_token	*tokens;
-    t_cmd   *cmd;
+	int     s_quotes;
+    int     d_quotes;
 	int		exit_status;
 	char	**envp;
     char    **argv;

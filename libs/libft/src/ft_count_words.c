@@ -14,21 +14,21 @@
 
 int	ft_count_words(char *str, char *charset)
 {
-    int	i;
-    int	count;
+	int	i;
+	int	count;
 
-    i = 0;
-    count = 0;
-    while (str[i])
-    {
-        if (ft_strchr(charset, str[i])  == NULL)
-        {
-            count++;
-            while (ft_strchr(charset, str[i]) == NULL && str[i])
-                i++;
-        }
-        else
-            i++;
-    }
-    return (count);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (ft_strchr(charset, str[i]) == NULL)
+		{
+			count++;
+			while (str[i] && ft_strchr(charset, str[i]) == NULL)
+				i++;
+		}
+		else
+			i++;
+	}
+	return (count);
 }

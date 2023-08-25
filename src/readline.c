@@ -18,11 +18,12 @@ static void	save_history(char *input)
 		add_history(input);
 }
 
-int8_t	take_input(char *buffer)
+int8_t	take_input(char *buffer, t_minishell *minishell)
 {
 	char	*trimmed;
 	char	*input;
 
+	(void)minishell;
 	input = readline(PROMPT);
 	if (input == NULL)
 	{

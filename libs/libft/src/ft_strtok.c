@@ -14,26 +14,12 @@
 
 char	*ft_strtok(char *str, const char *delim)
 {
-	static char	*last_pos;
-	char		*token;
+	char	*token;
 
-	if (str)
-		last_pos = str;
-	token = last_pos;
-	while (*last_pos)
-	{
-		if (ft_strchr(delim, *last_pos))
-		{
-			*last_pos = '\0';
-			last_pos++;
-			if (*token)
-				return (token);
-			token = last_pos;
-		}
-		else
-			last_pos++;
-	}
-	if (*token)
-		return (token);
-	return (NULL);
+	token = str;
+	if (ft_strchr(str, *delim) != NULL)
+		token = ft_substr(str, 0, ft_strchr(str, *delim) - str);
+	else
+		token = ft_strdup(str);
+	return (token);
 }

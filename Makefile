@@ -69,7 +69,7 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c debug.c signals.c readline.c error.c \
+SRCS	=	main.c init.c free.c debug.c signals.c readline.c error.c \
 			parsing/valid.c parsing/tokens.c parsing/parser.c \
 			exec/execution.c \
 			builtins/pwd.c builtins/env.c \

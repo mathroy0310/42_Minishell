@@ -22,7 +22,9 @@
 // linked list
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
+	char			*key;
+	char			*value;
 	struct s_list	*next;
 }					t_list;
 
@@ -90,6 +92,11 @@ char				*get_next_line(int fd);
 
 //* Mes Fonctions *//
 
+//lst
+
+void				ft_lstpush(t_list **lst, t_list *new);
+
+
 // is
 int					ft_iscntrl(int c);
 int					ft_isgraph(int c);
@@ -108,7 +115,7 @@ double				ft_ceil(double x);
 void				*ft_malloc(size_t size);
 void				*ft_realloc(void *ptr, size_t size);
 void				*ft_free(void *ptr);
-void				ft_free_arr(char **arr);
+void				ft_free_tab(char **tab);
 
 // string.h
 char				*ft_strcpy(char *dest, const char *src);
