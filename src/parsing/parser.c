@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/23 16:35:22 by maroy                                    */
-/*   Updated: 2023/08/24 20:50:15 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/27 13:20:30 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	parse_double_redir(char *src, char **dest, int *i, int *n_tokens)
 {
 	dest[*n_tokens] = malloc(sizeof(char) * (3));
-	ft_strlcpy(dest[(*n_tokens)++], ">>", 3);
+    if (src[*i] == '>')
+	    ft_strlcpy(dest[(*n_tokens)++], ">>", 3);
 	*i += 2;
 	dest[*n_tokens] = ft_strtok(&src[*i], " ");
 	*i += ft_strlen(dest[(*n_tokens)++]) - 1;
@@ -70,9 +71,7 @@ static void	parse_token(char *src, char **dest, int *i, int *n_tokens)
 		*i += size - 2;
 	}
 	else
-	{
 		parse_inner_tokens(src, dest, i, n_tokens);
-	}
 }
 
 void	parsing(char *src, char **dest)

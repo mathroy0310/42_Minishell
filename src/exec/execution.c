@@ -6,11 +6,12 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/15 16:15:39 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/25 15:34:03 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 
 int	handle_execute(t_minishell *minishell)
 {
@@ -34,5 +35,5 @@ int	handle_execute(t_minishell *minishell)
 		close(fds[i]);
 	dup2(pipe_stdin, STDIN_FILENO);
 	minishell->exit_status = minishell->exit_status % 256;
-	return (1);
+	return (OK);
 }

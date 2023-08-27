@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/09 13:36:25 by maroy                                    */
-/*   Updated: 2023/08/24 20:51:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/25 15:08:34 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	replace_if_matches(char *origin, char match, char replacement)
 		*origin = replacement;
 }
 
-static void	tokenize_internal_quotes(char *str, char qt_repr, char dbl_qt_repr)
+static void	tokenize_internal_quotes(char *str, char sq_delim, char dq_delim)
 {
 	int		i;
 
@@ -29,17 +29,17 @@ static void	tokenize_internal_quotes(char *str, char qt_repr, char dbl_qt_repr)
 		if (str[i] == '\"' && ft_strchr(&str[i + 1], '\"'))
 		{
 			while (str[++i] != '\"')
-				replace_if_matches(&str[i], '\'', dbl_qt_repr);
+				replace_if_matches(&str[i], '\'', dq_delim);
 		}
 		else if (str[i] == '\'' && ft_strchr(&str[i + 1], '\''))
 		{
 			while (str[++i] != '\'')
-				replace_if_matches(&str[i], '\"', qt_repr);
+				replace_if_matches(&str[i], '\"', sq_delim);
 		}
 	}
 }
 
-void	recover_internal_quotes(char *str, char qt_repr, char dbl_qt_repr)
+void	recover_internal_quotes(char *str, char sq_delim, char dq_delim)
 {
 	int		i;
 
@@ -49,12 +49,12 @@ void	recover_internal_quotes(char *str, char qt_repr, char dbl_qt_repr)
 		if (str[i] == '\"' && ft_strchr(&str[i + 1], '\"'))
 		{
 			while (str[++i] != '\"')
-				replace_if_matches(&str[i], dbl_qt_repr, '\'');
+				replace_if_matches(&str[i], dq_delim, '\'');
 		}
 		else if (str[i] == '\'' && ft_strchr(&str[i + 1], '\''))
 		{
 			while (str[++i] != '\'')
-				replace_if_matches(&str[i], qt_repr, '\"');
+				replace_if_matches(&str[i], sq_delim, '\"');
 		}
 	}
 }
@@ -91,7 +91,7 @@ int8_t	handle_tokens(char *str, t_minishell *minishell)
 		minishell->exit_status = 127;
 		return (print_msg_error("syntax error unbalanced quotes"));
 	}
-	n_tokens = ft_count_words(str, " ") + 30;
+	n_tokens = ft_count_words(str, " ") + BUFFER_SIZE;
 	minishell->argv = (char **)ft_calloc(n_tokens + 1, sizeof(char *));
 	parsing(str, minishell->argv);
 	i = -1;

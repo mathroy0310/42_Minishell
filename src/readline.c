@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/24 18:31:39 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/27 15:24:16 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void	save_history(char *input)
 {
 	if (input && *input)
+    {
 		add_history(input);
+        append_history(1, HISTORY_FILE);
+    }
 }
 
 int8_t	take_input(char *buffer, t_minishell *minishell)
@@ -27,7 +30,7 @@ int8_t	take_input(char *buffer, t_minishell *minishell)
 	input = readline(PROMPT);
 	if (input == NULL)
 	{
-		ft_putstr_fd("exit", STDOUT_FILENO);
+        ft_putstr_fd("exit", STDOUT_FILENO);
 		free(input);
 		return (EXIT_FAILURE);
 	}

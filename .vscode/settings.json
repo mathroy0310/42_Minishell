@@ -37,7 +37,8 @@
         "__string": "c",
         "string": "c",
         "string_view": "c",
-        "unordered_map": "c"
+        "unordered_map": "c",
+        "readline.h": "c"
     },
     "cSpell.words": [
         "dlist",

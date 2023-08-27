@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/21 16:03:34 by maroy                                    */
-/*   Updated: 2023/08/24 20:37:23 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/08/27 12:42:23 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ void	DEBUG_print_tab(char **tab)
         printf(BLUE "DEBUG 🐞: tab[%d] -={ %s }=-\n" DEFAULT, i, tab[i]);
 }
 
-void	DEBUG_print_msg(char *msg, char *arg)
+void	DEBUG_print_arg(char *msg, char *arg)
 {
 	printf(BLUE "DEBUG 🐞: %s -={ %s }=-\n" DEFAULT, msg, arg);
+}
+
+void	DEBUG_print_msg(char *msg)
+{
+	printf(BLUE "DEBUG 🐞: -={ %s }=- \n" DEFAULT, msg);
 }

@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/08/23 16:40:13 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/08/27 13:16:34 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ DEFAULT = \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES	= minishell.h typedefs.h
+HEADER_FILES	= minishell.h typedefs.h defines.h prototypes.h
 
 HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
 
@@ -69,7 +69,7 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c free.c debug.c signals.c readline.c error.c \
+SRCS	=	main.c init.c free.c debug.c signals.c readline.c error.c file.c\
 			parsing/valid.c parsing/tokens.c parsing/parser.c \
 			exec/execution.c \
 			builtins/pwd.c builtins/env.c \
