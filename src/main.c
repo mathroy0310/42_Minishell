@@ -1,31 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   main.c                                            ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/27 15:19:57 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
+/*   Updated: 2023/08/28 15:00:40 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	exec_stdin(t_minishell *minishell)
+void parse_here_doc(char *delim, int *fd) {
+    char    buffer[1024]; // Buffer to store user input
+    char    *tmp;
+    int     buffer_pos = 0;
+
+    close(fd[READ_END]);
+    signal(SIGINT, handle_heredoc_signal);
+    ft_putstr_fd("> ", STDIN_FILENO);
+
+    while (1) {
+        char c;
+        ssize_t bytes_read = read(STDIN_FILENO, &c, 1);
+
+        if (bytes_read <= 0) {
+            // Handle end of input or error
+            break;
+        }
+
+        if (c == '\n') {
+            buffer[buffer_pos] = '\0';
+
+            if (!strcmp(buffer, delim) || *(get_signal_triggered_status()) == 1) {
+                close(fd[WRITE_END]);
+                return;
+            }
+
+            tmp = ft_strjoin(buffer, "\n");
+            ft_putstr_fd(tmp, fd[WRITE_END]);
+            free(tmp);
+            buffer_pos = 0; // Reset buffer position
+            ft_putstr_fd("> ", STDIN_FILENO);
+        } else {
+            buffer[buffer_pos] = c;
+            buffer_pos++;
+
+            if ((unsigned long)buffer_pos >= sizeof(buffer) - 1) {
+                // Handle buffer overflow
+                buffer_pos = 0; // Reset buffer position
+            }
+        }
+    }
+
+    close(fd[WRITE_END]);
+}
+
+void	exec_stdin(char *delim)
 {
 	int		fd[2];
 
-	(void)minishell;
 	if (pipe(fd) == -1)
 	{
 		print_msg_error("pipe error");
 		return ;
 	}
-	fd[OUTFILE] = handle_file(TMP_FILE, O_RDWR | O_CREAT | O_TRUNC);
-	close(fd[OUTFILE]);
-	dup2(fd[INFILE], STDIN_FILENO);
-	close(fd[INFILE]);
+	fd[OUTPUT] = handle_file(TMP_FILE, O_RDWR | O_CREAT | O_TRUNC);
+	parse_here_doc(delim, fd);
+	close(fd[OUTPUT]);
+	dup2(fd[INPUT], STDIN_FILENO);
+	close(fd[INPUT]);
 }
 
 
@@ -65,12 +110,12 @@ int8_t read_input(char *buffer, t_minishell *minishell)
 	if (handle_tokens(buffer, minishell))
 		return (EXIT_FAILURE);
 	i = -1;
-	
 	while (minishell->argv[++i])
 	{
 		if (ft_strncmp(minishell->argv[i], "<<", 3) == 0 && minishell->argv[i + 1])
 		{
-			exec_stdin(minishell);
+			DEBUG_print_msg("here doc");
+			exec_stdin(minishell->argv[i + 1]);
 			if (ft_strncmp(minishell->argv[0], "<<", 3) == 0 && minishell->argv[2] == NULL)
 			{
 				ft_free_tab(minishell->argv);
@@ -80,7 +125,7 @@ int8_t read_input(char *buffer, t_minishell *minishell)
 			sanitize_arg(minishell);
 		}
 	}
-	
+	expand_args(minishell);
 	return (EXIT_SUCCESS);
 	
 }

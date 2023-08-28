@@ -12,6 +12,18 @@
 
 #include "../inc/minishell.h"
 
+int	*get_signal_triggered_status(void)
+{
+	static int	*triggered;
+
+	if (!triggered)
+	{
+		triggered = (int *)malloc(sizeof(int));
+		*triggered = 0;
+	}
+	return (triggered);
+}
+
 void	sig_interrupt(int sig)
 {
 	if (sig == SIGINT)
@@ -20,5 +32,17 @@ void	sig_interrupt(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+	}
+}
+
+void	handle_heredoc_signal(int signal_number)
+{
+	int	*triggered;
+
+	triggered = get_signal_triggered_status();
+	if (signal_number == SIGINT)
+	{
+		*triggered = 1;
+		signal(SIGINT, handle_heredoc_signal);
 	}
 }

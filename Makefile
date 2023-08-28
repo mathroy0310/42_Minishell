@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                      ██   ██ ██████          #
-#    Makefile                                          ██   ██      ██         #
-#                                                      ███████  █████          #
-#    By: maroy <maroy@student.42.qc>                        ██ ██              #
-#                                                           ██ ███████.qc      #
-#    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/08/27 13:16:34 by maroy            >(.)__ <(.)__ =(.)__     #
-#                                                      (___/  (___/  (___/     #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
+#    Updated: 2023/08/28 15:01:37 by maroy            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -69,7 +69,7 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c init.c free.c debug.c signals.c readline.c error.c file.c\
+SRCS	=	main.c init.c free.c debug.c signals.c readline.c error.c file.c expand.c\
 			parsing/valid.c parsing/tokens.c parsing/parser.c \
 			exec/execution.c \
 			builtins/pwd.c builtins/env.c \

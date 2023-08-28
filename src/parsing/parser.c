@@ -17,6 +17,8 @@ void	parse_double_redir(char *src, char **dest, int *i, int *n_tokens)
 	dest[*n_tokens] = malloc(sizeof(char) * (3));
     if (src[*i] == '>')
 	    ft_strlcpy(dest[(*n_tokens)++], ">>", 3);
+	else if (src[*i] == '<')
+	    ft_strlcpy(dest[(*n_tokens)++], "<<", 3);
 	*i += 2;
 	dest[*n_tokens] = ft_strtok(&src[*i], " ");
 	*i += ft_strlen(dest[(*n_tokens)++]) - 1;
@@ -45,7 +47,7 @@ void	parse_inner_tokens(char *src, char **dest, int *i, int *n_tokens)
 		{
 			if (*i != start)
 				dest[(*n_tokens)++] = ft_strtok(&src[start], &src[*i]);
-			if (src[*i + 1] && src[*i + 1] == '>' && src[*i + 2] != ' ')
+			if (src[*i + 1] && (src[*i + 1] == '>' || src[*i + 1] == '<')&& src[*i + 2] != ' ')
 				return (parse_double_redir(src, dest, i, n_tokens));
 			return (parse_single_token(src, dest, i, n_tokens));
 		}

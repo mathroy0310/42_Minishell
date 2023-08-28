@@ -21,23 +21,34 @@
  * -- Global defines --
  */
 
+// prompt
 # define PROMPT "minishell$ "
 # define PROMPT_ERROR "minishell error: "
-# define NONE -1
 
+// limit
 # define BUFFER_SIZE 1024
 # define MAX_TOKENS 1024
 
+// char delim
 # define SQ_DELIM_CHAR 29
 # define DQ_DELIM_CHAR 30
 
+// ok ko
 # define OK 1
 # define KO 0
 
+// file i/o 
+# define INPUT 0
+# define OUTPUT 1
+
+// pipe ends 
+# define READ_END 0
+# define WRITE_END 1
+
+// tmp file
 # define HISTORY_FILE "/tmp/.minishell_command_history"
 # define TMP_FILE "/tmp/.minishell_here_doc"
-# define INFILE 0
-# define OUTFILE 1
+
 
 /*
  * -- Color Codes for users --

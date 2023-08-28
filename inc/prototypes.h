@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   prototypes.h                                      ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/25 15:17:10 by maroy                                    */
-/*   Updated: 2023/08/27 13:48:39 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   prototypes.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/25 15:17:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/08/28 15:01:09 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_H
@@ -27,6 +27,9 @@ void    DEBUG_print_arg(char *msg, char *arg);
 
 int	handle_execute(t_minishell *minishell);
 
+//expand
+void	expand_args(t_minishell *minishell);
+
 //parsing
 void parsing(char *src, char **dest);
 
@@ -43,8 +46,13 @@ int8_t	handle_file(char *filename, int open_flag);
 int8_t	exec_env(t_list *env);
 int8_t	exec_pwd(void);
 
+//env
+char	*getenv_value(t_list *envp[], char *key);
+
 // Signal
 void	sig_interrupt(int sig);
+int 	*get_signal_triggered_status(void);
+void	handle_heredoc_signal(int signal_number);
 
 int8_t	handle_tokens(char *str, t_minishell *minishell);
 
