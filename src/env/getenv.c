@@ -6,37 +6,37 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:14:52 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/28 14:58:26 by maroy            ###   ########.fr       */
+/*   Updated: 2023/08/29 19:47:46 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static int	are_equal(char *one, char *other)
+int	dup_env_var(char **env)
 {
-	return (ft_memcmp(other, one, ft_strlen(one)));
+	int	i;
+
+	i = -1;
+	g_global->env_var = (char **)malloc(sizeof(char *) * (ft_tablen(env) + 1));
+	if (g_global->env_var == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < ft_tablen(env))
+		g_global->env_var[i] = ft_strdup(env[i]);
+	g_global->env_var[i] = 0;
+	return (1);
 }
 
-static t_list	*lst_find(t_list **list, char *key)
+char	**get_env_(char	**env_)
 {
-	t_list	*tmp;
+	char	**env;
+	int		i;
 
-	tmp = *list;
-	while (tmp != NULL)
-	{
-		if (are_equal(tmp->key, key) == 0)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-char	*getenv_value(t_list *envp[], char *key)
-{
-	t_list			*tmp;
-
-	tmp = lst_find(envp, key);
-	if (tmp)
-		return (tmp->value);
-	return (NULL);
+	i = -1;
+	env = (char **)malloc(sizeof(char *) * (ft_tablen(env_) + 1));
+	if (env == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < ft_tablen(env_))
+		env[i] = ft_strdup(env_[i]);
+	env[i] = 0;
+	return (env);
 }

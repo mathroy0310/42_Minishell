@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                      ██   ██ ██████          #
-#    Makefile                                          ██   ██      ██         #
-#                                                      ███████  █████          #
-#    By: maroy <maroy@student.42.qc>                        ██ ██              #
-#                                                           ██ ███████.qc      #
-#    Created: 2023/07/14 21:56:43 by maroy                                     #
-#    Updated: 2023/08/24 16:29:26 by maroy            >(.)__ <(.)__ =(.)__     #
-#                                                      (___/  (___/  (___/     #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/14 21:56:43 by maroy             #+#    #+#              #
+#    Updated: 2023/08/29 20:48:30 by maroy            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -26,6 +26,7 @@ SRC_SRC		= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 			ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
 			ft_tolower.c ft_toupper.c ft_substr.c ft_strjoin.c ft_strtrim.c \
 			ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
+			ft_is_white_space.c ft_strjoin_free.c ft_strjoin_char.c ft_strchar.c\
 			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c \
 			ft_lstadd_front.c ft_lstclear.c ft_lstmap.c ft_lstlast.c ft_lstsize.c \
 			ft_lstnew.c ft_lstadd_back.c ft_lstdelone.c ft_lstiter.c ft_lstpush.c \
@@ -33,7 +34,7 @@ SRC_SRC		= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii
 			ft_dlstclear.c ft_dlstdelone.c ft_dlstpop_front.c ft_dlstpop_back.c ft_dlstclearback_addr.c\
 			ft_free.c ft_free_tab.c ft_strtok.c ft_abs.c ft_atof.c ft_atol.c ft_floor.c ft_ceil.c \
 			ft_iscntrl.c ft_isgraph.c ft_ispunct.c ft_isxdigit.c ft_malloc.c ft_pow.c ft_rand.c ft_realloc.c ft_sqrt.c \
-			ft_strcat.c ft_strcpy.c ft_strncpy.c ft_isspace.c ft_strcmp.c ft_count_char.c ft_count_words.c 
+			ft_strcat.c ft_strcpy.c ft_strncpy.c ft_isspace.c ft_strcmp.c ft_count_char.c ft_count_words.c ft_tablen.c
 SRC			= $(addprefix $(SRC_DIR), $(SRC_SRC))
 
 #--- OBJECTS ---#

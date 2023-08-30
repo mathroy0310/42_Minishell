@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   libft.h                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2022/10/17 12:41:20 by maroy                                    */
-/*   Updated: 2023/08/24 16:29:15 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 12:41:20 by maroy             #+#    #+#             */
+/*   Updated: 2023/08/29 20:48:19 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
@@ -131,7 +131,12 @@ long				ft_atol(const char *str);
 // custom
 int					ft_count_char(char *s, char c);
 int             	ft_count_words(char *str, char *charset);
+int					ft_tablen(char **env);
+char				*ft_strjoin_free(char *s1, char *s2);
+char				*ft_strjoin_char(char *s, char c);
+char				*ft_strchar(char *save, char c);
 
+int					is_white_space(char *buff);
 // Random
 int					ft_rand(int min, int max);
 

@@ -1,96 +1,116 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser.c                                          ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/23 16:35:22 by maroy                                    */
-/*   Updated: 2023/08/27 13:20:30 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:13:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/08/29 21:58:19 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	parse_double_redir(char *src, char **dest, int *i, int *n_tokens)
+static t_ast	*parse_args_helper(t_parser *parser)
 {
-	dest[*n_tokens] = malloc(sizeof(char) * (3));
-    if (src[*i] == '>')
-	    ft_strlcpy(dest[(*n_tokens)++], ">>", 3);
-	else if (src[*i] == '<')
-	    ft_strlcpy(dest[(*n_tokens)++], "<<", 3);
-	*i += 2;
-	dest[*n_tokens] = ft_strtok(&src[*i], " ");
-	*i += ft_strlen(dest[(*n_tokens)++]) - 1;
-}
+	t_ast	*ast;
 
-void	parse_single_token(char *src, char **dest, int *i, int *n_tokens)
-{
-	dest[*n_tokens] = malloc(sizeof(char) * (2));
-	ft_strlcpy(dest[(*n_tokens)++], &src[(*i)++], 2);
-	dest[*n_tokens] = ft_strtok(&src[*i], " ");
-	*i += ft_strlen(dest[(*n_tokens)++]) - 1;
-}
-
-void	parse_inner_tokens(char *src, char **dest, int *i, int *n_tokens)
-{
-	int	size;
-	int	start;
-
-	size = ft_strchr(&src[*i], ' ') - &src[*i];
-	if (size < 0 || size > 300)
-		size = ft_strlen(&src[*i]);
-	start = *i;
-	while (size--)
+	ast = malloc(sizeof(t_ast));
+	if (!ast)
+		return (NULL);
+	init_ast(ast, arg_ast);
+	ast->args = (t_token **)malloc(sizeof(t_token *) * 2);
+	if (!ast->args)
+		return (NULL);
+	ast->args[1] = NULL;
+	if (ast->args_size == 0)
 	{
-		if (src[*i] == '>' || src[*i] == '<' || src[*i] == '|')
+		ast->args[0] = parser->curr_token;
+		if (parser->curr_token->type == pip)
 		{
-			if (*i != start)
-				dest[(*n_tokens)++] = ft_strtok(&src[start], &src[*i]);
-			if (src[*i + 1] && (src[*i + 1] == '>' || src[*i + 1] == '<')&& src[*i + 2] != ' ')
-				return (parse_double_redir(src, dest, i, n_tokens));
-			return (parse_single_token(src, dest, i, n_tokens));
+			print_msg("minishell: syntax error near unexpected token 0",
+				parser->curr_token->value);
+			free_parser(parser);
+			free_tree(ast);
+			return (NULL);
 		}
-		*i += 1;
+		ast->args_size += 1;
 	}
-	*i = start;
-	dest[*n_tokens] = ft_strtok(&src[*i], " ");
-	*i += ft_strlen(dest[(*n_tokens)++]) - 1;
+	return (ast);
 }
 
-static void	parse_token(char *src, char **dest, int *i, int *n_tokens)
+static uint8_t	init_parse_args(t_ast *ast, t_parser *parser)
 {
-	int		size;
-	char	*end;
-
-	if (src[*i + 1] && (src[*i] == '\'' || src[*i] == '\"')
-		&& (ft_strchr(&src[*i + 1], '\'') || ft_strchr(&src[*i + 1], '\"')))
-	{
-		end = ft_strchr(&src[*i + 1], src[*i]);
-		size = end - &src[*i] + 2;
-		dest[*n_tokens] = (char *)ft_calloc(size, sizeof(char));
-		ft_strlcpy(dest[(*n_tokens)++], &src[*i], size);
-		*i += size - 2;
-	}
-	else
-		parse_inner_tokens(src, dest, i, n_tokens);
+	ast->args_size += 1;
+	ast->args = realloc_ast_args(ast, ast->args_size);
+	parser->prev_token = parser->curr_token;
+	parser->curr_token = get_next_token(parser->lexer);
+	ast->args[ast->args_size - 1] = check_token(parser, ast);
+	if (!ast->args[ast->args_size - 1])
+		return (KO);
+	return (OK);
 }
 
-void	parsing(char *src, char **dest)
+static t_ast	*parse_args(t_parser *parser)
 {
-	int		i;
-	int		n_tokens;
+	t_ast		*ast;
 
-	i = -1;
-	n_tokens = 0;
-	while (src[++i])
+	ast = parse_args_helper(parser);
+	if (!ast)
+		return (NULL);
+	while (parser->curr_token->type != eof)
 	{
-		while (src[i] == ' ' || src[i] == '\t' || src[i] == '\a'
-			|| src[i] == '\r' || src[i] == '\v' || src[i] == '\f')
-			i++;
-		parse_token(src, dest, &i, &n_tokens);
+		if (!init_parse_args(ast, parser))
+			return (free_tree(ast));
+		if (ast->args[ast->args_size - 1]->type == pip)
+		{
+			parser->prev_token = parser->curr_token;
+			parser->curr_token = get_next_token(parser->lexer);
+			break ;
+		}
+		if (ast->args[ast->args_size - 1]->type == eof)
+			break ;
 	}
-	dest[n_tokens] = NULL;
-	while (dest[++n_tokens])
-		free(dest[n_tokens]);
+	if (!syntax_error(parser))
+	{
+		if (ast)
+			free_tree(ast);
+		return (NULL);
+	}
+	return (ast);
+}
+
+static void	parser_multi_cmd(t_ast *ast)
+{
+	ast->pipecmd_size += 1;
+	ast->pipecmd_values = realloc_ast_node(ast, ast->pipecmd_size + 1);
+}
+
+t_ast	*parse_pipe(t_parser *parser)
+{
+	t_ast	*ast;
+
+	ast = malloc(sizeof(t_ast));
+	if (!ast)
+		return (NULL);
+	init_ast(ast, pipe_ast);
+	ast->pipecmd_values = (t_ast **)malloc(sizeof(t_ast *) * 2);
+	if (!ast->pipecmd_values)
+		return (NULL);
+	ast->pipecmd_size = 1;
+	ast->pipecmd_values[ast->pipecmd_size] = NULL;
+	while (parser->curr_token->type != eof)
+	{
+		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(parser);
+		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
+		{
+			free_parser2(parser, 1);
+			return (free_tree(ast));
+		}
+		if (parser->prev_token->type == pip)
+			parser_multi_cmd(ast);
+	}
+	free_parser2(parser, 0);
+	return (ast);
 }

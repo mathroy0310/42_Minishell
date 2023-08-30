@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   defines.h                                         ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/08/27 15:30:04 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/08/29 19:40:31 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
@@ -49,6 +49,16 @@
 # define HISTORY_FILE "/tmp/.minishell_command_history"
 # define TMP_FILE "/tmp/.minishell_here_doc"
 
+//important char defines
+# define PIPE 124
+# define GREAT 62
+# define LESS 60
+# define DQUOTE 34
+# define SQUOTE 39
+# define DOLLAR 36
+# define BSLASH 92
+//already exist in the chardefs of readline
+//# define SPACE 32
 
 /*
  * -- Color Codes for users --
