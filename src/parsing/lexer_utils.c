@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 20:49:43 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   lexer_utils.c                                     ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:40:58 by maroy                                    */
+/*   Updated: 2023/08/30 18:13:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 int	valid_envar(char c)
 {
-	if (ft_isalnum(c) || c == '_')
+	if (ft_isalnum(c) || c == '_' || c == '~')
 		return (1);
 	return (0);
 }
@@ -82,7 +82,7 @@ char	*string_envar(t_lexer *lexer)
 			str = ft_strjoin_char(str, lexer->c);
 			readchar(lexer);
 		}
-	}
+	}  
 	else
 	{
 		str = ft_strdup("$");
@@ -115,7 +115,7 @@ char	*invalid_envar(t_lexer *lexer, int i)
 	}
 	else
 	{
-		str = ft_strdup("a");
+		str = ft_strdup("0");
 		str[0] = lexer->c;
 		readchar(lexer);
 		return (str);

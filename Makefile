@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/08/29 22:16:09 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/27 15:41:11 by maroy                                     #
+#    Updated: 2023/08/30 19:03:12 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -30,7 +30,7 @@ DEFAULT = \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES	= minishell.h defines.h  lexer.h
+HEADER_FILES	= minishell.h defines.h  lexer.h execution.h
 
 HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
 
@@ -54,9 +54,11 @@ SLIB_RLINE 		= $(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -ltermcap -g3 -fsanitize=address
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17  -g3 -fsanitize=address
 
 RLFLAGS	=	-lreadline -lcurses
+
+TIFLAGS	=	-ltermcap
 
 MK		=	mkdir -p
 
@@ -76,6 +78,7 @@ BINDIR	=	bin
 SRCS	=	main.c debug.c signals.c minishell.c\
 			parsing/lexer.c parsing/parser.c parsing/utils.c parsing/free.c parsing/get_next_token.c\
 			parsing/lexer_utils.c parsing/parser_utils.c parsing/ast.c parsing/ast_realloc.c \
+			execution/exec.c\
 			builtins/pwd.c builtins/env.c \
 			env/getenv.c
 

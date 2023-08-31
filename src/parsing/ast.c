@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 21:30:29 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   ast.c                                             ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:29:29 by maroy                                    */
+/*   Updated: 2023/08/30 19:15:13 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -26,7 +26,7 @@ void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 {
 	cmd[n].redir_nbr = ast->redir_nbr;
 	cmd[n].args_size = ast->args_size - (cmd[n].redir_nbr * 2) - 1;
-	cmd[n].r = malloc(sizeof(t_redir) * ast->redir_nbr);
+	cmd[n].redir = malloc(sizeof(t_redir) * ast->redir_nbr);
 	if (cmd[n].args_size > 0)
 		cmd[n].argvs = malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
@@ -49,9 +49,9 @@ void	visitor_args(t_ast *ast, t_cmd *cmd, int n)
 			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
 				&& x.m < ast->redir_nbr)
 			{
-				cmd[n].r[x.m].type = ast->args[x.k - 1]->type;
-				cmd[n].r[x.m].is_quoted = ast->args[x.k]->is_quoted;
-				cmd[n].r[x.m++].filename = ft_strdup(ast->args[x.k++]->value);
+				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
+				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;
+				cmd[n].redir[x.m++].filename = ft_strdup(ast->args[x.k++]->value);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ void	init_cmd(t_cmd cmd)
 	cmd.args_size = 0;
 	cmd.argvs = NULL;
 	cmd.redir_nbr = 0;
-	cmd.r = NULL;
+	cmd.redir = NULL;
 }
 
 t_cmd	*visitor(t_ast *ast)
@@ -89,7 +89,6 @@ t_cmd	*visitor(t_ast *ast)
 				cmd[x.k].type = eof;
 			(x.k)++;
 		}
-		x.m = -1;
 		while (++(x.m) < x.k)
 			cmd[x.m].nbr_cmd = x.k;
 	}

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 19:40:31 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   defines.h                                         ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/25 15:19:10 by maroy                                    */
+/*   Updated: 2023/08/30 20:08:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
@@ -21,9 +21,11 @@
  * -- Global defines --
  */
 
+//1 == DEBUG mode , 0 == NORMAL mode
+# define DEBUG 0
+
 // prompt
 # define PROMPT "minishell$ "
-# define PROMPT_ERROR "minishell error: "
 
 // limit
 # define BUFFER_SIZE 1024
@@ -46,8 +48,7 @@
 # define WRITE_END 1
 
 // tmp file
-# define HISTORY_FILE "/tmp/.minishell_command_history"
-# define TMP_FILE "/tmp/.minishell_here_doc"
+# define HISTORY_FILE "./.tmp/command_history"
 
 //important char defines
 # define PIPE 124

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:33:28 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 21:32:30 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   free.c                                            ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:33:28 by maroy                                    */
+/*   Updated: 2023/08/30 19:14:54 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -113,11 +113,11 @@ void	free_cmd(t_cmd *cmd)
 		j = -1;
 		while (++j < cmd[i].redir_nbr)
 		{
-			if (cmd[i].r[j].filename)
-				free(cmd[i].r[j].filename);
-			cmd[i].r[j].filename = NULL;
+			if (cmd[i].redir[j].filename)
+				free(cmd[i].redir[j].filename);
+			cmd[i].redir[j].filename = NULL;
 		}
-		free(cmd[i].r);
+		free(cmd[i].redir);
 	}
 	free(cmd);
 }

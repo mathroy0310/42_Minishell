@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 21:50:13 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   parser_utils.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:27:18 by maroy                                    */
+/*   Updated: 2023/08/30 15:52:29 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -45,8 +45,8 @@ int	is_redic(t_token *token)
 {
 	if (token->type == great || token->type == greater || token->type == less
 		|| token->type == here_doc)
-		return (1);
-	return (0);
+		return (OK);
+	return (KO);
 }
 
 char	*quoted_delim(t_parser *parser, char *s, int *i)

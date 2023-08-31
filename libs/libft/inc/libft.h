@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 12:41:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 20:48:19 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   libft.h                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2022/10/17 12:41:20 by maroy                                    */
+/*   Updated: 2023/08/30 18:30:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
@@ -135,6 +135,8 @@ int					ft_tablen(char **env);
 char				*ft_strjoin_free(char *s1, char *s2);
 char				*ft_strjoin_char(char *s, char c);
 char				*ft_strchar(char *save, char c);
+uint8_t	            ft_strequal(const char *s1, const char *s2);
+
 
 int					is_white_space(char *buff);
 // Random
