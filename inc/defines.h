@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   defines.h                                         ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/08/30 20:08:17 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/01 14:49:35 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
@@ -25,15 +25,10 @@
 # define DEBUG 0
 
 // prompt
-# define PROMPT "minishell$ "
+# define PROMPT "minishell >$ "
 
-// limit
-# define BUFFER_SIZE 1024
-# define MAX_TOKENS 1024
-
-// char delim
-# define SQ_DELIM_CHAR 29
-# define DQ_DELIM_CHAR 30
+// tmp file
+# define HISTORY_FILE "./.tmp/.minishell_history"
 
 // ok ko
 # define OK 1
@@ -46,9 +41,6 @@
 // pipe ends 
 # define READ_END 0
 # define WRITE_END 1
-
-// tmp file
-# define HISTORY_FILE "./.tmp/command_history"
 
 //important char defines
 # define PIPE 124

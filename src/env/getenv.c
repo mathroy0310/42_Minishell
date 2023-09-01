@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:14:52 by maroy             #+#    #+#             */
-/*   Updated: 2023/08/29 19:47:46 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/01 14:43:29 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	dup_env_var(char **env)
 	while (++i < ft_tablen(env))
 		g_global->env_var[i] = ft_strdup(env[i]);
 	g_global->env_var[i] = 0;
-	return (1);
+	return (OK);
 }
 
 char	**get_env_(char	**env_)

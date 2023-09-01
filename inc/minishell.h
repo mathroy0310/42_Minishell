@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/08/30 19:13:03 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/01 14:31:43 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -59,9 +59,11 @@
 /*
  * -- Local Includes --
  */
-# include "./execution.h"
+
+# include "execution.h"
 # include "lexer.h"
 # include "parser.h"
+# include "builtins.h"
 # include "defines.h"
 
 /*

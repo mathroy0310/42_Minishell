@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                      ██   ██ ██████          #
-#    Makefile                                          ██   ██      ██         #
-#                                                      ███████  █████          #
-#    By: maroy <maroy@student.42.qc>                        ██ ██              #
-#                                                           ██ ███████.qc      #
-#    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/08/30 19:03:12 by maroy            >(.)__ <(.)__ =(.)__     #
-#                                                      (___/  (___/  (___/     #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
+#    Updated: 2023/09/01 14:42:08 by maroy            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -30,7 +30,7 @@ DEFAULT = \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES	= minishell.h defines.h  lexer.h execution.h
+HEADER_FILES	= minishell.h defines.h  lexer.h execution.h builtins.h
 
 HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
 
@@ -75,11 +75,12 @@ SRCDIR	=	src
 BINDIR	=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c debug.c signals.c minishell.c\
+SRCS	=	main.c debug.c  minishell.c\
 			parsing/lexer.c parsing/parser.c parsing/utils.c parsing/free.c parsing/get_next_token.c\
 			parsing/lexer_utils.c parsing/parser_utils.c parsing/ast.c parsing/ast_realloc.c \
-			execution/exec.c\
-			builtins/pwd.c builtins/env.c \
+			execution/exec.c execution/signals.c \
+			execution/builtins/pwd.c execution/builtins/env.c \
+			execution/builtins/builtins.c \
 			env/getenv.c
 
 SRC		= $(addprefix $(SRCDIR)/, $(SRCS))

@@ -41,7 +41,8 @@
         "readline.h": "c",
         "lexer.h": "c",
         "parser.h": "c",
-        "defines.h": "c"
+        "defines.h": "c",
+        "stdint.h": "c"
     },
     "cSpell.words": [
         "dlist",
