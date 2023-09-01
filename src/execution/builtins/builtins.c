@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:21:04 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/01 14:39:01 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/01 16:43:26 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ uint8_t	check_builtin(t_cmd *cmd, t_data *data)
 		return (pwd_builtin());
 	else if (ft_strequal(args[0], "env"))
 	 	return (env_builtin(data));
+	else if (ft_strequal(args[0], "export"))
+		return (export_builtin(args));
 	// else if (ft_strequal(args[0], "echo"))
 	// 	return (echo_builtin(args));
-	// else if (ft_strequal(args[0], "export"))
-	// 	return (export_builtin(args, data));
 	// else if (ft_strequal(args[0], "unset"))
 	// 	return (unset_builtin(args, data));
 	// else if (ft_strequal(args[0], "cd"))

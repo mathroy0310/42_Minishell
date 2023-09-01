@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:30:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/01 14:38:13 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/01 16:42:59 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ uint8_t	pwd_builtin(void);
 */
 
 uint8_t	env_builtin(t_data *m);
+
+/*
+* export.c *
+*/
+uint8_t	export_builtin(char **args);
+
+/*
+* utils.c *
+*/
+
+void	sort_and_print(void);
+void	print_sorted_env(char **sorted_env);
 
 
 #endif

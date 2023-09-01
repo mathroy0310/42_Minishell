@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/01 14:42:08 by maroy            ###   ########.fr        #
+#    Updated: 2023/09/01 16:42:07 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ SRCS	=	main.c debug.c  minishell.c\
 			parsing/lexer.c parsing/parser.c parsing/utils.c parsing/free.c parsing/get_next_token.c\
 			parsing/lexer_utils.c parsing/parser_utils.c parsing/ast.c parsing/ast_realloc.c \
 			execution/exec.c execution/signals.c \
-			execution/builtins/pwd.c execution/builtins/env.c \
+			execution/builtins/pwd.c execution/builtins/env.c execution/builtins/export.c execution/builtins/utils.c \
 			execution/builtins/builtins.c \
 			env/getenv.c
 
