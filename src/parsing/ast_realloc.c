@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/08/30 15:56:11 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/02 19:00:58 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 
 	i = 0;
 	str = ft_strdup(s);
-	while (lexer->c != EOF && !ft_strchar("|>< \"\'", lexer->c))
+	while (lexer->c != EOF && !ft_strchr("|>< \"\'", lexer->c))
 	{
 		while (lexer->c == 32 && lexer->c != EOF)
 			readchar(lexer);

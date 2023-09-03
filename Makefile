@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/01 16:42:07 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/27 15:41:11 by maroy                                     #
+#    Updated: 2023/09/02 19:25:14 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -30,9 +30,9 @@ DEFAULT = \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES	= minishell.h defines.h  lexer.h execution.h builtins.h
+HEADER_FILES	= 	minishell.h defines.h  lexer.h execution.h builtins.h
 
-HEADERS			= $(addprefix $(INCDIR)/, $(HEADER_FILES))
+HEADERS			= 	$(addprefix $(INCDIR)/, $(HEADER_FILES))
 
 LIBFT			=	${LIBDIR}/libft
 
@@ -40,15 +40,15 @@ MAKELIB			=	${MAKE} -C ${LIBFT}
 
 SLIB_LIBFT		=	${LIBFT}/libft.a
 
-TERMINFO 		= termcap-1.3.1
+TERMCAP 		= 	termcap-1.3.1
 
-TERMINFO_DIR 	= ./libs/termcap
+TERMCAP_DIR 	= 	./libs/termcap
 
-LIBRLINE 		= readline-8.2
+LIBRLINE 		= 	readline-8.2
 
-LIBRLINE_DIR 	= ./libs/readline/
+LIBRLINE_DIR 	= 	./libs/readline/
 
-SLIB_RLINE 		= $(LIBRLINE_DIR)libreadline.a
+SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
 
 #--- COMMAND VARIABLES ---#
 
@@ -66,26 +66,45 @@ RM		=	rm -rf
 
 #--- SOURCE, INCLUDE AND BINARIES DIRECTORIES ---#
 
-INCDIR	=	inc
+INCDIR				=	inc
 
-LIBDIR	=	libs
+LIBDIR				=	libs
 
-SRCDIR	=	src
+SRC_MAIN_DIR 		= 	src
 
-BINDIR	=	bin
+SRC_PARSING_DIR 	= 	$(SRC_MAIN_DIR)/parsing
+
+SRC_EXECUT_DIR		= 	$(SRC_MAIN_DIR)/execution
+
+SRC_BUILTINS_DIR 	= 	$(SRC_EXECUT_DIR)/builtins
+
+SRC_DIR 			=	$(SRC_MAIN_DIR) $(SRC_PARSING_DIR) $(SRC_EXECUT_DIR) $(SRC_BUILTINS_DIR)
+
+BINDIR				=	bin
 
 #--- SOURCES ---#
-SRCS	=	main.c debug.c  minishell.c\
-			parsing/lexer.c parsing/parser.c parsing/utils.c parsing/free.c parsing/get_next_token.c\
-			parsing/lexer_utils.c parsing/parser_utils.c parsing/ast.c parsing/ast_realloc.c \
-			execution/exec.c execution/signals.c \
-			execution/builtins/pwd.c execution/builtins/env.c execution/builtins/export.c execution/builtins/utils.c \
-			execution/builtins/builtins.c \
-			env/getenv.c
+SRCS_MAIN			=	main.c debug.c  minishell.c\
+						env/getenv.c
 
-SRC		= $(addprefix $(SRCDIR)/, $(SRCS))
+SRCS_PARSING 		= 	lexer.c parser.c utils.c free.c get_next_token.c lexer_utils.c parser_utils.c ast.c ast_realloc.c
 
-BIN     = $(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
+SRCS_EXECUT			=	exec.c signals.c
+
+SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c
+
+#-- PREFIXED SOURCES --#
+
+SRC_M		=	$(addprefix $(SRC_MAIN_DIR)/, $(SRCS_MAIN))
+
+SRC_P		=	$(addprefix $(SRC_PARSING_DIR)/, $(SRCS_PARSING))
+
+SRC_E		=	$(addprefix $(SRC_EXECUT_DIR)/, $(SRCS_EXECUT))
+
+SRC_B		=	$(addprefix $(SRC_BUILTINS_DIR)/, $(SRCS_BUILTINS))
+
+SRC 		=	$(SRC_M) $(SRC_P) $(SRC_E) $(SRC_B)
+
+BIN     	=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 #--- RULES ---#
 
@@ -97,17 +116,19 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 all			: readline termcap ${NAME}
 
 termcap:
-	@if [ ! -f $(TERMINFO_DIR)/libtermcap.a ]; then \
+	@#!/bin/bash
+	@set -e
+	@if [ ! -f $(TERMCAP_DIR)/libtermcap.a ]; then \
 		echo "${BLUE}Installing Termcap ... ${DARKGRAY}"; \
-		mkdir -p $(TERMINFO_DIR); \
-		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMINFO).tar.gz > /dev/null 2>&1; \
-		tar -xf $(TERMINFO).tar.gz > /dev/null 2>&1; \
-		rm -rf $(TERMINFO).tar.gz; \
-		cd $(TERMINFO) && ./configure > /dev/null 2>&1 && make > /dev/null 2>&1; \
+		mkdir -p $(TERMCAP_DIR); \
+		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMCAP).tar.gz > /dev/null 2>&1; \
+		tar -xf $(TERMCAP).tar.gz > /dev/null 2>&1; \
+		rm -rf $(TERMCAP).tar.gz; \
+		cd $(TERMCAP) && ./configure > /dev/null 2>&1 && make > /dev/null 2>&1; \
 		mv libtermcap.a ../libs/termcap > /dev/null 2>&1; \
 		mkdir ../libs/termcap/inc > /dev/null 2>&1; \
 		mv ./*.h ../libs/termcap/inc > /dev/null 2>&1; \
-		cd .. && rm -rf $(TERMINFO); \
+		cd .. && rm -rf $(TERMCAP); \
 		echo "${BLUE}Termcap successfully installed 🗄${DEFAULT}"; \
 	fi
 

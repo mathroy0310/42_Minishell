@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/08/30 18:13:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/02 19:02:43 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	get_str_by_char(char *str, char c, int i)
 	return (ret);
 }
 
-
 char	*ft_getenv(char *str)
 {
 	char	*env_value;
@@ -59,7 +58,7 @@ char	*ft_getenv(char *str)
 		{
 			temp = env_value;
 			env_value = ft_substr(g_global->env_var[i], start + 1,
-					ft_strlen(g_global->env_var[i]) - start);
+				ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
 			ft_freeptr(env_key);
 			break ;
@@ -77,16 +76,16 @@ char	*string_envar(t_lexer *lexer)
 	{
 		readchar(lexer);
 		str = ft_strdup("");
-		while (lexer->c != EOF && !ft_strchar("|><\"\' $", lexer->c))
+		while (lexer->c != EOF && !ft_strchr("|><\"\' $", lexer->c))
 		{
 			str = ft_strjoin_char(str, lexer->c);
 			readchar(lexer);
 		}
-	}  
+	}
 	else
 	{
 		str = ft_strdup("$");
-		while (lexer->c != EOF && !ft_strchar("|><\"\'$", lexer->c))
+		while (lexer->c != EOF && !ft_strchr("|><\"\'$", lexer->c))
 		{
 			str = ft_strjoin_char(str, lexer->c);
 			readchar(lexer);
@@ -124,13 +123,13 @@ char	*invalid_envar(t_lexer *lexer, int i)
 
 char	*envar_token(t_lexer *lexer)
 {
-	char	*str;
-	char	*v;
+	char *str;
+	char *v;
 
 	if (!lexer)
 		return (NULL);
-	if (peek_char(lexer) == '$' || peek_char(lexer) == '\"' || peek_char(lexer) == '\''
-		|| peek_char(lexer) == EOF)
+	if (peek_char(lexer) == '$' || peek_char(lexer) == '\"'
+		|| peek_char(lexer) == '\'' || peek_char(lexer) == EOF)
 		return (invalid_envar(lexer, 0));
 	readchar(lexer);
 	if (ft_isdigit(lexer->c) || lexer->c == '?' || !valid_envar(lexer->c))

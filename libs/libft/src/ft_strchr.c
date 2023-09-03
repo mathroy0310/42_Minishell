@@ -6,22 +6,22 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2022/10/18 13:41:06 by maroy                                    */
-/*   Updated: 2023/07/31 14:15:59 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/02 19:03:08 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *save, int c)
 {
-	char	find_c;
+	size_t	i;
 
-	find_c = c;
-	while (*s != find_c)
+	i = 0;
+	while (save[i] != c)
 	{
-		if (*s == '\0')
+		if (save[i] == '\0')
 			return (NULL);
-		s++;
+		i++;
 	}
-	return ((char *)s);
+	return (save);
 }

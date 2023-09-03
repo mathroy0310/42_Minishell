@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/08/30 19:15:13 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/02 18:28:34 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_ast(t_ast *ast, t_ast_type type)
 {
 	ast->type = type;
-	ast->pipecmd_values = (void *) 0;
+	ast->pipecmd_values = (void *)0;
 	ast->pipecmd_size = 0;
 	ast->args = 0;
 	ast->redir_nbr = 0;

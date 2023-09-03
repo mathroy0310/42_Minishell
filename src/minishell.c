@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/08/30 19:16:19 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/02 18:51:44 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 
 void	quit_minishell(void)
 {
-	char		*up;
-	char		*ri;
+	char	*up;
+	char	*ri;
 
 	up = tgetstr("up", NULL);
 	ri = tgetstr("RI", NULL);
@@ -57,7 +57,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 		if (ast)
 		{
 			cmd = visitor(ast);
-			DEBUG_print_tab(cmd->argvs);
+			debug_print_tab(cmd->argvs);
 			if (cmd)
 			{
 				execution(cmd, state);
@@ -80,14 +80,14 @@ static void	sanitize(char **buff, t_lexer **lexer)
 		(*lexer)->buffer = ft_strdup(*buff);
 		(*lexer)->bufsize = ft_strlen((*lexer)->buffer);
 	}
-	free (*buff);
+	free(*buff);
 }
 
-uint8_t minishell_master(int argc, char **argv, char**env)
+uint8_t	minishell_master(int argc, char **argv, char **env)
 {
-	t_lexer		*lexer;
-	char		*buff;
-	t_state		*state;
+	t_lexer *lexer;
+	char *buff;
+	t_state *state;
 
 	state = (t_state *)malloc(sizeof(t_state));
 	initialize(argc, argv, env, state);
@@ -112,5 +112,5 @@ uint8_t minishell_master(int argc, char **argv, char**env)
 		}
 		parse(lexer, state);
 	}
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

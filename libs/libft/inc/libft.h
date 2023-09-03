@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 12:41:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/01 14:35:55 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   libft.h                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2022/10/17 12:41:20 by maroy                                    */
+/*   Updated: 2023/09/02 19:04:01 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdint.h>
 
 # define BUFFER_SIZE 1024
 
@@ -37,8 +37,9 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
 size_t				ft_strlen(const char *s);
 // Returns a pointer to the first occurrence of character in the C string str.
-// The terminating null-character is considered part of the C string. Therefore, it can also be located in order to retrieve a pointer to the end of a string.
-char				*ft_strchr(const char *s, int c);
+// The terminating null-character is considered part of the C string. Therefore,
+// it can also be located in order to retrieve a pointer to the end of a string.
+char				*ft_strchr(char *save, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -93,10 +94,9 @@ char				*get_next_line(int fd);
 
 //* Mes Fonctions *//
 
-//lst
+// lst
 
 void				ft_lstpush(t_list **lst, t_list *new);
-
 
 // is
 int					ft_iscntrl(int c);
@@ -131,13 +131,11 @@ long				ft_atol(const char *str);
 
 // custom
 int					ft_count_char(char *s, char c);
-int             	ft_count_words(char *str, char *charset);
+int					ft_count_words(char *str, char *charset);
 int					ft_tablen(char **env);
 char				*ft_strjoin_free(char *s1, char *s2);
 char				*ft_strjoin_char(char *s, char c);
-char				*ft_strchar(char *save, char c);
-uint8_t	            ft_strequal(const char *s1, const char *s2);
-
+uint8_t				ft_strequal(const char *s1, const char *s2);
 
 int					is_white_space(char *buff);
 // Random

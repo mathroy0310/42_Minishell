@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/01 14:31:43 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/06/26 21:49:41 by maroy                                    */
+/*   Updated: 2023/09/02 18:51:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -38,8 +38,8 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
-# include <termios.h>
 # include <sys/wait.h>
+# include <termios.h>
 # include <unistd.h>
 
 /*
@@ -49,8 +49,8 @@
 //  Readline
 # include "../libs/readline/inc/history.h"
 # include "../libs/readline/inc/readline.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 //  Libft
 # include "../libs/libft/inc/libft.h"
 // termcap
@@ -60,11 +60,11 @@
  * -- Local Includes --
  */
 
+# include "builtins.h"
+# include "defines.h"
 # include "execution.h"
 # include "lexer.h"
 # include "parser.h"
-# include "builtins.h"
-# include "defines.h"
 
 /*
  * -- Struct --
@@ -72,38 +72,36 @@
 
 typedef struct s_global
 {
-    char    **env_var;
-    int     pid;
-    int     exit_status;
-}   t_global;
+	char		**env_var;
+	int			pid;
+	int			exit_status;
+}				t_global;
 
 /*
  * -- My Global Variable --
  */
-extern t_global *g_global; 
-
+extern t_global	*g_global;
 
 /*
  * -- Prototypes --
  */
-uint8_t minishell_master(int argc, char **argv, char**env);
+uint8_t			minishell_master(int argc, char **argv, char **env);
 
+// debug
+void			debug_print_tab(char **tab);
+void			debug_print_msg(char *msg);
+void			debug_print_string(char *msg, char *arg);
+void			debug_print_decimal(char *msg, int arg);
+void			debug_print_char(char *msg, char arg);
+void			debug_print_parser(t_parser *head);
 
-//DEBUG
-void    DEBUG_print_tab(char **tab);
-void    DEBUG_print_msg(char *msg);
-void    DEBUG_print_string(char *msg, char *arg);
-void    DEBUG_print_decimal(char *msg, int arg);
-void    DEBUG_print_char(char *msg, char arg);
-void	DEBUG_print_parser(t_parser *head);
+// Signals.c
 
-//Signals.c
+void			sigint_handler(int signum);
 
-void	sigint_handler(int signum);
+// env.c
 
-//env.c
-
-int	dup_env_var(char **env);
-char	**get_env_(char	**env_);
+int				dup_env_var(char **env);
+char			**get_env_(char **env_);
 
 #endif
