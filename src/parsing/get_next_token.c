@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:29:35 by maroy                                    */
-/*   Updated: 2023/08/30 18:13:24 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 19:03:10 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*tokenize_dquoted_text(t_lexer *lexer)
 	str = ft_strdup("");
 	while (lexer->c != DQUOTE && lexer->c != EOF)
 	{
-		if (lexer->c == DOLLAR)
+		if (lexer->c == DOLLAR) 
 			str = ft_strjoin_free(str, envar_token(lexer));
 		else
 		{

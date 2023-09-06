@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:21:18 by maroy                                    */
-/*   Updated: 2023/08/30 18:14:01 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 18:07:52 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_token	*init_token(t_token_type type, char *str, t_lexer *lexer)
 	return (token);
 }
 
-void	print_msg(char *str, char *var)
+void	print_error_msg(char *str, char *var)
 {
 	printf(RED"%s"DEFAULT, str);
 	if (var)
@@ -58,9 +58,9 @@ int	multi_lines(t_lexer *lexer, char c)
 	if (lexer->c == EOF)
 	{
 		if (c == DQUOTE)
-			print_msg("minishell: syntax error expected \"\n", NULL);
+			print_error_msg("minishell: syntax error expected \"\n", NULL);
 		else
-			print_msg("minishell: syntax error expected \'\n", NULL);
+			print_error_msg("minishell: syntax error expected \'\n", NULL);
 		lexer->multi_line = 1;
 		return (KO);
 	}

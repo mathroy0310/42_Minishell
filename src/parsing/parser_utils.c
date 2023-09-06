@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:27:18 by maroy                                    */
-/*   Updated: 2023/08/30 15:52:29 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_parser	*init_parser(t_lexer *lexer)
 	parser->curr_token = get_next_token(lexer);
 	if (parser->curr_token->type == pip)
 	{
-		print_msg("minishell: syntax error near unexpected token 1",
+		print_error_msg("minishell: syntax error near unexpected token",
 			parser->curr_token->value);
 		free_parser(parser);
 		return (NULL);
@@ -55,7 +55,7 @@ char	*quoted_delim(t_parser *parser, char *s, int *i)
 	int		start;
 
 	start = *i;
-	while (s[*i] != 32 && s[*i] != '<')
+	while (s[*i] != SPACE && s[*i] != LESS)
 		(*i)--;
 	if (s[(*i) + 1] == DQUOTE || s[(*i) + 1] == SQUOTE)
 		(*i) += 2;
@@ -83,7 +83,7 @@ char	*get_stop_word(t_parser *parser)
 	s = ft_strdup(parser->lexer->buffer);
 	if (parser->curr_token->is_quoted == 0)
 	{
-		while (s[i] != 32 && s[i] != '<')
+		while (s[i] != SPACE && s[i] != LESS)
 			i--;
 		i += 1;
 		word = ft_substr(s, i, parser->lexer->curpos - i);
@@ -98,16 +98,16 @@ int	syntax_error(t_parser *parser)
 {
 	if (parser->prev_token->type == pip && parser->curr_token->type == pip)
 	{
-		print_msg("minishell: syntax error near unexpected token 3",
+		print_error_msg("minishell: syntax error near unexpected token",
 			parser->prev_token->value);
-		return (0);
+		return (KO);
 	}
 	if ((is_redic(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_msg("minishell: syntax error near unexpected token `newline'\n",
+		print_error_msg("minishell: syntax error near unexpected token `newline'\n",
 			NULL);
-		return (0);
+		return (KO);
 	}
-	return (1);
+	return (OK);
 }

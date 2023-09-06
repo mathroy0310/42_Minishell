@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/09/02 19:00:58 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 19:03:12 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_lexer	*init_lexer(t_lexer	*lexer)
 		return (NULL);
 	lexer->buffer = NULL;
 	lexer->bufsize = 0;
-	lexer->c = ' ';
+	lexer->c = SPACE;
 	lexer->curpos = 0;
 	lexer->readpos = 0;
 	return (lexer);
@@ -102,7 +102,7 @@ t_token	*check_token(t_parser *parser, t_ast *ast)
 	{
 		if (parser->curr_token->type != id)
 		{
-			print_msg("minishell: syntax error near unexpected token 2",
+			print_error_msg("minishell: syntax error near unexpected token",
 				parser->curr_token->value);
 			return (NULL);
 		}

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/09/02 18:51:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 void	initialize(int argc, char **argv, char **env, t_state *state)
 {
-	(void)argc;
-	(void)argv;
+	if (argc != 1)
+	{
+		if (access(argv[1] , F_OK) != -1)
+		{
+			ft_putstr_fd("minishell: Unable to execute scripts in minishell", STDERR_FILENO);
+			exit(1);
+		}
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(argv[1], STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		exit(127);
+	}
+	debug_print_error_msg("DEBUG mode enabled 🐛");
 	using_history();
 	read_history(HISTORY_FILE);
 	g_global = malloc(sizeof(t_global));
@@ -30,7 +41,7 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 	state->path = NULL;
 }
 
-void	quit_minishell(void)
+void	quit_minishell(char *buff)
 {
 	char	*up;
 	char	*ri;
@@ -40,6 +51,7 @@ void	quit_minishell(void)
 	tputs(ri, 1, putchar);
 	tputs(up, 1, putchar);
 	ft_putendl_fd("exit", STDOUT_FILENO);
+	free(buff);
 	exit(g_global->exit_status);
 }
 
@@ -48,8 +60,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 	t_cmd		*cmd;
 	t_ast		*ast;
 	t_parser	*parser;
-
-	(void)state;
+	
 	parser = init_parser(lexer);
 	if (parser)
 	{
@@ -57,9 +68,9 @@ static void	parse(t_lexer *lexer, t_state *state)
 		if (ast)
 		{
 			cmd = visitor(ast);
-			debug_print_tab(cmd->argvs);
 			if (cmd)
 			{
+				debug_print_cmd(cmd);
 				execution(cmd, state);
 				if (cmd)
 					free_cmd(cmd);
@@ -85,9 +96,9 @@ static void	sanitize(char **buff, t_lexer **lexer)
 
 uint8_t	minishell_master(int argc, char **argv, char **env)
 {
-	t_lexer *lexer;
-	char *buff;
-	t_state *state;
+	t_lexer	*lexer;
+	char	*buff;
+	t_state	*state;
 
 	state = (t_state *)malloc(sizeof(t_state));
 	initialize(argc, argv, env, state);
@@ -96,10 +107,7 @@ uint8_t	minishell_master(int argc, char **argv, char **env)
 		buff = NULL;
 		buff = readline(PROMPT);
 		if (!buff)
-		{
-			free(buff);
-			quit_minishell();
-		}
+			quit_minishell(buff);
 		else if (buff[0] == '\0')
 		{
 			free(buff);

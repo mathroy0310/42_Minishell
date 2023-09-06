@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/09/02 18:52:04 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 15:54:46 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -21,28 +21,19 @@
  * -- Global defines --
  */
 
-//1 == DEBUG mode , 0 == NORMAL mode
+// 1 == DEBUG mode , 0 == NORMAL mode
 # define DEBUG 1
 
 // prompt
-# define PROMPT "minishell >$ "
+# define PROMPT "minishell$ "
 
 // tmp file
 # define HISTORY_FILE "./.tmp/.minishell_history"
 
-// ok ko
 # define OK 1
 # define KO 0
 
-// file i/o 
-# define INPUT 0
-# define OUTPUT 1
-
-// pipe ends 
-# define READ_END 0
-# define WRITE_END 1
-
-//important char defines
+// important char defines
 # define PIPE 124
 # define GREAT 62
 # define LESS 60
@@ -50,7 +41,7 @@
 # define SQUOTE 39
 # define DOLLAR 36
 # define BSLASH 92
-//already exist in the chardefs of readline
+// already exist in the chardefs of readline
 //# define SPACE 32
 
 /*

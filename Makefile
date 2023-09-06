@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/09/02 19:25:14 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/09/03 17:00:02 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17  -g3 -fsanitize=address
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 -fsanitize=address
 
 RLFLAGS	=	-lreadline -lcurses
 
@@ -63,6 +63,7 @@ TIFLAGS	=	-ltermcap
 MK		=	mkdir -p
 
 RM		=	rm -rf
+
 
 #--- SOURCE, INCLUDE AND BINARIES DIRECTORIES ---#
 
@@ -83,6 +84,7 @@ SRC_DIR 			=	$(SRC_MAIN_DIR) $(SRC_PARSING_DIR) $(SRC_EXECUT_DIR) $(SRC_BUILTINS
 BINDIR				=	bin
 
 #--- SOURCES ---#
+
 SRCS_MAIN			=	main.c debug.c  minishell.c\
 						env/getenv.c
 
@@ -111,11 +113,11 @@ BIN     	=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@mkdir -p $(@D)
 	@echo "${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 all			: readline termcap ${NAME}
 
-termcap:
+termcap		:
 	@#!/bin/bash
 	@set -e
 	@if [ ! -f $(TERMCAP_DIR)/libtermcap.a ]; then \
@@ -133,6 +135,8 @@ termcap:
 	fi
 
 readline	:
+	@#!/bin/bash
+	@set -e
 	@if [ ! -f ./libs/readline/libreadline.a ]; then \
 		echo "${BLUE}Installing Readline ... ${DARKGRAY}"; \
 		mkdir -p $(LIBRLINE_DIR); \
@@ -169,6 +173,8 @@ bonus		:	all
 norm		:
 	@echo "$(DARKGRAY)norminette! $(DEFAULT)"
 	@norminette $(INCDIR) $(SRCDIR) $(LIBFT)/src $(LIBFT)/inc
+
+
 
 #--- PHONY ---#
 .PHONY	 	:	all clean fclean re readline norm bonus

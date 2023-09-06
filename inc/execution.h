@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/09/02 18:27:07 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 19:21:27 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_redir
 	char			*filename;
 	int				is_quoted;
 }					t_redir;
-
 typedef struct s_cmd
 {
 	int				nbr_cmd;
@@ -34,7 +33,6 @@ typedef struct s_cmd
 	t_redir			*redir;
 	t_token_type	type;
 }					t_cmd;
-
 typedef struct s_shell_red
 {
 	int				infile;
@@ -42,7 +40,6 @@ typedef struct s_shell_red
 	int				here_doc;
 	int				error;
 }					t_shell_red;
-
 typedef struct s_state
 {
 	char			**env_;
@@ -50,7 +47,6 @@ typedef struct s_state
 	int				read_end;
 	int				write_end;
 }					t_state;
-
 typedef struct s_data
 {
 	int				saved_stdout;
@@ -59,6 +55,16 @@ typedef struct s_data
 	t_shell_red		*redir;
 }					t_data;
 
+/*
+ * exec.c *
+ */
+
 void				execution(t_cmd *cmd, t_state *state);
+
+/*
+ * signals.c *
+ */
+
+void			sigint_handler(int signum);
 
 #endif

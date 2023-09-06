@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:15:26 by maroy                                    */
-/*   Updated: 2023/08/30 18:14:06 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/03 14:02:10 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	skip_space(t_lexer *lexer)
 {
 	if (!lexer || !lexer->buffer)
 		return ;
-	while (lexer->readpos <= lexer->bufsize && (lexer->c == 32
+	while (lexer->readpos <= lexer->bufsize && (lexer->c == SPACE
 			|| lexer->c == '\t' || lexer->c == '\n'))
 		readchar(lexer);
 	lexer->is_quoted = 0;

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 13:25:54 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/01 14:43:44 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   signals.c                                         ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/01 13:25:54 by maroy                                    */
+/*   Updated: 2023/09/03 15:07:16 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 void	is_child_process(int signum)
 {
-		if (signum == SIGQUIT)
-			ft_putstr_fd("Quit: 3\n", 1);
-		else if (signum == SIGINT)
-			ft_putchar_fd('\n', 1);
+	if (signum == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", 1);
+	else if (signum == SIGINT)
+		ft_putchar_fd('\n', 1);
 }
 
 void	sigint_handler(int signum)
@@ -28,7 +28,6 @@ void	sigint_handler(int signum)
 	{
 		if (signum == SIGINT)
 		{
-			
 			g_global->exit_status = 1;
 			ft_putchar_fd('\n', 2);
 			rl_replace_line("", 0);

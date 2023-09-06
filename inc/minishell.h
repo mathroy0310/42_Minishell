@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/09/02 18:51:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 19:21:45 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@
 # include "../libs/readline/inc/readline.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-//  Libft
+//	Libft
 # include "../libs/libft/inc/libft.h"
-// termcap
+//	termcap
 # include "../libs/termcap/inc/termcap.h"
 
 /*
@@ -87,19 +87,20 @@ extern t_global	*g_global;
  */
 uint8_t			minishell_master(int argc, char **argv, char **env);
 
-// debug
+/*
+ * debug.c *
+ */
+
 void			debug_print_tab(char **tab);
-void			debug_print_msg(char *msg);
+void			debug_print_error_msg(char *msg);
 void			debug_print_string(char *msg, char *arg);
 void			debug_print_decimal(char *msg, int arg);
 void			debug_print_char(char *msg, char arg);
-void			debug_print_parser(t_parser *head);
+void			debug_print_cmd(t_cmd *cmd);
 
-// Signals.c
-
-void			sigint_handler(int signum);
-
-// env.c
+/*
+ * env.c *
+ */
 
 int				dup_env_var(char **env);
 char			**get_env_(char **env_);

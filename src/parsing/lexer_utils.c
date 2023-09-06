@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/09/02 19:02:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 19:01:44 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -25,19 +25,18 @@ static void	ft_freeptr(void *ptr)
 	ptr = NULL;
 }
 
-static int	get_str_by_char(char *str, char c, int i)
+static int	get_str_by_char(char *str, char c)
 {
-	char	*str2;
-	int		ret;
+	int i;
 
-	str2 = ft_strchr(str, c);
-	if (!str2 && i == 0)
-		return (-1);
-	else if (!str2 && i == 1)
-		return (0);
-	else
-		ret = (int)(str2 - str);
-	return (ret);
+	i = -1;
+
+	while (str[++i])
+	{
+		if (str[i] == c)
+			return (i);
+	}
+	return (0);
 }
 
 char	*ft_getenv(char *str)
@@ -52,13 +51,12 @@ char	*ft_getenv(char *str)
 	i = -1;
 	while (g_global->env_var[++i])
 	{
-		start = get_str_by_char(g_global->env_var[i], '=', 1);
+		start = get_str_by_char(g_global->env_var[i], '=');
 		env_key = ft_substr(g_global->env_var[i], 0, start);
 		if (!ft_strcmp(env_key, str))
 		{
 			temp = env_value;
-			env_value = ft_substr(g_global->env_var[i], start + 1,
-				ft_strlen(g_global->env_var[i]) - start);
+			env_value = ft_substr(g_global->env_var[i], start + 1, ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
 			ft_freeptr(env_key);
 			break ;
@@ -114,7 +112,7 @@ char	*invalid_envar(t_lexer *lexer, int i)
 	}
 	else
 	{
-		str = ft_strdup("0");
+		str = ft_strdup("a");
 		str[0] = lexer->c;
 		readchar(lexer);
 		return (str);
@@ -140,6 +138,7 @@ char	*envar_token(t_lexer *lexer)
 		str = ft_strjoin_char(str, lexer->c);
 		readchar(lexer);
 	}
+	printf("str = %s\n", str);
 	v = ft_getenv(str);
 	free(str);
 	if (!v)

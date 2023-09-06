@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 19:26:07 by maroy                                    */
-/*   Updated: 2023/09/02 18:26:51 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*envar_token(t_lexer *lexer);
  */
 
 t_lexer				*init_lexer(t_lexer *lexer);
-void				print_msg(char *str, char *var);
+void				print_error_msg(char *str, char *var);
 t_token				*init_token(t_token_type type, char *str, t_lexer *lexer);
 int					peek_char(t_lexer *lexer);
 int					multi_lines(t_lexer *lexer, char c);
