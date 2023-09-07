@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:53:41 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/07 11:56:06 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ uint8_t	export_builtin(char **args, t_data *data)
 		}
 		set_or_modify(args[i]);
 		add_to_env(args[i], data);
-		debug_print_msg("export Success full ");
+		debug_print_msg("export Success full");
 	}
 	return (OK);
 }

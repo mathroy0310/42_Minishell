@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:52:35 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/07 11:56:14 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	debug_print_char(char *msg, char arg)
 void	debug_print_msg(char *msg)
 {
 	if (DEBUG == 1)
-		printf(BLUE "DEBUG 🐞: -={ %s }=- \n" DEFAULT, msg);
+		printf(BLUE "DEBUG 🐞: -={ %s }=-\n" DEFAULT, msg);
 }

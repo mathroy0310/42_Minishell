@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:36:52 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/07 11:56:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ char	*envar_token(t_lexer *lexer)
 		str = ft_strjoin_char(str, lexer->c);
 		readchar(lexer);
 	}
-	printf("str = %s\n", str);
 	v = ft_getenv(str);
 	free(str);
 	if (!v)
