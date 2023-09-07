@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer_utils.c                                     ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/09/06 19:01:44 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:36:52 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -25,7 +25,7 @@ static void	ft_freeptr(void *ptr)
 	ptr = NULL;
 }
 
-static int	get_str_by_char(char *str, char c)
+int	get_str_by_char(char *str, char c)
 {
 	int i;
 

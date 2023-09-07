@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec.c                                            ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:52:40 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -32,7 +32,7 @@ int	execute_cmd(t_cmd *cmd, t_data *data)
 {
 	if (is_builtin(cmd))
 	{
-		debug_print_error_msg("is_builtin == true");
+		debug_print_msg("is_builtin == true");
 		return (check_builtin(cmd, data));
 	}
 	return (OK);

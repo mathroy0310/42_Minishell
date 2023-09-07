@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.c                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:53:19 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
@@ -26,7 +26,7 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		exit(127);
 	}
-	debug_print_error_msg("DEBUG mode enabled 🐛");
+	debug_print_msg("DEBUG mode enabled 🐛");
 	using_history();
 	read_history(HISTORY_FILE);
 	g_global = malloc(sizeof(t_global));

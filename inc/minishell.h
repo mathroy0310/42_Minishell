@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/09/06 19:21:45 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:51:28 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -92,7 +92,7 @@ uint8_t			minishell_master(int argc, char **argv, char **env);
  */
 
 void			debug_print_tab(char **tab);
-void			debug_print_error_msg(char *msg);
+void			debug_print_msg(char *msg);
 void			debug_print_string(char *msg, char *arg);
 void			debug_print_decimal(char *msg, int arg);
 void			debug_print_char(char *msg, char arg);

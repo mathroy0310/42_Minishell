@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   debug.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/21 16:03:34 by maroy                                    */
-/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:52:35 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
@@ -44,7 +44,7 @@ void	debug_print_cmd(t_cmd *cmd)
 					cmd[i].args_size);
 			printf(BLUE "DEBUG 🐞: cmd[%d]->redir_nbr -={ %d }=-\n" DEFAULT, i,
 					cmd[i].redir_nbr);
-			debug_print_error_msg("-----------------------------------");
+			debug_print_msg("-----------------------------------");
 		}
 	}
 }
@@ -67,7 +67,7 @@ void	debug_print_char(char *msg, char arg)
 		printf(BLUE "DEBUG 🐞: %s -={ %c }=-\n" DEFAULT, msg, arg);
 }
 
-void	debug_print_error_msg(char *msg)
+void	debug_print_msg(char *msg)
 {
 	if (DEBUG == 1)
 		printf(BLUE "DEBUG 🐞: -={ %s }=- \n" DEFAULT, msg);

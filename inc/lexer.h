@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer.h                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 19:26:07 by maroy                                    */
-/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 19:26:07 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/07 11:37:17 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
@@ -64,6 +64,7 @@ t_token				*string_token(t_lexer *lexer);
 
 int					valid_envar(char c);
 char				*ft_getenv(char *str);
+int					get_str_by_char(char *str, char c);
 char				*envar_token(t_lexer *lexer);
 
 /*
