@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:56:06 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   export.c                                          ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/01 16:34:10 by maroy                                    */
+/*   Updated: 2023/09/07 13:15:09 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -41,8 +41,8 @@ int	is_valid_env_key(char *arg)
 
 static void	set_new_env(char *arg)
 {
-	int		index;
-	int		i;
+	int	index;
+	int	i;
 
 	index = 0;
 	i = -1;
@@ -80,13 +80,12 @@ static void	set_or_modify(char *arg)
 		if (!just_key)
 			modify_env(arg, key);
 	}
-	free (key);
+	free(key);
 }
-
 
 uint8_t	export_builtin(char **args, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	g_global->exit_status = 0;
@@ -107,7 +106,7 @@ uint8_t	export_builtin(char **args, t_data *data)
 		}
 		set_or_modify(args[i]);
 		add_to_env(args[i], data);
-		debug_print_msg("export Success full");
 	}
+	debug_print_msg("export Success yeah");
 	return (OK);
 }

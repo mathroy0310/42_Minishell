@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 16:38:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:49:22 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   utils.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/01 16:38:29 by maroy                                    */
+/*   Updated: 2023/09/07 13:10:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
 #include <stdbool.h>
 
 void	free_old_env(char **env_pointer)
@@ -25,7 +24,7 @@ void	free_old_env(char **env_pointer)
 		env_pointer[i] = NULL;
 		i++;
 	}
-	free (env_pointer);
+	free(env_pointer);
 	env_pointer = NULL;
 }
 
@@ -73,7 +72,7 @@ void	new_env(char *arg, char *key, t_data *data)
 			new_value = ft_strdup(arg);
 			tmp = data->state->env_[i];
 			data->state->env_[i] = new_value;
-			free (tmp);
+			free(tmp);
 		}
 	}
 }
@@ -90,7 +89,7 @@ void	add_to_env(char *arg, t_data *data)
 		return ;
 	key = ft_substr(arg, 0, i);
 	new_env(arg, key, data);
-	free (key);
+	free(key);
 }
 
 void	modify_env(char *arg, char *key)
@@ -107,7 +106,7 @@ void	modify_env(char *arg, char *key)
 		new_value = ft_strdup(arg);
 		tmp = g_global->env_var[i];
 		g_global->env_var[i] = new_value;
-		free (tmp);
+		free(tmp);
 	}
 }
 
@@ -194,7 +193,7 @@ void	sort_and_print(void)
 		i++;
 	}
 	print_sorted_env(dup);
-	free (dup);
+	free(dup);
 }
 
 int	find_env(char *key, char **env_pointer)
@@ -219,7 +218,7 @@ int	find_env(char *key, char **env_pointer)
 				free(sub_env);
 				return (i);
 			}
-			free (sub_env);
+			free(sub_env);
 		}
 	}
 	return (check_only_key(key));
@@ -227,7 +226,7 @@ int	find_env(char *key, char **env_pointer)
 
 int	check_only_key(char *key)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	if (!key)
