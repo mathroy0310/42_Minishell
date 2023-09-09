@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/09/07 13:15:09 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/08 14:58:18 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	is_valid_env_key(char *arg)
 	return (1);
 }
 
-static void	set_new_env(char *arg)
+void	set_new_env(char *arg)
 {
 	int	index;
 	int	i;
@@ -55,7 +55,7 @@ static void	set_new_env(char *arg)
 	g_global->env_var = realloc_new_env(index, arg, g_global->env_var);
 }
 
-static void	set_or_modify(char *arg)
+void	set_or_modify(char *arg)
 {
 	int		is_set;
 	int		i;
@@ -68,7 +68,7 @@ static void	set_or_modify(char *arg)
 	i = get_str_by_char(arg, '=');
 	if (i == -1)
 	{
-		just_key = 1;
+		just_key = OK;
 		i = ft_strlen(arg);
 	}
 	key = ft_substr(arg, 0, i);
@@ -77,7 +77,7 @@ static void	set_or_modify(char *arg)
 		set_new_env(arg);
 	else
 	{
-		if (!just_key)
+		if (just_key == KO)
 			modify_env(arg, key);
 	}
 	free(key);

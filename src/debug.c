@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:56:14 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   debug.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/21 16:03:34 by maroy                                    */
+/*   Updated: 2023/09/09 18:37:45 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
@@ -37,13 +37,13 @@ void	debug_print_cmd(t_cmd *cmd)
 			j = -1;
 			while (cmd[i].argvs[++j])
 				printf(BLUE "DEBUG 🐞: cmd[%d]->argvs[%d] -={ %s }=-\n" DEFAULT,
-						i, j, cmd[i].argvs[j]);
+					i, j, cmd[i].argvs[j]);
 			printf(BLUE "DEBUG 🐞: cmd[%d]->nbr_cmd -={ %d }=-\n" DEFAULT, i,
-					cmd[i].nbr_cmd);
+				cmd[i].nbr_cmd);
 			printf(BLUE "DEBUG 🐞: cmd[%d]->args_size -={ %d }=-\n" DEFAULT, i,
-					cmd[i].args_size);
+				cmd[i].args_size);
 			printf(BLUE "DEBUG 🐞: cmd[%d]->redir_nbr -={ %d }=-\n" DEFAULT, i,
-					cmd[i].redir_nbr);
+				cmd[i].redir_nbr);
 			debug_print_msg("-----------------------------------");
 		}
 	}

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 14:30:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:49:55 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   builtins.h                                        ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/01 14:30:21 by maroy                                    */
+/*   Updated: 2023/09/08 15:11:56 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
@@ -33,12 +33,21 @@ uint8_t pwd_builtin(void);
  * env.c *
  */
 
-uint8_t env_builtin(t_data *m);
+uint8_t env_builtin(char **args, t_data *m);
 
 /*
  * export.c *
  */
 uint8_t export_builtin(char **args, t_data *data);
+void	set_or_modify(char *arg);
+void	set_new_env(char *arg);
+int		is_valid_env_key(char *arg);
+
+/*
+ * unset.c *
+ */
+
+uint8_t	unset_builtin(char **args, t_data *data);
 
 /*
  * utils.c *

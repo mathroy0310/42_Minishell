@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:38:29 by maroy                                    */
-/*   Updated: 2023/09/07 13:10:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/08 14:59:39 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	sort_and_print(void)
 		i++;
 	}
 	print_sorted_env(dup);
-	free(dup);
+	ft_free_tab(dup);
 }
 
 int	find_env(char *key, char **env_pointer)
