@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:46:31 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/12 18:17:26 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 
 # define OK 1
 # define KO 0
+
+// MAX_PATH_LEN
+#define MAX_PATH_LEN 1024
 
 // important char defines
 # define PIPE 124

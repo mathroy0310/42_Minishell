@@ -1,17 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   utils.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/01 16:38:29 by maroy                                    */
-/*   Updated: 2023/09/08 14:59:39 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 16:38:29 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/12 18:11:40 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include <stdbool.h>
+
+char	*get_env_var_by_key(char *key)
+{
+	int		index;
+	char	*value;
+
+	value = NULL;
+	index = 0;
+	if (!key)
+		return (NULL);
+	index = find_env(key, g_global->env_var);
+	if (index == -1)
+		return (NULL);
+	value = return_value(g_global->env_var[index], '=');
+	return (value);
+}
 
 void	free_old_env(char **env_pointer)
 {

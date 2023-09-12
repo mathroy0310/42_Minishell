@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/11 14:30:36 by maroy            ###   ########.fr        #
+#    Updated: 2023/09/12 18:14:12 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ SRCS_PARSING 		= 	lexer.c parser.c utils.c free.c get_next_token.c lexer_utils.c
 
 SRCS_EXECUT			=	exec.c signals.c error.c
 
-SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c unset.c echo.c
+SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c unset.c echo.c exit.c cd.c cd_utils.c
 
 #-- PREFIXED SOURCES --#
 
