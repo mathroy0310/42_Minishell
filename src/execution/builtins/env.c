@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   env.c                                             ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 15:20:11 by maroy                                    */
-/*   Updated: 2023/09/09 19:19:59 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 15:20:11 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 13:53:02 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-uint8_t	env_builtin(char **args, t_data *data)
+uint8_t	env_builtin(t_data *data)
 {
 	int	i;
 
@@ -21,7 +21,5 @@ uint8_t	env_builtin(char **args, t_data *data)
 	i = -1;
 	while (data->state->env_[++i] != NULL)
 		ft_putendl_fd(data->state->env_[i], STDOUT_FILENO);
-	if (env)
-		ft_free_tab(env);
 	return (OK);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   export.c                                          ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/09/08 14:58:18 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 14:41:21 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	is_valid_env_key(char *arg)
+uint8_t	is_valid_env_key(char *arg)
 {
 	int	i;
 	int	alpha;
@@ -20,9 +20,9 @@ int	is_valid_env_key(char *arg)
 	i = 0;
 	alpha = 0;
 	if (!ft_strcmp(arg, ""))
-		return (0);
+		return (KO);
 	if (arg == NULL || arg[0] == '=')
-		return (0);
+		return (KO);
 	while (arg[i] && arg[i] != '=')
 	{
 		if (ft_isalpha(arg[i]))
@@ -30,13 +30,13 @@ int	is_valid_env_key(char *arg)
 		else
 		{
 			if (ft_isdigit(arg[i]) && !alpha)
-				return (0);
+				return (KO);
 			else if (!ft_isdigit(arg[i]) && arg[i] != '_')
-				return (0);
+				return (KO);
 		}
 		i++;
 	}
-	return (1);
+	return (OK);
 }
 
 void	set_new_env(char *arg)
@@ -98,9 +98,10 @@ uint8_t	export_builtin(char **args, t_data *data)
 	{
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
+			ft_putstr_fd(RED "minishell: export: `", STDERR_FILENO);
+			ft_putstr_fd(args[i], STDERR_FILENO);
+			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
+			ft_putendl_fd(DEFAULT, STDERR_FILENO);
 			g_global->exit_status = 1;
 			continue ;
 		}

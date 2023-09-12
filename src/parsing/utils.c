@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   utils.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:21:18 by maroy                                    */
-/*   Updated: 2023/09/06 18:07:52 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 14:20:30 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -35,13 +35,15 @@ t_token	*init_token(t_token_type type, char *str, t_lexer *lexer)
 
 void	print_error_msg(char *str, char *var)
 {
-	printf(RED"%s"DEFAULT, str);
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
 	if (var)
 	{
-		printf(RED" `");
-		printf("%s", var);
-		printf("'\n"DEFAULT);
+		ft_putstr_fd(" `",STDERR_FILENO);
+		ft_putstr_fd(var, STDERR_FILENO);
+		ft_putstr_fd("'", STDERR_FILENO);
 	}
+	ft_putendl_fd(DEFAULT, STDERR_FILENO);
 	g_global->exit_status = 258;
 }
 
@@ -58,9 +60,9 @@ int	multi_lines(t_lexer *lexer, char c)
 	if (lexer->c == EOF)
 	{
 		if (c == DQUOTE)
-			print_error_msg("minishell: syntax error expected \"\n", NULL);
+			print_error_msg("minishell: syntax error expected \"", NULL);
 		else
-			print_error_msg("minishell: syntax error expected \'\n", NULL);
+			print_error_msg("minishell: syntax error expected \'", NULL);
 		lexer->multi_line = 1;
 		return (KO);
 	}

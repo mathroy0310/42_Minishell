@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   builtins.c                                        ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/31 16:21:04 by maroy                                    */
-/*   Updated: 2023/09/08 14:26:57 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 16:21:04 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 14:22:57 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -20,13 +20,13 @@ uint8_t	check_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strequal(args[0], "pwd"))
 		return (pwd_builtin());
 	else if (ft_strequal(args[0], "env"))
-		return (env_builtin(args, data));
+		return (env_builtin(data));
 	else if (ft_strequal(args[0], "export"))
 		return (export_builtin(args, data));
 	else if (ft_strequal(args[0], "unset"))
 	 	return (unset_builtin(args, data));
-	// else if (ft_strequal(args[0], "echo"))
-	// 	return (echo_builtin(args));
+	else if (ft_strequal(args[0], "echo"))
+	 	return (echo_builtin(args));
 	// else if (ft_strequal(args[0], "cd"))
 	// 	return (cd_builtin(args));
 	// else if (ft_strequal(args[0], "exit"))

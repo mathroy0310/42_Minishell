@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   ast.c                                             ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/09/03 17:23:42 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   ast.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 13:52:21 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	init_ast(t_ast *ast, t_ast_type type)
+void init_ast(t_ast *ast, t_ast_type type)
 {
 	ast->type = type;
 	ast->pipecmd_values = (void *)0;
@@ -22,7 +22,7 @@ void	init_ast(t_ast *ast, t_ast_type type)
 	ast->args_size = 0;
 }
 
-void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
+void init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 {
 	cmd[n].redir_nbr = ast->redir_nbr;
 	cmd[n].args_size = ast->args_size - (cmd[n].redir_nbr * 2) - 1;
@@ -31,23 +31,21 @@ void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs = malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
 
-void	visitor_args(t_ast *ast, t_cmd *cmd, int n)
+void visitor_args(t_ast *ast, t_cmd *cmd, int n)
 {
-	t_index	x;
+	t_index x;
 
 	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, cmd, n);
 	if ((ast->args_size - 1) == (ast->redir_nbr * 2))
 		cmd[n].argvs = NULL;
-	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
-			|| ast->args[x.k]->type != pip))
+	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof || ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
 			cmd[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
 		else
 		{
-			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1
-				&& x.m < ast->redir_nbr)
+			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1 && x.m < ast->redir_nbr)
 			{
 				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
 				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;
@@ -59,7 +57,7 @@ void	visitor_args(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs[x.l] = NULL;
 }
 
-void	init_cmd(t_cmd cmd)
+void init_cmd(t_cmd cmd)
 {
 	(void)cmd;
 	cmd.args_size = 0;
@@ -68,10 +66,10 @@ void	init_cmd(t_cmd cmd)
 	cmd.redir = NULL;
 }
 
-t_cmd	*visitor(t_ast *ast)
+t_cmd *visitor(t_ast *ast)
 {
-	t_cmd	*cmd;
-	t_index	x;
+	t_cmd *cmd;
+	t_index x;
 
 	x = (t_index){.k = 0, .l = -1, .m = -1};
 	cmd = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));

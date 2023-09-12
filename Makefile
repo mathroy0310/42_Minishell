@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                      ██   ██ ██████          #
-#    Makefile                                          ██   ██      ██         #
-#                                                      ███████  █████          #
-#    By: maroy <maroy@student.42.qc>                        ██ ██              #
-#                                                           ██ ███████.qc      #
-#    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/09/08 14:13:55 by maroy            >(.)__ <(.)__ =(.)__     #
-#                                                      (___/  (___/  (___/     #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
+#    Updated: 2023/09/11 14:30:36 by maroy            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -90,9 +90,9 @@ SRCS_MAIN			=	main.c debug.c  minishell.c\
 
 SRCS_PARSING 		= 	lexer.c parser.c utils.c free.c get_next_token.c lexer_utils.c parser_utils.c ast.c ast_realloc.c
 
-SRCS_EXECUT			=	exec.c signals.c
+SRCS_EXECUT			=	exec.c signals.c error.c
 
-SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c unset.c
+SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c unset.c echo.c
 
 #-- PREFIXED SOURCES --#
 

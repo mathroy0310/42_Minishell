@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser_utils.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:27:18 by maroy                                    */
-/*   Updated: 2023/09/06 18:06:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/11 14:18:47 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -105,7 +105,7 @@ int	syntax_error(t_parser *parser)
 	if ((is_redic(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_error_msg("minishell: syntax error near unexpected token `newline'\n",
+		print_error_msg("minishell: syntax error near unexpected token `newline'",
 			NULL);
 		return (KO);
 	}
