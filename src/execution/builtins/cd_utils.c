@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cd_utils.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 18:01:11 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 14:14:59 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   cd_utils.c                                        ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/12 18:01:11 by maroy                                    */
+/*   Updated: 2023/09/14 18:28:11 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -15,7 +15,7 @@
 void	error_retrieving_cd(void)
 {
 	ft_putstr_fd(RED"cd: error retrieving current directory: ", STDERR_FILENO);
-	ft_putstr_fd(RED"getcwd: cannot access parent directories: ", STDERR_FILENO);
+	ft_putstr_fd(RED"cannot access parent directories: ", STDERR_FILENO);
 	printf("%s", strerror(errno));
 	ft_putendl_fd(DEFAULT, STDERR_FILENO);
 }
