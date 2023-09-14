@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:30:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/12 18:13:43 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/13 15:44:14 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,18 @@ uint8_t	echo_builtin(char **args);
 /*
  * export.c *
  */
-uint8_t export_builtin(char **args, t_data *data);
-void	set_or_modify(char *arg);
-void	set_new_env(char *arg);
+
+uint8_t     export_builtin(char **args, t_data *data);
+void	    set_or_modify(char *arg);
+void	    set_new_env(char *arg);
 uint8_t		is_valid_env_key(char *arg);
+
+/*
+ * export_utils.c *
+ */
+
+char	**dup_env(void);
+
 
 /*
  * unset.c *
@@ -79,14 +87,11 @@ uint8_t	exit_builtin(char **args);
  * utils.c *
  */
 
-char	*get_env_var_by_key(char *key);
 void    modify_env(char *arg, char *key);
 void    sort_and_print(void);
 void    free_old_env(char **env_pointer);
 char    **realloc_new_env(int env_num, char *arg, char **env_pointer);
 void    new_env(char *arg, char *key, t_data *data);
 void    add_to_env(char *arg, t_data *data);
-void    print_sorted_env(char **sorted_env);
-int     check_only_key(char *key);
 
 #endif

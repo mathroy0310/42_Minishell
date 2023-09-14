@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:01:11 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/12 18:17:10 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/14 14:14:59 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	error_retrieving_cd(void)
 {
-	ft_putstr_fd("cd: error retrieving current directory: ", STDERR_FILENO);
-	ft_putstr_fd("getcwd: cannot access parent directories: ", STDERR_FILENO);
-	printf("%s\n", strerror(errno));
+	ft_putstr_fd(RED"cd: error retrieving current directory: ", STDERR_FILENO);
+	ft_putstr_fd(RED"getcwd: cannot access parent directories: ", STDERR_FILENO);
+	printf("%s", strerror(errno));
+	ft_putendl_fd(DEFAULT, STDERR_FILENO);
 }
 
 char	*add_char_to_word(char *word, char c)
@@ -84,7 +85,9 @@ char	*return_value(const char *s, int c)
 int	error_path(const char *cmd, const char *path, int errnum)
 {
 	g_global->exit_status = 1;
-	printf("minishell: %s: %s: %s\n",
+	debug_print_msg("dans error_path");
+	printf(RED"minishell: %s: %s: %s",
 		cmd, path, strerror(errnum));
+	printf(DEFAULT"\n");
 	return (EXIT_FAILURE);
 }

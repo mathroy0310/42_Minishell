@@ -6,12 +6,17 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:26:07 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:37:17 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/13 15:44:41 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+/*
+ * -- Local Includes --
+ */
+#include "minishell.h"
 
 typedef enum e_token_type
 {

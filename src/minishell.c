@@ -6,26 +6,31 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/12 17:54:50 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/14 13:02:05 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+static char	**get_env_(char	**env_)
+{
+	char	**env;
+	int		i;
+
+	i = -1;
+	env = (char **)malloc(sizeof(char *) * (ft_tablen(env_) + 1));
+	if (env == NULL)
+		exit(EXIT_FAILURE);
+	while (++i < ft_tablen(env_))
+		env[i] = ft_strdup(env_[i]);
+	env[i] = 0;
+	return (env);
+}
+
 void	initialize(int argc, char **argv, char **env, t_state *state)
 {
-	if (argc != 1)
-	{
-		if (access(argv[1] , F_OK) != -1)
-		{
-			ft_putstr_fd("minishell: Unable to execute scripts in minishell", STDERR_FILENO);
-			exit(1);
-		}
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(argv[1], STDERR_FILENO);
-		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-		exit(127);
-	}
+	(void)argc;
+	(void)argv;
 	debug_print_msg("DEBUG mode enabled 🐛");
 	using_history();
 	read_history(HISTORY_FILE);

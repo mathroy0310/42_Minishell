@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/12 18:06:04 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/14 14:31:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	add_var_to_env(char *key, char *new_path)
 
 	tmp = NULL;
 	if (!key || !new_path)
-		return (0);
+		return (KO);
 	index = find_env(key, g_global->env_var);
 	if (index == -1)
-		return (1);
+		return (OK);
 	else
 	{
 		tmp = ft_strjoin(key, "=");
@@ -36,7 +36,7 @@ static int	add_var_to_env(char *key, char *new_path)
 		g_global->env_var[index] = tmp;
 		free (pfree);
 	}
-	return (1);
+	return (OK);
 }
 
 static int	move_to_dir(char *path)
@@ -72,12 +72,15 @@ static int	change_dir(char *path, int i, char **argv)
 {
 	DIR		*dir;
 
+	debug_print_string("path", path);
+	
 	dir = opendir(path);
 	if (!dir)
 		return (error_path("cd", argv[i + 1], errno));
 	else
 	{
 		closedir(dir);
+		debug_print_decimal("move_to_dir(path)", move_to_dir(path));
 		if (move_to_dir(path) == -1)
 			return (error_path("cd", argv[i + 1], errno));
 	}
@@ -88,12 +91,12 @@ static int	exec_cd(char *path, int i, char **argv)
 {
 	char	*pwd;
 
-	if (change_dir(path, i, argv))
-		return (1);
+	if (change_dir(path, i, argv) == OK)
+		return (OK);
 	pwd = get_env_var_by_key("PWD");
 	add_var_to_env("PWD", pwd);
 	free (pwd);
-	return (0);
+	return (KO);
 }
 
 int8_t	cd_builtin(char **argv)
@@ -110,13 +113,15 @@ int8_t	cd_builtin(char **argv)
 		{
 			g_global->exit_status = 1;
 			ft_putstr_fd(RED"minishell: cd:", STDERR_FILENO);
-			ft_putstr_fd (" HOME not set"DEFAULT, STDERR_FILENO);
-            ft_putstr_fd("\n", STDERR_FILENO);
+			ft_putstr_fd (" HOME not set", STDERR_FILENO);
+            ft_putendl_fd(DEFAULT, STDERR_FILENO);
 			return (-1);
 		}
 		if (!ft_strcmp(path, ""))
 			return (0);
 	}
+	else if (ft_strncmp(argv[i + 1], "-", 2) == 0)
+		path = get_env_var_by_key("OLDPWD");
 	else
 		path = argv[i + 1];
 	exec_cd(path, i, argv);

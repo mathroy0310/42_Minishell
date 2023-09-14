@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/12 18:14:12 by maroy            ###   ########.fr        #
+#    Updated: 2023/09/14 13:33:06 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 -fsanitize=address
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 #-fsanitize=address
 
 RLFLAGS	=	-lreadline -lcurses
 
@@ -85,14 +85,13 @@ BINDIR				=	bin
 
 #--- SOURCES ---#
 
-SRCS_MAIN			=	main.c debug.c  minishell.c\
-						env/getenv.c
+SRCS_MAIN			=	main.c debug.c  minishell.c
 
 SRCS_PARSING 		= 	lexer.c parser.c utils.c free.c get_next_token.c lexer_utils.c parser_utils.c ast.c ast_realloc.c
 
-SRCS_EXECUT			=	exec.c signals.c error.c
+SRCS_EXECUT			=	exec_main.c exec_reg_cmd.c exec_utils.c signals.c error.c
 
-SRCS_BUILTINS		= 	pwd.c env.c export.c utils.c builtins.c unset.c echo.c exit.c cd.c cd_utils.c
+SRCS_BUILTINS		= 	builtins_utils.c builtins.c cd_utils.c cd.c echo.c env.c exit.c export_utils.c export.c pwd.c unset.c 
 
 #-- PREFIXED SOURCES --#
 

@@ -42,7 +42,8 @@
         "lexer.h": "c",
         "parser.h": "c",
         "defines.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "stdbool.h": "c"
     },
     "cSpell.words": [
         "dlist",

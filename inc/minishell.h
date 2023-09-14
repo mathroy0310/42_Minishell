@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/07 11:51:28 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/13 15:47:42 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@
 /*
  * -- Local Includes --
  */
-
 # include "builtins.h"
-# include "defines.h"
 # include "execution.h"
+# include "defines.h"
 # include "lexer.h"
 # include "parser.h"
 
@@ -98,11 +97,5 @@ void			debug_print_decimal(char *msg, int arg);
 void			debug_print_char(char *msg, char arg);
 void			debug_print_cmd(t_cmd *cmd);
 
-/*
- * env.c *
- */
-
-int				dup_env_var(char **env);
-char			**get_env_(char **env_);
 
 #endif

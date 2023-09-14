@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/12 18:17:26 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/14 13:56:52 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
  */
 
 // 1 == DEBUG mode , 0 == USER mode
-# define DEBUG 0
+# define DEBUG 1
 
 // prompt
-# define PROMPT GREEN"minishell$ "DEFAULT
+# define PROMPT YELLOW"minishell$ "DEFAULT
 
 // tmp file
 # define HISTORY_FILE "./.tmp/.minishell_history"
