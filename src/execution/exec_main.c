@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_main.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:10:45 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_main.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/30 18:12:50 by maroy                                    */
+/*   Updated: 2023/09/16 18:46:46 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -26,8 +26,8 @@ void	wait_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			g_global->exit_status = signal + 128;
-		}		
+			g_global->exit_status = signal + EXIT_SIGFATERR;
+		}
 	}
 }
 

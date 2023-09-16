@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 13:56:32 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:01:45 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   error.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/11 13:56:32 by maroy                                    */
+/*   Updated: 2023/09/16 18:46:22 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -29,7 +29,7 @@ void	check_valid_fd(t_data *data, char *file_error, int fd)
 		ft_putstr_fd(file_error, STDERR_FILENO);
 		ft_putendl_fd(DEFAULT, STDERR_FILENO);
 		perror(" ");
-		g_global->exit_status = 1;
+		g_global->exit_status = EXIT_FAILURE;
 	}
 }
 
@@ -46,7 +46,7 @@ void	not_valid_id(char *arg)
 	ft_putstr_fd (arg, STDERR_FILENO);
 	ft_putstr_fd ("': not a valid identifier", STDERR_FILENO);
 	ft_putendl_fd(DEFAULT, STDERR_FILENO);
-	g_global->exit_status = 1;
+	g_global->exit_status = EXIT_FAILURE;
 }
 
 int8_t	path_error_print(t_cmd *cmd, t_data *data, char *possible_path)

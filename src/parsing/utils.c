@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:20:30 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   utils.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:21:18 by maroy                                    */
+/*   Updated: 2023/09/16 18:53:47 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -39,12 +39,12 @@ void	print_error_msg(char *str, char *var)
 	ft_putstr_fd(str, STDERR_FILENO);
 	if (var)
 	{
-		ft_putstr_fd(" `",STDERR_FILENO);
+		ft_putstr_fd(" `", STDERR_FILENO);
 		ft_putstr_fd(var, STDERR_FILENO);
 		ft_putstr_fd("'", STDERR_FILENO);
 	}
 	ft_putendl_fd(DEFAULT, STDERR_FILENO);
-	g_global->exit_status = 258;
+	g_global->exit_status = EXIT_FAILURE;
 }
 
 int	peek_char(t_lexer *lexer)

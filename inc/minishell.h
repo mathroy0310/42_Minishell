@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/13 15:47:42 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/06/26 21:49:41 by maroy                                    */
+/*   Updated: 2023/09/16 18:43:45 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -60,8 +60,8 @@
  * -- Local Includes --
  */
 # include "builtins.h"
-# include "execution.h"
 # include "defines.h"
+# include "execution.h"
 # include "lexer.h"
 # include "parser.h"
 
@@ -73,7 +73,7 @@ typedef struct s_global
 {
 	char		**env_var;
 	int			pid;
-	int			exit_status;
+	uint8_t		exit_status;
 }				t_global;
 
 /*
@@ -96,6 +96,5 @@ void			debug_print_string(char *msg, char *arg);
 void			debug_print_decimal(char *msg, int arg);
 void			debug_print_char(char *msg, char arg);
 void			debug_print_cmd(t_cmd *cmd);
-
 
 #endif

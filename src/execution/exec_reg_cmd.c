@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_reg_cmd.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:46:58 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_reg_cmd.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/13 15:58:19 by maroy                                    */
+/*   Updated: 2023/09/16 19:48:16 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -20,7 +20,7 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 		exit(g_global->exit_status);
 	if (data->redir->error)
 	{
-		g_global->exit_status = 1;
+		g_global->exit_status = EXIT_FAILURE;
 		exit(g_global->exit_status);
 	}
 	if (!ft_strcmp(cmd->argvs[0], "\0"))
@@ -28,11 +28,12 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 		ft_putstr_fd (RED"minishell: ", STDERR_FILENO);
 		ft_putstr_fd(": command not found", STDERR_FILENO);
 		ft_putendl_fd(DEFAULT, STDERR_FILENO);
+		g_global->exit_status = EXIT_CMD_NOT_FOUND;
 		exit (g_global->exit_status);
 	}
 }
 
-static int	check_for_permission(t_cmd *cmd)
+static uint8_t	check_for_permission(t_cmd *cmd)
 {
 	struct stat	_stat;
 
@@ -42,10 +43,9 @@ static int	check_for_permission(t_cmd *cmd)
 	{
 		ft_putstr_fd(": Permission denied", STDERR_FILENO);
 		ft_putendl_fd(DEFAULT, STDERR_FILENO);
-		return (126);
+		return (EXIT_PERM_DENIED);
 	}
-	
-	return (126);
+	return (EXIT_PERM_DENIED);
 }
 
 void	find_cmd_path(t_cmd *cmd, t_data *data)
@@ -80,7 +80,7 @@ uint8_t	execute_reg_cmd(t_cmd *cmd, t_data *data)
 	{
 		g_global->pid = 0;
 		child_pid = fork();
-		if (child_pid < 0 )
+		if (child_pid < 0)
 			fork_failed();
 		else if (child_pid == 0)
 			find_cmd_path(cmd, data);

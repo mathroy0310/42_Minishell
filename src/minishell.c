@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:02:05 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/07/14 21:56:43 by maroy                                    */
+/*   Updated: 2023/09/16 18:46:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char	**get_env_(char	**env_)
+static char	**get_env_(char **env_)
 {
 	char	**env;
 	int		i;
@@ -38,7 +38,7 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 	if (g_global == NULL)
 		exit(EXIT_FAILURE);
 	dup_env_var(env);
-	g_global->exit_status = 0;
+	g_global->exit_status = EXIT_SUCCESS;
 	g_global->pid = 1;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigint_handler);
@@ -65,7 +65,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 	t_cmd		*cmd;
 	t_ast		*ast;
 	t_parser	*parser;
-	
+
 	parser = init_parser(lexer);
 	if (parser)
 	{
@@ -111,7 +111,7 @@ uint8_t	minishell_master(int argc, char **argv, char **env)
 	while (1)
 	{
 		buff = NULL;
-		buff = readline(PROMPT);
+		buff = readline(YELLOW PROMPT DEFAULT);
 		if (!buff)
 			quit_minishell(buff);
 		else if (buff[0] == '\0')
