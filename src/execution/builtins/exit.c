@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:53:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 12:44:46 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:11:15 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	check_for_num_arg(char *args)
 	if (!is_alpha)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
-		ft_putstr_fd(RED"minishell: exit: too many arguments", STDERR_FILENO);
-		ft_putendl_fd(DEFAULT, STDERR_FILENO);
+		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"minishell: exit: too many arguments", STDERR_FILENO);
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		g_global->exit_status = 1;
 	}
 	else

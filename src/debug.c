@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 14:13:12 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:09:22 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	debug_print_tab(char **tab)
 	{
 		i = -1;
 		while (tab[++i])
-			printf(BLUE "DEBUG 🐞: tab[%d] -={ %s }=-", i, tab[i]);
-		printf(DEFAULT"\n");	
+			printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: tab[%d] -={ %s }=-", i, tab[i]);
+		printf("\n");	
 	}
 }
 
@@ -37,16 +37,16 @@ void	debug_print_cmd(t_cmd *cmd)
 		{
 			j = -1;
 			while (cmd[i].argvs[++j])
-				printf(BLUE "DEBUG 🐞: cmd[%d]->argvs[%d] -={ %s }=-\n",
+				printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: cmd[%d]->argvs[%d] -={ %s }=-\n",
 					i, j, cmd[i].argvs[j]);
-			printf(BLUE "DEBUG 🐞: cmd[%d]->nbr_cmd -={ %d }=-\n", i,
+			printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: cmd[%d]->nbr_cmd -={ %d }=-\n", i,
 				cmd[i].nbr_cmd);
-			printf(BLUE "DEBUG 🐞: cmd[%d]->args_size -={ %d }=-\n", i,
+			printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: cmd[%d]->args_size -={ %d }=-\n", i,
 				cmd[i].args_size);
-			printf(BLUE "DEBUG 🐞: cmd[%d]->redir_nbr -={ %d }=-\n", i,
+			printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: cmd[%d]->redir_nbr -={ %d }=-\n", i,
 				cmd[i].redir_nbr);
 			debug_print_msg("-----------------------------------");
-			printf(DEFAULT"\n");	
+			printf("\n");	
 		}
 	}
 }
@@ -55,8 +55,8 @@ void	debug_print_string(char *msg, char *arg)
 {
 	if (DEBUG == 1)
 	{
-		printf(BLUE "DEBUG 🐞: %s -={ %s }=-", msg, arg);
-		printf(DEFAULT"\n");	
+		printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: %s -={ %s }=-", msg, arg);
+		printf("\n");	
 	}
 }
 
@@ -64,8 +64,8 @@ void	debug_print_decimal(char *msg, int arg)
 {
 	if (DEBUG == 1)
 	{
-		printf(BLUE "DEBUG 🐞: %s -={ %d }=-", msg, arg);
-		printf(DEFAULT"\n");	
+		printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: %s -={ %d }=-", msg, arg);
+		printf("\n");	
 	}
 }
 
@@ -73,8 +73,8 @@ void	debug_print_char(char *msg, char arg)
 {
 	if (DEBUG == 1)
 	{
-		printf(BLUE "DEBUG 🐞: %s -={ %c }=-", msg, arg);
-		printf(DEFAULT"\n");
+		printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: %s -={ %c }=-", msg, arg);
+		printf("\n");
 	}
 }
 
@@ -82,7 +82,7 @@ void	debug_print_msg(char *msg)
 {
 	if (DEBUG == 1)
 	{
-		printf(BLUE "DEBUG 🐞: -={ %s }=-", msg);
-		printf(DEFAULT"\n");
+		printf(ANSI_COLOR_BRIGHT_BLUE "DEBUG 🐞: -={ %s }=-", msg);
+		printf("\n");
 	}
 }

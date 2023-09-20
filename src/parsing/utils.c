@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:20:30 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:10:02 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*init_token(t_token_type type, char *str, t_lexer *lexer)
 
 void	print_error_msg(char *str, char *var)
 {
-	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	if (var)
 	{
@@ -43,7 +43,7 @@ void	print_error_msg(char *str, char *var)
 		ft_putstr_fd(var, STDERR_FILENO);
 		ft_putstr_fd("'", STDERR_FILENO);
 	}
-	ft_putendl_fd(DEFAULT, STDERR_FILENO);
+	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 	g_global->exit_status = 258;
 }
 

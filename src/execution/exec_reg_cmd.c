@@ -6,13 +6,14 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:46:58 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:40:00 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 #include <sys/stat.h>
+#include <dirent.h>
 
 static void	check_for_errors(t_cmd *cmd, t_data *data)
 {
@@ -25,9 +26,9 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 	}
 	if (!ft_strcmp(cmd->argvs[0], "\0"))
 	{
-		ft_putstr_fd (RED"minishell: ", STDERR_FILENO);
+		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED"minishell: ", STDERR_FILENO);
 		ft_putstr_fd(": command not found", STDERR_FILENO);
-		ft_putendl_fd(DEFAULT, STDERR_FILENO);
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		exit (g_global->exit_status);
 	}
 }
@@ -35,16 +36,30 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 static int	check_for_permission(t_cmd *cmd)
 {
 	struct stat	_stat;
+	DIR			*dirp;
 
-	ft_putstr_fd(RED"minishell :", STDERR_FILENO);
+	dirp = opendir(cmd->argvs[0]);
+	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd->argvs[0], STDERR_FILENO);
+	if (dirp)
+	{
+		closedir(dirp);
+		ft_putstr_fd(": is a directory", STDERR_FILENO);
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+		return (126);
+	}
 	if (stat(cmd->argvs[0], &_stat) == 0)
 	{
 		ft_putstr_fd(": Permission denied", STDERR_FILENO);
-		ft_putendl_fd(DEFAULT, STDERR_FILENO);
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		return (126);
 	}
-	
+	if (!dirp)
+	{
+		ft_putstr_fd(" Not a directory\n", STDERR_FILENO);
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+		return (126);
+	}
 	return (126);
 }
 

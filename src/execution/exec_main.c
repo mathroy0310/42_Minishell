@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:10:45 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:33:07 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,11 @@ void	execution(t_cmd *cmd, t_state *state)
 	{
 		init_data(data, state);
 		execute_reg_cmd(cmd, data);
+	}
+	else if (cmd->redir_nbr > 0 && cmd->type == eof)
+	{
+		init_data(data, state);
+		check_for_heredoc(data, cmd);
+		execute_single_cmd(cmd, data);
 	}
 }

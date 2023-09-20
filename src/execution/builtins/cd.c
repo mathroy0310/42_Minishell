@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 14:31:38 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:11:03 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int8_t	cd_builtin(char **argv)
 		if (path == NULL)
 		{
 			g_global->exit_status = 1;
-			ft_putstr_fd(RED"minishell: cd:", STDERR_FILENO);
+			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"minishell: cd:", STDERR_FILENO);
 			ft_putstr_fd (" HOME not set", STDERR_FILENO);
-            ft_putendl_fd(DEFAULT, STDERR_FILENO);
+            ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 			return (-1);
 		}
 		if (!ft_strcmp(path, ""))

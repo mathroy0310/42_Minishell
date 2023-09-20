@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:02:05 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:42:13 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ uint8_t	minishell_master(int argc, char **argv, char **env)
 	while (1)
 	{
 		buff = NULL;
-		buff = readline(PROMPT);
+		buff = readline(ANSI_COLOR_BRIGHT_YELLOW PROMPT ANSI_COLOR_RESET);
 		if (!buff)
 			quit_minishell(buff);
 		else if (buff[0] == '\0')

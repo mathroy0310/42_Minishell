@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:41:21 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:11:23 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ uint8_t	export_builtin(char **args, t_data *data)
 	{
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			ft_putstr_fd(RED "minishell: export: `", STDERR_FILENO);
+			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED "minishell: export: `", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
 			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
-			ft_putendl_fd(DEFAULT, STDERR_FILENO);
+			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 			g_global->exit_status = 1;
 			continue ;
 		}
