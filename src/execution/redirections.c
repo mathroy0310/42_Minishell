@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 22:40:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:34:24 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   redirections.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/19 22:40:21 by maroy                                    */
+/*   Updated: 2023/09/20 13:50:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -39,13 +39,13 @@ static void	setup_outfiles(t_cmd *cmd, t_data *data, int i)
 
 	if (cmd->redir[i].type == great && !data->redir->error)
 	{
-		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_TRUNC);
+		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		data->redir->outfile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
 	}
 	else if (cmd->redir[i].type == greater && !data->redir->error)
 	{
-		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_APPEND);
+		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_APPEND, 0666);
 		data->redir->outfile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
 	}

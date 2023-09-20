@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 15:24:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/14 13:26:59 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_utils.c                                      ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/13 15:24:41 by maroy                                    */
+/*   Updated: 2023/09/20 16:42:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -21,7 +21,7 @@ char	*get_env_var_by_key(const char *key)
 	index = 0;
 	if (!key)
 		return (NULL);
-	index = find_env(key, g_global->env_var);
+	index = find_env_var_index(key, g_global->env_var);
 	if (index == -1)
 		return (NULL);
 	value = return_value(g_global->env_var[index], '=');
@@ -44,7 +44,7 @@ static int8_t	check_only_key(const char *key)
 	return (-1);
 }
 
-int8_t	find_env(const char *key, char **env_pointer)
+int8_t	find_env_var_index(const char *key, char **env_pointer)
 {
 	int		index;
 	char	*sub_env;

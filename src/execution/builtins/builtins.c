@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 16:21:04 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/13 15:47:35 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   builtins.c                                        ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/07/31 16:21:04 by maroy                                    */
+/*   Updated: 2023/09/20 17:06:19 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -24,9 +24,9 @@ uint8_t	check_builtin(t_cmd *cmd, t_data *data)
 	else if (ft_strequal(args[0], "export"))
 		return (export_builtin(args, data));
 	else if (ft_strequal(args[0], "unset"))
-	 	return (unset_builtin(args, data));
+		return (unset_builtin(args, data));
 	else if (ft_strequal(args[0], "echo"))
-	 	return (echo_builtin(args));
+		return (echo_builtin(args));
 	else if (ft_strequal(args[0], "cd"))
 		return (cd_builtin(args));
 	else if (ft_strequal(args[0], "exit"))

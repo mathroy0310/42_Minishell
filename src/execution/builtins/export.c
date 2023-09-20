@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:11:23 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   export.c                                          ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/01 16:34:10 by maroy                                    */
+/*   Updated: 2023/09/20 17:01:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -39,10 +39,10 @@ uint8_t	is_valid_env_key(char *arg)
 	return (OK);
 }
 
-void	set_new_env(char *arg)
+static void	set_new_env(char *arg)
 {
-	int	index;
-	int	i;
+	int16_t	index;
+	int16_t	i;
 
 	index = 0;
 	i = -1;
@@ -55,7 +55,7 @@ void	set_new_env(char *arg)
 	g_global->env_var = realloc_new_env(index, arg, g_global->env_var);
 }
 
-void	set_or_modify(char *arg)
+static void	set_or_modify(char *arg)
 {
 	int		is_set;
 	int		i;
@@ -72,7 +72,7 @@ void	set_or_modify(char *arg)
 		i = ft_strlen(arg);
 	}
 	key = ft_substr(arg, 0, i);
-	is_set = find_env(key, g_global->env_var);
+	is_set = find_env_var_index(key, g_global->env_var);
 	if (is_set == -1)
 		set_new_env(arg);
 	else
@@ -85,7 +85,7 @@ void	set_or_modify(char *arg)
 
 uint8_t	export_builtin(char **args, t_data *data)
 {
-	int	i;
+	int16_t	i;
 
 	i = 0;
 	g_global->exit_status = 0;
@@ -98,7 +98,8 @@ uint8_t	export_builtin(char **args, t_data *data)
 	{
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED "minishell: export: `", STDERR_FILENO);
+			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED \
+			"minishell: export: `", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
 			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
 			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
@@ -108,6 +109,5 @@ uint8_t	export_builtin(char **args, t_data *data)
 		set_or_modify(args[i]);
 		add_to_env(args[i], data);
 	}
-	debug_print_msg("export Success yeah");
 	return (OK);
 }

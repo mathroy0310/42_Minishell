@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:57:39 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   cd.c                                              ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/12 18:00:20 by maroy                                    */
+/*   Updated: 2023/09/20 16:42:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -22,7 +22,7 @@ static int	add_var_to_env(char *key, char *new_path)
 	tmp = NULL;
 	if (!key || !new_path)
 		return (KO);
-	index = find_env(key, g_global->env_var);
+	index = find_env_var_index(key, g_global->env_var);
 	if (index == -1)
 		return (OK);
 	else

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/08 14:05:13 by maroy                                    */
-/*   Updated: 2023/09/16 21:22:31 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/20 17:14:09 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**remove_env_by_key(int index, char **env_pointer)
 {
 	char			*next_env;
-	char			*pfree;
+	char			*tmp;
 	register int	i;
 
 	i = index;
@@ -24,23 +24,17 @@ char	**remove_env_by_key(int index, char **env_pointer)
 		while (env_pointer[i + 1] != NULL)
 		{
 			next_env = ft_strdup(env_pointer[i + 1]);
-			pfree = env_pointer[i];
+			tmp = env_pointer[i];
 			env_pointer[i] = next_env;
-			free (pfree);
+			free (tmp);
 			i++;
 		}
 	}
-	pfree = env_pointer[i];
+	tmp = env_pointer[i];
 	env_pointer[i] = 0;
-	free (pfree);
+	free (tmp);
 	return (env_pointer);
 }
-
-/*
-**  unset a bash environment variable
-**  unset arg
-**  unset arg1 arg2 *
-*/
 
 uint8_t	unset_builtin(char **args, t_data *data)
 {
@@ -50,11 +44,11 @@ uint8_t	unset_builtin(char **args, t_data *data)
 
 	i = -1;
 	if (!args[1])
-		return (1);
+		return (KO);
 	while (args[++i])
 	{
-		env_index = find_env(args[i], g_global->env_var);
-		env_index_ = find_env(args[i], data->state->env_);
+		env_index = find_env_var_index(args[i], g_global->env_var);
+		env_index_ = find_env_var_index(args[i], data->state->env_);
 		if (env_index_ != -1)
 			data->state->env_ = remove_env_by_key(env_index_, data->state->env_);
 		if (env_index != -1)

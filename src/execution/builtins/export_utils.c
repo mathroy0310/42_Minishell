@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:17:33 by maroy                                    */
-/*   Updated: 2023/09/16 21:22:24 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/20 16:55:20 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	modify_env(char *arg, char *key)
 	char	*new_value;
 	char	*tmp;
 
-	i = find_env(key, g_global->env_var);
+	i = find_env_var_index(key, g_global->env_var);
 	if (i == -1)
 		return ;
 	else
@@ -90,8 +90,8 @@ void	modify_env(char *arg, char *key)
 
 char	**dup_env(void)
 {
-	char	**dup;
-	int		i;
+	char		**dup;
+	int16_t		i;
 
 	i = env_count();
 	dup = (char **)malloc(sizeof(char *) * (i + 1));

@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/20 00:22:44 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/27 15:41:11 by maroy                                     #
+#    Updated: 2023/09/20 13:51:00 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -54,7 +54,7 @@ SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -pedantic
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17
 
 RLFLAGS	=	-lreadline -lcurses
 
@@ -116,8 +116,8 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 
 all			: readline termcap ${NAME}
 
-debug		: CFLAGS += -g3 -fsanitize=address -DDEBUGFLAG=1
-debug		: readline termcap ${NAME}
+debug		: CFLAGS += -g3 -fsanitize=address -DDEBUGFLAG=1 
+debug		: re
 
 termcap		:
 	@#!/bin/bash

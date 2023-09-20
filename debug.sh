@@ -8,7 +8,6 @@
 #		- ./minishell:		runs the executable
 #
 
-make fclean;
 make debug;
 make clean;
 clear;

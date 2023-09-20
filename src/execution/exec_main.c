@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_main.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/20 00:03:13 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_main.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/30 18:12:50 by maroy                                    */
+/*   Updated: 2023/09/20 16:42:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -22,7 +22,7 @@ void	wait_children(void)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
+			g_global->exit_status = WXITESTATUS(status);
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
@@ -51,7 +51,7 @@ char	**get_path(void)
 	char	*tmp;
 	int		ret;
 
-	ret = find_env("PATH", g_global->env_var);
+	ret = find_env_var_index("PATH", g_global->env_var);
 	if (ret == -1)
 		return (NULL);
 	tmp = return_value(g_global->env_var[ret], '=');
@@ -103,5 +103,9 @@ void	execution(t_cmd *cmd, t_state *state)
 		init_data(data, state);
 		check_for_heredoc(data, cmd);
 		execute_single_cmd(cmd, data);
+	}
+	else
+	{
+		
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:38:29 by maroy                                    */
-/*   Updated: 2023/09/16 21:22:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/20 16:49:01 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	new_env(char *arg, char *key, t_data *data)
 	char	*new_value;
 	char	*tmp;
 
-	i = find_env(key, data->state->env_);
+	i = find_env_var_index(key, data->state->env_);
 	if (i == -1)
 	{
 		i = 0;
@@ -65,7 +65,7 @@ void	new_env(char *arg, char *key, t_data *data)
 	}
 	else
 	{
-		i = find_env(key, data->state->env_);
+		i = find_env_var_index(key, data->state->env_);
 		if (i == -1)
 			return ;
 		else
@@ -93,9 +93,9 @@ void	add_to_env(char *arg, t_data *data)
 	free(key);
 }
 
-int	env_count(void)
+int16_t	env_count(void)
 {
-	int	i;
+	int16_t	i;
 
 	i = 0;
 	while (g_global->env_var[i])
