@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/20 00:03:51 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:25:07 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,19 @@
  */
 
 // 1 == DEBUG mode , 0 == USER mode
+#ifdef DEBUGFLAG
+
+# define DEBUG 1
+# define PROMPT "DEBUG$ "
+
+#else
+
 # define DEBUG 0
+# define PROMPT "minishell$ "
+
+#endif
 
 // prompt
-# define PROMPT "minishell$ "
 
 // tmp file
 # define HISTORY_FILE "./.tmp/.minishell_history"

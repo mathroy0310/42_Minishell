@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:57:22 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:32:47 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED"minishell: ", STDERR_FILENO);
 		ft_putstr_fd(": command not found", STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-		exit (g_global->exit_status);
+		exit(g_global->exit_status);
 	}
 }
 

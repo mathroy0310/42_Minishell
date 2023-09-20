@@ -1,3 +1,0 @@
-make re;
-clear;
-./minishell;
