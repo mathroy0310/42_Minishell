@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   get_next_token.c                                  ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:29:35 by maroy                                    */
-/*   Updated: 2023/09/16 18:49:08 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:29:35 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/20 00:04:12 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -85,13 +85,13 @@ char	*quoted_string(t_lexer *lexer, char *str)
 	{
 		s = tokenize_dquoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
-			g_global->exit_status = EXIT_CMD_NOT_FOUND;
+			g_global->exit_status = 127;
 	}
 	else
 	{
 		s = tokenize_squoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
-			g_global->exit_status = EXIT_CMD_NOT_FOUND;
+			g_global->exit_status = 127;
 	}
 	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:58:13 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/20 00:01:34 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ uint8_t 	check_builtin(t_cmd *cmd, t_data *data);
  * utils.c *
  */
 
-<<<<<<< HEAD
 int 		env_count(void);
 char 		**realloc_new_env(int env_num, char *arg, char **env_pointer);
 char		*find_path(char	*cmd, char **path);
@@ -150,7 +149,7 @@ void		fork_failed(void);
 void		check_valid_fd(t_data *data, char *file_error, int fd);
 void		print_error(char *file_error);
 int8_t		path_error_print(t_cmd *cmd, t_data *data, char *possible_path);
-=======
 int					env_count(void);
 char				**realloc_new_env(int env_num, char *arg,
 						char **env_pointer);
+#endif
