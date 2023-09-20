@@ -6,18 +6,18 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:34:01 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:58:13 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
-#define EXECUTION_H
+# define EXECUTION_H
 
 /*
  * -- Local Includes --
  */
-#include "minishell.h"
-#include "lexer.h"
+# include "lexer.h"
+# include "minishell.h"
 
 typedef struct s_redir
 {
@@ -65,10 +65,10 @@ typedef struct s_data
  * exec_main.c *
  */
 
-void		wait_children(void);
-void 		execution(t_cmd *cmd, t_state *state);
-void		restore_std(int saved_stdout, int saved_stdin);
-uint8_t		dup_env_var(char **env);
+void				wait_children(void);
+void				execution(t_cmd *cmd, t_state *state);
+void				restore_std(int saved_stdout, int saved_stdin);
+uint8_t				dup_env_var(char **env);
 
 /*
  * exec_reg_cmd.c *
@@ -86,8 +86,8 @@ void	find_cmd_path(t_cmd *cmd, t_data *data);
  * exec_utils.c *
  */
 
-int8_t		find_env(const char *key, char **env_pointer);
-char		*get_env_var_by_key(const char *key);
+int8_t				find_env(const char *key, char **env_pointer);
+char				*get_env_var_by_key(const char *key);
 
 /*
  * signals.c *
@@ -105,10 +105,10 @@ uint8_t 	check_builtin(t_cmd *cmd, t_data *data);
  * utils.c *
  */
 
+<<<<<<< HEAD
 int 		env_count(void);
 char 		**realloc_new_env(int env_num, char *arg, char **env_pointer);
 char		*find_path(char	*cmd, char **path);
-
 /*
  * redirections.c *
  */
@@ -150,5 +150,7 @@ void		fork_failed(void);
 void		check_valid_fd(t_data *data, char *file_error, int fd);
 void		print_error(char *file_error);
 int8_t		path_error_print(t_cmd *cmd, t_data *data, char *possible_path);
-
-#endif
+=======
+int					env_count(void);
+char				**realloc_new_env(int env_num, char *arg,
+						char **env_pointer);

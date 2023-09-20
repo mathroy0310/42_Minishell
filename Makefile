@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/19 23:12:53 by maroy            ###   ########.fr        #
+#    Updated: 2023/09/19 23:57:52 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
 
 CC		=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 #-fsanitize=address
+CFLAGS 	=	-Wall -Wextra -Werror -std=c17 -g3 -pedantic #-fsanitize=address
 
 RLFLAGS	=	-lreadline -lcurses
 

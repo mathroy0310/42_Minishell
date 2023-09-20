@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:33:07 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:25 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	wait_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			g_global->exit_status = signal + 128;
-		}		
+			g_global->exit_status = signal + EXIT_SIGFATERR;
+		}
 	}
 }
 

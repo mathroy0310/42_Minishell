@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:41:17 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:58:01 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,16 @@
 #define ANSI_STYLE_REVERSED          "\x1b[7m"
 
 /*
- *-- Error messages --
+ *-- Exit Code --
  */
+# define EXIT_PERM_DENIED 126
+# define EXIT_CMD_NOT_FOUND 127
+# define EXIT_INVALID_ARG 128
+# define EXIT_SIGFATERR 128
+# define EXIT_SIGKILL 129
+# define EXIT_SIGINT 130
+# define EXIT_SIGQUIT 131
+
 
 /*
  * -- Global defines --
@@ -76,7 +84,7 @@
 # define KO 0
 
 // MAX_PATH_LEN
-#define MAX_PATH_LEN 1024
+# define MAX_PATH_LEN 1024
 
 // important char defines
 # define PIPE 124

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:29:35 by maroy                                    */
-/*   Updated: 2023/09/06 19:03:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/16 18:49:08 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*tokenize_dquoted_text(t_lexer *lexer)
 	str = ft_strdup("");
 	while (lexer->c != DQUOTE && lexer->c != EOF)
 	{
-		if (lexer->c == DOLLAR) 
+		if (lexer->c == DOLLAR)
 			str = ft_strjoin_free(str, envar_token(lexer));
 		else
 		{
@@ -85,13 +85,13 @@ char	*quoted_string(t_lexer *lexer, char *str)
 	{
 		s = tokenize_dquoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
-			g_global->exit_status = 127;
+			g_global->exit_status = EXIT_CMD_NOT_FOUND;
 	}
 	else
 	{
 		s = tokenize_squoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
-			g_global->exit_status = 127;
+			g_global->exit_status = EXIT_CMD_NOT_FOUND;
 	}
 	return (s);
 }
@@ -103,8 +103,8 @@ t_token	*string_token(t_lexer *lexer)
 	char	*temp;
 
 	str = ft_strdup("");
-	while (lexer->curpos <= lexer->bufsize && lexer->c != PIPE && lexer->c != GREAT
-		&& lexer->c != LESS && lexer->c != EOF)
+	while (lexer->curpos <= lexer->bufsize && lexer->c != PIPE
+		&& lexer->c != GREAT && lexer->c != LESS && lexer->c != EOF)
 	{
 		s = ft_strdup("");
 		temp = s;
@@ -119,7 +119,7 @@ t_token	*string_token(t_lexer *lexer)
 		}
 		str = ft_strjoin_free(str, s);
 		free(temp);
-		if (lexer->c == 32)
+		if (lexer->c == SPACE)
 			return (return_token(str, lexer, 0));
 	}
 	return (return_token(str, lexer, 0));

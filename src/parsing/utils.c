@@ -1,5 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
+<<<<<<< HEAD
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -8,6 +9,16 @@
 /*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
 /*   Updated: 2023/09/19 23:10:02 by maroy            ###   ########.fr       */
 /*                                                                            */
+=======
+/*                                                     ██   ██ ██████         */
+/*   utils.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:21:18 by maroy                                    */
+/*   Updated: 2023/09/16 18:53:47 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
+>>>>>>> mongit/main
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -39,12 +50,17 @@ void	print_error_msg(char *str, char *var)
 	ft_putstr_fd(str, STDERR_FILENO);
 	if (var)
 	{
-		ft_putstr_fd(" `",STDERR_FILENO);
+		ft_putstr_fd(" `", STDERR_FILENO);
 		ft_putstr_fd(var, STDERR_FILENO);
 		ft_putstr_fd("'", STDERR_FILENO);
 	}
+<<<<<<< HEAD
 	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 	g_global->exit_status = 258;
+=======
+	ft_putendl_fd(DEFAULT, STDERR_FILENO);
+	g_global->exit_status = EXIT_FAILURE;
+>>>>>>> mongit/main
 }
 
 int	peek_char(t_lexer *lexer)

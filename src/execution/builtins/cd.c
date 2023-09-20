@@ -6,12 +6,11 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:11:03 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
 #include <dirent.h>
 
 static int	add_var_to_env(char *key, char *new_path)
@@ -31,20 +30,21 @@ static int	add_var_to_env(char *key, char *new_path)
 		tmp = ft_strjoin(key, "=");
 		pfree = tmp;
 		tmp = ft_strjoin(tmp, new_path);
-		free (pfree);
+		free(pfree);
 		pfree = g_global->env_var[index];
 		g_global->env_var[index] = tmp;
-		free (pfree);
+		free(pfree);
 	}
 	return (OK);
 }
 
 static int	move_to_dir(char *path)
 {
-	int			ret;
-	char		*old_pwd;
-	char		*tmp;
+	int		ret;
+	char	*old_pwd;
+	char	*tmp;
 
+	debug_print_string("path dans move_to_dir = ", path);
 	old_pwd = get_env_var_by_key("PWD");
 	add_var_to_env("OLDPWD", old_pwd);
 	ret = chdir(path);
@@ -52,42 +52,40 @@ static int	move_to_dir(char *path)
 	if (!tmp && (!ft_strcmp(".", path) || !ft_strcmp("./", path)))
 	{
 		error_retrieving_cd();
-		free (tmp);
+		free(tmp);
 		tmp = get_env_var_by_key("PWD");
 		tmp = add_char_to_word(tmp, '/');
 		old_pwd = tmp;
 		tmp = ft_strjoin(tmp, path);
-		free (old_pwd);
+		free(old_pwd);
 		add_var_to_env("PWD", tmp);
 		g_global->exit_status = 0;
 		free(tmp);
 		return (1);
 	}
 	add_var_to_env("PWD", tmp);
-	free (tmp);
+	free(tmp);
 	return (ret);
 }
 
-static int	change_dir(char *path, int i, char **argv)
+static uint8_t	change_dir(char *path, int i, char **argv)
 {
-	DIR		*dir;
+	DIR	*dir;
 
-	debug_print_string("path", path);
-	
 	dir = opendir(path);
 	if (!dir)
 		return (error_path("cd", argv[i + 1], errno));
 	else
 	{
 		closedir(dir);
-		debug_print_decimal("move_to_dir(path)", move_to_dir(path));
+		debug_print_string("path dans change_dir", path);
 		if (move_to_dir(path) == -1)
 			return (error_path("cd", argv[i + 1], errno));
 	}
 	return (OK);
 }
 
-static int	exec_cd(char *path, int i, char **argv)
+static uint8_t	exec_cd(char *path, int i, char **argv)
 {
 	char	*pwd;
 
@@ -95,7 +93,7 @@ static int	exec_cd(char *path, int i, char **argv)
 		return (OK);
 	pwd = get_env_var_by_key("PWD");
 	add_var_to_env("PWD", pwd);
-	free (pwd);
+	free(pwd);
 	return (KO);
 }
 
@@ -118,12 +116,12 @@ int8_t	cd_builtin(char **argv)
 			return (-1);
 		}
 		if (!ft_strcmp(path, ""))
-			return (0);
+			return (KO);
 	}
 	else if (ft_strncmp(argv[i + 1], "-", 2) == 0)
 		path = get_env_var_by_key("OLDPWD");
 	else
 		path = argv[i + 1];
 	exec_cd(path, i, argv);
-	return (0);
+	return (KO);
 }

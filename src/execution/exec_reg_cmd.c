@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:40:00 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:22 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 		exit(g_global->exit_status);
 	if (data->redir->error)
 	{
-		g_global->exit_status = 1;
+		g_global->exit_status = EXIT_FAILURE;
 		exit(g_global->exit_status);
 	}
 	if (!ft_strcmp(cmd->argvs[0], "\0"))
@@ -33,7 +33,7 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 	}
 }
 
-static int	check_for_permission(t_cmd *cmd)
+static uint8_t	check_for_permission(t_cmd *cmd)
 {
 	struct stat	_stat;
 	DIR			*dirp;
@@ -95,7 +95,7 @@ uint8_t	execute_reg_cmd(t_cmd *cmd, t_data *data)
 	{
 		g_global->pid = 0;
 		child_pid = fork();
-		if (child_pid < 0 )
+		if (child_pid < 0)
 			fork_failed();
 		else if (child_pid == 0)
 			find_cmd_path(cmd, data);

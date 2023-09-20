@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:56:32 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:10:38 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/19 23:57:30 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_valid_fd(t_data *data, char *file_error, int fd)
 		ft_putstr_fd(file_error, STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		perror(" ");
-		g_global->exit_status = 1;
+		g_global->exit_status = EXIT_FAILURE;
 	}
 }
 
