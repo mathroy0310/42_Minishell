@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/09/16 21:19:18 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/21 14:28:27 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <sys/wait.h>
-# include <termios.h>
+
 # include <unistd.h>
 
 /*

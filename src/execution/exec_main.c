@@ -6,13 +6,12 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/09/20 16:42:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 15:18:34 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "../../inc/builtins.h"
-
 
 void	wait_children(void)
 {
@@ -22,7 +21,7 @@ void	wait_children(void)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
-			g_global->exit_status = WXITESTATUS(status);
+			g_global->exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
@@ -106,6 +105,6 @@ void	execution(t_cmd *cmd, t_state *state)
 	}
 	else
 	{
-		
+		execute_multi_cmd(cmd, data);
 	}
 }

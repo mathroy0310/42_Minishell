@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/20 00:02:41 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   utils.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:21:18 by maroy                                    */
+/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -60,9 +60,9 @@ int	multi_lines(t_lexer *lexer, char c)
 	if (lexer->c == EOF)
 	{
 		if (c == DQUOTE)
-			print_error_msg("minishell: syntax error expected \"", NULL);
+			print_error_msg( ERR_PROMPT "syntax error expected \"", NULL);
 		else
-			print_error_msg("minishell: syntax error expected \'", NULL);
+			print_error_msg( ERR_PROMPT "syntax error expected \'", NULL);
 		lexer->multi_line = 1;
 		return (KO);
 	}

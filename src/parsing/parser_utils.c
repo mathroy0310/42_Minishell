@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:18:47 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   parser_utils.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:27:18 by maroy                                    */
+/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -26,7 +26,7 @@ t_parser	*init_parser(t_lexer *lexer)
 	parser->curr_token = get_next_token(lexer);
 	if (parser->curr_token->type == pip)
 	{
-		print_error_msg("minishell: syntax error near unexpected token",
+		print_error_msg( ERR_PROMPT "syntax error near unexpected token",
 			parser->curr_token->value);
 		free_parser(parser);
 		return (NULL);
@@ -98,14 +98,14 @@ int	syntax_error(t_parser *parser)
 {
 	if (parser->prev_token->type == pip && parser->curr_token->type == pip)
 	{
-		print_error_msg("minishell: syntax error near unexpected token",
+		print_error_msg( ERR_PROMPT "syntax error near unexpected token",
 			parser->prev_token->value);
 		return (KO);
 	}
 	if ((is_redic(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_error_msg("minishell: syntax error near unexpected token `newline'",
+		print_error_msg( ERR_PROMPT "syntax error near unexpected token `newline'",
 			NULL);
 		return (KO);
 	}

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:40:21 by maroy                                    */
-/*   Updated: 2023/09/20 13:50:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 14:29:18 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	setup_infiles(t_cmd *cmd, t_data *data, int i)
 	{
 		if (dup2(data->redir->infile, 0) < 0)
 		{
-			printf("Unable to duplicate file descriptor.");
+			print_error("Unable to duplicate file descriptor.");
 			exit(EXIT_FAILURE);
 		}
 		close(data->redir->infile);

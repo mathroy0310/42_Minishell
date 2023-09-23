@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/09/20 12:46:49 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 16:01:27 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -60,36 +60,40 @@
 
 // 1 == DEBUG mode , 0 == USER mode
 # ifdef DEBUGFLAG
-
-#  define DEBUG 1
-#  define PROMPT "DEBUG$ "
-
+#	define DEBUG 1
+#	define PROMPT "DEBUG minishell$ "
+#	define ERR_PROMPT "DEBUG minishell: "
 # else
-
-#  define DEBUG 0
-#  define PROMPT "minishell$ "
-
+#	define DEBUG 0
+#	define PROMPT "minishell$ "
+#	define ERR_PROMPT "minishell: "
 # endif
 
-// prompt
-
-// tmp file
+/// @brief Temportary file for command history
 # define HISTORY_FILE "./.tmp/.minishell_history"
+/// @brief Temporary file for here_doc
 # define HERE_DOC_FILE "./.tmp/.minishell_here_doc"
 
+/// @brief Return Success
 # define OK 1
+/// @brief Return Failure
 # define KO 0
 
-// MAX_PATH_LEN
-# define MAX_PATH_LEN 1024
+// Minishell chardefs
 
-// important char defines
+/// @brief `|` character
 # define PIPE 124
+/// @brief `>` character
 # define GREAT 62
+/// @brief `<` character
 # define LESS 60
+/// @brief `"` character
 # define DQUOTE 34
+/// @brief `'` character
 # define SQUOTE 39
+/// @brief `$` character
 # define DOLLAR 36
+/// @brief `\\` character
 # define BSLASH 92
 // already exist in the chardefs of readline
 //# define SPACE 32

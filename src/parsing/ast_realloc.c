@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/09/06 19:03:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_token	*check_token(t_parser *parser, t_ast *ast)
 	{
 		if (parser->curr_token->type != id)
 		{
-			print_error_msg("minishell: syntax error near unexpected token",
+			print_error_msg( ERR_PROMPT "syntax error near unexpected token",
 				parser->curr_token->value);
 			return (NULL);
 		}

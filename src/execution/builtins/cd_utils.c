@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cd_utils.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 18:01:11 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:57:43 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   cd_utils.c                                        ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/12 18:01:11 by maroy                                    */
+/*   Updated: 2023/09/23 16:01:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -48,11 +48,11 @@ char	*get_pwd(void)
 {
 	char	*new_pwd;
 
-	new_pwd = (char *)malloc(sizeof(char) * MAX_PATH_LEN + 1);
+	new_pwd = (char *)malloc(sizeof(char) * PATH_MAX + 1);
 	if (!new_pwd)
 		return (NULL);
-	ft_bzero(new_pwd, MAX_PATH_LEN + 1);
-	if (getcwd(new_pwd, sizeof(char) * MAX_PATH_LEN) == NULL)
+	ft_bzero(new_pwd, PATH_MAX + 1);
+	if (getcwd(new_pwd, sizeof(char) * PATH_MAX) == NULL)
 	{
 		free(new_pwd);
 		return (NULL);
@@ -86,7 +86,7 @@ int	error_path(const char *cmd, const char *path, int errnum)
 {
 	g_global->exit_status = 1;
 	debug_print_msg("dans error_path");
-	printf(ANSI_COLOR_BRIGHT_RED"minishell: %s: %s: %s",
+	printf(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "%s: %s: %s",
 		cmd, path, strerror(errnum));
 	printf("\n");
 	return (EXIT_FAILURE);

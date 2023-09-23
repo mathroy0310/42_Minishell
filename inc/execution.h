@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/09/20 17:03:24 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 16:35:51 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ uint8_t				dup_env_var(char **env);
 uint8_t				execute_reg_cmd(t_cmd *cmd, t_data *data);
 
 
+/*
+ * exec_multi_cmd.c *
+*/
+
+uint8_t				execute_multi_cmd(t_cmd *cmd, t_data *data);
+
 
 /// @brief Executes a command and check for errors
 /// @param cmd The command to execute
@@ -117,7 +123,10 @@ int8_t				find_env_var_index(const char *key, char **env_pointer);
 /// @param key The key of the environment variable
 /// @return The value of the environment variable
 char				*get_env_var_by_key(const char *key);
-
+/// @brief 
+char				**realloc_new_env(int env_num, char *arg,
+						char **env_pointer);
+char				*find_path(char *cmd, char **path);
 /*
  * signals.c *
  */
@@ -127,13 +136,7 @@ char				*get_env_var_by_key(const char *key);
 /// @param signum The signal number
 void				sigint_handler(int signum);
 
-/*
- * utils.c *
- */
 
-char				**realloc_new_env(int env_num, char *arg,
-						char **env_pointer);
-char				*find_path(char *cmd, char **path);
 /*
  * redirections.c *
  */
@@ -143,6 +146,12 @@ void				check_for_heredoc(t_data *data, t_cmd *cmd);
  * here_doc.c *
  */
 void				parse_here_doc(t_redir *redir, t_data *data);
+
+/*
+ * handle_pipes.c 
+*/
+
+int8_t execute_simple_pipe(t_cmd *cmd, t_data *data);
 
 /*
  * here_doc_utils.c *
@@ -174,6 +183,4 @@ void				check_valid_fd(t_data *data, char *file_error, int fd);
 void				print_error(char *file_error);
 int8_t				path_error_print(t_cmd *cmd, t_data *data,
 						char *possible_path);
-char				**realloc_new_env(int env_num, char *arg,
-						char **env_pointer);
 #endif

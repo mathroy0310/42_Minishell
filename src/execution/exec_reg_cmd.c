@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:58:19 by maroy                                    */
-/*   Updated: 2023/09/20 15:49:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/23 15:26:56 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	check_for_errors(t_cmd *cmd, t_data *data)
 	}
 	if (!ft_strcmp(cmd->argvs[0], "\0"))
 	{
-		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED"minishell: ", STDERR_FILENO);
+		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
 		ft_putstr_fd(": command not found", STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		exit(g_global->exit_status);
@@ -35,7 +35,7 @@ static uint8_t	check_for_permission(t_cmd *cmd)
 {
 	if (access(cmd->argvs[0], F_OK | X_OK) != 0)
 	{
-		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"minishell: ", STDERR_FILENO);
+		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
 		ft_putstr_fd(cmd->argvs[0], STDERR_FILENO);
 		ft_putstr_fd(": Permission denied", STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
