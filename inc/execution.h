@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   execution.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/09/23 16:35:51 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   execution.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/25 02:48:08 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -43,6 +43,7 @@ typedef struct s_shell_red
 	int				here_doc;
 	int				error;
 	char			*filename;
+	int				**pipe_fd;
 }					t_shell_red;
 
 typedef struct s_state
@@ -64,14 +65,15 @@ typedef struct s_data
 /*
  * exec_main.c *
  */
-
+/// @brief Initialize the `t_data` structure
+void				init_data(t_data *data, t_state *state);
 /// @brief waitpid and give `g_global->exit_status` the exit status
 void				wait_children(void);
 
 /// @brief Main Executes a command seperated by type of command
 /// @param cmd The commands to execute
 /// @param state The state of the shell
-void				execution(t_cmd *cmd, t_state *state);
+uint8_t				execution(t_cmd *cmd, t_state *state);
 
 
 /// @brief Resotre the stdin and stdout from the saved values
@@ -88,6 +90,9 @@ uint8_t				dup_env_var(char **env);
  * exec_reg_cmd.c *
  */
 
+
+void				check_for_errors(t_cmd *cmd, t_data *data);
+
 /// @brief executes a regular command,
 ///	@brief commands with no redirections and no pipes
 /// @param cmd The command to execute
@@ -100,7 +105,7 @@ uint8_t				execute_reg_cmd(t_cmd *cmd, t_data *data);
  * exec_multi_cmd.c *
 */
 
-uint8_t				execute_multi_cmd(t_cmd *cmd, t_data *data);
+void				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
 
 /// @brief Executes a command and check for errors
@@ -142,16 +147,36 @@ void				sigint_handler(int signum);
  */
 void				check_for_heredoc(t_data *data, t_cmd *cmd);
 
+
 /*
  * here_doc.c *
  */
+
 void				parse_here_doc(t_redir *redir, t_data *data);
 
 /*
  * handle_pipes.c 
 */
 
-int8_t execute_simple_pipe(t_cmd *cmd, t_data *data);
+void				 execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state);
+
+/*
+ * handle_pipes_utils.c *
+*/
+
+void				close_all_pipes(int **fd, int nbr_cmd);
+
+uint8_t				setup_command_pipes(t_cmd *cmd, t_data *data);
+
+/*
+ * free.c
+*/
+
+void				free_path(char **path);
+void				main_free(t_data *data, t_cmd *cmd);
+void				ft_freeptr(void *ptr);
+
+
 
 /*
  * here_doc_utils.c *

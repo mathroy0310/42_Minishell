@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_reg_cmd.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/13 15:58:19 by maroy                                    */
-/*   Updated: 2023/09/23 15:26:56 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_reg_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/25 02:02:35 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 
-static void	check_for_errors(t_cmd *cmd, t_data *data)
+void	check_for_errors(t_cmd *cmd, t_data *data)
 {
 	if (!cmd->argvs)
 		exit(g_global->exit_status);

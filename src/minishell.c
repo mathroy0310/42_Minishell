@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/20 00:01:51 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/25 02:54:29 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 		ast = parse_pipe(parser);
 		if (ast)
 		{
-			cmd = visitor(ast);
+			cmd = parse_pipeline_to_cmd(ast);
 			if (cmd)
 			{
 				debug_print_cmd(cmd);

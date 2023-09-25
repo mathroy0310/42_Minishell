@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                      ██   ██ ██████          #
-#    Makefile                                          ██   ██      ██         #
-#                                                      ███████  █████          #
-#    By: maroy <maroy@student.42.qc>                        ██ ██              #
-#                                                           ██ ███████.qc      #
-#    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/09/23 16:36:36 by maroy            >(.)__ <(.)__ =(.)__     #
-#                                                      (___/  (___/  (___/     #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
+#    Updated: 2023/09/25 02:46:33 by maroy            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -89,7 +89,7 @@ SRCS_MAIN			=	main.c debug.c  minishell.c
 
 SRCS_PARSING 		= 	lexer.c parser.c utils.c free.c get_next_token.c lexer_utils.c parser_utils.c ast.c ast_realloc.c
 
-SRCS_EXECUT			=	exec_main.c exec_reg_cmd.c handle_pipes.c exec_multi_cmd.c exec_utils.c signals.c error.c redirections.c here_doc.c here_doc_utils.c
+SRCS_EXECUT			=	exec_main.c exec_reg_cmd.c free.c handle_pipes.c handle_pipes_utils.c exec_multi_cmd.c exec_utils.c signals.c error.c redirections.c here_doc.c here_doc_utils.c
 
 SRCS_BUILTINS		= 	builtins_utils.c builtins.c cd_utils.c cd.c echo.c env.c exit.c export_utils.c export.c pwd.c unset.c 
 

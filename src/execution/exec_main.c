@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_main.c                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/09/23 15:18:34 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_main.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/25 03:04:04 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -63,19 +63,21 @@ char	**get_path(void)
 }
 
 
-static void	init_data(t_data *data, t_state *state)
+void	init_data(t_data *data, t_state *state)
 {
 	g_global->pid = 1;
 	if (state->path != NULL)
 		ft_free_tab(state->path);
 	state->path = get_path();
-	data->saved_stdout = dup(STDIN_FILENO);
-	data->saved_stdin = dup(STDOUT_FILENO);
+	data->saved_stdout = dup(0);
+	data->saved_stdin = dup(1);
 	data->state = state;
 	data->redir = (t_shell_red *)malloc(sizeof(t_shell_red));
 	data->redir->infile = 0;
 	data->redir->outfile = 0;
 	data->redir->here_doc = 0;
+	data->redir->filename = NULL;
+	data->redir->pipe_fd = NULL;
 	data->redir->error = 0;
 }
 
@@ -87,11 +89,11 @@ void	restore_std(int saved_stdout, int saved_stdin)
 	close(saved_stdin);
 }
 
-void	execution(t_cmd *cmd, t_state *state)
+uint8_t	execution(t_cmd *cmd, t_state *state)
 {
 	t_data	*data;
 
-	data = (t_data *)malloc(sizeof(t_data));
+	data = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (cmd->redir_nbr == 0 && cmd->type == eof)
 	{
 		init_data(data, state);
@@ -104,7 +106,7 @@ void	execution(t_cmd *cmd, t_state *state)
 		execute_single_cmd(cmd, data);
 	}
 	else
-	{
-		execute_multi_cmd(cmd, data);
-	}
+		execute_multi_cmd(cmd, data, state);
+	main_free(data, cmd);
+	return (OK);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser.h                                          ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:10:28 by maroy                                    */
-/*   Updated: 2023/09/16 21:20:06 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:10:28 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/25 02:54:29 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
@@ -71,7 +71,7 @@ t_parser			*init_parser(t_lexer *lexer);
  */
 
 void				init_ast(t_ast *ast, t_ast_type type);
-t_cmd				*visitor(t_ast *ast);
+t_cmd				*parse_pipeline_to_cmd(t_ast *ast);
 
 /*
  * realloc_ast.c *

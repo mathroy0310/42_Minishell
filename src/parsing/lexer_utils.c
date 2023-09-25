@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/19 23:57:14 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/25 02:44:33 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int	valid_envar(char c)
 	if (ft_isalnum(c) || c == '_' || c == '~')
 		return (OK);
 	return (KO);
-}
-
-static void	ft_freeptr(void *ptr)
-{
-	free(ptr);
-	ptr = NULL;
 }
 
 int	get_str_by_char(char *str, char c)

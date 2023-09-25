@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 13:52:21 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/25 02:54:54 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs = malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
 
-void visitor_args(t_ast *ast, t_cmd *cmd, int n)
+void populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 {
 	t_index x;
 
@@ -66,7 +66,7 @@ void init_cmd(t_cmd cmd)
 	cmd.redir = NULL;
 }
 
-t_cmd *visitor(t_ast *ast)
+t_cmd *parse_pipeline_to_cmd(t_ast *ast)
 {
 	t_cmd *cmd;
 	t_index x;
@@ -80,7 +80,7 @@ t_cmd *visitor(t_ast *ast)
 		while (++(x.l) < ast->pipecmd_size && x.k < ast->pipecmd_size)
 		{
 			init_cmd(cmd[x.k]);
-			visitor_args(ast->pipecmd_values[x.l], cmd, x.k);
+			populate_cmd_from_ast(ast->pipecmd_values[x.l], cmd, x.k);
 			if (ast->pipecmd_size >= 2 && x.l < ast->pipecmd_size - 1)
 				cmd[x.k].type = pip;
 			else
