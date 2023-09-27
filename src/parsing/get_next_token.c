@@ -1,61 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_token.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:29:35 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/20 00:04:12 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   get_next_token.c                                  ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:29:35 by maroy                                    */
+/*   Updated: 2023/09/26 14:29:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*tokenize_dquoted_text(t_lexer *lexer)
+char	*tokenize_double_quoted_text(t_lexer *lexer)
 {
 	char	*str;
 
-	readchar(lexer);
+	read_single_char(lexer);
 	str = ft_strdup("");
-	while (lexer->c != DQUOTE && lexer->c != EOF)
+	while (lexer->c != DOUBLE_QUOTE && lexer->c != EOF)
 	{
 		if (lexer->c == DOLLAR)
 			str = ft_strjoin_free(str, envar_token(lexer));
 		else
 		{
 			str = ft_strjoin_char(str, lexer->c);
-			readchar(lexer);
+			read_single_char(lexer);
 		}
 	}
-	if (!multi_lines(lexer, DQUOTE))
+	if (!multi_lines(lexer, DOUBLE_QUOTE))
 	{
 		free(str);
 		return (NULL);
 	}
 	lexer->is_quoted = 1;
-	readchar(lexer);
+	read_single_char(lexer);
 	return (str);
 }
 
-char	*tokenize_squoted_text(t_lexer *lexer)
+char	*tokenize_simple_quoted_text(t_lexer *lexer)
 {
 	char	*str;
 
-	readchar(lexer);
+	read_single_char(lexer);
 	str = ft_strdup("");
-	while (lexer->c != SQUOTE && lexer->c != EOF)
+	while (lexer->c != SINGLE_QUOTE && lexer->c != EOF)
 	{
 		str = ft_strjoin_char(str, lexer->c);
-		readchar(lexer);
+		read_single_char(lexer);
 	}
-	if (!multi_lines(lexer, SQUOTE))
+	if (!multi_lines(lexer, SINGLE_QUOTE))
 	{
 		free(str);
 		return (NULL);
 	}
 	lexer->is_quoted = 1;
-	readchar(lexer);
+	read_single_char(lexer);
 	return (str);
 }
 
@@ -81,15 +81,15 @@ char	*quoted_string(t_lexer *lexer, char *str)
 {
 	char	*s;
 
-	if (lexer->c == DQUOTE)
+	if (lexer->c == DOUBLE_QUOTE)
 	{
-		s = tokenize_dquoted_text(lexer);
+		s = tokenize_double_quoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
 			g_global->exit_status = 127;
 	}
 	else
 	{
-		s = tokenize_squoted_text(lexer);
+		s = tokenize_simple_quoted_text(lexer);
 		if (!ft_strcmp(s, "\0") && !ft_strcmp(str, "\0"))
 			g_global->exit_status = 127;
 	}
@@ -108,7 +108,7 @@ t_token	*string_token(t_lexer *lexer)
 	{
 		s = ft_strdup("");
 		temp = s;
-		if (lexer->c == DQUOTE || lexer->c == SQUOTE)
+		if (lexer->c == DOUBLE_QUOTE || lexer->c == SINGLE_QUOTE)
 			s = quoted_string(lexer, str);
 		else
 			s = tokenize_text(lexer, s);

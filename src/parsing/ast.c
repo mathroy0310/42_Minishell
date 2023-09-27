@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:54:54 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   ast.c                                             ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:29:29 by maroy                                    */
+/*   Updated: 2023/09/26 14:34:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -45,7 +45,7 @@ void populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 			cmd[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
 		else
 		{
-			if (is_redic(ast->args[++x.k - 1]) && x.k >= 1 && x.m < ast->redir_nbr)
+			if (is_redirect(ast->args[++x.k - 1]) && x.k >= 1 && x.m < ast->redir_nbr)
 			{
 				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
 				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;

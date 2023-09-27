@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 13:47:03 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ uint8_t	export_builtin(char **args, t_data *data)
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
 			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED \
-			 ERR_PROMPT "export: `", STDERR_FILENO);
+			ERR_PROMPT "export: `", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
 			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
 			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);

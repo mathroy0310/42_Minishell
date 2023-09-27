@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 19:26:07 by maroy                                    */
-/*   Updated: 2023/09/16 21:20:21 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_token
  * lexer.c *
  */
 
-void				readchar(t_lexer *lexer);
+void				read_single_char(t_lexer *lexer);
 t_token				*ret_str(t_lexer *lexer, char *s, int type);
 t_token				*get_next_token(t_lexer *lexer);
 

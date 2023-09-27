@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:27:18 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:39:36 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_parser	*init_parser(t_lexer *lexer)
 	parser->curr_token = get_next_token(lexer);
 	if (parser->curr_token->type == pip)
 	{
-		print_error_msg( ERR_PROMPT "syntax error near unexpected token",
+		print_error_msg(ERR_PROMPT ERR_SYNTAX,
 			parser->curr_token->value);
 		free_parser(parser);
 		return (NULL);
@@ -41,7 +41,7 @@ t_parser	*init_parser(t_lexer *lexer)
 	return (parser);
 }
 
-int	is_redic(t_token *token)
+int	is_redirect(t_token *token)
 {
 	if (token->type == great || token->type == greater || token->type == less
 		|| token->type == here_doc)
@@ -57,12 +57,12 @@ char	*quoted_delim(t_parser *parser, char *s, int *i)
 	start = *i;
 	while (s[*i] != SPACE && s[*i] != LESS)
 		(*i)--;
-	if (s[(*i) + 1] == DQUOTE || s[(*i) + 1] == SQUOTE)
+	if (s[(*i) + 1] == DOUBLE_QUOTE || s[(*i) + 1] == SINGLE_QUOTE)
 		(*i) += 2;
 	if (s[*i] == DOLLAR)
 	{
 		word = ft_strdup("");
-		while ((s[*i] != DQUOTE || s[*i] != SQUOTE) && (*i) < start)
+		while ((s[*i] != DOUBLE_QUOTE || s[*i] != SINGLE_QUOTE) && (*i) < start)
 		{
 			word = ft_strjoin_char(word, s[*i]);
 			(*i)++;
@@ -98,15 +98,14 @@ int	syntax_error(t_parser *parser)
 {
 	if (parser->prev_token->type == pip && parser->curr_token->type == pip)
 	{
-		print_error_msg( ERR_PROMPT "syntax error near unexpected token",
+		print_error_msg(ERR_PROMPT ERR_SYNTAX,
 			parser->prev_token->value);
 		return (KO);
 	}
-	if ((is_redic(parser->prev_token) && parser->curr_token->type == eof)
+	if ((is_redirect(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_error_msg( ERR_PROMPT "syntax error near unexpected token `newline'",
-			NULL);
+		print_error_msg(ERR_PROMPT ERR_SYNTAX, NULL);
 		return (KO);
 	}
 	return (OK);

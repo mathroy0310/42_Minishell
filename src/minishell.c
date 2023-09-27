@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:54:29 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/07/14 21:56:43 by maroy                                    */
+/*   Updated: 2023/09/26 19:03:16 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <stdbool.h>
 
 static char	**get_env_(char **env_)
 {
@@ -93,7 +94,7 @@ static void	sanitize(char **buff, t_lexer **lexer)
 	append_history(1, HISTORY_FILE);
 	if (!is_white_space(*buff))
 	{
-		(*lexer) = init_lexer(*lexer);
+		*lexer = init_lexer(*lexer);
 		(*lexer)->buffer = ft_strdup(*buff);
 		(*lexer)->bufsize = ft_strlen((*lexer)->buffer);
 	}

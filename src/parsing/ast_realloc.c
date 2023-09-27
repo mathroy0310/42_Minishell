@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:37:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 	while (lexer->c != EOF && !ft_strchr("|>< \"\'", lexer->c))
 	{
 		while (lexer->c == 32 && lexer->c != EOF)
-			readchar(lexer);
+			read_single_char(lexer);
 		if (lexer->c == DOLLAR)
 		{
 			str = ft_strjoin_free(str, envar_token(lexer));
@@ -84,7 +84,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 		else
 		{
 			str = ft_strjoin_char(str, lexer->c);
-			readchar(lexer);
+			read_single_char(lexer);
 		}
 	}
 	return (str);
@@ -98,11 +98,11 @@ t_token	*check_token(t_parser *parser, t_ast *ast)
 		return (NULL);
 	if (!syntax_error(parser))
 		return (NULL);
-	if (is_redic(parser->prev_token))
+	if (is_redirect(parser->prev_token))
 	{
 		if (parser->curr_token->type != id)
 		{
-			print_error_msg( ERR_PROMPT "syntax error near unexpected token",
+			print_error_msg( ERR_PROMPT ERR_SYNTAX,
 				parser->curr_token->value);
 			return (NULL);
 		}

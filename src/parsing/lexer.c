@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:15:26 by maroy                                    */
-/*   Updated: 2023/09/03 14:02:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	readchar(t_lexer *lexer)
+void	read_single_char(t_lexer *lexer)
 {
 	if (!lexer || !lexer->buffer)
 		return ;
@@ -30,15 +30,15 @@ void	skip_space(t_lexer *lexer)
 		return ;
 	while (lexer->readpos <= lexer->bufsize && (lexer->c == SPACE
 			|| lexer->c == '\t' || lexer->c == '\n'))
-		readchar(lexer);
+		read_single_char(lexer);
 	lexer->is_quoted = 0;
 }
 
 t_token	*ret_str(t_lexer *lexer, char *s, int type)
 {
 	if (type == greater || type == here_doc)
-		readchar(lexer);
-	readchar(lexer);
+		read_single_char(lexer);
+	read_single_char(lexer);
 	return (init_token(type, s, lexer));
 }
 

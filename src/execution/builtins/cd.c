@@ -6,14 +6,14 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 13:48:28 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include <dirent.h>
 
-static int	add_var_to_env(char *key, char *new_path)
+int	add_var_to_env(char *key, char *new_path)
 {
 	int		index;
 	char	*tmp;

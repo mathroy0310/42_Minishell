@@ -1,68 +1,68 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/25 02:46:33 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/27 15:41:11 by maroy                                     #
+#    Updated: 2023/09/26 20:42:49 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
 
-NAME	=	minishell
+NAME				=	minishell
 
 #--- COLORS ---#
 
-RED		= \033[1;31m
+RED					= \033[1;31m
 
-GREEN	= \033[1;32m
+GREEN				= \033[1;32m
 
-BLUE	= \033[1;34m
+BLUE				= \033[1;34m
 
-YELLOW	= \033[1;33m
+YELLOW				= \033[1;33m
 
-DARKGRAY= \033[1;30m
+DARKGRAY			= \033[1;30m
 
-DEFAULT = \033[1;30m
+DEFAULT 			= \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
-HEADER_FILES	= 	minishell.h defines.h  lexer.h execution.h builtins.h
+HEADER_FILES		= 	minishell.h defines.h  lexer.h execution.h builtins.h
 
-HEADERS			= 	$(addprefix $(INCDIR)/, $(HEADER_FILES))
+HEADERS				= 	$(addprefix $(INCDIR)/, $(HEADER_FILES))
 
-LIBFT			=	${LIBDIR}/libft
+LIBFT				=	${LIBDIR}/libft
 
-MAKELIB			=	${MAKE} -C ${LIBFT}
+MAKELIB				=	${MAKE} -C ${LIBFT}
 
-SLIB_LIBFT		=	${LIBFT}/libft.a
+SLIB_LIBFT			=	${LIBFT}/libft.a
 
-TERMCAP 		= 	termcap-1.3.1
+TERMCAP 			= 	termcap-1.3.1
 
-TERMCAP_DIR 	= 	./libs/termcap
+TERMCAP_DIR 		= 	./libs/termcap
 
-LIBRLINE 		= 	readline-8.2
+LIBRLINE 			= 	readline-8.2
 
-LIBRLINE_DIR 	= 	./libs/readline/
+LIBRLINE_DIR 		= 	./libs/readline/
 
-SLIB_RLINE 		= 	$(LIBRLINE_DIR)libreadline.a
+SLIB_RLINE 			= 	$(LIBRLINE_DIR)libreadline.a
 
 #--- COMMAND VARIABLES ---#
 
-CC		=	gcc
+CC					=	gcc
 
-CFLAGS 	=	-Wall -Wextra -Werror -std=c17
+CFLAGS 				=	-Wall -Wextra -Werror -std=c17
 
-RLFLAGS	=	-lreadline -lcurses
+RLFLAGS				=	-lreadline -lcurses
 
-TIFLAGS	=	-ltermcap
+TIFLAGS				=	-ltermcap
 
-MK		=	mkdir -p
+MK					=	mkdir -p
 
-RM		=	rm -rf
+RM					=	rm -rf
 
 
 #--- SOURCE, INCLUDE AND BINARIES DIRECTORIES ---#
@@ -95,28 +95,28 @@ SRCS_BUILTINS		= 	builtins_utils.c builtins.c cd_utils.c cd.c echo.c env.c exit.
 
 #-- PREFIXED SOURCES --#
 
-SRC_M		=	$(addprefix $(SRC_MAIN_DIR)/, $(SRCS_MAIN))
+SRC_M				=	$(addprefix $(SRC_MAIN_DIR)/, $(SRCS_MAIN))
 
-SRC_P		=	$(addprefix $(SRC_PARSING_DIR)/, $(SRCS_PARSING))
+SRC_P				=	$(addprefix $(SRC_PARSING_DIR)/, $(SRCS_PARSING))
 
-SRC_E		=	$(addprefix $(SRC_EXECUT_DIR)/, $(SRCS_EXECUT))
+SRC_E				=	$(addprefix $(SRC_EXECUT_DIR)/, $(SRCS_EXECUT))
 
-SRC_B		=	$(addprefix $(SRC_BUILTINS_DIR)/, $(SRCS_BUILTINS))
+SRC_B				=	$(addprefix $(SRC_BUILTINS_DIR)/, $(SRCS_BUILTINS))
 
-SRC 		=	$(SRC_M) $(SRC_P) $(SRC_E) $(SRC_B)
+SRC 				=	$(SRC_M) $(SRC_P) $(SRC_E) $(SRC_B)
 
-BIN     	=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
+BIN     			=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 #--- RULES ---#
 
 bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@mkdir -p $(@D)
-	@echo "${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}"
+	@echo "${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 all			: readline termcap ${NAME}
 
-debug		: CFLAGS += -g3 -fsanitize=address -DDEBUGFLAG=1 
+debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG_FLAG=1 
 debug		: re
 
 termcap		:

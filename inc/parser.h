@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:10:28 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:54:29 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   parser.h                                          ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:10:28 by maroy                                    */
+/*   Updated: 2023/09/26 14:34:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
@@ -60,7 +60,7 @@ t_ast				*parse_pipe(t_parser *parser);
  */
 
 t_parser			*init_parser(t_lexer *l);
-int					is_redic(t_token *t);
+int					is_redirect(t_token *t);
 int					syntax_error(t_parser *p);
 char				*get_stop_word(t_parser *p);
 
@@ -87,7 +87,7 @@ t_token				*check_token(t_parser *p, t_ast *ast);
 
 t_ast				*free_tree(t_ast *ast);
 void				free_parser(t_parser *parser);
-void				free_parser2(t_parser *parser, int i);
+void				free_parser_helper(t_parser *parser, int i);
 void				free_cmd(t_cmd *cmd);
 
 #endif

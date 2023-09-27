@@ -22,5 +22,6 @@ uint8_t	pwd_builtin(void)
 		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (EXIT_SUCCESS);
 	}
+	ft_putendl_fd(get_env_var_by_key("PWD"), STDOUT_FILENO);
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/01 13:25:54 by maroy                                    */
-/*   Updated: 2023/09/16 18:48:10 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 15:18:46 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	sigint_handler(int signum)
 		if (signum == SIGINT)
 		{
 			g_global->exit_status = EXIT_FAILURE;
-			ft_putchar_fd('\n', 2);
+			ft_putchar_fd('\n', 1);
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:21:18 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:29:46 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	multi_lines(t_lexer *lexer, char c)
 {
 	if (lexer->c == EOF)
 	{
-		if (c == DQUOTE)
-			print_error_msg( ERR_PROMPT "syntax error expected \"", NULL);
+		if (c == DOUBLE_QUOTE)
+			print_error_msg(ERR_PROMPT "syntax error expected \"", NULL);
 		else
-			print_error_msg( ERR_PROMPT "syntax error expected \'", NULL);
+			print_error_msg(ERR_PROMPT "syntax error expected \'", NULL);
 		lexer->multi_line = 1;
 		return (KO);
 	}

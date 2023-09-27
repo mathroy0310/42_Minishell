@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:44:33 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   lexer_utils.c                                     ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:40:58 by maroy                                    */
+/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -21,7 +21,7 @@ int	valid_envar(char c)
 
 int	get_str_by_char(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -65,12 +65,12 @@ char	*string_envar(t_lexer *lexer)
 
 	if (ft_isdigit(lexer->c))
 	{
-		readchar(lexer);
+		read_single_char(lexer);
 		str = ft_strdup("");
 		while (lexer->c != EOF && !ft_strchr("|><\"\' $", lexer->c))
 		{
 			str = ft_strjoin_char(str, lexer->c);
-			readchar(lexer);
+			read_single_char(lexer);
 		}
 	}
 	else
@@ -79,7 +79,7 @@ char	*string_envar(t_lexer *lexer)
 		while (lexer->c != EOF && !ft_strchr("|><\"\'$", lexer->c))
 		{
 			str = ft_strjoin_char(str, lexer->c);
-			readchar(lexer);
+			read_single_char(lexer);
 		}
 	}
 	return (str);
@@ -98,7 +98,7 @@ char	*invalid_envar(t_lexer *lexer, int i)
 			str = ft_itoa(g_global->exit_status);
 		else
 			return (string_envar(lexer));
-		readchar(lexer);
+		read_single_char(lexer);
 		s = tokenize_text(lexer, str);
 		free(str);
 		return (s);
@@ -107,7 +107,7 @@ char	*invalid_envar(t_lexer *lexer, int i)
 	{
 		str = ft_strdup("a");
 		str[0] = lexer->c;
-		readchar(lexer);
+		read_single_char(lexer);
 		return (str);
 	}
 }
@@ -122,14 +122,14 @@ char	*envar_token(t_lexer *lexer)
 	if (peek_char(lexer) == '$' || peek_char(lexer) == '\"'
 		|| peek_char(lexer) == '\'' || peek_char(lexer) == EOF)
 		return (invalid_envar(lexer, 0));
-	readchar(lexer);
+	read_single_char(lexer);
 	if (ft_isdigit(lexer->c) || lexer->c == '?' || !valid_envar(lexer->c))
 		return (invalid_envar(lexer, 1));
 	str = ft_strdup("");
 	while (valid_envar(lexer->c) && lexer->c != EOF)
 	{
 		str = ft_strjoin_char(str, lexer->c);
-		readchar(lexer);
+		read_single_char(lexer);
 	}
 	v = ft_getenv(str);
 	free(str);

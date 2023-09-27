@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:13:10 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:37:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_ast	*parse_args_helper(t_parser *parser)
 		ast->args[0] = parser->curr_token;
 		if (parser->curr_token->type == pip)
 		{
-			print_error_msg( ERR_PROMPT "syntax error near unexpected token 0",
+			print_error_msg(ERR_PROMPT ERR_SYNTAX,
 				parser->curr_token->value);
 			free_parser(parser);
 			free_tree(ast);
@@ -105,12 +105,12 @@ t_ast	*parse_pipe(t_parser *parser)
 		ast->pipecmd_values[ast->pipecmd_size - 1] = parse_args(parser);
 		if (!ast->pipecmd_values[ast->pipecmd_size - 1])
 		{
-			free_parser2(parser, 1);
+			free_parser_helper(parser, 1);
 			return (free_tree(ast));
 		}
 		if (parser->prev_token->type == pip)
 			parser_multi_cmd(ast);
 	}
-	free_parser2(parser, 0);
+	free_parser_helper(parser, 0);
 	return (ast);
 }

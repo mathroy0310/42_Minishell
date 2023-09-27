@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/09/23 16:01:27 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/26 14:44:34 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -54,22 +54,23 @@
 # define ANSI_STYLE_UNDERLINE "\x1b[4m"
 # define ANSI_STYLE_REVERSED "\x1b[7m"
 
+# define ERR_SYNTAX "syntax error near unexpected token"
 /*
  * -- Global defines --
  */
 
 // 1 == DEBUG mode , 0 == USER mode
-# ifdef DEBUGFLAG
-#	define DEBUG 1
-#	define PROMPT "DEBUG minishell$ "
-#	define ERR_PROMPT "DEBUG minishell: "
-# else
-#	define DEBUG 0
-#	define PROMPT "minishell$ "
-#	define ERR_PROMPT "minishell: "
-# endif
+// # ifdef DEBUG_FLAG
+// #  define DEBUG 1
+// #  define PROMPT "DEBUG minishell$ "
+// #  define ERR_PROMPT "DEBUG minishell: "
+// # else
+# define DEBUG 0
+# define PROMPT "minishell$ "
+# define ERR_PROMPT "minishell: "
+//# endif
 
-/// @brief Temportary file for command history
+/// @brief Temporary file for command history
 # define HISTORY_FILE "./.tmp/.minishell_history"
 /// @brief Temporary file for here_doc
 # define HERE_DOC_FILE "./.tmp/.minishell_here_doc"
@@ -79,7 +80,9 @@
 /// @brief Return Failure
 # define KO 0
 
-// Minishell chardefs
+/*
+ * -- Char defines --
+ */
 
 /// @brief `|` character
 # define PIPE 124
@@ -88,9 +91,9 @@
 /// @brief `<` character
 # define LESS 60
 /// @brief `"` character
-# define DQUOTE 34
+# define DOUBLE_QUOTE 34
 /// @brief `'` character
-# define SQUOTE 39
+# define SINGLE_QUOTE 39
 /// @brief `$` character
 # define DOLLAR 36
 /// @brief `\\` character
