@@ -6,31 +6,31 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:47:03 by maroy                                    */
-/*   Updated: 2023/09/23 14:30:49 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/27 14:43:57 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 
-static char	*herdoc_helper(char *buff, char *output, char *filename, int is_quoted)
+char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
 {
 	char	*temp;
 
-	if (!ft_strcmp(buff, filename))
+	if (!ft_strcmp(buf, filename))
 	{
-		free(buff);
+		free(buf);
 		return (NULL);
 	}
-	if (ft_strcmp(output, "\0"))
+	if (ft_strcmp(dst, "\0"))
 	{
-		temp = output;
-		output = ft_strjoin(output, "\n");
+		temp = dst;
+		dst = ft_strjoin(dst, "\n");
 		free(temp);
 	}
-	output = ft_strjoin_free(output, envar_here_doc(buff, is_quoted));
-	free(buff);
-	return (output);
+	dst = ft_strjoin_free(dst, envar_here_doc(buf, is_quoted));
+	free(buf);
+	return (dst);
 }
 
 
@@ -58,28 +58,28 @@ static int	random_file_name(t_data *data)
 
 void	parse_here_doc(t_redir *redir, t_data *data)
 {
-	char	*buff;
-	char	*output;
+	char	*buf;
+	char	*dst;
 	char	*temp;
 	int		fd;
 	int		empty;
 
 	empty = 0;
 	fd = random_file_name(data);
-	output = ft_strdup("");
+	dst = ft_strdup("");
 	while (1)
 	{
 		empty++;
 		data->redir->here_doc = 1;
-		buff = readline("> ");
-		temp = output;
-		output = herdoc_helper(buff, output, redir->filename, redir->is_quoted);
-		if (!output)
+		buf = readline("> ");
+		temp = dst;
+		dst = here_doc_helper(buf, dst, redir->filename, redir->is_quoted);
+		if (!dst)
 			break ;
 	}
 	if (empty != 1)
 		ft_putendl_fd(temp, fd);
-	free(output);
+	free(dst);
 	free(temp);
 	close (fd);
 }

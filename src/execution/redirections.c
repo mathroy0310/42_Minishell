@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:40:21 by maroy                                    */
-/*   Updated: 2023/09/23 14:29:18 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/09/28 15:00:21 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -119,4 +119,19 @@ void	execute_single_cmd(t_cmd *cmd, t_data *data)
 			wait_children();
 		restore_std(data->saved_stdout, data->saved_stdin);
 	}
+}
+
+
+void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state)
+{
+	int	i;
+
+	i = -1;
+	while (++i < cmd->nbr_cmd)
+		init_data(&data[i], state);
+	
+	redirections_setup(cmd, data);
+	close_all_pipes(data->redir->pipe_fd, cmd->nbr_cmd - 1);
+	wait_children();
+	g_global->pid = 0;
 }

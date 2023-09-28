@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:48:08 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   execution.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:37:15 by maroy                                    */
+/*   Updated: 2023/09/28 14:16:02 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -61,6 +61,9 @@ typedef struct s_data
 	t_state			*state;
 	t_shell_red		*redir;
 }					t_data;
+
+void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state);
+int	execute_pipe_cmd(t_cmd *cmd, t_data *data);
 
 /*
  * exec_main.c *

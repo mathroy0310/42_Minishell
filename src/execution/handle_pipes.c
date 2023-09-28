@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_pipes.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 16:34:02 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 03:04:45 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   handle_pipes.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/23 16:34:02 by maroy                                    */
+/*   Updated: 2023/09/28 14:15:54 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -50,7 +50,7 @@ static int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 		{
 			dup2(data->state->write_end, STDOUT_FILENO);
 			close(data->state->write_end);
-		}	
+		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
 			check_builtin(cmd, data);
 		else
@@ -60,7 +60,7 @@ static int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 	return (EXIT_FAILURE);
 }
 
-static int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
+int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 {
 	int		i;
 
@@ -83,7 +83,7 @@ static int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-void execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state)
+void	execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state)
 {
 	int		i;
 

@@ -6,27 +6,13 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/09/26 20:42:49 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/09/27 14:33:55 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
 
 NAME				=	minishell
-
-#--- COLORS ---#
-
-RED					= \033[1;31m
-
-GREEN				= \033[1;32m
-
-BLUE				= \033[1;34m
-
-YELLOW				= \033[1;33m
-
-DARKGRAY			= \033[1;30m
-
-DEFAULT 			= \033[1;30m
 
 #--- LIBRARIES AND HEADERS ---#
 
@@ -111,7 +97,7 @@ BIN     			=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@mkdir -p $(@D)
-	@echo "${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
+	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 all			: readline termcap ${NAME}
@@ -156,17 +142,17 @@ readline	:
 ${NAME}		:	${BIN}
 	@${MAKELIB}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
-	@echo "${GREEN}Minishell successfully created. 📂${DEFAULT}"
+	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
 
 clean		:
 	@${MAKELIB} clean
 	@${RM} ${BINDIR}
-	@echo "${YELLOW}Minishell binary files successfully removed 🗑${DEFAULT}"
+	@echo "${YELLOW}${NAME} binary files successfully removed 🗑${DEFAULT}"
 
 fclean		:	clean
-	@${MAKELIB} fclean
+
 	@${RM} ${NAME}
-	@echo "${RED}Minishell executable successfully removed 🗑${DEFAULT}"
+	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
 re	 		:	fclean all
 
@@ -180,3 +166,17 @@ norm		:
 
 #--- PHONY ---#
 .PHONY	 	:	all clean fclean re readline norm bonus
+
+#--- COLORS ---#
+
+RED					= \033[1;31m
+
+GREEN				= \033[1;32m
+
+BLUE				= \033[1;34m
+
+YELLOW				= \033[1;33m
+
+DARKGRAY			= \033[1;30m
+
+DEFAULT 			= \033[1;30m

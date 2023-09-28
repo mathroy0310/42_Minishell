@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/14 21:56:43 by maroy             #+#    #+#              #
-#    Updated: 2023/09/12 18:15:20 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/14 21:56:43 by maroy                                     #
+#    Updated: 2023/09/27 14:34:12 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -52,12 +52,14 @@ $(RM) 	 = rm -rf
 #--- RULES ---#
 bin/%.o: $(SRC_DIR)%.c  $(HEADER)
 	@mkdir -p $(@D)
+	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
  
 $(NAME): $(BIN)
 	@ar rcs $(NAME) $(BIN)
+#@echo "\r${BLUE}${NAME} successfully created. 📂${DEFAULT}";
  
 $(BINDIR)/%.o: %.c
 	@mkdir -p $(@D)
@@ -65,11 +67,26 @@ $(BINDIR)/%.o: %.c
 
 clean:
 	@rm -rf $(BIN_DIR)
+#@echo "${YELLOW}${NAME} binary files successfully removed 🗑${DEFAULT}"
  
 fclean: clean
 	@$(RM) $(NAME)
-
+#@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
 re: fclean all
 
 .PHONY: all clean fclean re bonus
+
+#--- COLORS ---#
+
+RED					= \033[1;31m
+
+GREEN				= \033[1;32m
+
+BLUE				= \033[1;34m
+
+YELLOW				= \033[1;33m
+
+DARKGRAY			= \033[1;30m
+
+DEFAULT 			= \033[1;30m
