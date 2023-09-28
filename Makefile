@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/09/27 14:33:55 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/09/28 15:07:45 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -151,6 +151,7 @@ clean		:
 
 fclean		:	clean
 
+	@${MAKELIB} fclean
 	@${RM} ${NAME}
 	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
