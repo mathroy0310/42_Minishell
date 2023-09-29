@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   execution.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/09/28 14:16:02 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   execution.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/29 14:09:34 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -41,7 +41,7 @@ typedef struct s_shell_red
 	int				infile;
 	int				outfile;
 	int				here_doc;
-	int				error;
+	bool			is_error;
 	char			*filename;
 	int				**pipe_fd;
 }					t_shell_red;
@@ -111,6 +111,13 @@ uint8_t				execute_reg_cmd(t_cmd *cmd, t_data *data);
 void				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
 
+/*
+ * exec_multi_cmd_utils.c *
+ */
+void setup_input(t_cmd *cmd, t_data *data, int j);
+void setup_output(t_cmd *cmd, t_data *data, int j);
+
+
 /// @brief Executes a command and check for errors
 /// @param cmd The command to execute
 /// @param data The data structure
@@ -149,7 +156,9 @@ void				sigint_handler(int signum);
  * redirections.c *
  */
 void				check_for_heredoc(t_data *data, t_cmd *cmd);
-
+int8_t				redirections_setup(t_cmd *cmd, t_data *data);
+void				setup_infiles(t_cmd *cmd, t_data *data, int i);
+void				setup_outfiles(t_cmd *cmd, t_data *data, int i);
 
 /*
  * here_doc.c *
@@ -160,7 +169,7 @@ void				parse_here_doc(t_redir *redir, t_data *data);
 /*
  * handle_pipes.c 
 */
-
+int					execute_process(t_cmd *cmd, t_data *data, int *fd);
 void				 execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state);
 
 /*

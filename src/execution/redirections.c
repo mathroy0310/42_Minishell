@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   redirections.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/19 22:40:21 by maroy                                    */
-/*   Updated: 2023/09/28 15:00:21 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 22:40:21 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/29 14:05:29 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static void	setup_infiles(t_cmd *cmd, t_data *data, int i)
+void	setup_infiles(t_cmd *cmd, t_data *data, int i)
 {
 	int	fd;
 
@@ -22,7 +22,7 @@ static void	setup_infiles(t_cmd *cmd, t_data *data, int i)
 		data->redir->infile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
 	}
-	if (!data->redir->error)
+	if (!data->redir->is_error)
 	{
 		if (dup2(data->redir->infile, 0) < 0)
 		{
@@ -33,30 +33,30 @@ static void	setup_infiles(t_cmd *cmd, t_data *data, int i)
 	}
 }
 
-static void	setup_outfiles(t_cmd *cmd, t_data *data, int i)
+void	setup_outfiles(t_cmd *cmd, t_data *data, int i)
 {
 	int	fd;
 
-	if (cmd->redir[i].type == great && !data->redir->error)
+	if (cmd->redir[i].type == great && !data->redir->is_error)
 	{
-		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
 		data->redir->outfile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
 	}
-	else if (cmd->redir[i].type == greater && !data->redir->error)
+	else if (cmd->redir[i].type == greater && !data->redir->is_error)
 	{
-		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_APPEND, 0666);
+		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
 		data->redir->outfile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
 	}
-	if (!data->redir->error)
+	if (!data->redir->is_error)
 	{
-		dup2(data->redir->outfile, 1);
+		dup2(data->redir->outfile, STDOUT_FILENO);
 		close(data->redir->outfile);
 	}
 }
 
-static int8_t	redirections_setup(t_cmd *cmd, t_data *data)
+int8_t	redirections_setup(t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ static int8_t	redirections_setup(t_cmd *cmd, t_data *data)
 		if (cmd->redir[i].type == less)
 			setup_infiles(cmd, data, i);
 		if ((cmd->redir[i].type == greater || cmd->redir[i].type == great) && \
-			!data->redir->error)
+			!data->redir->is_error)
 			setup_outfiles(cmd, data, i);
 		i++;
 	}
@@ -102,7 +102,7 @@ void	execute_single_cmd(t_cmd *cmd, t_data *data)
 	pid_t	child_pid;
 
 	redirections_setup(cmd, data);
-	if (is_builtin(cmd) && !data->redir->error)
+	if (is_builtin(cmd) && !data->redir->is_error)
 	{
 		check_builtin(cmd, data);
 		restore_std(data->saved_stdout, data->saved_stdin);
@@ -119,19 +119,4 @@ void	execute_single_cmd(t_cmd *cmd, t_data *data)
 			wait_children();
 		restore_std(data->saved_stdout, data->saved_stdin);
 	}
-}
-
-
-void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state)
-{
-	int	i;
-
-	i = -1;
-	while (++i < cmd->nbr_cmd)
-		init_data(&data[i], state);
-	
-	redirections_setup(cmd, data);
-	close_all_pipes(data->redir->pipe_fd, cmd->nbr_cmd - 1);
-	wait_children();
-	g_global->pid = 0;
 }

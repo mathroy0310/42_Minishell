@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 03:04:04 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:55:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init_data(t_data *data, t_state *state)
 	data->redir->here_doc = 0;
 	data->redir->filename = NULL;
 	data->redir->pipe_fd = NULL;
-	data->redir->error = 0;
+	data->redir->is_error = 0;
 }
 
 void	restore_std(int saved_stdout, int saved_stdin)

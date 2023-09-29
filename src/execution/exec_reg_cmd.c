@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:02:35 by maroy            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:55:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_for_errors(t_cmd *cmd, t_data *data)
 {
 	if (!cmd->argvs)
 		exit(g_global->exit_status);
-	if (data->redir->error)
+	if (data->redir->is_error)
 	{
 		g_global->exit_status = EXIT_FAILURE;
 		exit(g_global->exit_status);

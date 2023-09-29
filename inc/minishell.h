@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/09/21 14:28:27 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/29 14:05:45 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -38,8 +38,9 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
+# include <sys/stat.h>
 # include <sys/wait.h>
-
+# include <stdbool.h>
 # include <unistd.h>
 
 /*
@@ -72,7 +73,7 @@
 typedef struct s_global
 {
 	char		**env_var;
-	int			pid;
+	pid_t		pid;
 	uint8_t		exit_status;
 }				t_global;
 

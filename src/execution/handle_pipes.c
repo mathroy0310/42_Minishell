@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   handle_pipes.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/23 16:34:02 by maroy                                    */
-/*   Updated: 2023/09/28 14:15:54 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   handle_pipes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 16:34:02 by maroy             #+#    #+#             */
+/*   Updated: 2023/09/29 13:55:58 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -34,19 +34,21 @@ void	execute_cmd_path(t_cmd *cmd, t_data *data, int *p_fd)
 		exit(126);
 }
 
-static int	execute_process(t_cmd *cmd, t_data *data, int *fd)
+int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 {
 	g_global->pid = fork();
-	if (g_global->pid < 0)
-		fork_failed();
 	if (g_global->pid == 0)
 	{
-		if (data->state->read_end != STDIN_FILENO)
+		if (data->redir->infile && !data->redir->is_error)
+			dup2(data->redir->infile, STDIN_FILENO);
+		else if (data->state->read_end != STDIN_FILENO)
 		{
 			dup2(data->state->read_end, STDIN_FILENO);
 			close(data->state->read_end);
 		}
-		if (data->state->write_end != STDOUT_FILENO)
+		if (data->redir->outfile && !data->redir->is_error)
+			dup2(data->redir->outfile, STDOUT_FILENO);
+		else if (data->state->write_end != STDOUT_FILENO)
 		{
 			dup2(data->state->write_end, STDOUT_FILENO);
 			close(data->state->write_end);
@@ -80,7 +82,7 @@ int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 	}
 	data->state->write_end = STDOUT_FILENO;
 	g_global->pid = execute_process(&cmd[i], &data[i], NULL);
-	return (1);
+	return (OK);
 }
 
 void	execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state)
