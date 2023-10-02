@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   get_next_token.c                                  ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:29:35 by maroy                                    */
-/*   Updated: 2023/09/26 14:29:55 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:29:35 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:03:51 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -28,12 +28,12 @@ char	*tokenize_double_quoted_text(t_lexer *lexer)
 			read_single_char(lexer);
 		}
 	}
-	if (!multi_lines(lexer, DOUBLE_QUOTE))
+	if (!is_multi_lines(lexer, DOUBLE_QUOTE))
 	{
 		free(str);
 		return (NULL);
 	}
-	lexer->is_quoted = 1;
+	lexer->is_quoted = true;
 	read_single_char(lexer);
 	return (str);
 }
@@ -49,12 +49,12 @@ char	*tokenize_simple_quoted_text(t_lexer *lexer)
 		str = ft_strjoin_char(str, lexer->c);
 		read_single_char(lexer);
 	}
-	if (!multi_lines(lexer, SINGLE_QUOTE))
+	if (!is_multi_lines(lexer, SINGLE_QUOTE))
 	{
 		free(str);
 		return (NULL);
 	}
-	lexer->is_quoted = 1;
+	lexer->is_quoted = true;
 	read_single_char(lexer);
 	return (str);
 }
@@ -112,7 +112,7 @@ t_token	*string_token(t_lexer *lexer)
 			s = quoted_string(lexer, str);
 		else
 			s = tokenize_text(lexer, s);
-		if (!s && lexer->multi_line == 1)
+		if (!s && lexer->is_multi_line == true)
 		{
 			free(temp);
 			return (return_token(str, lexer, 1));

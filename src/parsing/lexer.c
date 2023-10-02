@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:15:26 by maroy                                    */
-/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:15:26 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:06:54 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -31,7 +31,7 @@ void	skip_space(t_lexer *lexer)
 	while (lexer->readpos <= lexer->bufsize && (lexer->c == SPACE
 			|| lexer->c == '\t' || lexer->c == '\n'))
 		read_single_char(lexer);
-	lexer->is_quoted = 0;
+	lexer->is_quoted = false;
 }
 
 t_token	*ret_str(t_lexer *lexer, char *s, int type)

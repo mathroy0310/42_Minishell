@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   here_doc_utils.c                                  ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/19 22:47:32 by maroy                                    */
-/*   Updated: 2023/09/20 12:41:57 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   here_doc_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 22:47:32 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:05:32 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -61,7 +61,7 @@ static char	*envar_helper(char *buff, int *i, char *str, int flag)
 	else
 	{
 		env = ft_strdup("");
-		while (buff[*i] != '\0' && valid_envar(buff[*i]))
+		while (buff[*i] != '\0' && is_valid_envar(buff[*i]))
 		{
 			env = ft_strjoin_char(env, buff[(*i)]);
 			(*i)++;
@@ -88,7 +88,7 @@ char	*envar_here_doc(char *buff, int i)
 		else
 		{
 			i += 1;
-			if (ft_isdigit(buff[i]) || buff[i] == '?' || !valid_envar(buff[i]))
+			if (ft_isdigit(buff[i]) || buff[i] == '?' || !is_valid_envar(buff[i]))
 				str = envar_helper(buff, &i, str, 0);
 			else
 			{

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:56:32 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 13:55:58 by maroy            ###   ########.fr       */
+/*   Updated: 2023/10/02 15:58:50 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_valid_fd(t_data *data, char *file_error, int fd)
 {
 	if (fd < 0)
 	{
-		data->redir->is_error = 1;
+		data->redir->is_error = true;
 		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
 		ft_putstr_fd(file_error, STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);

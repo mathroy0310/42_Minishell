@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer_utils.c                                     ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:05:51 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	valid_envar(char c)
+bool	is_valid_envar(char c)
 {
 	if (ft_isalnum(c) || c == '_' || c == '~')
-		return (OK);
-	return (KO);
+		return (true);
+	return (false);
 }
 
 int	get_str_by_char(char *str, char c)
@@ -123,10 +123,10 @@ char	*envar_token(t_lexer *lexer)
 		|| peek_char(lexer) == '\'' || peek_char(lexer) == EOF)
 		return (invalid_envar(lexer, 0));
 	read_single_char(lexer);
-	if (ft_isdigit(lexer->c) || lexer->c == '?' || !valid_envar(lexer->c))
+	if (ft_isdigit(lexer->c) || lexer->c == '?' || !is_valid_envar(lexer->c))
 		return (invalid_envar(lexer, 1));
 	str = ft_strdup("");
-	while (valid_envar(lexer->c) && lexer->c != EOF)
+	while (is_valid_envar(lexer->c) && lexer->c != EOF)
 	{
 		str = ft_strjoin_char(str, lexer->c);
 		read_single_char(lexer);

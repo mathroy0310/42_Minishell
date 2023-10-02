@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/09/29 14:00:59 by maroy            ###   ########.fr        #
+#    Updated: 2023/10/02 15:52:02 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,12 @@ LIBFT				=	${LIBDIR}/libft
 
 MAKELIB				=	${MAKE} -C ${LIBFT}
 
-SLIB_LIBFT			=	${LIBFT}/libft.a
+
+LIBFT				=	libft
+
+LIBFT_DIR			= 	./libs/libft
+
+SLIB_LIBFT			=	${LIBFT_DIR}/libft.a
 
 TERMCAP 			= 	termcap-1.3.1
 
@@ -136,17 +141,31 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
-all			: readline termcap ${NAME}
+all			: readline termcap libft ${NAME}
 
 debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG_FLAG=1 
 debug		: re
+
+libft		:
+	@#!/bin/bash
+	@set -e
+	@if [ ! -f $(SLIB_LIBFT) ]; then \
+		echo "${BLUE}Installing Libft ... ${DARKGRAY}"; \
+		$(MK) $(LIBFT_DIR); \
+		git clone https://github.com/mathroy0310/42_libft.git $(LIBFT_DIR) > /dev/null 2>&1; \
+		make -C $(LIBFT_DIR) > /dev/null 2>&1; \
+		cp $(LIBFT_DIR)/libft.a $(SLIB_LIBFT)> /dev/null 2>&1; \
+		cp -r $(LIBFT_DIR)/inc/. $(INCDIR)/ > /dev/null 2>&1; \
+		rm -rf $(LIBFT_DIR)/bin/. > /dev/null 2>&1;\
+		echo "${BLUE}Libft successfully installed 🗄${DEFAULT}"; \
+	fi
 
 termcap		:
 	@#!/bin/bash
 	@set -e
 	@if [ ! -f $(TERMCAP_DIR)/inc/termcap.h ]; then \
 		echo "${BLUE}Installing Termcap ... ${DARKGRAY}"; \
-		mkdir -p $(TERMCAP_DIR); \
+		$(MK) $(TERMCAP_DIR); \
 		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMCAP).tar.gz > /dev/null 2>&1; \
 		tar -xf $(TERMCAP).tar.gz > /dev/null 2>&1; \
 		rm -rf $(TERMCAP).tar.gz; \
@@ -163,7 +182,7 @@ readline	:
 	@set -e
 	@if [ ! -f ./libs/readline/libreadline.a ]; then \
 		echo "${BLUE}Installing Readline ... ${DARKGRAY}"; \
-		mkdir -p $(LIBRLINE_DIR); \
+		$(MK) $(LIBRLINE_DIR); \
 		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz > /dev/null 2>&1; \
 		tar -xf $(LIBRLINE).tar.gz > /dev/null 2>&1; \
 		rm -rf $(LIBRLINE).tar.gz; \
@@ -176,22 +195,21 @@ readline	:
 	fi
 
 ${NAME}		:	${BIN}
-	@${MAKELIB}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
 
 clean		:
-	@${MAKELIB} clean
 	@${RM} ${BINDIR}
 	@echo "${YELLOW}${NAME} binary files successfully removed 🗑${DEFAULT}"
 
 fclean		:	clean
-
-	@${MAKELIB} fclean
 	@${RM} ${NAME}
 	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
-re	 		:	fclean all
+re: fclean ${BIN}
+	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
+	@echo "\r${GREEN}${NAME} successfully recompiled. 📂${DEFAULT}"
+
 
 bonus		:	all
 

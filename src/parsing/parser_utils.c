@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser_utils.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:27:18 by maroy                                    */
-/*   Updated: 2023/09/26 14:39:36 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:01:01 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -81,7 +81,7 @@ char	*get_stop_word(t_parser *parser)
 
 	i = parser->lexer->curpos - 1;
 	s = ft_strdup(parser->lexer->buffer);
-	if (parser->curr_token->is_quoted == 0)
+	if (parser->curr_token->is_quoted == false)
 	{
 		while (s[i] != SPACE && s[i] != LESS)
 			i--;

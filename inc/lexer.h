@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer.h                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 19:26:07 by maroy                                    */
-/*   Updated: 2023/09/26 14:22:52 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 19:26:07 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:05:24 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
@@ -37,8 +37,8 @@ typedef struct s_lexer
 	int				curpos;
 	int				readpos;
 	char			c;
-	int				multi_line;
-	int				is_quoted;
+	bool			is_multi_line;
+	bool			is_quoted;
 }					t_lexer;
 
 typedef struct s_token
@@ -67,7 +67,7 @@ t_token				*string_token(t_lexer *lexer);
  * lexer_utlis.c *
  */
 
-int					valid_envar(char c);
+bool				is_valid_envar(char c);
 char				*ft_getenv(char *str);
 int					get_str_by_char(char *str, char c);
 char				*envar_token(t_lexer *lexer);
@@ -80,6 +80,6 @@ t_lexer				*init_lexer(t_lexer *lexer);
 void				print_error_msg(char *str, char *var);
 t_token				*init_token(t_token_type type, char *str, t_lexer *lexer);
 int					peek_char(t_lexer *lexer);
-int					multi_lines(t_lexer *lexer, char c);
+bool				is_multi_lines(t_lexer *lexer, char c);
 
 #endif

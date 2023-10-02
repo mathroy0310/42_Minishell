@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   utils.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:21:18 by maroy                                    */
-/*   Updated: 2023/09/26 14:29:46 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 16:03:13 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -55,7 +55,7 @@ int	peek_char(t_lexer *lexer)
 		return (lexer->buffer[lexer->readpos]);
 }
 
-int	multi_lines(t_lexer *lexer, char c)
+bool	is_multi_lines(t_lexer *lexer, char c)
 {
 	if (lexer->c == EOF)
 	{
@@ -63,8 +63,8 @@ int	multi_lines(t_lexer *lexer, char c)
 			print_error_msg(ERR_PROMPT "syntax error expected \"", NULL);
 		else
 			print_error_msg(ERR_PROMPT "syntax error expected \'", NULL);
-		lexer->multi_line = 1;
-		return (KO);
+		lexer->is_multi_line = true;
+		return (false);
 	}
-	return (OK);
+	return (true);
 }
