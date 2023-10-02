@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.c                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/09/26 19:03:16 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 17:46:13 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
@@ -30,9 +30,13 @@ static char	**get_env_(char **env_)
 
 void	initialize(int argc, char **argv, char **env, t_state *state)
 {
+	int fd;
 	(void)argc;
 	(void)argv;
 	debug_print_msg("DEBUG mode enabled 🐛");
+	debug_print_msg("HISTORY_FILE: " HISTORY_FILE);
+    fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
+	close(fd);
 	using_history();
 	read_history(HISTORY_FILE);
 	g_global = malloc(sizeof(t_global));

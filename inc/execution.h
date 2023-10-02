@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 14:09:34 by maroy            ###   ########.fr       */
+/*   Updated: 2023/10/02 17:27:56 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void				sigint_handler(int signum);
 /*
  * redirections.c *
  */
+
 void				check_for_heredoc(t_data *data, t_cmd *cmd);
 int8_t				redirections_setup(t_cmd *cmd, t_data *data);
 void				setup_infiles(t_cmd *cmd, t_data *data, int i);
@@ -169,6 +170,7 @@ void				parse_here_doc(t_redir *redir, t_data *data);
 /*
  * handle_pipes.c 
 */
+
 int					execute_process(t_cmd *cmd, t_data *data, int *fd);
 void				 execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state);
 

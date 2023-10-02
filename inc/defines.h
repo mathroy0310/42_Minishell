@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   defines.h                                         ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/09/26 14:44:34 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/10/02 17:46:27 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
@@ -60,20 +60,20 @@
  */
 
 // 1 == DEBUG mode , 0 == USER mode
-// # ifdef DEBUG_FLAG
-// #  define DEBUG 1
-// #  define PROMPT "DEBUG minishell$ "
-// #  define ERR_PROMPT "DEBUG minishell: "
-// # else
+# ifdef DEBUG_FLAG
+#  define DEBUG 1
+#  define PROMPT "DEBUG minishell$ "
+#  define ERR_PROMPT "DEBUG minishell: "
+# else
 # define DEBUG 0
 # define PROMPT "minishell$ "
 # define ERR_PROMPT "minishell: "
-//# endif
+# endif
 
 /// @brief Temporary file for command history
-# define HISTORY_FILE "./.tmp/.minishell_history"
+# define HISTORY_FILE ".minishell_history"
 /// @brief Temporary file for here_doc
-# define HERE_DOC_FILE "./.tmp/.minishell_here_doc"
+# define HERE_DOC_FILE ".minishell_here_doc"
 
 /// @brief Return Success
 # define OK 1

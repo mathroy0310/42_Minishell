@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/10/02 15:52:02 by maroy            ###   ########.fr        #
+#    Updated: 2023/10/02 17:33:46 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,9 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
-all			: readline termcap libft ${NAME}
+all			: deps ${NAME}
+
+deps		: readline termcap libft
 
 debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG_FLAG=1 
 debug		: re
@@ -154,9 +156,7 @@ libft		:
 		$(MK) $(LIBFT_DIR); \
 		git clone https://github.com/mathroy0310/42_libft.git $(LIBFT_DIR) > /dev/null 2>&1; \
 		make -C $(LIBFT_DIR) > /dev/null 2>&1; \
-		cp $(LIBFT_DIR)/libft.a $(SLIB_LIBFT)> /dev/null 2>&1; \
-		cp -r $(LIBFT_DIR)/inc/. $(INCDIR)/ > /dev/null 2>&1; \
-		rm -rf $(LIBFT_DIR)/bin/. > /dev/null 2>&1;\
+		$(RM) ./libs/libft/Makefile ./libs/libft/bin ./libs/libft/src > /dev/null 2>&1; \
 		echo "${BLUE}Libft successfully installed 🗄${DEFAULT}"; \
 	fi
 
@@ -206,7 +206,7 @@ fclean		:	clean
 	@${RM} ${NAME}
 	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
-re: fclean ${BIN}
+re: deps fclean ${BIN}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully recompiled. 📂${DEFAULT}"
 
