@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 16:03:13 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   utils.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:21:18 by maroy                                    */
+/*   Updated: 2023/10/04 17:21:59 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -44,7 +44,7 @@ void	print_error_msg(char *str, char *var)
 		ft_putstr_fd("'", STDERR_FILENO);
 	}
 	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-	g_global->exit_status = 1;
+	g_global->exit_status = EXIT_FAILURE;
 }
 
 int	peek_char(t_lexer *lexer)

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/09/26 13:48:28 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:22:16 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	move_to_dir(char *path)
 		tmp = ft_strjoin(tmp, path);
 		free(old_pwd);
 		add_var_to_env("PWD", tmp);
-		g_global->exit_status = 0;
+		g_global->exit_status = EXIT_FAILURE;
 		free(tmp);
 		return (1);
 	}
@@ -103,13 +103,13 @@ int8_t	cd_builtin(char **argv)
 	int		i;
 
 	i = 0;
-	g_global->exit_status = 0;
+	g_global->exit_status = EXIT_SUCCESS;
 	if (argv[i + 1] == NULL)
 	{
 		path = get_env_var_by_key("HOME");
 		if (path == NULL)
 		{
-			g_global->exit_status = 1;
+			g_global->exit_status = EXIT_FAILURE;
 			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "cd:", STDERR_FILENO);
 			ft_putstr_fd (" HOME not set", STDERR_FILENO);
             ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);

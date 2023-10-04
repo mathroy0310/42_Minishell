@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:24:41 by maroy                                    */
-/*   Updated: 2023/09/20 16:42:05 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:58:47 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*get_env_var_by_key(const char *key)
 	value = return_value(g_global->env_var[index], '=');
 	return (value);
 }
-
 
 static int8_t	check_only_key(const char *key)
 {
@@ -72,7 +71,7 @@ int8_t	find_env_var_index(const char *key, char **env_pointer)
 	return (check_only_key(key));
 }
 
-char	*find_path(char	*cmd, char **path)
+char	*find_path(char *cmd, char **path)
 {
 	char	*temp;
 	char	*possible_path;

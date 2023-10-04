@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 16:01:01 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   parser_utils.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:27:18 by maroy                                    */
+/*   Updated: 2023/10/04 17:50:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -98,14 +98,14 @@ int	syntax_error(t_parser *parser)
 {
 	if (parser->prev_token->type == pip && parser->curr_token->type == pip)
 	{
-		print_error_msg(ERR_PROMPT ERR_SYNTAX,
+		print_error_msg(ERR_PROMPT "syntax error unexpected token",
 			parser->prev_token->value);
 		return (KO);
 	}
 	if ((is_redirect(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_error_msg(ERR_PROMPT ERR_SYNTAX, NULL);
+		print_error_msg(ERR_PROMPT "syntax error unexpected token", NULL);
 		return (KO);
 	}
 	return (OK);

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 16:05:51 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   lexer_utils.c                                     ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 20:40:58 by maroy                                    */
+/*   Updated: 2023/10/04 17:57:26 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -49,7 +49,8 @@ char	*ft_getenv(char *str)
 		if (!ft_strcmp(env_key, str))
 		{
 			temp = env_value;
-			env_value = ft_substr(g_global->env_var[i], start + 1, ft_strlen(g_global->env_var[i]) - start);
+			env_value = ft_substr(g_global->env_var[i], start + 1, \
+				ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
 			ft_freeptr(env_key);
 			break ;
@@ -114,8 +115,8 @@ char	*invalid_envar(t_lexer *lexer, int i)
 
 char	*envar_token(t_lexer *lexer)
 {
-	char *str;
-	char *v;
+	char	*str;
+	char	*v;
 
 	if (!lexer)
 		return (NULL);

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 17:46:13 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/07/14 21:56:43 by maroy                                    */
+/*   Updated: 2023/10/04 17:56:39 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
@@ -28,14 +28,13 @@ static char	**get_env_(char **env_)
 	return (env);
 }
 
-void	initialize(int argc, char **argv, char **env, t_state *state)
+void	initialize(char **env, t_state *state)
 {
-	int fd;
-	(void)argc;
-	(void)argv;
+	int	fd;
+
 	debug_print_msg("DEBUG mode enabled 🐛");
 	debug_print_msg("HISTORY_FILE: " HISTORY_FILE);
-    fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
+	fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
 	close(fd);
 	using_history();
 	read_history(HISTORY_FILE);
@@ -53,13 +52,6 @@ void	initialize(int argc, char **argv, char **env, t_state *state)
 
 void	quit_minishell(char *buff)
 {
-	char	*up;
-	char	*ri;
-
-	up = tgetstr("up", NULL);
-	ri = tgetstr("RI", NULL);
-	tputs(ri, 1, putchar);
-	tputs(up, 1, putchar);
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	free(buff);
 	exit(g_global->exit_status);
@@ -112,7 +104,7 @@ uint8_t	minishell_master(int argc, char **argv, char **env)
 	t_state	*state;
 
 	state = (t_state *)malloc(sizeof(t_state));
-	initialize(argc, argv, env, state);
+	initialize(env, state);
 	while (1)
 	{
 		buff = NULL;

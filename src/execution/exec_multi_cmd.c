@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_multi_cmd.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 14:48:08 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 14:09:04 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_multi_cmd.c                                  ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/23 14:48:08 by maroy                                    */
+/*   Updated: 2023/10/04 17:59:38 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -27,10 +27,11 @@ static void	pipe_all(t_cmd *cmd, t_data *data)
 	}
 }
 
-void redirections_all_setup(t_cmd *cmd, t_data *data)
+void	redirections_all_setup(t_cmd *cmd, t_data *data)
 {
 	int i;
 	int j;
+	
 	i = -1;
 	while (++i < cmd->nbr_cmd)
 	{

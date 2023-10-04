@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 22:40:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 14:05:29 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   redirections.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/19 22:40:21 by maroy                                    */
+/*   Updated: 2023/10/04 17:58:34 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -65,8 +65,8 @@ int8_t	redirections_setup(t_cmd *cmd, t_data *data)
 	{
 		if (cmd->redir[i].type == less)
 			setup_infiles(cmd, data, i);
-		if ((cmd->redir[i].type == greater || cmd->redir[i].type == great) && \
-			!data->redir->is_error)
+		if ((cmd->redir[i].type == greater || cmd->redir[i].type == great)
+			&& !data->redir->is_error)
 			setup_outfiles(cmd, data, i);
 		i++;
 	}
@@ -91,7 +91,7 @@ void	check_for_heredoc(t_data *data, t_cmd *cmd)
 				cmd->redir[i].type = less;
 				pfree = cmd->redir[i].filename;
 				cmd->redir[i].filename = data->redir->filename;
-				free (pfree);
+				free(pfree);
 			}
 		}
 	}

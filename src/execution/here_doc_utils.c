@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   here_doc_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 22:47:32 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 16:05:32 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   here_doc_utils.c                                  ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/19 22:47:32 by maroy                                    */
+/*   Updated: 2023/10/04 17:58:37 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -88,7 +88,8 @@ char	*envar_here_doc(char *buff, int i)
 		else
 		{
 			i += 1;
-			if (ft_isdigit(buff[i]) || buff[i] == '?' || !is_valid_envar(buff[i]))
+			if (ft_isdigit(buff[i]) || buff[i] == '?'
+				|| !is_valid_envar(buff[i]))
 				str = envar_helper(buff, &i, str, 0);
 			else
 			{

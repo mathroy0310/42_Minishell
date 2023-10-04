@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 02:44:01 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/25 02:50:59 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   free.c                                            ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/25 02:44:01 by maroy                                    */
+/*   Updated: 2023/10/04 17:58:45 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -34,7 +34,7 @@ void	free_path(char **path)
 	i = 0;
 	while (path[i])
 	{
-		free (path[i]);
+		free(path[i]);
 		path[i] = NULL;
 		i++;
 	}
@@ -50,7 +50,7 @@ void	main_free(t_data *data, t_cmd *cmd)
 	{
 		free(data->redir);
 		data->redir = NULL;
-		free (data);
+		free(data);
 		data = NULL;
 	}
 	else
@@ -59,8 +59,8 @@ void	main_free(t_data *data, t_cmd *cmd)
 		while (i >= 0)
 		{
 			if (data[i].redir->pipe_fd != NULL)
-				pipe_free (data[i].redir->pipe_fd, cmd->nbr_cmd);
-			free (data[i].redir);
+				pipe_free(data[i].redir->pipe_fd, cmd->nbr_cmd);
+			free(data[i].redir);
 			i--;
 		}
 		free(data);

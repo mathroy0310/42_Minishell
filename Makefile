@@ -1,13 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/10/02 17:33:46 by maroy            ###   ########.fr        #
-#                                                                              #
+#                                                      ██   ██ ██████          #
+#    Makefile                                          ██   ██      ██         #
+#                                                      ███████  █████          #
+#    By: maroy <maroy@student.42.qc>                        ██ ██              #
+#                                                           ██ ███████.qc      #
+#    Created: 2023/07/27 15:41:11 by maroy                                     #
+#    Updated: 2023/10/04 17:47:39 by maroy            >(.)__ <(.)__ =(.)__     #
+#                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
 #--- PROGRAM NAME ---#
@@ -143,7 +143,7 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 
 all			: deps ${NAME}
 
-deps		: readline termcap libft
+deps		: readline libft #termcap
 
 debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG_FLAG=1 
 debug		: re
@@ -160,22 +160,22 @@ libft		:
 		echo "${BLUE}Libft successfully installed 🗄${DEFAULT}"; \
 	fi
 
-termcap		:
-	@#!/bin/bash
-	@set -e
-	@if [ ! -f $(TERMCAP_DIR)/inc/termcap.h ]; then \
-		echo "${BLUE}Installing Termcap ... ${DARKGRAY}"; \
-		$(MK) $(TERMCAP_DIR); \
-		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMCAP).tar.gz > /dev/null 2>&1; \
-		tar -xf $(TERMCAP).tar.gz > /dev/null 2>&1; \
-		rm -rf $(TERMCAP).tar.gz; \
-		cd $(TERMCAP) && ./configure > /dev/null 2>&1 && make > /dev/null 2>&1; \
-		mv libtermcap.a ../libs/termcap > /dev/null 2>&1; \
-		mkdir ../libs/termcap/inc > /dev/null 2>&1; \
-		mv ./*.h ../libs/termcap/inc > /dev/null 2>&1; \
-		cd .. && rm -rf $(TERMCAP); \
-		echo "${BLUE}Termcap successfully installed 🗄${DEFAULT}"; \
-	fi
+# termcap		:
+# 	@#!/bin/bash
+# 	@set -e
+# 	@if [ ! -f $(TERMCAP_DIR)/inc/termcap.h ]; then \
+# 		echo "${BLUE}Installing Termcap ... ${DARKGRAY}"; \
+# 		$(MK) $(TERMCAP_DIR); \
+# 		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMCAP).tar.gz > /dev/null 2>&1; \
+# 		tar -xf $(TERMCAP).tar.gz > /dev/null 2>&1; \
+# 		rm -rf $(TERMCAP).tar.gz; \
+# 		cd $(TERMCAP) && ./configure > /dev/null 2>&1 && make > /dev/null 2>&1; \
+# 		mv libtermcap.a ../libs/termcap > /dev/null 2>&1; \
+# 		mkdir ../libs/termcap/inc > /dev/null 2>&1; \
+# 		mv ./*.h ../libs/termcap/inc > /dev/null 2>&1; \
+# 		cd .. && rm -rf $(TERMCAP); \
+# 		echo "${BLUE}Termcap successfully installed 🗄${DEFAULT}"; \
+# 	fi
 
 readline	:
 	@#!/bin/bash

@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/09/26 14:34:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:58:23 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void init_ast(t_ast *ast, t_ast_type type)
+void	init_ast(t_ast *ast, t_ast_type type)
 {
 	ast->type = type;
 	ast->pipecmd_values = (void *)0;
@@ -22,7 +22,7 @@ void init_ast(t_ast *ast, t_ast_type type)
 	ast->args_size = 0;
 }
 
-void init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
+void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 {
 	cmd[n].redir_nbr = ast->redir_nbr;
 	cmd[n].args_size = ast->args_size - (cmd[n].redir_nbr * 2) - 1;
@@ -31,21 +31,23 @@ void init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs = malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
 
-void populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
+void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 {
-	t_index x;
+	t_index	x;
 
 	x = (t_index){.k = 0, .l = 0, .m = 0};
 	init_cmdargs(ast, cmd, n);
 	if ((ast->args_size - 1) == (ast->redir_nbr * 2))
 		cmd[n].argvs = NULL;
-	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof || ast->args[x.k]->type != pip))
+	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
+			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id)
 			cmd[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
 		else
 		{
-			if (is_redirect(ast->args[++x.k - 1]) && x.k >= 1 && x.m < ast->redir_nbr)
+			if (is_redirect(ast->args[++x.k - 1]) && x.k >= 1
+				&& x.m < ast->redir_nbr)
 			{
 				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
 				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;
@@ -57,7 +59,7 @@ void populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs[x.l] = NULL;
 }
 
-void init_cmd(t_cmd cmd)
+void	init_cmd(t_cmd cmd)
 {
 	(void)cmd;
 	cmd.args_size = 0;
@@ -66,10 +68,10 @@ void init_cmd(t_cmd cmd)
 	cmd.redir = NULL;
 }
 
-t_cmd *parse_pipeline_to_cmd(t_ast *ast)
+t_cmd	*parse_pipeline_to_cmd(t_ast *ast)
 {
-	t_cmd *cmd;
-	t_index x;
+	t_cmd	*cmd;
+	t_index	x;
 
 	x = (t_index){.k = 0, .l = -1, .m = -1};
 	cmd = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));

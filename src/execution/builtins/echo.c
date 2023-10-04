@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 14:22:40 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/11 14:33:17 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   echo.c                                            ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/11 14:22:40 by maroy                                    */
+/*   Updated: 2023/10/04 17:20:49 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
@@ -56,7 +56,7 @@ uint8_t	echo_builtin(char **args)
 {
 	int	j;
 
-	g_global->exit_status = 0;
+	g_global->exit_status = EXIT_SUCCESS;
 	if (args[1] == NULL)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	else

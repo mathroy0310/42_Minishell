@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_pipes.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 16:34:02 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 13:55:58 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   handle_pipes.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/23 16:34:02 by maroy                                    */
+/*   Updated: 2023/10/04 17:58:40 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -27,10 +27,10 @@ void	execute_cmd_path(t_cmd *cmd, t_data *data, int *p_fd)
 			exit(127);
 	if (p_fd != NULL)
 	{
-		close (p_fd[0]);
-		close (p_fd[1]);
+		close(p_fd[0]);
+		close(p_fd[1]);
 	}
-	if (execve (possible_path, cmd->argvs, g_global->env_var))
+	if (execve(possible_path, cmd->argvs, g_global->env_var))
 		exit(126);
 }
 
@@ -64,7 +64,7 @@ int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 
 int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	data->state->read_end = 0;
@@ -73,10 +73,11 @@ int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 	{
 		pipe(data->redir->pipe_fd[i]);
 		data->state->write_end = data->redir->pipe_fd[i][1];
-		g_global->pid = execute_process(&cmd[i], &data[i], data->redir->pipe_fd[i]);
+		g_global->pid = execute_process(&cmd[i], &data[i],
+			data->redir->pipe_fd[i]);
 		close(data->state->write_end);
 		if (data->state->read_end != 0)
-			close (data->state->read_end);
+			close(data->state->read_end);
 		data->state->read_end = data->redir->pipe_fd[i][0];
 		i++;
 	}
@@ -87,7 +88,7 @@ int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 
 void	execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	while (++i < cmd->nbr_cmd)

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 17:53:21 by maroy                                    */
-/*   Updated: 2023/09/23 15:21:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:41:19 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 void	error_exit(char *arg)
 {
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	ft_putstr_fd( ERR_PROMPT "exit: ", STDERR_FILENO);
+	ft_putstr_fd(ANSI_BG_COLOR_RED ERR_PROMPT "exit: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+	ft_putstr_fd(": numeric argument required", STDERR_FILENO);
+	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 	exit (255);
 }
 
@@ -97,7 +98,7 @@ int	check_for_num_arg(char *args)
 		ft_putendl_fd("exit", STDOUT_FILENO);
 		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: too many arguments", STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-		g_global->exit_status = 1;
+		g_global->exit_status = EXIT_FAILURE;
 	}
 	else
 		error_exit(args);

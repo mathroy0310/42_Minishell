@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 13:56:32 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 15:58:50 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   error.c                                           ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/11 13:56:32 by maroy                                    */
+/*   Updated: 2023/10/04 17:23:02 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
@@ -46,7 +46,7 @@ void	not_valid_id(char *arg)
 	ft_putstr_fd (arg, STDERR_FILENO);
 	ft_putstr_fd ("': not a valid identifier", STDERR_FILENO);
 	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-	g_global->exit_status = 1;
+	g_global->exit_status = EXIT_FAILURE;
 }
 
 int8_t	path_error_print(t_cmd *cmd, t_data *data, char *possible_path)

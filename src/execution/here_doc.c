@@ -6,12 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:47:03 by maroy                                    */
-/*   Updated: 2023/09/27 14:43:57 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 16:41:41 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
 
 char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
 {
@@ -32,7 +31,6 @@ char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
 	free(buf);
 	return (dst);
 }
-
 
 static int	random_file_name(t_data *data)
 {

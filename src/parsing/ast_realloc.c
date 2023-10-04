@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/09/26 14:37:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:58:26 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_lexer	*init_lexer(t_lexer	*lexer)
+t_lexer	*init_lexer(t_lexer *lexer)
 {
 	lexer = malloc(sizeof(t_lexer));
 	if (!lexer)
@@ -102,8 +102,7 @@ t_token	*check_token(t_parser *parser, t_ast *ast)
 	{
 		if (parser->curr_token->type != id)
 		{
-			print_error_msg( ERR_PROMPT ERR_SYNTAX,
-				parser->curr_token->value);
+			print_error_msg(ERR_PROMPT ERR_SYNTAX, parser->curr_token->value);
 			return (NULL);
 		}
 		ast->redir_nbr += 1;

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/09/26 13:47:03 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/04 17:21:39 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ uint8_t	export_builtin(char **args, t_data *data)
 	int16_t	i;
 
 	i = 0;
-	g_global->exit_status = 0;
+	g_global->exit_status = EXIT_SUCCESS;
 	if (!args[1])
 	{
 		sort_and_print();
@@ -103,7 +103,7 @@ uint8_t	export_builtin(char **args, t_data *data)
 			ft_putstr_fd(args[i], STDERR_FILENO);
 			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
 			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-			g_global->exit_status = 1;
+			g_global->exit_status = EXIT_FAILURE;
 			continue ;
 		}
 		set_or_modify(args[i]);

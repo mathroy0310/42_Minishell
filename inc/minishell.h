@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/09/29 14:05:45 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/06/26 21:49:41 by maroy                                    */
+/*   Updated: 2023/10/04 17:51:15 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -54,8 +54,6 @@
 # include <readline/readline.h>
 //	Libft
 # include "../libs/libft/inc/libft.h"
-//	termcap
-# include "../libs/termcap/inc/termcap.h"
 
 /*
  * -- Local Includes --
