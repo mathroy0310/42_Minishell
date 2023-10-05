@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/10/04 17:03:22 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:12:38 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@
 #  define PROMPT "DEBUG minishell$ "
 #  define ERR_PROMPT "DEBUG minishell: "
 # else
-# define DEBUG 0
-# define PROMPT "minishell$ "
-# define ERR_PROMPT "minishell: "
+#  define DEBUG 0
+#  define PROMPT "minishell$ "
+#  define ERR_PROMPT "minishell: "
 # endif
 
 /// @brief Temporary file for command history

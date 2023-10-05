@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/10/04 17:56:39 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:14:24 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	**get_env_(char **env_)
 		exit(EXIT_FAILURE);
 	while (++i < ft_tablen(env_))
 		env[i] = ft_strdup(env_[i]);
-	env[i] = 0;
+	env[i] = NULL;
 	return (env);
 }
 
@@ -48,13 +48,6 @@ void	initialize(char **env, t_state *state)
 	signal(SIGQUIT, sigint_handler);
 	state->env_ = get_env_(env);
 	state->path = NULL;
-}
-
-void	quit_minishell(char *buff)
-{
-	ft_putendl_fd("exit", STDOUT_FILENO);
-	free(buff);
-	exit(g_global->exit_status);
 }
 
 static void	parse(t_lexer *lexer, t_state *state)
@@ -97,7 +90,7 @@ static void	sanitize(char **buff, t_lexer **lexer)
 	free(*buff);
 }
 
-uint8_t	minishell_master(int argc, char **argv, char **env)
+uint8_t	minishell_master(char **env)
 {
 	t_lexer	*lexer;
 	char	*buff;

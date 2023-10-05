@@ -6,11 +6,28 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/01 13:25:54 by maroy                                    */
-/*   Updated: 2023/10/04 17:54:47 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:23:26 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	wait_children(void)
+{
+	int		status;
+	int		signal;
+
+	while (waitpid(-1, &status, 0) > 0)
+	{
+		if (WIFEXITED(status))
+			g_global->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			g_global->exit_status = signal + 128;
+		}
+	}
+}
 
 void	is_child_process(int signum)
 {

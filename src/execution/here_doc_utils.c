@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:47:32 by maroy                                    */
-/*   Updated: 2023/10/04 17:58:37 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:43:22 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -73,32 +73,34 @@ static char	*envar_helper(char *buff, int *i, char *str, int flag)
 	return (NULL);
 }
 
+static char	*handle_envar(char *buff, int *i, char *str)
+{
+	(*i)++;
+	if (ft_isdigit(buff[*i]) || buff[*i] == '?' || !is_valid_envar(buff[*i]))
+		str = envar_helper(buff, i, str, 0);
+	else
+	{
+		str = envar_helper(buff, i, str, 2);
+		if (buff[*i] != '\0')
+			str = ft_strjoin_char(str, buff[*i]);
+	}
+	return (str);
+}
+
 char	*envar_here_doc(char *buff, int i)
 {
 	char	*str;
 
-	if (!ft_strcmp(buff, "\0") || i == 1)
+	if (*buff == '\0')
 		return (ft_strdup(buff));
-	i = -1;
 	str = ft_strdup("");
+	i = -1;
 	while (buff[++i] != '\0')
 	{
 		if (buff[i] != DOLLAR)
 			str = ft_strjoin_char(str, buff[i]);
 		else
-		{
-			i += 1;
-			if (ft_isdigit(buff[i]) || buff[i] == '?'
-				|| !is_valid_envar(buff[i]))
-				str = envar_helper(buff, &i, str, 0);
-			else
-			{
-				str = envar_helper(buff, &i, str, 2);
-				if (buff[i] == '\0')
-					break ;
-				str = ft_strjoin_char(str, buff[i]);
-			}
-		}
+			str = handle_envar(buff, &i, str);
 	}
 	return (str);
 }

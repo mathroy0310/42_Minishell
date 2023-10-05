@@ -6,11 +6,18 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 15:20:11 by maroy                                    */
-/*   Updated: 2023/10/04 17:20:54 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:18:38 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+bool	is_valid_envar(char c)
+{
+	if (ft_isalnum(c) || c == '_' || c == '~')
+		return (true);
+	return (false);
+}
 
 uint8_t	env_builtin(t_data *data)
 {

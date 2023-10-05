@@ -6,13 +6,12 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:38:29 by maroy                                    */
-/*   Updated: 2023/09/20 16:49:01 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:44:33 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 #include "../../../inc/execution.h"
-
 
 void	free_old_env(char **env_pointer)
 {
@@ -93,9 +92,9 @@ void	add_to_env(char *arg, t_data *data)
 	free(key);
 }
 
-int16_t	env_count(void)
+int	env_count(void)
 {
-	int16_t	i;
+	int	i;
 
 	i = 0;
 	while (g_global->env_var[i])

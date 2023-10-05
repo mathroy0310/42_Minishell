@@ -6,18 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/10/04 17:57:26 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:18:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-bool	is_valid_envar(char c)
-{
-	if (ft_isalnum(c) || c == '_' || c == '~')
-		return (true);
-	return (false);
-}
 
 int	get_str_by_char(char *str, char c)
 {
@@ -60,7 +53,7 @@ char	*ft_getenv(char *str)
 	return (env_value);
 }
 
-char	*string_envar(t_lexer *lexer)
+static char	*string_envar(t_lexer *lexer)
 {
 	char	*str;
 
@@ -86,7 +79,7 @@ char	*string_envar(t_lexer *lexer)
 	return (str);
 }
 
-char	*invalid_envar(t_lexer *lexer, int i)
+static char	*invalid_envar(t_lexer *lexer, int i)
 {
 	char	*str;
 	char	*s;

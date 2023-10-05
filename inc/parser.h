@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:10:28 by maroy                                    */
-/*   Updated: 2023/09/26 14:34:53 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:11:33 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
  * -- Local Includes --
  */
-# include "minishell.h"
 # include "lexer.h"
+# include "minishell.h"
 
 typedef struct s_parser
 {

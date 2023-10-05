@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/23 14:48:08 by maroy                                    */
-/*   Updated: 2023/10/04 17:59:38 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:27:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	pipe_all(t_cmd *cmd, t_data *data)
 
 void	redirections_all_setup(t_cmd *cmd, t_data *data)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = -1;
 	while (++i < cmd->nbr_cmd)
 	{
@@ -41,7 +41,9 @@ void	redirections_all_setup(t_cmd *cmd, t_data *data)
 		{
 			if (cmd[i].redir[j].type == less)
 				setup_input(&cmd[i], &data[i], j);
-			if ((cmd[i].redir[j].type == great || cmd[i].redir[j].type == greater) && !data->redir->is_error)
+			if ((cmd[i].redir[j].type == great \
+				|| cmd[i].redir[j].type == greater) \
+				&& !data->redir->is_error)
 				setup_output(&cmd[i], &data[i], j);
 		}
 	}
@@ -62,7 +64,8 @@ void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state)
 	{
 		pipe(data->redir->pipe_fd[i]);
 		data->state->write_end = data->redir->pipe_fd[i][1];
-		g_global->pid = execute_process(&cmd[i], &data[i], data->redir->pipe_fd[i]);
+		g_global->pid = execute_process \
+		(&cmd[i], &data[i], data->redir->pipe_fd[i]);
 		close(data->state->write_end);
 		if (data->state->read_end != 0)
 			close(data->state->read_end);

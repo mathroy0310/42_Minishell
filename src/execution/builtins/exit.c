@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 17:53:21 by maroy                                    */
-/*   Updated: 2023/10/04 17:41:19 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:54:48 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
 #include <limits.h>
+#define ERR_EXIT "exit: too many arguments"
 
 void	error_exit(char *arg)
 {
@@ -21,7 +21,7 @@ void	error_exit(char *arg)
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd(": numeric argument required", STDERR_FILENO);
 	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-	exit (255);
+	exit(255);
 }
 
 long long	atoi_exit(const char *str)
@@ -50,7 +50,7 @@ long long	atoi_exit(const char *str)
 		str++;
 	}
 	ft_putendl_fd("exit", STDERR_FILENO);
-	exit (r * signe);
+	exit(r * signe);
 }
 
 void	exit_number(char *arg)
@@ -64,16 +64,16 @@ void	exit_number(char *arg)
 		{
 			if (arg[0] == '-' || arg[0] == '+')
 				i++;
-			if (arg[i] < '0' || arg[i] > '9' )
+			if (arg[i] < '0' || arg[i] > '9')
 			{
 				ft_putendl_fd("exit", STDOUT_FILENO);
-				ft_putstr_fd( ERR_PROMPT "exit: ", STDERR_FILENO);
+				ft_putstr_fd(ERR_PROMPT "exit: ", STDERR_FILENO);
 				ft_putstr_fd(arg, STDERR_FILENO);
 				ft_putendl_fd(": numeric argument required", STDERR_FILENO);
-				exit (255);
+				exit(255);
 			}
 			i++;
-		}	
+		}
 	}
 	atoi_exit(arg);
 }
@@ -96,7 +96,7 @@ int	check_for_num_arg(char *args)
 	if (!is_alpha)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
-		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: too many arguments", STDERR_FILENO);
+		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT ERR_EXIT, STDERR_FILENO);
 		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		g_global->exit_status = EXIT_FAILURE;
 	}
@@ -124,7 +124,7 @@ uint8_t	exit_builtin(char **args)
 	else
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
-		exit (g_global->exit_status);
+		exit(g_global->exit_status);
 	}
 	return (OK);
 }

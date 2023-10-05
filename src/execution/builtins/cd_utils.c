@@ -6,16 +6,17 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:01:11 by maroy                                    */
-/*   Updated: 2023/10/04 17:19:50 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:50:58 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+#define CD_ERR "cd: error retrieving current directory:\
+ getcwd: cannot access parent directories: "
 
 void	error_retrieving_cd(void)
 {
-	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"cd: error retrieving current directory: ", STDERR_FILENO);
-	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED"getcwd: cannot access parent directories: ", STDERR_FILENO);
+	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED CD_ERR, STDERR_FILENO);
 	printf("%s", strerror(errno));
 	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 }

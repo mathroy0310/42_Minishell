@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/10/04 17:21:39 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 14:27:23 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 uint8_t	is_valid_env_key(char *arg)
 {
-	int	i;
-	int	alpha;
+	int		i;
+	bool	is_alnum;
 
 	i = 0;
-	alpha = 0;
 	if (!ft_strcmp(arg, ""))
 		return (KO);
 	if (arg == NULL || arg[0] == '=')
 		return (KO);
 	while (arg[i] && arg[i] != '=')
 	{
-		if (ft_isalpha(arg[i]))
-			alpha = 1;
+		is_alnum = false;
+		if (ft_isalnum(arg[i]) == OK)
+			is_alnum = true;
 		else
-		{
-			if (ft_isdigit(arg[i]) && !alpha)
+			if (is_alnum == false && arg[i] != '_')
 				return (KO);
-			else if (!ft_isdigit(arg[i]) && arg[i] != '_')
-				return (KO);
-		}
 		i++;
 	}
 	return (OK);
@@ -41,8 +37,8 @@ uint8_t	is_valid_env_key(char *arg)
 
 static void	set_new_env(char *arg)
 {
-	int16_t	index;
-	int16_t	i;
+	int	index;
+	int	i;
 
 	index = 0;
 	i = -1;
@@ -85,7 +81,7 @@ static void	set_or_modify(char *arg)
 
 uint8_t	export_builtin(char **args, t_data *data)
 {
-	int16_t	i;
+	int	i;
 
 	i = 0;
 	g_global->exit_status = EXIT_SUCCESS;

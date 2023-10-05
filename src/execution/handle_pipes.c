@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/23 16:34:02 by maroy                                    */
-/*   Updated: 2023/10/04 17:58:40 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:25:48 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 	{
 		pipe(data->redir->pipe_fd[i]);
 		data->state->write_end = data->redir->pipe_fd[i][1];
-		g_global->pid = execute_process(&cmd[i], &data[i],
-			data->redir->pipe_fd[i]);
+		g_global->pid = execute_process(&cmd[i], &data[i], \
+		data->redir->pipe_fd[i]);
 		close(data->state->write_end);
 		if (data->state->read_end != 0)
 			close(data->state->read_end);

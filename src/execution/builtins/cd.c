@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/10/04 17:22:16 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:48:16 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	move_to_dir(char *path)
 	char	*old_pwd;
 	char	*tmp;
 
-	debug_print_string("path dans move_to_dir = ", path);
 	old_pwd = get_env_var_by_key("PWD");
 	add_var_to_env("OLDPWD", old_pwd);
 	ret = chdir(path);
@@ -61,7 +60,7 @@ static int	move_to_dir(char *path)
 		add_var_to_env("PWD", tmp);
 		g_global->exit_status = EXIT_FAILURE;
 		free(tmp);
-		return (1);
+		return (EXIT_FAILURE);
 	}
 	add_var_to_env("PWD", tmp);
 	free(tmp);
@@ -97,7 +96,7 @@ static uint8_t	exec_cd(char *path, int i, char **argv)
 	return (KO);
 }
 
-int8_t	cd_builtin(char **argv)
+uint8_t	cd_builtin(char **argv)
 {
 	char	*path;
 	int		i;
@@ -112,8 +111,8 @@ int8_t	cd_builtin(char **argv)
 			g_global->exit_status = EXIT_FAILURE;
 			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "cd:", STDERR_FILENO);
 			ft_putstr_fd (" HOME not set", STDERR_FILENO);
-            ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
-			return (-1);
+			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+			return (KO);
 		}
 		if (!ft_strcmp(path, ""))
 			return (KO);
@@ -123,5 +122,5 @@ int8_t	cd_builtin(char **argv)
 	else
 		path = argv[i + 1];
 	exec_cd(path, i, argv);
-	return (KO);
+	return (OK);
 }

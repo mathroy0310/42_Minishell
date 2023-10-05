@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/10/04 18:01:09 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:29:13 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	setup_output(t_cmd *cmd, t_data *data, int j)
 		{
 			data->redir->is_error = true;
 			print_error(cmd->redir[j].filename);
-			}
+		}
 	}
 	data->redir->outfile = fd;
 }

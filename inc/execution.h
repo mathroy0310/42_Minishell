@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/10/04 18:01:49 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:24:07 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -62,26 +62,26 @@ typedef struct s_data
 	t_shell_red		*redir;
 }					t_data;
 
-void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state);
-int	execute_pipe_cmd(t_cmd *cmd, t_data *data);
+void				execute_pipe_redir(t_cmd *cmd, t_data *data,
+						t_state *state);
+int					execute_pipe_cmd(t_cmd *cmd, t_data *data);
 
 /*
  * exec_main.c *
  */
 /// @brief Initialize the `t_data` structure
+/// @param data The data structure
+/// @param state The state of the shell
 void				init_data(t_data *data, t_state *state);
-/// @brief waitpid and give `g_global->exit_status` the exit status
-void				wait_children(void);
 
 /// @brief Main Executes a command seperated by type of command
 /// @param cmd The commands to execute
 /// @param state The state of the shell
 uint8_t				execution(t_cmd *cmd, t_state *state);
 
-
 /// @brief Resotre the stdin and stdout from the saved values
-/// @param saved_stdout 
-/// @param saved_stdin 
+/// @param saved_stdout
+/// @param saved_stdin
 void				restore_std(int saved_stdout, int saved_stdin);
 
 /// @brief Dup the parameters in the `g_global->env_var`
@@ -93,7 +93,6 @@ uint8_t				dup_env_var(char **env);
  * exec_reg_cmd.c *
  */
 
-
 void				check_for_errors(t_cmd *cmd, t_data *data);
 
 /// @brief executes a regular command,
@@ -103,20 +102,17 @@ void				check_for_errors(t_cmd *cmd, t_data *data);
 /// @return The exit status of the command (0 if OK, 1 if KO)
 uint8_t				execute_reg_cmd(t_cmd *cmd, t_data *data);
 
-
 /*
  * exec_multi_cmd.c *
 */
 
 void				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
-
 /*
  * exec_multi_cmd_utils.c *
  */
-void setup_input(t_cmd *cmd, t_data *data, int j);
-void setup_output(t_cmd *cmd, t_data *data, int j);
-
+void				setup_input(t_cmd *cmd, t_data *data, int j);
+void				setup_output(t_cmd *cmd, t_data *data, int j);
 
 /// @brief Executes a command and check for errors
 /// @param cmd The command to execute
@@ -128,7 +124,6 @@ void				find_cmd_path(t_cmd *cmd, t_data *data);
  * exec_utils.c *
  */
 
-
 /// @brief Get the value of an environment variable
 /// @param key The key of the environment variable
 /// @param env_pointer The pointer to the env table
@@ -138,7 +133,7 @@ int8_t				find_env_var_index(const char *key, char **env_pointer);
 /// @param key The key of the environment variable
 /// @return The value of the environment variable
 char				*get_env_var_by_key(const char *key);
-/// @brief 
+/// @brief
 char				**realloc_new_env(int env_num, char *arg,
 						char **env_pointer);
 char				*find_path(char *cmd, char **path);
@@ -150,7 +145,8 @@ char				*find_path(char *cmd, char **path);
 /// @brief also handle the case where the signal is sent to a child process
 /// @param signum The signal number
 void				sigint_handler(int signum);
-
+/// @brief waitpid and give `g_global->exit_status` the exit status
+void				wait_children(void);
 
 /*
  * redirections.c *
@@ -172,7 +168,8 @@ void				parse_here_doc(t_redir *redir, t_data *data);
 */
 
 int					execute_process(t_cmd *cmd, t_data *data, int *fd);
-void				 execute_simple_pipe(t_cmd *cmd, t_data *data, t_state *state);
+void				execute_simple_pipe(t_cmd *cmd, t_data *data,
+						t_state *state);
 
 /*
  * handle_pipes_utils.c *
@@ -189,8 +186,6 @@ uint8_t				setup_command_pipes(t_cmd *cmd, t_data *data);
 void				free_path(char **path);
 void				main_free(t_data *data, t_cmd *cmd);
 void				ft_freeptr(void *ptr);
-
-
 
 /*
  * here_doc_utils.c *

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/10/04 17:58:23 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:22:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 			{
 				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
 				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;
-				cmd[n].redir[x.m++].filename = ft_strdup(ast->args[x.k++]->value);
+				cmd[n].redir[x.m++].filename = \
+				ft_strdup(ast->args[x.k++]->value);
 			}
 		}
 	}

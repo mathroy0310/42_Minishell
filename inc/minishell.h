@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/10/04 17:51:15 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:14:46 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ extern t_global	*g_global;
 /*
  * -- Prototypes --
  */
-uint8_t			minishell_master(int argc, char **argv, char **env);
-
+uint8_t			minishell_master(char **env);
+void			quit_minishell(char *buff);
 /*
  * debug.c *
  */

@@ -1,34 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_main.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/10/02 15:59:00 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_main.c                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/30 18:12:50 by maroy                                    */
+/*   Updated: 2023/10/05 15:23:20 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "../../inc/builtins.h"
-
-void	wait_children(void)
-{
-	int		status;
-	int		signal;
-
-	while (waitpid(-1, &status, 0) > 0)
-	{
-		if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			signal = WTERMSIG(status);
-			g_global->exit_status = signal + 128;
-		}
-	}
-}
 
 uint8_t	dup_env_var(char **env)
 {
@@ -61,7 +44,6 @@ char	**get_path(void)
 		return (NULL);
 	return (path);
 }
-
 
 void	init_data(t_data *data, t_state *state)
 {

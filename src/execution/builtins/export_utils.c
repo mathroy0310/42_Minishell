@@ -6,12 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:17:33 by maroy                                    */
-/*   Updated: 2023/09/20 16:55:20 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 14:25:48 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-#include <stdbool.h>
 
 static void	print_sorted_env(char **sorted_env)
 {
@@ -67,7 +66,6 @@ void	sort_and_print(void)
 		i++;
 	}
 	print_sorted_env(dup);
-	ft_free_tab(dup);
 }
 
 void	modify_env(char *arg, char *key)
@@ -91,7 +89,7 @@ void	modify_env(char *arg, char *key)
 char	**dup_env(void)
 {
 	char		**dup;
-	int16_t		i;
+	int			i;
 
 	i = env_count();
 	dup = (char **)malloc(sizeof(char *) * (i + 1));

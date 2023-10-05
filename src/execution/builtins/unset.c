@@ -6,17 +6,17 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/08 14:05:13 by maroy                                    */
-/*   Updated: 2023/09/20 17:14:09 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/05 15:53:55 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-char	**remove_env_by_key(int index, char **env_pointer)
+static char	**rm_env_by_key(int index, char **env_pointer)
 {
 	char			*next_env;
 	char			*tmp;
-	register int	i;
+	int				i;
 
 	i = index;
 	if (i < ft_tablen(env_pointer))
@@ -50,9 +50,9 @@ uint8_t	unset_builtin(char **args, t_data *data)
 		env_index = find_env_var_index(args[i], g_global->env_var);
 		env_index_ = find_env_var_index(args[i], data->state->env_);
 		if (env_index_ != -1)
-			data->state->env_ = remove_env_by_key(env_index_, data->state->env_);
+			data->state->env_ = rm_env_by_key(env_index_, data->state->env_);
 		if (env_index != -1)
-			g_global->env_var = remove_env_by_key(env_index, g_global->env_var);
+			g_global->env_var = rm_env_by_key(env_index, g_global->env_var);
 		else
 		{
 			if (!is_valid_env_key(args[i]))
