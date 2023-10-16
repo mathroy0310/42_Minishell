@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 14:30:21 by maroy                                    */
-/*   Updated: 2023/10/05 15:55:07 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/16 11:48:09 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ uint8_t		unset_builtin(char **args, t_data *data);
  * cd.c *
  */
 int			add_var_to_env(char *key, char *new_path);
-int8_t		cd_builtin(char **argv);
+uint8_t		cd_builtin(char **argv);
 
 /*
  * cd_utils.c *
