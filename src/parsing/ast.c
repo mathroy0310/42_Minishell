@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/10/05 15:22:35 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:42:48 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "minishell.h"
 
 void	init_ast(t_ast *ast, t_ast_type type)
 {

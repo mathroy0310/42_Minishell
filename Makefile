@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/10/17 15:58:19 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/10/17 16:42:18 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -15,14 +15,6 @@
 NAME				=	minishell
 
 #--- LIBRARIES AND HEADERS ---#
-
-HEADER_FILES		= 	minishell.h \
-						defines.h \
-						lexer.h \
-						execution.h \
-						builtins.h \
-
-HEADERS				= 	$(addprefix $(INCDIR)/, $(HEADER_FILES))
 
 LIBFT				=	${LIBDIR}/libft
 
@@ -49,7 +41,7 @@ SLIB_RLINE 			= 	$(LIBRLINE_DIR)libreadline.a
 
 CC					=	gcc
 
-CFLAGS 				=	-Wall -Wextra -Werror -std=c17
+CFLAGS 				=	-Wall -Wextra -Werror -std=c17 -I${INCDIR}
 
 RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses
 
@@ -136,7 +128,7 @@ BIN     			=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 
 #--- RULES ---#
 
-bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
+bin/%.o		: $(SRCDIR)%.c
 	@mkdir -p $(@D)
 	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 

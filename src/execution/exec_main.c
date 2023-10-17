@@ -6,12 +6,12 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/10/05 15:23:20 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:44:59 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
-#include "../../inc/builtins.h"
+#include "minishell.h"
+#include "builtins.h"
 
 uint8_t	dup_env_var(char **env)
 {

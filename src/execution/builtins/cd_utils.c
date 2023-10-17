@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:01:11 by maroy                                    */
-/*   Updated: 2023/10/05 15:50:58 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 #define CD_ERR "cd: error retrieving current directory:\
  getcwd: cannot access parent directories: "
 

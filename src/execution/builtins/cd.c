@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/10/05 15:48:16 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 #include <dirent.h>
 
 int	add_var_to_env(char *key, char *new_path)

@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:38:29 by maroy                                    */
-/*   Updated: 2023/10/05 15:44:33 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 #include "../../../inc/execution.h"
 
 void	free_old_env(char **env_pointer)

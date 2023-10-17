@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/25 02:44:01 by maroy                                    */
-/*   Updated: 2023/10/04 17:58:45 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "minishell.h"
 
 static void	pipe_free(int **pipe_fd, int nbr_cmd)
 {

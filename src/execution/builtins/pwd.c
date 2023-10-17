@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 15:20:18 by maroy                                    */
-/*   Updated: 2023/10/04 17:21:46 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
 uint8_t	pwd_builtin(void)
 {

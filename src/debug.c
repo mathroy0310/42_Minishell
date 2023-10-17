@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/21 16:03:34 by maroy                                    */
-/*   Updated: 2023/10/04 17:07:06 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:42:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "minishell.h"
 
 void	debug_print_tab(char **tab)
 {

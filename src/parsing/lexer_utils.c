@@ -6,11 +6,11 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/10/05 15:18:55 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 16:42:58 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "minishell.h"
 
 int	get_str_by_char(char *str, char c)
 {
