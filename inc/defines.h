@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/10/05 15:12:38 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 15:38:57 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -17,42 +17,18 @@
  * -- Color Codes for users --
  */
 
-# define ANSI_COLOR_RESET "\x1b[0m"
-# define ANSI_COLOR_BLACK "\x1b[30m"
-# define ANSI_COLOR_RED "\x1b[31m"
-# define ANSI_COLOR_GREEN "\x1b[32m"
-# define ANSI_COLOR_YELLOW "\x1b[33m"
-# define ANSI_COLOR_BLUE "\x1b[34m"
-# define ANSI_COLOR_MAGENTA "\x1b[35m"
-# define ANSI_COLOR_CYAN "\x1b[36m"
-# define ANSI_COLOR_WHITE "\x1b[37m"
-# define ANSI_COLOR_BRIGHT_BLACK "\x1b[30;1m"
-# define ANSI_COLOR_BRIGHT_RED "\x1b[31;1m"
-# define ANSI_COLOR_BRIGHT_GREEN "\x1b[32;1m"
-# define ANSI_COLOR_BRIGHT_YELLOW "\x1b[33;1m"
-# define ANSI_COLOR_BRIGHT_BLUE "\x1b[34;1m"
-# define ANSI_COLOR_BRIGHT_MAGENTA "\x1b[35;1m"
-# define ANSI_COLOR_BRIGHT_CYAN "\x1b[36;1m"
-# define ANSI_COLOR_BRIGHT_WHITE "\x1b[37;1m"
-# define ANSI_BG_COLOR_BLACK "\x1b[40m"
-# define ANSI_BG_COLOR_RED "\x1b[41m"
-# define ANSI_BG_COLOR_GREEN "\x1b[42m"
-# define ANSI_BG_COLOR_YELLOW "\x1b[43m"
-# define ANSI_BG_COLOR_BLUE "\x1b[44m"
-# define ANSI_BG_COLOR_MAGENTA "\x1b[45m"
-# define ANSI_BG_COLOR_CYAN "\x1b[46m"
-# define ANSI_BG_COLOR_WHITE "\x1b[47m"
-# define ANSI_BG_COLOR_BRIGHT_BLACK "\x1b[40;1m"
-# define ANSI_BG_COLOR_BRIGHT_RED "\x1b[41;1m"
-# define ANSI_BG_COLOR_BRIGHT_GREEN "\x1b[42;1m"
-# define ANSI_BG_COLOR_BRIGHT_YELLOW "\x1b[43;1m"
-# define ANSI_BG_COLOR_BRIGHT_BLUE "\x1b[44;1m"
-# define ANSI_BG_COLOR_BRIGHT_MAGENTA "\x1b[45;1m"
-# define ANSI_BG_COLOR_BRIGHT_CYAN "\x1b[46;1m"
-# define ANSI_BG_COLOR_BRIGHT_WHITE "\x1b[47;1m"
-# define ANSI_STYLE_BOLD "\x1b[1m"
-# define ANSI_STYLE_UNDERLINE "\x1b[4m"
-# define ANSI_STYLE_REVERSED "\x1b[7m"
+# define ANSI_COLOR_RESET "\001\x1b[0m\002"
+# define ANSI_COLOR_BRIGHT_BLACK "\001\x1b[30;1m\002"
+# define ANSI_COLOR_BRIGHT_RED "\001\x1b[31;1m\002"
+# define ANSI_COLOR_BRIGHT_GREEN "\001\x1b[32;1m\002"
+# define ANSI_COLOR_BRIGHT_YELLOW "\001\x1b[33;1m\002"
+# define ANSI_COLOR_BRIGHT_BLUE "\001\x1b[34;1m\002"
+# define ANSI_COLOR_BRIGHT_MAGENTA "\001\x1b[35;1m\002"
+# define ANSI_COLOR_BRIGHT_CYAN "\001\x1b[36;1m\002"
+# define ANSI_COLOR_BRIGHT_WHITE "\001\x1b[37;1m\002"
+# define ANSI_STYLE_BOLD "\001\x1b[1m\002"
+# define ANSI_STYLE_UNDERLINE "\001\x1b[4m\002"
+# define ANSI_STYLE_REVERSED "\001\x1b[7m\002"
 
 # define ERR_SYNTAX "syntax error near unexpected token"
 /*
@@ -60,8 +36,7 @@
  */
 
 // 1 == DEBUG mode , 0 == USER mode
-# ifdef DEBUG_FLAG
-#  define DEBUG 1
+# ifdef DEBUG
 #  define PROMPT "DEBUG minishell$ "
 #  define ERR_PROMPT "DEBUG minishell: "
 # else

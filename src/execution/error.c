@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/11 13:56:32 by maroy                                    */
-/*   Updated: 2023/10/04 17:23:02 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/17 15:26:00 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	print_error(char *file_error)
 {
 	ft_putstr_fd (ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
 	ft_putstr_fd (file_error, STDERR_FILENO);
-	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 	perror(" ");
+	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 }
 
 void	check_valid_fd(t_data *data, char *file_error, int fd)
@@ -27,8 +27,8 @@ void	check_valid_fd(t_data *data, char *file_error, int fd)
 		data->redir->is_error = true;
 		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
 		ft_putstr_fd(file_error, STDERR_FILENO);
-		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		perror(" ");
+		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
 		g_global->exit_status = EXIT_FAILURE;
 	}
 }

@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.qc>                        ██ ██              #
 #                                                           ██ ███████.qc      #
 #    Created: 2023/07/27 15:41:11 by maroy                                     #
-#    Updated: 2023/10/05 15:13:49 by maroy            >(.)__ <(.)__ =(.)__     #
+#    Updated: 2023/10/17 15:58:19 by maroy            >(.)__ <(.)__ =(.)__     #
 #                                                      (___/  (___/  (___/     #
 # **************************************************************************** #
 
@@ -51,9 +51,9 @@ CC					=	gcc
 
 CFLAGS 				=	-Wall -Wextra -Werror -std=c17
 
-RLFLAGS				=	-lreadline -lcurses
+RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses
 
-TIFLAGS				=	-ltermcap
+LIBFTFLAGS			= 	-L${LIBFT_DIR} -lft
 
 MK					=	mkdir -p
 
@@ -141,75 +141,49 @@ bin/%.o		: $(SRCDIR)%.c  $(HEADERS)
 	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
-all			: deps ${NAME}
+all			: ${NAME}
 
-deps		: readline libft #termcap
 
-debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG_FLAG=1 
+debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG=1 
 debug		: re
 
-libft		:
-	@#!/bin/bash
-	@set -e
-	@if [ ! -f $(SLIB_LIBFT) ]; then \
-		echo "${BLUE}Installing Libft ... ${DARKGRAY}"; \
-		$(MK) $(LIBFT_DIR); \
-		git clone https://github.com/mathroy0310/42_libft.git $(LIBFT_DIR) > /dev/null 2>&1; \
-		make -C $(LIBFT_DIR) > /dev/null 2>&1; \
-		$(RM) ./libs/libft/Makefile ./libs/libft/bin ./libs/libft/src > /dev/null 2>&1; \
-		echo "${BLUE}Libft successfully installed 🗄${DEFAULT}"; \
-	fi
+${SLIB_LIBFT}	:
+	@echo "${BLUE}Installing Libft ... ${DARKGRAY}"; \
+	$(MK) $(LIBFT_DIR); \
+	git clone https://github.com/mathroy0310/42_libft.git $(LIBFT_DIR) > /dev/null 2>&1; \
+	make -C $(LIBFT_DIR) > /dev/null 2>&1; \
+	echo "${BLUE}Libft successfully installed 🗄${DEFAULT}";
 
-# termcap		:
-# 	@#!/bin/bash
-# 	@set -e
-# 	@if [ ! -f $(TERMCAP_DIR)/inc/termcap.h ]; then \
-# 		echo "${BLUE}Installing Termcap ... ${DARKGRAY}"; \
-# 		$(MK) $(TERMCAP_DIR); \
-# 		curl -O https://ftp.gnu.org/gnu/termcap/$(TERMCAP).tar.gz > /dev/null 2>&1; \
-# 		tar -xf $(TERMCAP).tar.gz > /dev/null 2>&1; \
-# 		rm -rf $(TERMCAP).tar.gz; \
-# 		cd $(TERMCAP) && ./configure > /dev/null 2>&1 && make > /dev/null 2>&1; \
-# 		mv libtermcap.a ../libs/termcap > /dev/null 2>&1; \
-# 		mkdir ../libs/termcap/inc > /dev/null 2>&1; \
-# 		mv ./*.h ../libs/termcap/inc > /dev/null 2>&1; \
-# 		cd .. && rm -rf $(TERMCAP); \
-# 		echo "${BLUE}Termcap successfully installed 🗄${DEFAULT}"; \
-# 	fi
+${SLIB_RLINE}	:
+	@echo "${BLUE}Installing Readline ... ${DARKGRAY}"; \
+	$(MK) $(LIBRLINE_DIR); \
+	curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz > /dev/null 2>&1; \
+	tar -xf $(LIBRLINE).tar.gz > /dev/null 2>&1; \
+	rm -rf $(LIBRLINE).tar.gz; \
+	cd $(LIBRLINE) && bash configure > /dev/null 2>&1 && make > /dev/null 2>&1;\
+	mv ./libreadline.a ../libs/readline > /dev/null 2>&1; \
+	mkdir ../libs/readline/inc > /dev/null 2>&1; \
+	mv ./*.h ../libs/readline/inc > /dev/null 2>&1; \
+	rm -rf ../$(LIBRLINE); \
+	echo "${BLUE}Readline successfully created 🗄${DEFAULT}";
 
-readline	:
-	@#!/bin/bash
-	@set -e
-	@if [ ! -f ./libs/readline/libreadline.a ]; then \
-		echo "${BLUE}Installing Readline ... ${DARKGRAY}"; \
-		$(MK) $(LIBRLINE_DIR); \
-		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz > /dev/null 2>&1; \
-		tar -xf $(LIBRLINE).tar.gz > /dev/null 2>&1; \
-		rm -rf $(LIBRLINE).tar.gz; \
-		cd $(LIBRLINE) && bash configure > /dev/null 2>&1 && make > /dev/null 2>&1;\
-		mv ./libreadline.a ../libs/readline > /dev/null 2>&1; \
-		mkdir ../libs/readline/inc > /dev/null 2>&1; \
-		mv ./*.h ../libs/readline/inc > /dev/null 2>&1; \
-		rm -rf ../$(LIBRLINE); \
-		echo "${BLUE}Readline successfully created 🗄${DEFAULT}"; \
-	fi
-
-${NAME}		:	${BIN}
-	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
+${NAME}		:	${SLIB_RLINE} ${SLIB_LIBFT} ${BIN} 
+	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${LIBFTFLAGS} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
 
 clean		:
-	@${RM} ${BINDIR}
+	@${RM} ${BINDIR} 
 	@echo "${YELLOW}${NAME} binary files successfully removed 🗑${DEFAULT}"
 
 fclean		:	clean
 	@${RM} ${NAME}
 	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
 
-re: deps fclean ${BIN}
-	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${SLIB_RLINE} ${SLIB_LIBFT} -o ${NAME} 
-	@echo "\r${GREEN}${NAME} successfully recompiled. 📂${DEFAULT}"
+lclean		:
+	@${RM} ${LIBDIR}
+	@echo "${RED}Libraries successfully removed 🗑${DEFAULT}"
 
+re: fclean all
 
 bonus		:	all
 
