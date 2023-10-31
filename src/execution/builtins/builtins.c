@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 16:21:04 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:29:40 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-uint8_t	check_builtin(t_cmd *cmd, t_data *data)
+t_u8	check_builtin(t_cmd *cmd, t_data *data)
 {
 	char	**args;
 
@@ -34,7 +34,7 @@ uint8_t	check_builtin(t_cmd *cmd, t_data *data)
 	return (KO);
 }
 
-uint8_t	is_builtin(t_cmd *cmd)
+t_u8	is_builtin(t_cmd *cmd)
 {
 	char	**argvs;
 

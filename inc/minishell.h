@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/10/05 15:14:46 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:46:04 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@
 # include <errno.h> // pour errno
 # include <fcntl.h>
 # include <signal.h>
-# include <stdint.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h> // pour EXIT_SUCCESS et EXIT_FAILURE
 # include <sys/stat.h>
 # include <sys/wait.h>
-# include <stdbool.h>
 # include <unistd.h>
 
 /*
@@ -72,7 +71,7 @@ typedef struct s_global
 {
 	char		**env_var;
 	pid_t		pid;
-	uint8_t		exit_status;
+	t_u8		exit_status;
 }				t_global;
 
 /*
@@ -83,7 +82,7 @@ extern t_global	*g_global;
 /*
  * -- Prototypes --
  */
-uint8_t			minishell_master(char **env);
+t_u8			minishell_master(char **env);
 void			quit_minishell(char *buff);
 /*
  * debug.c *

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/10/17 16:42:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:46:38 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 	str = ft_strdup(s);
 	while (lexer->c != EOF && !ft_strchr("|>< \"\'", lexer->c))
 	{
-		while (lexer->c == 32 && lexer->c != EOF)
+		while (lexer->c == SPACE && lexer->c != EOF)
 			read_single_char(lexer);
 		if (lexer->c == DOLLAR)
 		{

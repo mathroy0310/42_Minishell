@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:17:33 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:42:09 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ static void	print_sorted_env(char **sorted_env)
 	{
 		j = 0;
 		equ_sign = false;
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr("declare -x ");
 		while (sorted_env[i][j])
 		{
-			ft_putchar_fd(sorted_env[i][j], 1);
+			ft_putchar(sorted_env[i][j]);
 			if (sorted_env[i][j] == '=' && equ_sign)
 			{
-				ft_putchar_fd('"', 1);
+				ft_putchar('"');
 				equ_sign = true;
 			}
 			j++;
 		}
 		if (equ_sign == true)
-			ft_putendl_fd("\"", 1);
+			ft_putstr_nl("\"");
 		else
-			ft_putchar_fd('\n', 1);
+			ft_putstr_nl(NULL);
 	}
 }
 

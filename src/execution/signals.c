@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/01 13:25:54 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:31:28 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	wait_children(void)
 void	is_child_process(int signum)
 {
 	if (signum == SIGQUIT)
-		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		ft_putstr_errnl("Quit: 3");
 	else if (signum == SIGINT)
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putstr_errnl(NULL);
 }
 
 void	sigint_handler(int signum)
@@ -46,7 +46,7 @@ void	sigint_handler(int signum)
 		if (signum == SIGINT)
 		{
 			g_global->exit_status = EXIT_FAILURE;
-			ft_putchar_fd('\n', STDOUT_FILENO);
+			ft_putchar('\n');
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();

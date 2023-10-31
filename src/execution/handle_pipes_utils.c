@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/25 02:06:20 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:29:40 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	close_all_pipes(int **fd, int nbr_cmd)
 	}
 }
 
-uint8_t	setup_command_pipes(t_cmd *cmd, t_data *data)
+t_u8	setup_command_pipes(t_cmd *cmd, t_data *data)
 {
 	int	i;
 

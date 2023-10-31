@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/08 14:05:13 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:46:00 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	**rm_env_by_key(int index, char **env_pointer)
 {
-	char			*next_env;
-	char			*tmp;
-	int				i;
+	char	*next_env;
+	char	*tmp;
+	int		i;
 
 	i = index;
 	if (i < ft_tablen(env_pointer))
@@ -26,17 +26,17 @@ static char	**rm_env_by_key(int index, char **env_pointer)
 			next_env = ft_strdup(env_pointer[i + 1]);
 			tmp = env_pointer[i];
 			env_pointer[i] = next_env;
-			free (tmp);
+			free(tmp);
 			i++;
 		}
 	}
 	tmp = env_pointer[i];
 	env_pointer[i] = 0;
-	free (tmp);
+	free(tmp);
 	return (env_pointer);
 }
 
-uint8_t	unset_builtin(char **args, t_data *data)
+t_u8	unset_builtin(char **args, t_data *data)
 {
 	int	i;
 	int	env_index;

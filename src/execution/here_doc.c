@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:47:03 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 19:14:44 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
+char	*here_doc_helper(char *buf, char *dst, char *filename, bool is_quoted)
 {
 	char	*temp;
 
@@ -27,6 +27,8 @@ char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
 		dst = ft_strjoin(dst, "\n");
 		free(temp);
 	}
+	if (!buf)
+		return (dst);
 	dst = ft_strjoin_free(dst, envar_here_doc(buf, is_quoted));
 	free(buf);
 	return (dst);
@@ -34,11 +36,12 @@ char	*here_doc_helper(char *buf, char *dst, char *filename, int is_quoted)
 
 static int	random_file_name(t_data *data)
 {
-	static int	file_nbr = 0;
+	static int	file_nbr;
 	char		*name;
 	char		*itoa_nbr;
 	int			fd;
 
+	file_nbr = 0;
 	file_nbr++;
 	name = NULL;
 	itoa_nbr = ft_itoa(file_nbr);
@@ -49,7 +52,7 @@ static int	random_file_name(t_data *data)
 	if (fd < 0)
 	{
 		check_valid_fd(data, data->redir->filename, fd);
-		exit (g_global->exit_status);
+		exit(g_global->exit_status);
 	}
 	return (fd);
 }
@@ -58,7 +61,6 @@ void	parse_here_doc(t_redir *redir, t_data *data)
 {
 	char	*buf;
 	char	*dst;
-	char	*temp;
 	int		fd;
 	int		empty;
 
@@ -68,16 +70,17 @@ void	parse_here_doc(t_redir *redir, t_data *data)
 	while (1)
 	{
 		empty++;
-		data->redir->here_doc = 1;
+		data->redir->is_here_doc = true;
 		buf = readline("> ");
-		temp = dst;
+		if (!buf)
+			break ;
 		dst = here_doc_helper(buf, dst, redir->filename, redir->is_quoted);
+		debug_print_string("dst ->", dst);
 		if (!dst)
 			break ;
 	}
 	if (empty != 1)
-		ft_putendl_fd(temp, fd);
+		ft_putstr_fdnl(fd, dst);
 	free(dst);
-	free(temp);
-	close (fd);
+	close(fd);
 }

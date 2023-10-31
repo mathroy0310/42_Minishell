@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/10/05 15:24:07 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 19:12:15 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_shell_red
 {
 	int				infile;
 	int				outfile;
-	int				here_doc;
+	bool			is_here_doc;
 	bool			is_error;
 	char			*filename;
 	int				**pipe_fd;
@@ -77,7 +77,7 @@ void				init_data(t_data *data, t_state *state);
 /// @brief Main Executes a command seperated by type of command
 /// @param cmd The commands to execute
 /// @param state The state of the shell
-uint8_t				execution(t_cmd *cmd, t_state *state);
+t_u8				execution(t_cmd *cmd, t_state *state);
 
 /// @brief Resotre the stdin and stdout from the saved values
 /// @param saved_stdout
@@ -87,7 +87,7 @@ void				restore_std(int saved_stdout, int saved_stdin);
 /// @brief Dup the parameters in the `g_global->env_var`
 /// @param env the env to dup
 /// @return Exit Status (0 if OK, 1 if KO)
-uint8_t				dup_env_var(char **env);
+t_u8				dup_env_var(char **env);
 
 /*
  * exec_reg_cmd.c *
@@ -100,11 +100,11 @@ void				check_for_errors(t_cmd *cmd, t_data *data);
 /// @param cmd The command to execute
 /// @param data The data structure
 /// @return The exit status of the command (0 if OK, 1 if KO)
-uint8_t				execute_reg_cmd(t_cmd *cmd, t_data *data);
+t_u8				execute_reg_cmd(t_cmd *cmd, t_data *data);
 
 /*
  * exec_multi_cmd.c *
-*/
+ */
 
 void				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
@@ -164,8 +164,8 @@ void				setup_outfiles(t_cmd *cmd, t_data *data, int i);
 void				parse_here_doc(t_redir *redir, t_data *data);
 
 /*
- * handle_pipes.c 
-*/
+ * handle_pipes.c
+ */
 
 int					execute_process(t_cmd *cmd, t_data *data, int *fd);
 void				execute_simple_pipe(t_cmd *cmd, t_data *data,
@@ -173,15 +173,15 @@ void				execute_simple_pipe(t_cmd *cmd, t_data *data,
 
 /*
  * handle_pipes_utils.c *
-*/
+ */
 
 void				close_all_pipes(int **fd, int nbr_cmd);
 
-uint8_t				setup_command_pipes(t_cmd *cmd, t_data *data);
+t_u8				setup_command_pipes(t_cmd *cmd, t_data *data);
 
 /*
  * free.c
-*/
+ */
 
 void				free_path(char **path);
 void				main_free(t_data *data, t_cmd *cmd);

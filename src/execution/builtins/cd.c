@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:34:29 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	move_to_dir(char *path)
 	return (ret);
 }
 
-static uint8_t	change_dir(char *path, int i, char **argv)
+static t_u8	change_dir(char *path, int i, char **argv)
 {
 	DIR	*dir;
 
@@ -84,7 +84,7 @@ static uint8_t	change_dir(char *path, int i, char **argv)
 	return (OK);
 }
 
-static uint8_t	exec_cd(char *path, int i, char **argv)
+static t_u8	exec_cd(char *path, int i, char **argv)
 {
 	char	*pwd;
 
@@ -96,7 +96,7 @@ static uint8_t	exec_cd(char *path, int i, char **argv)
 	return (KO);
 }
 
-uint8_t	cd_builtin(char **argv)
+t_u8	cd_builtin(char **argv)
 {
 	char	*path;
 	int		i;
@@ -109,9 +109,9 @@ uint8_t	cd_builtin(char **argv)
 		if (path == NULL)
 		{
 			g_global->exit_status = EXIT_FAILURE;
-			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "cd:", STDERR_FILENO);
-			ft_putstr_fd (" HOME not set", STDERR_FILENO);
-			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+			ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "cd:");
+			ft_putstr_err (" HOME not set");
+			ft_putstr_errnl(ANSI_COLOR_RESET);
 			return (KO);
 		}
 		if (!ft_strcmp(path, ""))

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 21:29:29 by maroy                                    */
-/*   Updated: 2023/10/17 16:42:48 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/19 15:47:56 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_ast(t_ast *ast, t_ast_type type)
 {
 	ast->type = type;
-	ast->pipecmd_values = (void *)0;
+	ast->pipecmd_values = NULL;
 	ast->pipecmd_size = 0;
 	ast->args = 0;
 	ast->redir_nbr = 0;
@@ -62,7 +62,6 @@ void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 
 void	init_cmd(t_cmd cmd)
 {
-	(void)cmd;
 	cmd.args_size = 0;
 	cmd.argvs = NULL;
 	cmd.redir_nbr = 0;

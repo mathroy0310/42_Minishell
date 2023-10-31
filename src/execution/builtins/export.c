@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/01 16:34:10 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 18:06:19 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-uint8_t	is_valid_env_key(char *arg)
+t_u8	is_valid_env_key(char *arg)
 {
 	int		i;
 	bool	is_alnum;
@@ -27,9 +27,8 @@ uint8_t	is_valid_env_key(char *arg)
 		is_alnum = false;
 		if (ft_isalnum(arg[i]) == OK)
 			is_alnum = true;
-		else
-			if (is_alnum == false && arg[i] != '_')
-				return (KO);
+		else if (is_alnum == false && arg[i] != '_')
+			return (KO);
 		i++;
 	}
 	return (OK);
@@ -45,9 +44,11 @@ static void	set_new_env(char *arg)
 	if (arg == NULL)
 		return ;
 	while (arg[++i])
+	{
 		if (arg[i] == '=')
 			index = 1;
-	index = (env_count());
+	}
+	index = env_count();
 	g_global->env_var = realloc_new_env(index, arg, g_global->env_var);
 }
 
@@ -79,7 +80,7 @@ static void	set_or_modify(char *arg)
 	free(key);
 }
 
-uint8_t	export_builtin(char **args, t_data *data)
+t_u8	export_builtin(char **args, t_data *data)
 {
 	int	i;
 
@@ -94,11 +95,10 @@ uint8_t	export_builtin(char **args, t_data *data)
 	{
 		if (!is_valid_env_key(args[i]) && args[i] != NULL)
 		{
-			ft_putstr_fd(ANSI_COLOR_BRIGHT_RED \
-			ERR_PROMPT "export: `", STDERR_FILENO);
-			ft_putstr_fd(args[i], STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier", STDERR_FILENO);
-			ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+			ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "export: `");
+			ft_putstr_err(args[i]);
+			ft_putstr_err("': not a valid identifier");
+			ft_putstr_errnl(ANSI_COLOR_RESET);
 			g_global->exit_status = EXIT_FAILURE;
 			continue ;
 		}

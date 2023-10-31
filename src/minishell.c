@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/10/17 16:42:30 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:29:40 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	sanitize(char **buff, t_lexer **lexer)
 	free(*buff);
 }
 
-uint8_t	minishell_master(char **env)
+t_u8	minishell_master(char **env)
 {
 	t_lexer	*lexer;
 	char	*buff;

@@ -6,14 +6,14 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/10/17 16:44:59 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 19:12:30 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-uint8_t	dup_env_var(char **env)
+t_u8	dup_env_var(char **env)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ void	init_data(t_data *data, t_state *state)
 	data->redir = (t_shell_red *)malloc(sizeof(t_shell_red));
 	data->redir->infile = 0;
 	data->redir->outfile = 0;
-	data->redir->here_doc = 0;
+	data->redir->is_here_doc = false;
 	data->redir->filename = NULL;
 	data->redir->pipe_fd = NULL;
 	data->redir->is_error = false;
@@ -71,7 +71,7 @@ void	restore_std(int saved_stdout, int saved_stdin)
 	close(saved_stdin);
 }
 
-uint8_t	execution(t_cmd *cmd, t_state *state)
+t_u8	execution(t_cmd *cmd, t_state *state)
 {
 	t_data	*data;
 

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/29 20:21:18 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:25:57 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ t_token	*init_token(t_token_type type, char *str, t_lexer *lexer)
 
 void	print_error_msg(char *str, char *var)
 {
-	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED, STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_err(ANSI_COLOR_BRIGHT_RED);
+	ft_putstr_err(str);
 	if (var)
 	{
-		ft_putstr_fd(" `", STDERR_FILENO);
-		ft_putstr_fd(var, STDERR_FILENO);
-		ft_putstr_fd("'", STDERR_FILENO);
+		ft_putstr_err(" `");
+		ft_putstr_err(var);
+		ft_putstr_err("'");
 	}
-	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+	ft_putstr_errnl(ANSI_COLOR_RESET);
 	g_global->exit_status = EXIT_FAILURE;
 }
 

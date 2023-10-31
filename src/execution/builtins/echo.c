@@ -6,13 +6,13 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/11 14:22:40 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:37:20 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static uint8_t	is_valid_option(char *arg)
+static t_u8	is_valid_option(char *arg)
 {
 	int	i;
 
@@ -45,20 +45,20 @@ static void	check_n_option(char **args)
 	}
 	while (args[i] != NULL)
 	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
+		ft_putstr(args[i]);
 		i++;
 		if (args[i] != NULL)
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			ft_putstr(" ");
 	}
 }
 
-uint8_t	echo_builtin(char **args)
+t_u8	echo_builtin(char **args)
 {
 	int	j;
 
 	g_global->exit_status = EXIT_SUCCESS;
 	if (args[1] == NULL)
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_putstr_nl(NULL);
 	else
 	{
 		if (is_valid_option(args[1]) == 1)
@@ -68,12 +68,12 @@ uint8_t	echo_builtin(char **args)
 			j = 1;
 			while (args[j] != NULL)
 			{
-				ft_putstr_fd(args[j], STDOUT_FILENO);
+				ft_putstr(args[j]);
 				if (args[j + 1] != NULL)
-					ft_putstr_fd(" ", STDOUT_FILENO);
+					ft_putstr(" ");
 				j++;
 			}
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_putstr_nl(NULL);
 		}
 	}
 	return (OK);

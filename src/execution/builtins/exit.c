@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 17:53:21 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 18:29:31 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 void	error_exit(char *arg)
 {
-	ft_putendl_fd("exit", STDOUT_FILENO);
-	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: ", STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd(": numeric argument required", STDERR_FILENO);
-	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+	ft_putstr_nl("exit");
+	ft_putstr(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: ");
+	ft_putstr(arg);
+	ft_putstr(": numeric argument required");
+	ft_putstr_nl(ANSI_COLOR_RESET);
 	exit(255);
 }
 
@@ -49,7 +49,7 @@ long long	atoi_exit(const char *str)
 			error_exit(error_tmp);
 		str++;
 	}
-	ft_putendl_fd("exit", STDERR_FILENO);
+	//ft_putstr_errnl("exit");
 	exit(r * signe);
 }
 
@@ -66,10 +66,10 @@ void	exit_number(char *arg)
 				i++;
 			if (arg[i] < '0' || arg[i] > '9')
 			{
-				ft_putendl_fd("exit", STDOUT_FILENO);
-				ft_putstr_fd(ERR_PROMPT "exit: ", STDERR_FILENO);
-				ft_putstr_fd(arg, STDERR_FILENO);
-				ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+				ft_putstr_nl("exit");
+				ft_putstr(ERR_PROMPT "exit: ");
+				ft_putstr(arg);
+				ft_putstr_nl(": numeric argument required");
 				exit(255);
 			}
 			i++;
@@ -95,9 +95,9 @@ int	check_for_num_arg(char *args)
 	}
 	if (!is_alpha)
 	{
-		ft_putendl_fd("exit", STDOUT_FILENO);
-		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT ERR_EXIT, STDERR_FILENO);
-		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+		ft_putstr_nl("exit");
+		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT ERR_EXIT);
+		ft_putstr_errnl(ANSI_COLOR_RESET);
 		g_global->exit_status = EXIT_FAILURE;
 	}
 	else
@@ -105,7 +105,7 @@ int	check_for_num_arg(char *args)
 	return (EXIT_SUCCESS);
 }
 
-uint8_t	exit_builtin(char **args)
+t_u8	exit_builtin(char **args)
 {
 	char	*trim_arg;
 
@@ -116,14 +116,14 @@ uint8_t	exit_builtin(char **args)
 	{
 		if (!ft_strcmp(trim_arg, "-9223372036854775808"))
 		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
+			ft_putstr_nl("exit");
 			exit(EXIT_SUCCESS);
 		}
 		exit_number(trim_arg);
 	}
 	else
 	{
-		ft_putendl_fd("exit", STDOUT_FILENO);
+		ft_putstr_nl("exit");
 		exit(g_global->exit_status);
 	}
 	return (OK);

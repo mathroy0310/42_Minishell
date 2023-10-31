@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/12 18:01:11 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:35:53 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 void	error_retrieving_cd(void)
 {
-	ft_putstr_fd(ANSI_COLOR_BRIGHT_RED CD_ERR, STDERR_FILENO);
-	printf("%s", strerror(errno));
-	ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+	ft_putstr_err(ANSI_COLOR_BRIGHT_RED CD_ERR);
+	ft_printf("%s", strerror(errno));
+	ft_putstr_errnl(ANSI_COLOR_RESET);
 }
 
 char	*add_char_to_word(char *word, char c)
@@ -87,8 +87,7 @@ int	error_path(const char *cmd, const char *path, int errnum)
 {
 	g_global->exit_status = EXIT_FAILURE;
 	debug_print_msg("dans error_path");
-	printf(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "%s: %s: %s",
+	ft_printf(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "%s: %s: %s \n",
 		cmd, path, strerror(errnum));
-	printf("\n");
 	return (g_global->exit_status);
 }

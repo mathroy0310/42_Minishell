@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/07/31 15:20:11 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:43 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:37:42 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	is_valid_envar(char c)
 	return (false);
 }
 
-uint8_t	env_builtin(t_data *data)
+t_u8	env_builtin(t_data *data)
 {
 	int	i;
 
@@ -27,6 +27,6 @@ uint8_t	env_builtin(t_data *data)
 	g_global->exit_status = EXIT_SUCCESS;
 	i = -1;
 	while (data->state->env_[++i] != NULL)
-		ft_putendl_fd(data->state->env_[i], STDOUT_FILENO);
+		ft_putstr_nl(data->state->env_[i]);
 	return (OK);
 }

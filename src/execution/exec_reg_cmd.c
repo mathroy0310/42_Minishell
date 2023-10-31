@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/13 15:58:19 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/10/28 16:47:35 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -23,24 +23,43 @@ void	check_for_errors(t_cmd *cmd, t_data *data)
 	}
 	if (!ft_strcmp(cmd->argvs[0], "\0"))
 	{
-		ft_putstr_fd (ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
-		ft_putstr_fd(": command not found", STDERR_FILENO);
-		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
+		ft_putstr_err(": command not found");
+		ft_putstr_errnl(ANSI_COLOR_RESET);
+		exit(g_global->exit_status);
+	}
+	/// FAUT CHANGER CA LOL !!!! ya no way quon garde ca de meme
+	if ((!ft_strcmp(cmd->argvs[0], "./")) || (!ft_strcmp(cmd->argvs[0], "../")))
+	{
+		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
+		ft_putstr_err(cmd->argvs[0]);
+		ft_putstr_err(": is a directory");
+		ft_putstr_errnl(ANSI_COLOR_RESET);
+		exit(g_global->exit_status);
+	}
+	if (!ft_strcmp(cmd->argvs[0], "."))
+	{
+		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
+		ft_putstr_err("filename argument required");
+		ft_putstr_err(".: usage: . filename [arguments]");
+		ft_putstr_errnl(ANSI_COLOR_RESET);
 		exit(g_global->exit_status);
 	}
 }
 
-static uint8_t	check_for_permission(t_cmd *cmd)
+static t_u8	check_for_permission(t_cmd *cmd)
 {
+	/// ici a place pour le `.` et `./`
+	/// ca veut dire quil reussi a execve `.` ou `./`
 	if (access(cmd->argvs[0], F_OK | X_OK) != 0)
 	{
-		ft_putstr_fd(ANSI_COLOR_BRIGHT_RED ERR_PROMPT, STDERR_FILENO);
-		ft_putstr_fd(cmd->argvs[0], STDERR_FILENO);
-		ft_putstr_fd(": Permission denied", STDERR_FILENO);
-		ft_putendl_fd(ANSI_COLOR_RESET, STDERR_FILENO);
+		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
+		ft_putstr_err(cmd->argvs[0]);
+		ft_putstr_err(": Permission denied");
+		ft_putstr_errnl(ANSI_COLOR_RESET);
 		return (126);
 	}
-	return (1);
+	return (OK);
 }
 
 void	find_cmd_path(t_cmd *cmd, t_data *data)
@@ -49,7 +68,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *data)
 	int		fd;
 
 	check_for_errors(cmd, data);
-	possible_path = find_path (cmd->argvs[0], data->state->path);
+	possible_path = find_path(cmd->argvs[0], data->state->path);
 	if (possible_path == NULL)
 		possible_path = ft_strdup(cmd->argvs[0]);
 	fd = open(possible_path, O_RDONLY);
@@ -61,11 +80,11 @@ void	find_cmd_path(t_cmd *cmd, t_data *data)
 			exit(g_global->exit_status);
 		}
 	}
-	if (execve (possible_path, cmd->argvs, g_global->env_var))
+	if (execve(possible_path, cmd->argvs, g_global->env_var))
 		exit(check_for_permission(cmd));
 }
 
-uint8_t	execute_reg_cmd(t_cmd *cmd, t_data *data)
+t_u8	execute_reg_cmd(t_cmd *cmd, t_data *data)
 {
 	pid_t	child_pid;
 
