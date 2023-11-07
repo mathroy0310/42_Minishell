@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_reg_cmd.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/13 15:58:19 by maroy                                    */
-/*   Updated: 2023/10/28 16:47:35 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_reg_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/07 01:39:28 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/stat.h>
+# include <dirent.h>
 
 void	check_for_errors(t_cmd *cmd, t_data *data)
 {
@@ -28,38 +30,29 @@ void	check_for_errors(t_cmd *cmd, t_data *data)
 		ft_putstr_errnl(ANSI_COLOR_RESET);
 		exit(g_global->exit_status);
 	}
-	/// FAUT CHANGER CA LOL !!!! ya no way quon garde ca de meme
-	if ((!ft_strcmp(cmd->argvs[0], "./")) || (!ft_strcmp(cmd->argvs[0], "../")))
-	{
-		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
-		ft_putstr_err(cmd->argvs[0]);
-		ft_putstr_err(": is a directory");
-		ft_putstr_errnl(ANSI_COLOR_RESET);
-		exit(g_global->exit_status);
-	}
-	if (!ft_strcmp(cmd->argvs[0], "."))
-	{
-		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
-		ft_putstr_err("filename argument required");
-		ft_putstr_err(".: usage: . filename [arguments]");
-		ft_putstr_errnl(ANSI_COLOR_RESET);
-		exit(g_global->exit_status);
-	}
 }
 
 static t_u8	check_for_permission(t_cmd *cmd)
 {
-	/// ici a place pour le `.` et `./`
-	/// ca veut dire quil reussi a execve `.` ou `./`
-	if (access(cmd->argvs[0], F_OK | X_OK) != 0)
+	struct stat	sb;
+	DIR			*dirp;
+
+	dirp = opendir(cmd->argvs[0]);
+	ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
+	ft_putstr_err(cmd->argvs[0]);
+	if (dirp)
 	{
-		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
-		ft_putstr_err(cmd->argvs[0]);
-		ft_putstr_err(": Permission denied");
+		closedir(dirp);
+		ft_putstr_err(": is a directory");
 		ft_putstr_errnl(ANSI_COLOR_RESET);
 		return (126);
 	}
-	return (OK);
+	if (stat(cmd->argvs[0], &sb) == 0)
+		ft_putstr_err(": Permission denied");
+	else if (!dirp)
+		ft_putstr_err(" Not a directory");
+	ft_putstr_errnl(ANSI_COLOR_RESET);
+	return (126);
 }
 
 void	find_cmd_path(t_cmd *cmd, t_data *data)
