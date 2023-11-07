@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/06/26 21:49:41 by maroy                                    */
-/*   Updated: 2023/10/28 16:46:04 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/07 02:40:42 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -26,10 +26,13 @@
 
 # ifdef __APPLE__
 #  include <limits.h> // pour PATH_MAX
+#  include <termio.h>
 # endif
 
 # ifdef __linux__
 #  include <linux/limits.h> // pour PATH_MAX
+#  include <termios.h>
+#  define ECHOCTL 0x40
 # endif
 
 # include <errno.h> // pour errno
@@ -94,5 +97,10 @@ void			debug_print_string(char *msg, char *arg);
 void			debug_print_decimal(char *msg, int arg);
 void			debug_print_char(char *msg, char arg);
 void			debug_print_cmd(t_cmd *cmd);
+
+
+
+void shlvl();
+
 
 #endif

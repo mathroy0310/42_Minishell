@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   execution.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/10/28 19:12:15 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   execution.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/07 02:14:33 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -147,6 +147,7 @@ char				*find_path(char *cmd, char **path);
 void				sigint_handler(int signum);
 /// @brief waitpid and give `g_global->exit_status` the exit status
 void				wait_children(void);
+void				signals_init(void);
 
 /*
  * redirections.c *

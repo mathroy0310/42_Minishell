@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   signals.c                                         ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/01 13:25:54 by maroy                                    */
-/*   Updated: 2023/10/28 16:31:28 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/01 13:25:54 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/07 02:41:40 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -57,4 +57,22 @@ void	sigint_handler(int signum)
 			rl_redisplay();
 		}
 	}
+}
+ 
+static void 	remove_echoctl(void)
+{
+	struct termios	term;
+
+	if (tcgetattr(STDIN_FILENO, &term) != 0)
+		ft_putstr_err( ERR_PROMPT"tcsetattr"ANSI_COLOR_RESET);
+	term.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) != 0)
+		ft_putstr_err( ERR_PROMPT"tcsetattr"ANSI_COLOR_RESET);
+}
+
+void	signals_init(void)
+{
+	remove_echoctl();
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigint_handler);
 }

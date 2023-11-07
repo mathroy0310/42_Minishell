@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   minishell.c                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/10/28 16:29:40 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/07 02:40:33 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -23,7 +23,9 @@ static char	**get_env_(char **env_)
 	if (env == NULL)
 		exit(EXIT_FAILURE);
 	while (++i < ft_tablen(env_))
+	{
 		env[i] = ft_strdup(env_[i]);
+	}
 	env[i] = NULL;
 	return (env);
 }
@@ -44,9 +46,9 @@ void	initialize(char **env, t_state *state)
 	dup_env_var(env);
 	g_global->exit_status = EXIT_SUCCESS;
 	g_global->pid = 1;
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	signals_init();
 	state->env_ = get_env_(env);
+	shlvl();
 	state->path = NULL;
 }
 
