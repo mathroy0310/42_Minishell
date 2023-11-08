@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/09/19 22:47:03 by maroy                                    */
-/*   Updated: 2023/10/28 19:14:44 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/11/08 14:19:25 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -63,22 +63,32 @@ void	parse_here_doc(t_redir *redir, t_data *data)
 	char	*dst;
 	int		fd;
 	int		empty;
+	pid_t	child_pid;
 
 	empty = 0;
 	fd = random_file_name(data);
 	dst = ft_strdup("");
-	while (1)
+	g_global->pid = 0;
+	child_pid = fork();
+	if (child_pid < 0)
+		fork_failed();
+	else if (child_pid == 0)
 	{
-		empty++;
-		data->redir->is_here_doc = true;
-		buf = readline("> ");
-		if (!buf)
-			break ;
-		dst = here_doc_helper(buf, dst, redir->filename, redir->is_quoted);
-		debug_print_string("dst ->", dst);
-		if (!dst)
-			break ;
+		signal(SIGINT, sigint_here_doc_handler);
+		while (1)
+		{
+			empty++;
+			data->redir->is_here_doc = true;
+			buf = readline("> ");
+			if (!buf)
+				break ;
+			dst = here_doc_helper(buf, dst, redir->filename, redir->is_quoted);
+			debug_print_string("dst ->", dst);
+			if (!dst)
+				break ;
+		}
 	}
+	signals_init();
 	if (empty != 1)
 		ft_putstr_fdnl(fd, dst);
 	free(dst);

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.qc>                        ██ ██             */
 /*                                                          ██ ███████.qc     */
 /*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/10/17 15:38:57 by maroy            >(.)__ <(.)__ =(.)__    */
+/*   Updated: 2023/11/08 15:44:45 by maroy            >(.)__ <(.)__ =(.)__    */
 /*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # define OK 1
 /// @brief Return Failure
 # define KO 0
+
+# define W EXIT_SUCCESS
+# define L EXIT_FAILURE
 
 /*
  * -- Char defines --

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 13:25:54 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 02:41:40 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   signals.c                                         ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/01 13:25:54 by maroy                                    */
+/*   Updated: 2023/11/08 14:57:07 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	wait_children(void)
 {
-	int		status;
-	int		signal;
+	int	status;
+	int	signal;
 
 	while (waitpid(-1, &status, 0) > 0)
 	{
@@ -29,50 +29,34 @@ void	wait_children(void)
 	}
 }
 
-void	is_child_process(int signum)
+void	sigint_here_doc_handler(int signum)
 {
-	if (signum == SIGQUIT)
-		ft_putstr_errnl("Quit: 3");
-	else if (signum == SIGINT)
-		ft_putstr_errnl(NULL);
+	if (signum == SIGINT)
+	{
+		g_global->exit_status = EXIT_FAILURE;
+		ft_putchar('\n');
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		exit(g_global->exit_status);
+	}
 }
 
 void	sigint_handler(int signum)
 {
 	if (g_global->pid == 0)
-		is_child_process(signum);
-	else
+		return ;
+	if (signum == SIGINT)
 	{
-		if (signum == SIGINT)
-		{
-			g_global->exit_status = EXIT_FAILURE;
-			ft_putchar('\n');
-			rl_replace_line("", 0);
-			rl_on_new_line();
-			rl_redisplay();
-		}
-		else if (signum == SIGQUIT)
-		{
-			rl_on_new_line();
-			rl_redisplay();
-		}
+		g_global->exit_status = EXIT_FAILURE;
+		ft_putchar('\n');
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-}
- 
-static void 	remove_echoctl(void)
-{
-	struct termios	term;
-
-	if (tcgetattr(STDIN_FILENO, &term) != 0)
-		ft_putstr_err( ERR_PROMPT"tcsetattr"ANSI_COLOR_RESET);
-	term.c_lflag &= ~ECHOCTL;
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) != 0)
-		ft_putstr_err( ERR_PROMPT"tcsetattr"ANSI_COLOR_RESET);
 }
 
 void	signals_init(void)
 {
-	remove_echoctl();
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

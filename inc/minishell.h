@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 02:40:42 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   minishell.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/06/26 21:49:41 by maroy                                    */
+/*   Updated: 2023/11/08 14:49:15 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -26,7 +26,7 @@
 
 # ifdef __APPLE__
 #  include <limits.h> // pour PATH_MAX
-#  include <termio.h>
+#  include <termios.h>
 # endif
 
 # ifdef __linux__
@@ -70,37 +70,37 @@
  * -- Struct --
  */
 
+typedef struct termios	t_termios;
+
 typedef struct s_global
 {
-	char		**env_var;
-	pid_t		pid;
-	t_u8		exit_status;
-}				t_global;
+	char				**env_var;
+	pid_t				pid;
+	t_u8				exit_status;
+	t_termios			term_old;
+}						t_global;
 
 /*
  * -- My Global Variable --
  */
-extern t_global	*g_global;
+extern t_global			*g_global;
 
 /*
  * -- Prototypes --
  */
-t_u8			minishell_master(char **env);
-void			quit_minishell(char *buff);
+t_u8					minishell_master(char **env);
+void					quit_minishell(char *buff);
 /*
  * debug.c *
  */
 
-void			debug_print_tab(char **tab);
-void			debug_print_msg(char *msg);
-void			debug_print_string(char *msg, char *arg);
-void			debug_print_decimal(char *msg, int arg);
-void			debug_print_char(char *msg, char arg);
-void			debug_print_cmd(t_cmd *cmd);
+void					debug_print_tab(char **tab);
+void					debug_print_msg(char *msg);
+void					debug_print_string(char *msg, char *arg);
+void					debug_print_decimal(char *msg, int arg);
+void					debug_print_char(char *msg, char arg);
+void					debug_print_cmd(t_cmd *cmd);
 
-
-
-void shlvl();
-
+void					shlvl(void);
 
 #endif

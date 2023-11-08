@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 02:14:33 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   execution.h                                       ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/08/29 21:37:15 by maroy                                    */
+/*   Updated: 2023/11/08 14:18:12 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -216,6 +216,7 @@ void				not_valid_id(char *arg);
 void				fork_failed(void);
 void				check_valid_fd(t_data *data, char *file_error, int fd);
 void				print_error(char *file_error);
-int8_t				path_error_print(t_cmd *cmd, t_data *data,
+t_s8				path_error_print(t_cmd *cmd, t_data *data,
 						char *possible_path);
+void				sigint_here_doc_handler(int signum);
 #endif

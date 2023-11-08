@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_reg_cmd.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 01:39:28 by maroy            ###   ########.fr       */
-/*                                                                            */
+/*                                                     ██   ██ ██████         */
+/*   exec_reg_cmd.c                                    ██   ██      ██        */
+/*                                                     ███████  █████         */
+/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
+/*                                                          ██ ███████.qc     */
+/*   Created: 2023/09/13 15:58:19 by maroy                                    */
+/*   Updated: 2023/11/08 14:55:58 by maroy            >(.)__ <(.)__ =(.)__    */
+/*                                                     (___/  (___/  (___/    */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <dirent.h>
 #include <sys/stat.h>
-# include <dirent.h>
 
 void	check_for_errors(t_cmd *cmd, t_data *data)
 {
@@ -73,6 +73,8 @@ void	find_cmd_path(t_cmd *cmd, t_data *data)
 			exit(g_global->exit_status);
 		}
 	}
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (execve(possible_path, cmd->argvs, g_global->env_var))
 		exit(check_for_permission(cmd));
 }
