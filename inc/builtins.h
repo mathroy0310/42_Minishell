@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   builtins.h                                        ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/01 14:30:21 by maroy                                    */
-/*   Updated: 2023/10/28 16:29:40 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   builtins.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 14:30:21 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/14 01:48:18 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
@@ -20,15 +20,8 @@
  * builtins.c *
  */
 
-/// @brief Check if the command is a builtin
-/// @param cmd The command to check
-/// @return 1 if the command is a builtin, 0 otherwise
 t_u8	is_builtin(t_cmd *cmd);
 
-/// @brief Check if the command is a builtin and execute it
-/// @param cmd The command to check and execute
-/// @param data The data structure
-/// @return 1 if the command is a builtin, 0 otherwise
 t_u8	check_builtin(t_cmd *cmd, t_data *data);
 
 /*

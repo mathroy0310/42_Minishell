@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   defines.h                                         ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/25 15:19:10 by maroy                                    */
-/*   Updated: 2023/11/08 15:44:45 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/25 15:19:10 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/14 01:49:02 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
@@ -45,14 +45,11 @@
 #  define ERR_PROMPT "minishell: "
 # endif
 
-/// @brief Temporary file for command history
 # define HISTORY_FILE ".minishell_history"
-/// @brief Temporary file for here_doc
 # define HERE_DOC_FILE ".minishell_here_doc"
 
-/// @brief Return Success
+
 # define OK 1
-/// @brief Return Failure
 # define KO 0
 
 # define W EXIT_SUCCESS
@@ -62,19 +59,19 @@
  * -- Char defines --
  */
 
-/// @brief `|` character
+// `|` character
 # define PIPE 124
-/// @brief `>` character
+// `>` character
 # define GREAT 62
-/// @brief `<` character
+// `<` character
 # define LESS 60
-/// @brief `"` character
+// `"` character
 # define DOUBLE_QUOTE 34
-/// @brief `'` character
+// `'` character
 # define SINGLE_QUOTE 39
-/// @brief `$` character
+// `$` character
 # define DOLLAR 36
-/// @brief `\\` character
+// `\\` character
 # define BSLASH 92
 // already exist in the chardefs of readline
 //# define SPACE 32

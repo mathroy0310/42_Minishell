@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   execution.h                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:37:15 by maroy                                    */
-/*   Updated: 2023/11/08 14:18:12 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   execution.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/14 01:49:47 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
@@ -69,24 +69,13 @@ int					execute_pipe_cmd(t_cmd *cmd, t_data *data);
 /*
  * exec_main.c *
  */
-/// @brief Initialize the `t_data` structure
-/// @param data The data structure
-/// @param state The state of the shell
+
 void				init_data(t_data *data, t_state *state);
 
-/// @brief Main Executes a command seperated by type of command
-/// @param cmd The commands to execute
-/// @param state The state of the shell
 t_u8				execution(t_cmd *cmd, t_state *state);
 
-/// @brief Resotre the stdin and stdout from the saved values
-/// @param saved_stdout
-/// @param saved_stdin
 void				restore_std(int saved_stdout, int saved_stdin);
 
-/// @brief Dup the parameters in the `g_global->env_var`
-/// @param env the env to dup
-/// @return Exit Status (0 if OK, 1 if KO)
 t_u8				dup_env_var(char **env);
 
 /*
@@ -95,11 +84,6 @@ t_u8				dup_env_var(char **env);
 
 void				check_for_errors(t_cmd *cmd, t_data *data);
 
-/// @brief executes a regular command,
-///	@brief commands with no redirections and no pipes
-/// @param cmd The command to execute
-/// @param data The data structure
-/// @return The exit status of the command (0 if OK, 1 if KO)
 t_u8				execute_reg_cmd(t_cmd *cmd, t_data *data);
 
 /*
@@ -114,26 +98,16 @@ void				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 void				setup_input(t_cmd *cmd, t_data *data, int j);
 void				setup_output(t_cmd *cmd, t_data *data, int j);
 
-/// @brief Executes a command and check for errors
-/// @param cmd The command to execute
-/// @param data The data structure
-/// @return The exit status of the command.
 void				find_cmd_path(t_cmd *cmd, t_data *data);
 
 /*
  * exec_utils.c *
  */
 
-/// @brief Get the value of an environment variable
-/// @param key The key of the environment variable
-/// @param env_pointer The pointer to the env table
-/// @return Index of the env variable
 int8_t				find_env_var_index(const char *key, char **env_pointer);
-/// @brief Get the value of an environment variable
-/// @param key The key of the environment variable
-/// @return The value of the environment variable
+
 char				*get_env_var_by_key(const char *key);
-/// @brief
+
 char				**realloc_new_env(int env_num, char *arg,
 						char **env_pointer);
 char				*find_path(char *cmd, char **path);
@@ -141,11 +115,7 @@ char				*find_path(char *cmd, char **path);
  * signals.c *
  */
 
-/// @brief Handle the `SIGINT` and `SIGQUIT` signal
-/// @brief also handle the case where the signal is sent to a child process
-/// @param signum The signal number
 void				sigint_handler(int signum);
-/// @brief waitpid and give `g_global->exit_status` the exit status
 void				wait_children(void);
 void				signals_init(void);
 
@@ -192,20 +162,10 @@ void				ft_freeptr(void *ptr);
  * here_doc_utils.c *
  */
 
-/// @brief Count the number of redirections of a given type
-/// @param cmd The command to check
-/// @param type The type of redirection to count
-/// @return The number of redirections of the given type
 int					token_type_count(t_cmd *cmd, t_token_type type);
-/// @brief Handle the case where there's envar in here_doc
-/// @param buff The buffer to parse
-/// @param i The index of the buffer
-/// @return The string to replace the envar with
+
 char				*envar_here_doc(char *buff, int i);
 
-/// @brief Execute a single command (redirections , no pipes)
-/// @param cmd The command to execute
-/// @param data The data structure
 void				execute_single_cmd(t_cmd *cmd, t_data *data);
 
 /*
