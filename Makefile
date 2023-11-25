@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/11/07 02:24:36 by maroy            ###   ########.fr        #
+#    Updated: 2023/11/24 19:26:31 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,8 +136,7 @@ bin/%.o		: $(SRCDIR)%.c
 
 all			: ${NAME}
 
-
-debug		: CFLAGS += -g3 -fsanitize=address -DDEBUG=1 
+debug		: CFLAGS += -g3 -DDEBUG=1 #-fsanitize=address 
 debug		: re
 
 ${SLIB_LIBFT}	:
@@ -163,6 +162,10 @@ ${SLIB_RLINE}	:
 ${NAME}		:	${SLIB_RLINE} ${SLIB_LIBFT} ${BIN} 
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${LIBFTFLAGS} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
+
+leaks		: debug
+	@echo "${RED}LEAKS CHECKER${DEFAULT}"
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=supp.txt ./${NAME}
 
 clean		:
 	@${RM} ${BINDIR} 

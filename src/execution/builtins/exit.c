@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exit.c                                            ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/12 17:53:21 by maroy                                    */
-/*   Updated: 2023/10/28 18:29:31 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 17:53:21 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 17:06:03 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -16,12 +16,12 @@
 
 void	error_exit(char *arg)
 {
-	ft_putstr_nl("exit");
-	ft_putstr(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: ");
-	ft_putstr(arg);
-	ft_putstr(": numeric argument required");
-	ft_putstr_nl(ANSI_COLOR_RESET);
-	exit(255);
+	ft_putstr_errnl("exit");
+	ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "exit: ");
+	ft_putstr_err(arg);
+	ft_putstr_err(": numeric argument required");
+	ft_putstr_errnl(ANSI_COLOR_RESET);
+	exit(2);
 }
 
 long long	atoi_exit(const char *str)
@@ -70,7 +70,7 @@ void	exit_number(char *arg)
 				ft_putstr(ERR_PROMPT "exit: ");
 				ft_putstr(arg);
 				ft_putstr_nl(": numeric argument required");
-				exit(255);
+				exit(2);
 			}
 			i++;
 		}
@@ -81,10 +81,10 @@ void	exit_number(char *arg)
 int	check_for_num_arg(char *args)
 {
 	int	i;
-	int	is_alpha;
+	t_bool	is_alpha;
 
 	i = 0;
-	is_alpha = 0;
+	is_alpha = FALSE;
 	while (args[i])
 	{
 		if (args[0] == '-' || args[0] == '+')

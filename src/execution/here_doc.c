@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   here_doc.c                                        ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/19 22:47:03 by maroy                                    */
-/*   Updated: 2023/11/08 14:19:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 22:47:03 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/23 18:54:47 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -85,8 +85,11 @@ void	parse_here_doc(t_redir *redir, t_data *data)
 			dst = here_doc_helper(buf, dst, redir->filename, redir->is_quoted);
 			debug_print_string("dst ->", dst);
 			if (!dst)
+			{
 				break ;
+			}
 		}
+		exit(g_global->exit_status);
 	}
 	signals_init();
 	if (empty != 1)

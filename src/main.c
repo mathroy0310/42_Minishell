@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   main.c                                            ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/07/14 21:56:43 by maroy                                    */
-/*   Updated: 2023/11/08 14:55:02 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 11:25:18 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -80,16 +80,7 @@ void	quit_minishell(char *buff)
 
 int	main(int argc, char **argv, char **env)
 {
-	int			return_value;
-	t_termios	term;
-
 	(void)argc;
 	(void)argv;
-	tcgetattr(STDIN_FILENO, &term);
-	tcgetattr(STDIN_FILENO, &g_global->term_old);
-	term.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	return_value = minishell_master(env);
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_global->term_old);
-	return (return_value);
+	return (minishell_master(env));
 }

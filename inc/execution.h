@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/14 01:49:47 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/24 16:25:49 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_u8				dup_env_var(char **env);
 
 void				check_for_errors(t_cmd *cmd, t_data *data);
 
+t_u8				check_for_permission(t_cmd *cmd);
 t_u8				execute_reg_cmd(t_cmd *cmd, t_data *data);
 
 /*
@@ -156,7 +157,6 @@ t_u8				setup_command_pipes(t_cmd *cmd, t_data *data);
 
 void				free_path(char **path);
 void				main_free(t_data *data, t_cmd *cmd);
-void				ft_freeptr(void *ptr);
 
 /*
  * here_doc_utils.c *

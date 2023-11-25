@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   cd.c                                              ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/12 18:00:20 by maroy                                    */
-/*   Updated: 2023/10/28 16:34:29 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 11:45:05 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -110,7 +110,7 @@ t_u8	cd_builtin(char **argv)
 		{
 			g_global->exit_status = EXIT_FAILURE;
 			ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT "cd:");
-			ft_putstr_err (" HOME not set");
+			ft_putstr_err(" HOME not set");
 			ft_putstr_errnl(ANSI_COLOR_RESET);
 			return (KO);
 		}

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   lexer_utils.c                                     ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:40:58 by maroy                                    */
-/*   Updated: 2023/10/17 16:42:58 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 11:56:24 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -45,10 +45,10 @@ char	*ft_getenv(char *str)
 			env_value = ft_substr(g_global->env_var[i], start + 1, \
 				ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
-			ft_freeptr(env_key);
+			ft_free(env_key);
 			break ;
 		}
-		ft_freeptr(env_key);
+		ft_free(env_key);
 	}
 	return (env_value);
 }

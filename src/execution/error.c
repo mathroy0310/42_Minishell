@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   error.c                                           ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/11 13:56:32 by maroy                                    */
-/*   Updated: 2023/10/28 16:25:25 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 13:56:32 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 18:12:44 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -28,7 +28,7 @@ void	check_valid_fd(t_data *data, char *file_error, int fd)
 		ft_putstr_err(ANSI_COLOR_BRIGHT_RED ERR_PROMPT);
 		ft_putstr_err(file_error);
 		perror(" ");
-		ft_putstr_errnl(ANSI_COLOR_RESET);
+		ft_putstr_err(ANSI_COLOR_RESET);
 		g_global->exit_status = EXIT_FAILURE;
 	}
 }

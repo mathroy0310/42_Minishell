@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   handle_pipes.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/23 16:34:02 by maroy                                    */
-/*   Updated: 2023/11/08 13:39:20 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   handle_pipes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 16:34:02 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 18:13:01 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -24,20 +24,32 @@ void	execute_cmd_path(t_cmd *cmd, t_data *data, int *p_fd)
 	fd = open(possible_path, O_RDONLY);
 	if (fd < 0)
 		if (path_error_print(cmd, data, possible_path))
+		{
+			close(fd);
+			free(possible_path);	
 			exit(127);
+		}
 	if (p_fd != NULL)
 	{
 		close(p_fd[0]);
 		close(p_fd[1]);
 	}
+	close(fd);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(possible_path, cmd->argvs, g_global->env_var))
-		exit(126);
+		exit(1);
 }
 
 int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 {
+	printf("- data->redir->is_error %d\n" ,data->redir->is_error);
+	printf("- data->redir->infile %d\n" ,data->redir->infile);
+	printf("- data->redir->outfile %d\n" ,data->redir->outfile);
+	printf("- data->state->read_end %d\n" ,data->state->read_end);
+	printf("- data->state->write_end %d\n" ,data->state->write_end);
+	if (data->redir->is_error)
+		return (EXIT_FAILURE);
 	g_global->pid = fork();
 	if (g_global->pid == 0)
 	{
@@ -57,7 +69,7 @@ int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 		}
 		if (cmd->argvs != NULL && is_builtin(cmd))
 			check_builtin(cmd, data);
-		else
+		else if (cmd->argvs != NULL)
 			execute_cmd_path(cmd, data, fd);
 		exit(EXIT_SUCCESS);
 	}

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_multi_cmd.c                                  ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/23 14:48:08 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_multi_cmd.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 14:48:08 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 16:56:04 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -78,14 +78,14 @@ void	execute_pipe_redir(t_cmd *cmd, t_data *data, t_state *state)
 void	execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state)
 {
 	int		i;
-	bool	is_redir;
+	t_bool	is_redir;
 
 	i = 0;
-	is_redir = false;
+	is_redir = FALSE;
 	while (i < cmd->nbr_cmd)
 	{
 		if (cmd[i].redir_nbr != 0)
-			is_redir = true;
+			is_redir = TRUE;
 		i++;
 	}
 	if (!is_redir)

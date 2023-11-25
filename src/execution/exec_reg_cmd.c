@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_reg_cmd.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/09/13 15:58:19 by maroy                                    */
-/*   Updated: 2023/11/08 14:55:58 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_reg_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 17:59:39 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -32,7 +32,7 @@ void	check_for_errors(t_cmd *cmd, t_data *data)
 	}
 }
 
-static t_u8	check_for_permission(t_cmd *cmd)
+t_u8	check_for_permission(t_cmd *cmd)
 {
 	struct stat	sb;
 	DIR			*dirp;
@@ -50,7 +50,10 @@ static t_u8	check_for_permission(t_cmd *cmd)
 	if (stat(cmd->argvs[0], &sb) == 0)
 		ft_putstr_err(": Permission denied");
 	else if (!dirp)
+	{
 		ft_putstr_err(" Not a directory");
+		return (127);
+	}
 	ft_putstr_errnl(ANSI_COLOR_RESET);
 	return (126);
 }
@@ -69,13 +72,15 @@ void	find_cmd_path(t_cmd *cmd, t_data *data)
 	{
 		if (!path_error_print(cmd, data, possible_path))
 		{
+			close(fd);
 			free(possible_path);
 			exit(g_global->exit_status);
 		}
 	}
+	close(fd);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (execve(possible_path, cmd->argvs, g_global->env_var))
+	if (execve(possible_path, cmd->argvs, g_global->env_var) == -1)
 		exit(check_for_permission(cmd));
 }
 
@@ -90,6 +95,7 @@ t_u8	execute_reg_cmd(t_cmd *cmd, t_data *data)
 	}
 	else
 	{
+		debug_print_msg("is_builtin == false");
 		g_global->pid = 0;
 		child_pid = fork();
 		if (child_pid < 0)

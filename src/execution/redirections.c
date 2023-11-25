@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:40:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/14 01:46:44 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:00:29 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	setup_infiles(t_cmd *cmd, t_data *data, int i)
 		fd = open(cmd->redir[i].filename, O_RDWR);
 		data->redir->infile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
+		close(fd);
 	}
 	if (!data->redir->is_error)
 	{
@@ -102,7 +103,7 @@ void	execute_single_cmd(t_cmd *cmd, t_data *data)
 	pid_t	child_pid;
 
 	redirections_setup(cmd, data);
-	if (is_builtin(cmd) && !data->redir->is_error)
+	if (is_builtin(cmd))
 	{
 		check_builtin(cmd, data);
 		restore_std(data->saved_stdout, data->saved_stdin);

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   exec_main.c                                       ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/30 18:12:50 by maroy                                    */
-/*   Updated: 2023/10/28 19:12:30 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   exec_main.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/24 16:36:26 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -51,22 +51,22 @@ void	init_data(t_data *data, t_state *state)
 	if (state->path != NULL)
 		ft_free_tab(state->path);
 	state->path = get_path();
-	data->saved_stdout = dup(0);
-	data->saved_stdin = dup(1);
+	data->saved_stdout = dup(STDOUT_FILENO);
+	data->saved_stdin = dup(STDIN_FILENO);
 	data->state = state;
 	data->redir = (t_shell_red *)malloc(sizeof(t_shell_red));
 	data->redir->infile = 0;
 	data->redir->outfile = 0;
-	data->redir->is_here_doc = false;
+	data->redir->is_here_doc = FALSE;
 	data->redir->filename = NULL;
 	data->redir->pipe_fd = NULL;
-	data->redir->is_error = false;
+	data->redir->is_error = FALSE;
 }
 
 void	restore_std(int saved_stdout, int saved_stdin)
 {
-	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
+	dup2(saved_stdout, STDOUT_FILENO);
 	close(saved_stdout);
 	close(saved_stdin);
 }
@@ -88,7 +88,9 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 		execute_single_cmd(cmd, data);
 	}
 	else
+	{
 		execute_multi_cmd(cmd, data, state);
+	}
 	main_free(data, cmd);
 	return (OK);
 }
