@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:34:02 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 18:13:01 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:06:48 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,12 @@ void	execute_cmd_path(t_cmd *cmd, t_data *data, int *p_fd)
 		close(p_fd[1]);
 	}
 	close(fd);
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	if (execve(possible_path, cmd->argvs, g_global->env_var))
 		exit(1);
 }
 
 int	execute_process(t_cmd *cmd, t_data *data, int *fd)
 {
-	printf("- data->redir->is_error %d\n" ,data->redir->is_error);
-	printf("- data->redir->infile %d\n" ,data->redir->infile);
-	printf("- data->redir->outfile %d\n" ,data->redir->outfile);
-	printf("- data->state->read_end %d\n" ,data->state->read_end);
-	printf("- data->state->write_end %d\n" ,data->state->write_end);
-	if (data->redir->is_error)
-		return (EXIT_FAILURE);
 	g_global->pid = fork();
 	if (g_global->pid == 0)
 	{

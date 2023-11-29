@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 02:40:33 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:40:23 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	initialize(char **env, t_state *state)
 	g_global->pid = 1;
 	signals_init();
 	state->env_ = get_env_(env);
-	shlvl();
 	state->path = NULL;
 }
 
@@ -75,8 +74,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 		}
 		debug_print_decimal("exit status", g_global->exit_status);
 	}
-	if (parser)
-		free(parser);
+	ft_free(parser);
 }
 
 static void	sanitize(char **buff, t_lexer **lexer)
@@ -89,7 +87,7 @@ static void	sanitize(char **buff, t_lexer **lexer)
 		(*lexer)->buffer = ft_strdup(*buff);
 		(*lexer)->bufsize = ft_strlen((*lexer)->buffer);
 	}
-	free(*buff);
+	ft_free(*buff);
 }
 
 t_u8	minishell_master(char **env)
@@ -105,10 +103,13 @@ t_u8	minishell_master(char **env)
 		buff = NULL;
 		buff = readline(ANSI_COLOR_BRIGHT_YELLOW PROMPT ANSI_COLOR_RESET);
 		if (!buff)
+		{
 			quit_minishell(buff);
+			break ;
+		}
 		else if (buff[0] == '\0')
 		{
-			free(buff);
+			ft_free(buff);
 			continue ;
 		}
 		else
@@ -118,5 +119,10 @@ t_u8	minishell_master(char **env)
 		}
 		parse(lexer, state);
 	}
-	return (EXIT_SUCCESS);
+	free_path(state->path);
+	ft_free_tab(state->env_);
+	ft_free(state);
+	ft_free(g_global->env_var);
+	ft_free(g_global);
+	return (g_global->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 11:40:34 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:34:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@
 
 # ifdef __APPLE__
 #  include <limits.h> // pour PATH_MAX
-#  include <termios.h>
 # endif
 
 # ifdef __linux__
 #  include <linux/limits.h> // pour PATH_MAX
-#  include <termios.h>
-#  define ECHOCTL 0x40
 # endif
 
 # include <errno.h> // pour errno
@@ -70,14 +67,12 @@
  * -- Struct --
  */
 
-typedef struct termios	t_termios;
-
 typedef struct s_global
 {
 	char				**env_var;
 	pid_t				pid;
 	t_u8				exit_status;
-	t_termios			term_old;
+	t_u8				open_fds;
 }						t_global;
 
 /*
@@ -101,6 +96,5 @@ void					debug_print_decimal(char *msg, int arg);
 void					debug_print_char(char *msg, char arg);
 void					debug_print_cmd(t_cmd *cmd);
 
-void					shlvl(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 11:25:18 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:30:03 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ t_global	*g_global;
 
 void	quit_minishell(char *buff)
 {
-	ft_putstr_nl("exit");
-	free(buff);
-	exit(g_global->exit_status);
+	ft_putstr_nl("exit");;
+	ft_free(buff);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-	return (minishell_master(env));
+	int ret;
+	ret = minishell_master(env);
+	return (ret);
 }

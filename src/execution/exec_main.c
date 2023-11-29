@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 16:36:26 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:41:20 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_u8	dup_env_var(char **env)
 		exit(EXIT_FAILURE);
 	while (++i < ft_tablen(env))
 		g_global->env_var[i] = ft_strdup(env[i]);
-	g_global->env_var[i] = 0;
+	g_global->env_var[i] = NULL;
 	return (OK);
 }
 
@@ -49,7 +49,7 @@ void	init_data(t_data *data, t_state *state)
 {
 	g_global->pid = 1;
 	if (state->path != NULL)
-		ft_free_tab(state->path);
+		free_path(state->path);
 	state->path = get_path();
 	data->saved_stdout = dup(STDOUT_FILENO);
 	data->saved_stdin = dup(STDIN_FILENO);

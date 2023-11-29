@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 12:33:36 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:02:35 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int8_t	find_env_var_index(const char *key, char **env_pointer)
 			sub_env = ft_substr(env_pointer[i], 0, index);
 			if (sub_env != NULL && ft_strequal(key, sub_env))
 			{
-				free(sub_env);
+				ft_free(sub_env);
 				return (i);
 			}
-			free(sub_env);
+			ft_free(sub_env);
 		}
 	}
 	return (check_only_key(key));
@@ -89,13 +89,13 @@ char	*find_path(char *cmd, char **path)
 		fd = open(possible_path, O_RDONLY);
 		if (fd >= 0)
 		{
-			free(temp);
+			ft_free(temp);
 			close(fd);
 			return (possible_path);
 		}
 	}
 	close(fd);
-	free(temp);
-	free(possible_path);
+	ft_free(temp);
+	ft_free(possible_path);
 	return (NULL);
 }

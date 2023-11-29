@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser_utils.c                                    ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:27:18 by maroy                                    */
-/*   Updated: 2023/10/17 16:43:17 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/28 20:18:21 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -41,12 +41,12 @@ t_parser	*init_parser(t_lexer *lexer)
 	return (parser);
 }
 
-int	is_redirect(t_token *token)
+t_bool	is_redirect(t_token *token)
 {
 	if (token->type == great || token->type == greater || token->type == less
 		|| token->type == here_doc)
-		return (OK);
-	return (KO);
+		return (TRUE);
+	return (FALSE);
 }
 
 char	*quoted_delim(t_parser *parser, char *s, int *i)
@@ -81,7 +81,7 @@ char	*get_stop_word(t_parser *parser)
 
 	i = parser->lexer->curpos - 1;
 	s = ft_strdup(parser->lexer->buffer);
-	if (parser->curr_token->is_quoted == false)
+	if (parser->curr_token->is_quoted == FALSE)
 	{
 		while (s[i] != SPACE && s[i] != LESS)
 			i--;
@@ -105,7 +105,7 @@ int	syntax_error(t_parser *parser)
 	if ((is_redirect(parser->prev_token) && parser->curr_token->type == eof)
 		|| (parser->prev_token->type == pip && parser->curr_token->type == eof))
 	{
-		print_error_msg(ERR_PROMPT "syntax error unexpected token", NULL);
+		print_error_msg(ERR_PROMPT "syntax error unexpected token", "newline");
 		return (KO);
 	}
 	return (OK);

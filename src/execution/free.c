@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 02:44:01 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 13:11:41 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:07:10 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	pipe_free(int **pipe_fd, int nbr_cmd)
 	i = nbr_cmd - 2;
 	while (i >= 0)
 	{
-		free(pipe_fd[i]);
+		ft_free(pipe_fd[i]);
 		pipe_fd[i] = NULL;
 		i--;
 	}
-	free(pipe_fd);
+	ft_free(pipe_fd);
 	pipe_fd = NULL;
 }
 
@@ -38,7 +38,7 @@ void	free_path(char **path)
 		path[i] = NULL;
 		i++;
 	}
-	free(path);
+	ft_free(path);
 	path = NULL;
 }
 
@@ -48,9 +48,9 @@ void	main_free(t_data *data, t_cmd *cmd)
 
 	if (cmd->nbr_cmd == 1)
 	{
-		free(data->redir);
+		ft_free(data->redir);
 		data->redir = NULL;
-		free(data);
+		ft_free(data);
 		data = NULL;
 	}
 	else
@@ -60,9 +60,9 @@ void	main_free(t_data *data, t_cmd *cmd)
 		{
 			if (data[i].redir->pipe_fd != NULL)
 				pipe_free(data[i].redir->pipe_fd, cmd->nbr_cmd);
-			free(data[i].redir);
+			ft_free(data[i].redir);
 			i--;
 		}
-		free(data);
+		ft_free(data);
 	}
 }

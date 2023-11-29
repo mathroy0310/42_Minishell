@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   parser.h                                          ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:10:28 by maroy                                    */
-/*   Updated: 2023/10/28 16:46:10 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:10:28 by maroy             #+#    #+#             */
+/*   Updated: 2023/11/28 20:18:37 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
@@ -59,8 +59,7 @@ t_ast				*parse_pipe(t_parser *parser);
  * parser_utils.c *
  */
 
-t_parser			*init_parser(t_lexer *l);
-int					is_redirect(t_token *t);
+t_bool				is_redirect(t_token *t);
 int					syntax_error(t_parser *p);
 char				*get_stop_word(t_parser *p);
 

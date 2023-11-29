@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:47:03 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/23 18:54:47 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:11:29 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	parse_here_doc(t_redir *redir, t_data *data)
 		while (1)
 		{
 			empty++;
-			data->redir->is_here_doc = true;
+			data->redir->is_here_doc = TRUE;
 			buf = readline("> ");
 			if (!buf)
 				break ;

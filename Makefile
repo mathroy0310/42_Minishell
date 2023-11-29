@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/11/24 19:26:31 by maroy            ###   ########.fr        #
+#    Updated: 2023/11/28 21:35:46 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ CFLAGS 				=	-Wall -Wextra -Werror -std=c17 -I${INCDIR}
 
 RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses
 
+VALGFLAGS = --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=rl_supp.txt
+
 LIBFTFLAGS			= 	-L${LIBFT_DIR} -lft
 
 MK					=	mkdir -p
@@ -75,7 +77,6 @@ BINDIR				=	bin
 SRCS_MAIN			=	main.c \
 						debug.c \
 						minishell.c \
-						shlvl.c \
 
 SRCS_PARSING 		= 	lexer.c \
 						parser.c \
@@ -134,8 +135,10 @@ bin/%.o		: $(SRCDIR)%.c
 	@printf "\r${DARKGRAY}Compiling : $(@F) ... ${DEFAULT}\033[K"
 	@$(CC) $(CFLAGS) -c $< -o $@ 
 
+.PHONY		:	all
 all			: ${NAME}
 
+.PHONY		:	debug
 debug		: CFLAGS += -g3 -DDEBUG=1 #-fsanitize=address 
 debug		: re
 
@@ -163,34 +166,36 @@ ${NAME}		:	${SLIB_RLINE} ${SLIB_LIBFT} ${BIN}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${LIBFTFLAGS} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
 
+.PHONY		:	leaks
 leaks		: debug
 	@echo "${RED}LEAKS CHECKER${DEFAULT}"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=supp.txt ./${NAME}
+	@valgrind ${VALGFLAGS} ./${NAME}
 
+.PHONY		:	clean
 clean		:
 	@${RM} ${BINDIR} 
-	@echo "${YELLOW}${NAME} binary files successfully removed 🗑${DEFAULT}"
+	@echo "${YELLOW} ${NAME} binary files successfully removed 🗑${DEFAULT}"
 
+.PHONY		:	fclean
 fclean		:	clean
 	@${RM} ${NAME}
-	@echo "${RED}${NAME} executable successfully removed 🗑${DEFAULT}"
+	@echo "${RED} ${NAME} executable successfully removed 🗑${DEFAULT}"
 
+.PHONY		:	lclean
 lclean		:
 	@${RM} ${LIBDIR}
 	@echo "${RED}Libraries successfully removed 🗑${DEFAULT}"
 
+.PHONY		:	re
 re: fclean all
 
+.PHONY		:	bonus
 bonus		:	all
 
+.PHONY		:	norm
 norm		:
 	@echo "$(DARKGRAY)norminette! $(DEFAULT)"
 	@norminette $(INCDIR) $(SRC) $(LIBFT_DIR)
-
-
-
-#--- PHONY ---#
-.PHONY	 	:	all clean fclean re readline norm bonus
 
 #--- COLORS ---#
 
@@ -204,4 +209,4 @@ YELLOW				= \033[1;33m
 
 DARKGRAY			= \033[1;30m
 
-DEFAULT 			= \033[1;30m
+DEFAULT 			= \033[0;30m

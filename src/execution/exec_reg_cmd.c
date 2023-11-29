@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:58:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 17:59:39 by maroy            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:02:16 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	find_cmd_path(t_cmd *cmd, t_data *data)
 		if (!path_error_print(cmd, data, possible_path))
 		{
 			close(fd);
-			free(possible_path);
+			ft_free(possible_path);
 			exit(g_global->exit_status);
 		}
 	}
