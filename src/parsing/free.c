@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:33:28 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/24 14:32:37 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:08:20 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,8 @@ void	free_args(t_ast *ast)
 	while (k < ast->args_size)
 	{
 		if (ast->args[k])
-		{
-			if (ast->args[k]->value)
-				free(ast->args[k]->value);
-			ast->args[k]->value = NULL;
-		}
-		if (ast->args[k])
-			free(ast->args[k]);
-		ast->args[k] = NULL;
+			ft_free(ast->args[k]->value);
+		ft_free(ast->args[k]);
 		k++;
 	}
 	free(ast->args);
@@ -63,11 +57,8 @@ void	free_parser(t_parser *parser)
 	free_parser_helper(parser, 1);
 	if (parser->prev_token)
 	{
-		if (parser->prev_token->value)
-			free(parser->prev_token->value);
-		parser->prev_token->value = NULL;
-		free(parser->prev_token);
-		parser->prev_token = NULL;
+		ft_free(parser->prev_token->value);
+		ft_free(parser->prev_token);
 	}
 	free(parser);
 }
@@ -78,19 +69,13 @@ void	free_parser_helper(t_parser *parser, int i)
 		return ;
 	if (parser->lexer)
 	{
-		if (parser->lexer->buffer)
-			free(parser->lexer->buffer);
-		parser->lexer->buffer = NULL;
-		free(parser->lexer);
-		parser->lexer = NULL;
+		ft_free(parser->lexer->buffer);
+		ft_free(parser->lexer);
 	}
 	if (parser->curr_token && i == 1)
 	{
-		if (parser->curr_token->value)
-			free(parser->curr_token->value);
-		parser->curr_token->value = NULL;
-		free(parser->curr_token);
-		parser->curr_token = NULL;
+		ft_free(parser->curr_token->value);
+		ft_free(parser->curr_token);
 	}
 }
 
@@ -105,17 +90,13 @@ void	free_cmd(t_cmd *cmd)
 		j = -1;
 		while (++j < cmd[i].args_size)
 		{
-			if (cmd[i].argvs[j])
-				free(cmd[i].argvs[j]);
-			cmd[i].argvs[j] = NULL;
+			ft_free(cmd[i].argvs[j]);
 		}
 		free(cmd[i].argvs);
 		j = -1;
 		while (++j < cmd[i].redir_nbr)
 		{
-			if (cmd[i].redir[j].filename)
-				free(cmd[i].redir[j].filename);
-			cmd[i].redir[j].filename = NULL;
+			ft_free(cmd[i].redir[j].filename);
 		}
 		free(cmd[i].redir);
 	}

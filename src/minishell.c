@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:15:53 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:49:17 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	initialize(char **env, t_state *state)
 {
 	int	fd;
 
-	debug_print_msg("DEBUG mode enabled 🐛");
-	debug_print_msg("HISTORY_FILE: " HISTORY_FILE);
+	if (DEBUG)
+	{
+		ft_debug_printf("DEBUG mode enabled 🐛");
+		ft_debug_printf("HISTORY_FILE: %s", HISTORY_FILE);
+	}
 	fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
 	close(fd);
 	using_history();
@@ -60,6 +63,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 	parser = init_parser(lexer);
 	if (parser)
 	{
+		//debug_print_parser(parser);
 		ast = parse_pipe(parser);
 		if (ast)
 		{
@@ -72,9 +76,9 @@ static void	parse(t_lexer *lexer, t_state *state)
 					free_cmd(cmd);
 			}
 		}
-		debug_print_decimal("exit status", g_global->exit_status);
+		if (DEBUG)
+			ft_debug_printf("exit status %d", g_global->exit_status);
 	}
-	ft_free(parser);
 }
 
 static void	sanitize(char **buff, t_lexer **lexer)
@@ -101,7 +105,7 @@ t_u8	minishell_master(char **env)
 	while (1)
 	{
 		buff = NULL;
-		buff = readline(ANSI_COLOR_BRIGHT_YELLOW PROMPT ANSI_COLOR_RESET);
+		buff = readline(FT_YEL PROMPT FT_COLOR_RESET);
 		if (!buff)
 		{
 			quit_minishell(buff);

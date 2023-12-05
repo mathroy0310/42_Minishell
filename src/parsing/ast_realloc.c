@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   ast_realloc.c                                     ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 21:29:12 by maroy                                    */
-/*   Updated: 2023/10/28 16:46:38 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   ast_realloc.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 21:29:12 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/05 17:02:20 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_lexer	*init_lexer(t_lexer *lexer)
-{
-	lexer = malloc(sizeof(t_lexer));
-	if (!lexer)
-		return (NULL);
-	lexer->buffer = NULL;
-	lexer->bufsize = 0;
-	lexer->c = SPACE;
-	lexer->curpos = 0;
-	lexer->readpos = 0;
-	return (lexer);
-}
 
 t_ast	**realloc_ast_node(t_ast *ast, int size)
 {
@@ -37,8 +24,7 @@ t_ast	**realloc_ast_node(t_ast *ast, int size)
 		while (++i < ast->pipecmd_size)
 			new[i] = ast->pipecmd_values[i];
 		new[i] = NULL;
-		free(ast->pipecmd_values);
-		ast->pipecmd_values = NULL;
+		ft_free(ast->pipecmd_values);
 		return (new);
 	}
 	return (NULL);
@@ -74,7 +60,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 	{
 		while (lexer->c == SPACE && lexer->c != EOF)
 			read_single_char(lexer);
-		if (lexer->c == DOLLAR)
+		if (lexer->c == DOLLAR || lexer->c == BACKSLASH || lexer->c == TILDE)
 		{
 			str = ft_strjoin_free(str, envar_token(lexer));
 			i += 1;

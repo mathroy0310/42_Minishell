@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:12:36 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:00:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ char	*ft_getenv(char *str)
 		if (!ft_strcmp(env_key, str))
 		{
 			temp = env_value;
-			env_value = ft_substr(g_global->env_var[i], start + 1, \
-				ft_strlen(g_global->env_var[i]) - start);
+			env_value = ft_substr(g_global->env_var[i], start + 1,
+					ft_strlen(g_global->env_var[i]) - start);
 			free(temp);
 			ft_free(env_key);
 			break ;
@@ -106,6 +106,13 @@ static char	*invalid_envar(t_lexer *lexer, int i)
 	}
 }
 
+static t_bool	is_tilde(char *str)
+{
+	if (!ft_strcmp(str, "~") || !ft_strcmp(str, "~/"))
+		return (TRUE);
+	return (FALSE);
+}
+
 char	*envar_token(t_lexer *lexer)
 {
 	char	*str;
@@ -125,6 +132,8 @@ char	*envar_token(t_lexer *lexer)
 		str = ft_strjoin_char(str, lexer->c);
 		read_single_char(lexer);
 	}
+	if (is_tilde(str))
+		return (ft_getenv("HOME"));
 	v = ft_getenv(str);
 	free(str);
 	if (!v)

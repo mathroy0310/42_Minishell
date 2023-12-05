@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:18:28 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:01:49 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,14 @@ void					quit_minishell(char *buff);
  */
 
 void					debug_print_tab(char **tab);
-void					debug_print_msg(char *msg);
-void					debug_print_string(char *msg, char *arg);
-void					debug_print_decimal(char *msg, int arg);
-void					debug_print_char(char *msg, char arg);
+void					debug_print_token(t_token *token);
 void					debug_print_cmd(t_cmd *cmd);
+
+/*
+ * debug_utils.c *
+ */
+
+char					*get_token_type(t_token_type type);
 
 /*
  * free.c *

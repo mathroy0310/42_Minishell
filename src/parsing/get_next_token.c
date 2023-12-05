@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                     ██   ██ ██████         */
-/*   get_next_token.c                                  ██   ██      ██        */
-/*                                                     ███████  █████         */
-/*   By: maroy <maroy@student.42.qc>                        ██ ██             */
-/*                                                          ██ ███████.qc     */
-/*   Created: 2023/08/29 20:29:35 by maroy                                    */
-/*   Updated: 2023/10/17 16:42:55 by maroy            >(.)__ <(.)__ =(.)__    */
-/*                                                     (___/  (___/  (___/    */
+/*                                                        :::      ::::::::   */
+/*   get_next_token.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:29:35 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/05 16:47:15 by maroy            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -30,7 +30,7 @@ char	*tokenize_double_quoted_text(t_lexer *lexer)
 	}
 	if (!is_multi_lines(lexer, DOUBLE_QUOTE))
 	{
-		free(str);
+		ft_free(str);
 		return (NULL);
 	}
 	lexer->is_quoted = true;
@@ -66,12 +66,12 @@ t_token	*return_token(char *str, t_lexer *lexer, int i)
 	if (i == 0)
 	{
 		token = init_token(id, str, lexer);
-		free(str);
+		ft_free(str);
 		return (token);
 	}
 	else
 	{
-		free(str);
+		ft_free(str);
 		return (init_token(illegal, NULL, lexer));
 	}
 	return (NULL);

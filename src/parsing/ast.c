@@ -6,32 +6,31 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/07 01:29:54 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:35:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_ast(t_ast *ast, t_ast_type type)
-{
-	ast->type = type;
-	ast->pipecmd_values = NULL;
-	ast->pipecmd_size = 0;
-	ast->args = 0;
-	ast->redir_nbr = 0;
-	ast->args_size = 0;
-}
-
-void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
+static void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 {
 	cmd[n].redir_nbr = ast->redir_nbr;
 	cmd[n].args_size = ast->args_size - (cmd[n].redir_nbr * 2) - 1;
-	cmd[n].redir = malloc(sizeof(t_redir) * ast->redir_nbr);
+	cmd[n].redir = ft_malloc(sizeof(t_redir) * ast->redir_nbr);
 	if (cmd[n].args_size > 0)
-		cmd[n].argvs = malloc(sizeof(char *) * (cmd[n].args_size + 1));
+		cmd[n].argvs = ft_malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
 
-void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
+static void cmd_args_size(int n, t_cmd *cmd, int l)
+{
+	if (l != 0)
+	{
+		cmd[n].args_size = l;
+		cmd[n].argvs[l] = NULL;
+	}
+}
+
+static void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 {
 	t_index	x;
 
@@ -40,9 +39,9 @@ void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 	if ((ast->args_size - 1) == (ast->redir_nbr * 2))
 		cmd[n].argvs = NULL;
 	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
-			|| ast->args[x.k]->type != pip))
+		|| ast->args[x.k]->type != pip))
 	{
-		if (ast->args[x.k]->type == id)
+		if (ast->args[x.k]->type == id && ast->args[x.k]->value)
 			cmd[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
 		else
 		{
@@ -56,11 +55,10 @@ void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 			}
 		}
 	}
-	if (x.l != 0)
-		cmd[n].argvs[x.l] = NULL;
+	cmd_args_size(n, cmd, x.l);
 }
 
-void	init_cmd(t_cmd cmd)
+static void	init_cmd(t_cmd cmd)
 {
 	(void)cmd;
 	cmd.args_size = 0;
@@ -75,9 +73,7 @@ t_cmd	*parse_pipeline_to_cmd(t_ast *ast)
 	t_index	x;
 
 	x = (t_index){.k = 0, .l = -1, .m = -1};
-	cmd = malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
-	if (!cmd)
-		return (NULL);
+	cmd = ft_malloc(sizeof(t_cmd) * (ast->pipecmd_size + 1));
 	if (ast->type == pipe_ast)
 	{
 		while (++(x.l) < ast->pipecmd_size && x.k < ast->pipecmd_size)

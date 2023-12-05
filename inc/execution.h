@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:18:09 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 11:14:44 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ typedef struct s_state
 {
 	char			**env_;
 	char			**path;
-	int				read_end;
-	int				write_end;
+	t_u8			read_end;
+	t_u8			write_end;
 }					t_state;
 
 typedef struct s_data
 {
-	int				saved_stdout;
-	int				saved_stdin;
+	t_file			*saved_stdout;
+	t_file			*saved_stdin;
 	t_state			*state;
 	t_shell_red		*redir;
 }					t_data;

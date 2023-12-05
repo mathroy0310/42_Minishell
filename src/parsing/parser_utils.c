@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:27:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/28 20:18:21 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:53:11 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ t_parser	*init_parser(t_lexer *lexer)
 
 	if (!lexer)
 		return (NULL);
-	parser = malloc(sizeof(t_parser));
-	if (!parser)
-		return (NULL);
+	parser = ft_malloc(sizeof(t_parser));
 	parser->lexer = lexer;
 	parser->prev_token = NULL;
 	parser->curr_token = get_next_token(lexer);
@@ -33,8 +31,6 @@ t_parser	*init_parser(t_lexer *lexer)
 	}
 	if (parser->curr_token->type == illegal)
 	{
-		free(lexer->buffer);
-		lexer->buffer = NULL;
 		free_parser(parser);
 		return (NULL);
 	}

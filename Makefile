@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/04 20:23:51 by maroy            ###   ########.fr        #
+#    Updated: 2023/12/05 16:11:31 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ BINDIR				=	bin
 
 SRCS_MAIN			=	main.c \
 						debug.c \
+						debug_utils.c \
 						minishell.c \
 						free.c \
 						signals.c \
@@ -87,6 +88,7 @@ SRCS_PARSING 		= 	lexer.c \
 						get_next_token.c \
 						lexer_utils.c \
 						parser_utils.c \
+						init.c \
 						ast.c \
 						ast_realloc.c
 
@@ -157,10 +159,23 @@ ${NAME}		:	${SLIB_RLINE} ${SLIB_LIBFT} ${BIN}
 	@${CC} ${CFLAGS} ${BIN} ${RLFLAGS} ${LIBFTFLAGS} -o ${NAME} 
 	@echo "\r${GREEN}${NAME} successfully created. 📂${DEFAULT}"
 
+.PHONY		:	run
+run			:	all
+	@echo "${GREEN}Running ${NAME} ... ${DEFAULT}"
+	@./${NAME}
+
 .PHONY		:	leaks
-leaks		: debug
-	@echo "${RED}LEAKS CHECKER${DEFAULT}"
+leaks		:	debug
+	@echo "${RED}LEAKS CHECKER${DEFAULT}"; 
 	@valgrind ${VALGFLAGS} ./${NAME}
+	
+
+.PHONY		:	libft
+libft		:	${SLIB_LIBFT}
+
+.PHONY		:	libft_debug
+libft_debug	:	make -C ${LIBFT_DIR} debug
+
 
 .PHONY		:	clean
 clean		:
@@ -185,8 +200,13 @@ bonus		:	all
 
 .PHONY		:	norm
 norm		:
-	@echo "$(DARKGRAY)norminette! $(DEFAULT)"
-	@norminette $(INCDIR) $(SRC) $(LIBFT_DIR)
+	@echo "$(DARKGRAY)Checking norminette output...$(DEFAULT)"
+	@if norminette $(INCDIR) $(SRC) $(LIBFT_DIR) | grep -vq "OK!$$"; then \
+        echo "$(RED)Not all lines end with 'OK!'$(DEFAULT)"; \
+		norminette $(HEADER_DIR) $(SRC) | grep -v "OK!$$"; \
+	else \
+        echo "$(GREEN)All lines end with 'OK!'$(DEFAULT)"; \
+	fi
 
 #--- COLORS ---#
 

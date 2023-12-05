@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:12:43 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 11:28:12 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,17 @@ t_u8	dup_env_var(char **env)
 	return (OK);
 }
 
+t_bool	is_valid_cmd(t_cmd *cmd)
+{
+	if (!cmd->argvs[0] && (cmd->args_size == 0 || cmd->args_size == 1))
+		return (FALSE);
+	return (FALSE);
+}
+
 t_u8	execution(t_cmd *cmd, t_state *state)
 {
-	(void)cmd;
 	(void)state;
+	if (is_valid_cmd(cmd) == FALSE)
+		return (g_global->exit_status);
 	return (OK);
 }

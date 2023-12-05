@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:26:07 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:10:48 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:47:08 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,14 @@ char				*envar_token(t_lexer *lexer);
  * utils.c *
  */
 
-t_lexer				*init_lexer(t_lexer *lexer);
 void				print_error_msg(char *str, char *var);
-
-t_token				*init_token(t_token_type type, char *str, t_lexer *lexer);
 int					peek_char(t_lexer *lexer);
-bool				is_multi_lines(t_lexer *lexer, char c);
+t_bool				is_multi_lines(t_lexer *lexer, char c);
+
+/*
+* init.c
+*/
+t_token				*init_token(t_token_type type, char *str, t_lexer *lexer);
+t_lexer				*init_lexer(t_lexer *lexer);
 
 #endif
