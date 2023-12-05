@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:33:28 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 17:08:20 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:10:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	free_parser_helper(t_parser *parser, int i)
 		ft_free(parser->curr_token->value);
 		ft_free(parser->curr_token);
 	}
+	free(parser);
 }
 
 void	free_cmd(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:13:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 17:08:15 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:11:11 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ t_ast	*parse_pipe(t_parser *parser)
 			parser_multi_cmd(ast);
 	}
 	free_parser_helper(parser, 0);
-	ft_free(parser);
 	return (ast);
 }
