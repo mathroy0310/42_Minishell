@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 11:14:44 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:31:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_redir
 {
 	t_token_type	type;
 	char			*filename;
-	int				is_quoted;
+	t_bool			is_quoted;
 }					t_redir;
 
 typedef struct s_cmd
@@ -38,10 +38,10 @@ typedef struct s_cmd
 
 typedef struct s_shell_red
 {
-	int				infile;
-	int				outfile;
-	bool			is_here_doc;
-	bool			is_error;
+	t_file			*infile;
+	t_file			*outfile;
+	t_bool			is_here_doc;
+	t_bool			is_error;
 	char			*filename;
 	int				**pipe_fd;
 }					t_shell_red;

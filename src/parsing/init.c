@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:08:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:10:23 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:04:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ t_lexer	*init_lexer(t_lexer *lexer)
 	lexer->readpos = 0;
 	return (lexer);
 }
-
-
 
 void	init_ast(t_ast *ast, t_ast_type type)
 {

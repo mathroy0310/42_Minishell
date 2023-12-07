@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:01:49 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:43:22 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_global
 	char				**env_var;
 	pid_t				pid;
 	t_u8				exit_status;
-	t_u8				open_fds;
 }						t_global;
 
 /*
@@ -91,6 +90,8 @@ void					quit_minishell(char *buff);
 void					debug_print_tab(char **tab);
 void					debug_print_token(t_token *token);
 void					debug_print_cmd(t_cmd *cmd);
+void					debug_print_redir(t_redir *redir);
+void 					debug_print_file_info(t_file *file);
 
 /*
  * debug_utils.c *

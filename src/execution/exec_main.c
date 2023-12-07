@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 11:28:12 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:02:21 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,49 @@ t_u8	dup_env_var(char **env)
 	return (OK);
 }
 
-t_bool	is_valid_cmd(t_cmd *cmd)
+void init_data(t_data *data, t_state *state)
 {
-	if (!cmd->argvs[0] && (cmd->args_size == 0 || cmd->args_size == 1))
-		return (FALSE);
-	return (FALSE);
+	(void)state;
+	(void)data;
+
+	//state->path = get_path();
+// 	data = (t_data *)ft_malloc(sizeof(t_data));
+// 	data->saved_stdout->c_fd = dup(STDOUT_FILENO);
+// 	data->saved_stdin->c_fd = dup(STDIN_FILENO);
+// 	data->state = state;
+	
+// 	data->redir = (t_shell_red *)ft_malloc(sizeof(t_shell_red));
+// 	data->redir->infile = NULL;
+// 	data->redir->outfile = NULL;
+// 	data->redir->is_here_doc = FALSE;
+// 	data->redir->filename = NULL;
+// 	data->redir->pipe_fd = NULL;
+// 	data->redir->is_error = FALSE;
 }
 
 t_u8	execution(t_cmd *cmd, t_state *state)
 {
+	(void)cmd;
 	(void)state;
-	if (is_valid_cmd(cmd) == FALSE)
-		return (g_global->exit_status);
+	t_data *data;
+	t_file *file;
+
+	data = NULL;
+	
+	init_data(data, state);
+	if (cmd[0].redir_nbr > 0)
+	{
+		if (ft_is_file_exists(cmd[0].redir[0].filename))
+		{
+			ft_debug_printf	("file exists");
+			file = ft_open_file(cmd[0].redir[0].filename, O_RDONLY);
+			debug_print_file_info(file);
+			ft_close_file(file);
+		}
+		else
+			ft_debug_printf	("file doesn't exists");
+	}
+	
+	
 	return (OK);
 }
