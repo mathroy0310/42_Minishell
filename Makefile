@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/07 15:08:01 by maroy            ###   ########.fr        #
+#    Updated: 2023/12/08 16:25:12 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,10 @@ SRCS_PARSING 		= 	lexer.c \
 						ast_realloc.c
 
 SRCS_EXECUT			=	exec_main.c \
+						exec_simple.c \
+						exec_multi.c \
+						exec_regular.c \
+						free.c \
 						
 
 # SRCS_BUILTINS		= 	builtins.c \
@@ -170,11 +174,9 @@ leaks		:	debug
 	@valgrind ${VALGFLAGS} ./${NAME}
 	
 
-.PHONY		:	libft
-libft		:	${SLIB_LIBFT}
-
-.PHONY		:	libft_debug
-libft_debug	:	make -C ${LIBFT_DIR} debug
+.PHONY		:	libft	
+libft		:
+	@make -C ${LIBFT_DIR}
 
 
 .PHONY		:	clean

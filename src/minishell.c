@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:49:17 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:19:05 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void	initialize(char **env, t_state *state)
 	close(fd);
 	using_history();
 	read_history(HISTORY_FILE);
-	g_global = malloc(sizeof(t_global));
-	if (g_global == NULL)
-		exit(EXIT_FAILURE);
+	g_global = ft_malloc(sizeof(t_global));
 	dup_env_var(env);
 	g_global->exit_status = EXIT_SUCCESS;
 	g_global->pid = 1;

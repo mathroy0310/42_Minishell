@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/07 16:35:52 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/07 19:42:27 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ void debug_print_redir(t_redir *redir)
 void	debug_print_cmd(t_cmd *cmd)
 {
 	int	i;
-	int	j;
 
 	if (DEBUG == 1)
 	{
 		i = -1;
 		while (++i != cmd->nbr_cmd)
 		{
-			j = -1;
 			if (cmd[i].argvs)
 				debug_print_tab(cmd[i].argvs);
 			ft_debug_printf("cmd[%d]->nbr_cmd -={ %d }=-", i, cmd[i].nbr_cmd);

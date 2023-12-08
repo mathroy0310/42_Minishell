@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/07 16:31:58 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 16:24:43 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_state
 
 typedef struct s_data
 {
-	t_file			*saved_stdout;
-	t_file			*saved_stdin;
+	int				saved_stdout_fd;
+	int				saved_stdin_fd;
 	t_state			*state;
 	t_shell_red		*redir;
 }					t_data;
@@ -68,5 +68,28 @@ typedef struct s_data
 
 t_u8				dup_env_var(char **env);
 t_u8				execution(t_cmd *cmd, t_state *state);
+
+/*
+ * exec_multi.c *
+ */
+
+t_u8				execute_multi_cmd(t_cmd *cmd, t_data *data);
+
+/*
+ * exec_simple.c *
+ */
+
+t_u8				execute_simple_cmd(t_cmd *cmd, t_data *data);
+
+/*
+ * exec_regular.c *
+ */
+
+t_u8				execute_regular_cmd(t_cmd *cmd, t_data *data);
+
+/*
+ * free.c *
+ */
+void				free_data(t_data *data, t_cmd *cmd);
 
 #endif
