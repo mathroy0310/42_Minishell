@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 21:39:22 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:38:51 by maroy            ###   ########.fr       */
+/*   Created: 2023/07/31 15:20:18 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/08 20:01:52 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_global(void)
+t_u8	pwd_builtin(void)
 {
-	ft_free_tab(g_global->env_var);
-	ft_free(g_global);
-}
+	char cwd[PATH_MAX];
 
-void	free_state(t_state *state)
-{
-	ft_free_tab(state->path);
-	ft_free_tab(state->env_);
-	ft_free(state);
+	g_global->exit_status = EXIT_SUCCESS;
+	if (getcwd(cwd, PATH_MAX))
+	{
+		ft_putstr_nl(cwd);
+		return (EXIT_SUCCESS);
+	}
+	ft_putstr_nl(get_env_var_by_key("PWD"));
+	return (EXIT_FAILURE);
 }

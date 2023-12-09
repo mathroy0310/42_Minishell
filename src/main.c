@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/04 20:16:48 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 22:08:37 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	quit_minishell(char *buff)
 	ft_putstr_nl("exit");;
 	ft_free(buff);
 }
+
 
 int	main(int argc, char **argv, char **env)
 {

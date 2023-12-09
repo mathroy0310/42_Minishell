@@ -6,24 +6,11 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:40:58 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 17:00:38 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 20:29:30 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	get_str_by_char(char *str, char c)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == c)
-			return (i);
-	}
-	return (KO);
-}
 
 char	*ft_getenv(char *str)
 {
@@ -37,14 +24,14 @@ char	*ft_getenv(char *str)
 	i = -1;
 	while (g_global->env_var[++i])
 	{
-		start = get_str_by_char(g_global->env_var[i], '=');
+		start = get_str_from_char(g_global->env_var[i], '=', TRUE);
 		env_key = ft_substr(g_global->env_var[i], 0, start);
 		if (!ft_strcmp(env_key, str))
 		{
 			temp = env_value;
 			env_value = ft_substr(g_global->env_var[i], start + 1,
 					ft_strlen(g_global->env_var[i]) - start);
-			free(temp);
+			ft_free(temp);
 			ft_free(env_key);
 			break ;
 		}

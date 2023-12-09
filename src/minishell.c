@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 14:19:05 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 22:22:15 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,15 @@ static char	**get_env_(char **env_)
 
 void	initialize(char **env, t_state *state)
 {
-	int	fd;
-
 	if (DEBUG)
 	{
 		ft_debug_printf("DEBUG mode enabled 🐛");
 		ft_debug_printf("HISTORY_FILE: %s", HISTORY_FILE);
 	}
-	fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
-	close(fd);
-	using_history();
-	read_history(HISTORY_FILE);
+	use_history();
 	g_global = ft_malloc(sizeof(t_global));
 	dup_env_var(env);
+	g_global->has_exited = FALSE;
 	g_global->exit_status = EXIT_SUCCESS;
 	g_global->pid = 1;
 	signals_init();
@@ -61,7 +57,7 @@ static void	parse(t_lexer *lexer, t_state *state)
 	parser = init_parser(lexer);
 	if (parser)
 	{
-		//debug_print_parser(parser);
+		// debug_print_parser(parser);
 		ast = parse_pipe(parser);
 		if (ast)
 		{
@@ -100,20 +96,15 @@ t_u8	minishell_master(char **env)
 
 	state = (t_state *)malloc(sizeof(t_state));
 	initialize(env, state);
-	while (1)
+	while (!g_global->has_exited)
 	{
 		buff = NULL;
-		buff = readline(FT_YEL PROMPT FT_COLOR_RESET);
-		if (!buff)
-		{
-			quit_minishell(buff);
+		buff = readline(FT_BYEL PROMPT FT_COLOR_RESET);
+		buff = check_line(buff);
+		if (ft_strequal(buff, "break"))
 			break ;
-		}
-		else if (buff[0] == '\0')
-		{
-			ft_free(buff);
+		else if (ft_strequal(buff, "continue"))
 			continue ;
-		}
 		else
 		{
 			lexer = NULL;
@@ -121,8 +112,6 @@ t_u8	minishell_master(char **env)
 		}
 		parse(lexer, state);
 	}
-	ft_free_tab(state->path);
-	ft_free_tab(state->env_);
-	ft_free(state);
+	free_state(state);
 	return (g_global->exit_status);
 }

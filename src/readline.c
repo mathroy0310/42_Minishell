@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 21:39:22 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:38:51 by maroy            ###   ########.fr       */
+/*   Created: 2023/12/08 22:08:58 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/08 22:21:17 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_global(void)
+char	*check_line(char *buff)
 {
-	ft_free_tab(g_global->env_var);
-	ft_free(g_global);
+	if (!buff)
+	{
+		quit_minishell(buff);
+		return ("break");
+	}
+	else if (buff[0] == '\0')
+	{
+		ft_free(buff);
+		return ("continue");
+	}
+	else
+		return (buff);
 }
 
-void	free_state(t_state *state)
+void	use_history(void)
 {
-	ft_free_tab(state->path);
-	ft_free_tab(state->env_);
-	ft_free(state);
+	int	fd;
+
+	fd = open(HISTORY_FILE, O_CREAT, S_IRUSR | S_IWUSR);
+	close(fd);
+	using_history();
+	read_history(HISTORY_FILE);
 }

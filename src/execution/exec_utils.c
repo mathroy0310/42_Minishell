@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 21:39:22 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:38:51 by maroy            ###   ########.fr       */
+/*   Created: 2023/12/09 00:49:46 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/09 02:57:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_global(void)
+char	*path_join(const char *s1, const char *s2)
 {
-	ft_free_tab(g_global->env_var);
-	ft_free(g_global);
-}
+	char *tmp;
+	char *path;
 
-void	free_state(t_state *state)
-{
-	ft_free_tab(state->path);
-	ft_free_tab(state->env_);
-	ft_free(state);
+	tmp = ft_strjoin(s1, "/");
+	path = ft_strjoin(tmp, s2);
+	ft_free(tmp);
+	return (path);
 }

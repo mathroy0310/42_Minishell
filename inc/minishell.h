@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/07 16:43:22 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 03:40:19 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 /*
  * -- Local Includes --
  */
+# include "builtins.h"
 # include "defines.h"
 # include "execution.h"
 # include "lexer.h"
@@ -71,6 +72,7 @@ typedef struct s_global
 	char				**env_var;
 	pid_t				pid;
 	t_u8				exit_status;
+	t_bool				has_exited;
 }						t_global;
 
 /*
@@ -102,11 +104,30 @@ char					*get_token_type(t_token_type type);
 /*
  * free.c *
  */
-void					free_global(t_global *g_global);
+
+void					free_global(void);
+void					free_state(t_state *state);
 
 /**
  * signal.c *
  */
+
+void					wait_children(void);
 void					signals_init(void);
+
+/**
+ * utils.c *
+ */
+
+int						get_str_from_char(char *str, char c, t_bool flag);
+
+/**
+ * readline.c
+ */
+
+char					*check_line(char *buff);
+void					use_history(void);
+void					add_to_history(char *buff);
+
 
 #endif

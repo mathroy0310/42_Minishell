@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/08 16:25:12 by maroy            ###   ########.fr        #
+#    Updated: 2023/12/09 01:43:47 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,11 @@ CC					=	gcc
 
 CFLAGS 				=	-Wall -Wextra -Werror -std=c17 -I${INCDIR}
 
-RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses
+RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses -I${LIBRLINE_DIR}/inc
 
 VALGFLAGS = --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=rl_supp.txt
 
-LIBFTFLAGS			= 	-L${LIBFT_DIR} -lft
+LIBFTFLAGS			= 	-L${LIBFT_DIR} -lft -I${LIBFT_DIR}/inc
 
 MK					=	mkdir -p
 
@@ -80,6 +80,8 @@ SRCS_MAIN			=	main.c \
 						minishell.c \
 						free.c \
 						signals.c \
+						utils.c \
+						readline.c \
 
 SRCS_PARSING 		= 	lexer.c \
 						parser.c \
@@ -92,24 +94,28 @@ SRCS_PARSING 		= 	lexer.c \
 						ast.c \
 						ast_realloc.c
 
-SRCS_EXECUT			=	exec_main.c \
-						exec_simple.c \
+SRCS_EXECUT			=	error.c \
+						exec_main.c \
 						exec_multi.c \
+						exec_simple.c \
 						exec_regular.c \
+						exec_utils.c \
+						exec_errors.c \
 						free.c \
+						utils.c \
 						
 
-# SRCS_BUILTINS		= 	builtins.c \
-# 						builtins_utils.c \
-# 						cd.c \
-# 						cd_utils.c \
-# 						echo.c \
-# 						env.c \
-# 						exit.c \
-# 						export_utils.c \
-# 						export.c \
-# 						pwd.c \
-# 						unset.c 
+SRCS_BUILTINS		= 	builtins.c \
+						builtins_utils.c \
+						cd.c \
+						cd_utils.c \
+						echo.c \
+						env.c \
+						exit.c \
+						export_utils.c \
+						export.c \
+						pwd.c \
+						unset.c 
 
 #-- PREFIXED SOURCES --#
 
@@ -119,9 +125,9 @@ SRC_P				=	$(addprefix $(SRC_PARSING_DIR)/, $(SRCS_PARSING))
 
 SRC_E				=	$(addprefix $(SRC_EXECUT_DIR)/, $(SRCS_EXECUT))
 
-#SRC_B				=	$(addprefix $(SRC_BUILTINS_DIR)/, $(SRCS_BUILTINS))
+SRC_B				=	$(addprefix $(SRC_BUILTINS_DIR)/, $(SRCS_BUILTINS))
 
-SRC 				=	$(SRC_M) $(SRC_P) $(SRC_E) #$(SRC_B)
+SRC 				=	$(SRC_M) $(SRC_P) $(SRC_E) $(SRC_B)
 
 BIN     			=	$(patsubst $(SRCDIR)%.c,bin/%.o,$(SRC))
 

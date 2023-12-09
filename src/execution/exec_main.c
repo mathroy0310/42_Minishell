@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 16:55:09 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/08 22:02:21 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,29 @@ t_u8	dup_env_var(char **env)
 	return (OK);
 }
 
+static char	**get_path(void)
+{
+	char	**path;
+	char	*tmp;
+	int		ret;
+
+	ret = find_env_var_index("PATH", g_global->env_var);
+	if (ret == -1)
+		return (NULL);
+	tmp = return_value(g_global->env_var[ret], '=');
+	path = ft_split(tmp, ':');
+	if (path[0] == NULL)
+		return (NULL);
+	if (!path)
+		return (NULL);
+	return (path);
+}
+
 void	init_data(t_data *data, t_state *state)
 {
-	(void)state;
-	(void)data;
-	// state->path = get_path();
-	data = (t_data *)ft_malloc(sizeof(t_data));
+	if (state->path != NULL)
+		ft_free_tab(state->path);
+	state->path = get_path();
 	data->saved_stdout_fd = STDOUT_FILENO;
 	data->saved_stdin_fd = STDIN_FILENO;
 	data->state = state;
@@ -54,14 +71,16 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 {
 	t_data	*data;
 
-	data = NULL;
-	if (cmd->nbr_cmd == 0)
+	data = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
+	init_data(data, state);
+	if (ft_strequal(cmd->argvs[0], "exit"))
+		exit_builtin(cmd->argvs);
+	else if (cmd->nbr_cmd == 0)
 		return (OK);
-	if (cmd->type == pip)
-		return (execute_multi_cmd(cmd, data));
+	else if (cmd->type == pip)
+		execute_multi_cmd(cmd, data);
 	else
 	{
-		init_data(data, state);
 		if (cmd->redir_nbr > 0)
 			// check here doc
 			execute_simple_cmd(cmd, data);
@@ -69,6 +88,6 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 			execute_regular_cmd(cmd, data);
 		// ft_debug_printf("no redirection");
 	}
-	//free_data(data, cmd);
+	free_data(data, cmd);
 	return (OK);
 }

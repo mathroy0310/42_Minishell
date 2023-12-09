@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 19:26:07 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:47:08 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 01:39:20 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_lexer
 	int				curpos;
 	int				readpos;
 	char			c;
-	bool			is_multi_line;
-	bool			is_quoted;
+	t_bool			is_multi_line;
+	t_bool			is_quoted;
 }					t_lexer;
 
 typedef struct s_token
@@ -69,7 +69,6 @@ t_token				*string_token(t_lexer *lexer);
 
 t_bool				is_valid_envar(char c);
 char				*ft_getenv(char *str);
-int					get_str_by_char(char *str, char c);
 char				*envar_token(t_lexer *lexer);
 
 /*

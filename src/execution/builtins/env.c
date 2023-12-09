@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 21:39:22 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:38:51 by maroy            ###   ########.fr       */
+/*   Created: 2023/07/31 15:20:11 by maroy             #+#    #+#             */
+/*   Updated: 2023/12/08 20:33:49 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_global(void)
+t_u8	env_builtin(t_data *data)
 {
-	ft_free_tab(g_global->env_var);
-	ft_free(g_global);
-}
+	int i;
 
-void	free_state(t_state *state)
-{
-	ft_free_tab(state->path);
-	ft_free_tab(state->env_);
-	ft_free(state);
+	i = -1;
+	g_global->exit_status = EXIT_SUCCESS;
+	i = -1;
+	while (data->state->env_[++i] != NULL)
+		ft_putstr_nl(data->state->env_[i]);
+	return (OK);
 }

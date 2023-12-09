@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 16:24:43 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 03:39:54 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,60 @@ typedef struct s_data
 t_u8				dup_env_var(char **env);
 t_u8				execution(t_cmd *cmd, t_state *state);
 
-/*
+/**
  * exec_multi.c *
  */
 
 t_u8				execute_multi_cmd(t_cmd *cmd, t_data *data);
 
-/*
+/**
  * exec_simple.c *
  */
 
 t_u8				execute_simple_cmd(t_cmd *cmd, t_data *data);
 
-/*
+/**
  * exec_regular.c *
  */
 
 t_u8				execute_regular_cmd(t_cmd *cmd, t_data *data);
 
-/*
+/**
+ * exec_builtin.c *
+ */
+char				**get_bin_path(void);
+
+/**
  * free.c *
  */
+
 void				free_data(t_data *data, t_cmd *cmd);
+void				free_child(t_cmd *cmd, t_data *data);
+
+/**
+ * utils.c *
+ */
+
+char				*get_env_var_by_key(char *key);
+int					find_env_var_index(char *key, char **env_pointer);
+
+/**
+ * error.c *
+ */
+
+void				not_valid_id(char *arg);
+
+/**
+ * exec_errors.c *
+ */
+
+char				*check_dir(char *bin, char *cmd);
+int					error_message(char *path);
+
+/**
+ * exec_utils.c *
+ */
+
+char				*path_join(const char *s1, const char *s2);
 
 #endif
