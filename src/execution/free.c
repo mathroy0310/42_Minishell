@@ -6,16 +6,24 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:20:59 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:39:13 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 17:29:40 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	restore_std_fd(t_data *data)
+{
+	dup2(data->saved_stdin_fd, STDIN_FILENO);
+	dup2(data->saved_stdout_fd, STDOUT_FILENO);
+	ft_close(data->saved_stdout_fd);
+	ft_close(data->saved_stdin_fd);
+}
 void	free_data(t_data *data, t_cmd *cmd)
 {
 	int	i;
 
+	restore_std_fd(data);
 	if (cmd->nbr_cmd == 1)
 	{
 		ft_free(data->redir);

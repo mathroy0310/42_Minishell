@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:46:44 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 20:36:01 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 17:25:50 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,39 @@ int	check_for_permission(t_cmd *cmd)
 	return (126);
 }
 
+int	error_message(char *path)
+{
+	DIR	*folder;
+	int	fd;
+	int	ret;
+
+	fd = open(path, O_WRONLY);
+	folder = opendir(path);
+	ft_putstr_err(FT_RED ERR_PROMPT);
+	ft_putstr_err(path);
+	if (!ft_strchr(path, '/'))
+		ft_putstr_errnl(": command not found");
+	else if (fd == -1 && !folder)
+		ft_putstr_errnl(": No such file or directory");
+	else if (fd == -1 && folder)
+		ft_putstr_errnl(": is a directory");
+	else if (fd != -1 && !folder)
+		ft_putstr_errnl(": Permission denied");
+	if (!ft_strchr(path, '/') || (fd == -1 && !folder))
+		ret = 127;
+	else
+		ret = 126;
+	ft_putstr_err(FT_COLOR_RESET);
+	if (folder)
+		closedir(folder);
+	ft_close(fd);
+	return (ret);
+}
+
 void	print_error(char *error)
 {
-	ft_putstr_err(ERR_PROMPT);
+	ft_putstr_err(FT_RED ERR_PROMPT);
 	ft_putstr_err(error);
 	perror(" ");
+	ft_putstr_errnl(FT_COLOR_RESET);
 }

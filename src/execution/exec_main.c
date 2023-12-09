@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 22:02:21 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 17:29:14 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	init_data(t_data *data, t_state *state)
 	if (state->path != NULL)
 		ft_free_tab(state->path);
 	state->path = get_path();
-	data->saved_stdout_fd = STDOUT_FILENO;
-	data->saved_stdin_fd = STDIN_FILENO;
+	data->saved_stdout_fd = dup(STDOUT_FILENO);
+	data->saved_stdin_fd = dup(STDIN_FILENO);
 	data->state = state;
 	data->redir = (t_shell_red *)ft_malloc(sizeof(t_shell_red));
 	data->redir->filename = NULL;
-	data->redir->infile = NULL;
-	data->redir->outfile = NULL;
+	data->redir->infile = 0;
+	data->redir->outfile = 0;
 	data->redir->is_here_doc = FALSE;
 	data->redir->pipe_fd = NULL;
 	data->redir->is_error = FALSE;

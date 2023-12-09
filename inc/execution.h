@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:39:54 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 17:29:51 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_cmd
 
 typedef struct s_shell_red
 {
-	t_file			*infile;
-	t_file			*outfile;
+	int				infile;
+	int				outfile;
 	t_bool			is_here_doc;
 	t_bool			is_error;
 	char			*filename;
@@ -111,18 +111,22 @@ int					find_env_var_index(char *key, char **env_pointer);
  */
 
 void				not_valid_id(char *arg);
-
-/**
- * exec_errors.c *
- */
-
-char				*check_dir(char *bin, char *cmd);
+int					check_error(t_cmd *cmd, t_data *data);
 int					error_message(char *path);
+void				print_error(char *error);
 
 /**
  * exec_utils.c *
  */
 
-char				*path_join(const char *s1, const char *s2);
+t_u8				execute(char *path, t_cmd *cmd, t_data *data);
+char				*find_cmd_path(t_cmd *cmd, t_data *data);
+t_u8				execute(char *path, t_cmd *cmd, t_data *data);
+
+/**
+ * redirection.c *
+ */
+
+int					redirections_setup(t_cmd *cmd, t_data *data);
 
 #endif
