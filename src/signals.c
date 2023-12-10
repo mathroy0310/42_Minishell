@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 13:25:54 by maroy             #+#    #+#             */
-/*   Updated: 2023/11/28 21:16:28 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 20:01:12 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,10 @@ void	wait_children(void)
 	}
 }
 
-void	sigint_here_doc_handler(int signum)
-{
-	(void)signum;
-	g_global->exit_status = EXIT_FAILURE;
-	ft_putchar('\n');
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	exit(g_global->exit_status);
-}
-
 void	is_child_process(int signum)
 {
 		if (signum == SIGQUIT)
-			ft_putstr_nl("Quit");
+			ft_putstr_nl("Quit : 3");
 		else if (signum == SIGINT)
 			ft_putchar('\n');
 }
@@ -56,8 +46,8 @@ void	sigint_handler(int signum)
 		if (signum == SIGINT)
 		{
 			
-			g_global->exit_status = 1;
-			ft_putchar_fd('\n', 2);
+			g_global->exit_status = EXIT_FAILURE;
+			ft_putchar_err('\n');
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();

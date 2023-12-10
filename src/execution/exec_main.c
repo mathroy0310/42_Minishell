@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 17:29:14 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 19:48:32 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	init_data(t_data *data, t_state *state)
 	data->redir->is_here_doc = FALSE;
 	data->redir->pipe_fd = NULL;
 	data->redir->is_error = FALSE;
+	g_global->exit_status = EXIT_SUCCESS;
 }
 
 t_u8	execution(t_cmd *cmd, t_state *state)
@@ -88,6 +89,7 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 			execute_regular_cmd(cmd, data);
 		// ft_debug_printf("no redirection");
 	}
+	signals_init();
 	free_data(data, cmd);
 	return (OK);
 }

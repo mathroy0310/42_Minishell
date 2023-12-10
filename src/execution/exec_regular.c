@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 02:31:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 17:28:33 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 20:44:15 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 t_u8	execute_regular_cmd(t_cmd *cmd, t_data *data)
 {
-	(void)cmd;
-	(void)data;
-
-	char *path;
 	int ret;
+	char *path;
 
 	if (DEBUG)
 		ft_debug_printf(" -- execute_regular_cmd -- ");

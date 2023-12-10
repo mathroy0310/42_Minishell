@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:29:12 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 17:02:20 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 19:54:44 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*tokenize_text(t_lexer *lexer, char *s)
 	{
 		while (lexer->c == SPACE && lexer->c != EOF)
 			read_single_char(lexer);
-		if (lexer->c == DOLLAR || lexer->c == BACKSLASH || lexer->c == TILDE)
+		if (lexer->c == DOLLAR)
 		{
 			str = ft_strjoin_free(str, envar_token(lexer));
 			i += 1;

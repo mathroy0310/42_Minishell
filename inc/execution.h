@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 17:29:51 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 20:34:41 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void				print_error(char *error);
  * exec_utils.c *
  */
 
-t_u8				execute(char *path, t_cmd *cmd, t_data *data);
 char				*find_cmd_path(t_cmd *cmd, t_data *data);
 t_u8				execute(char *path, t_cmd *cmd, t_data *data);
 
