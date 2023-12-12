@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 20:34:41 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/11 19:05:06 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,13 @@ t_u8				execute(char *path, t_cmd *cmd, t_data *data);
  * redirection.c *
  */
 
-int					redirections_setup(t_cmd *cmd, t_data *data);
+t_bool				redirections_all_setup(t_cmd *cmd, t_data *data);
+t_bool				redirections_setup(t_cmd *cmd, t_data *data);
+
+/**
+ * heredoc.c *
+ */
+void				check_for_heredoc(t_cmd *cmd, t_data *data);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 19:46:44 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 17:25:50 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/11 18:41:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_for_permission(t_cmd *cmd)
 	if (dirp)
 	{
 		closedir(dirp);
-		ft_putstr_errnl(": is a directory");
+		ft_putstr_errnl(": Is a directory");
 		return (126);
 	}
 	if (stat(cmd->argvs[0], &sb) == 0 || access(cmd->argvs[0], X_OK) != 0)
