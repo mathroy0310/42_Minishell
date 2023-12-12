@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 00:49:46 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/11 18:40:44 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/09 20:44:46 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	*find_path(char *cmd, char **path)
 	{
 		temp = ft_strjoin(path[i], "/");
 		possible_path = ft_strjoin(temp, cmd);
+		//ft_debug_printf("possible_path: %s", possible_path);
 		ft_free(temp);
 		fd = open(possible_path, O_RDONLY);
 		if (fd >= 0)
@@ -33,7 +34,6 @@ static char	*find_path(char *cmd, char **path)
 			ft_close(fd);
 			return (possible_path);
 		}
-		ft_free(possible_path);
 	}
 	ft_close(fd);
 	return (ft_strdup("(null)"));
@@ -46,14 +46,21 @@ static void	path_error_print(t_cmd *cmd, t_data *data)
 	if (data->state->path == NULL)
 	{
 		ft_putstr_err(": No such file or directory");
+		ft_putstr_errnl(FT_COLOR_RESET);
+		g_global->exit_status = 127;
+	}
+	else if (ft_strncmp(cmd->argvs[0], "//", 2))
+	{
+		ft_putstr_err(": No such file or directory");
+		ft_putstr_errnl(FT_COLOR_RESET);
 		g_global->exit_status = 127;
 	}
 	else if (ft_strncmp(cmd->argvs[0], "./", 2))
 	{
-		ft_putstr_err(": Command not found");
-		g_global->exit_status = 126;
+		ft_putstr_err(": command not found");
+		ft_putstr_errnl(FT_COLOR_RESET);
+		g_global->exit_status = 127;
 	}
-	ft_putstr_errnl(FT_COLOR_RESET);
 }
 
 char	*find_cmd_path(t_cmd *cmd, t_data *data)
