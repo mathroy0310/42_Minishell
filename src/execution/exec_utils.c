@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 00:49:46 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 20:44:46 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:33:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static char	*find_path(char *cmd, char **path)
 			ft_close(fd);
 			return (possible_path);
 		}
+		ft_close(fd);
+		ft_free(possible_path);
 	}
-	ft_close(fd);
 	return (ft_strdup("(null)"));
 }
 
@@ -92,7 +93,7 @@ t_u8	execute(char *path, t_cmd *cmd, t_data *data)
 	else if (g_global->pid == 0)
 	{
 		if (ft_strchr(path, '/'))
-			execve(path, cmd->argvs, data->state->env_);
+			execve(path, cmd->argvs, g_global->env_var);
 		ret = error_message(path);
 		ft_free(path);
 		free_child(cmd, data);

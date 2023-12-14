@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:36:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 17:29:27 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:10:15 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_valid_fd(t_data *data, char *filename, int fd)
 	}
 }
 
-t_bool	setup_infiles(t_cmd *cmd, t_data *data, int i)
+static t_bool	setup_infiles(t_cmd *cmd, t_data *data, int i)
 {
 	int	fd;
 
@@ -49,7 +49,7 @@ t_bool	setup_infiles(t_cmd *cmd, t_data *data, int i)
 	return (TRUE);
 }
 
-t_bool	setup_outfiles(t_cmd *cmd, t_data *data, int i)
+static t_bool	setup_outfiles(t_cmd *cmd, t_data *data, int i)
 {
 	int	fd;
 
@@ -74,7 +74,29 @@ t_bool	setup_outfiles(t_cmd *cmd, t_data *data, int i)
 	return (TRUE);
 }
 
-int	redirections_setup(t_cmd *cmd, t_data *data)
+void	redirections_all_setup(t_cmd *cmd, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < cmd->nbr_cmd)
+	{
+		j = -1;
+		//check_for_heredoc(&data[i], &cmd[i]);
+		while (++j < cmd[i].redir_nbr)
+		{
+			if (cmd[i].redir[j].type == less)
+				setup_infiles(&cmd[i], &data[i], j);
+			if ((cmd[i].redir[j].type == great
+					|| cmd[i].redir[j].type == greater)
+				&& !data->redir->is_error)
+				setup_outfiles(&cmd[i], &data[i], j);
+		}
+	}
+}
+
+void	redirections_setup(t_cmd *cmd, t_data *data)
 {
 	int i;
 
@@ -88,5 +110,4 @@ int	redirections_setup(t_cmd *cmd, t_data *data)
 			setup_outfiles(cmd, data, i);
 		i++;
 	}
-	return (1);
 }

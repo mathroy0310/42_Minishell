@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 20:34:41 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:13:42 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
  * exec_main.c *
  */
 
+void				init_data(t_data *data, t_state *state);
 t_u8				dup_env_var(char **env);
 t_u8				execution(t_cmd *cmd, t_state *state);
 
@@ -73,7 +74,7 @@ t_u8				execution(t_cmd *cmd, t_state *state);
  * exec_multi.c *
  */
 
-t_u8				execute_multi_cmd(t_cmd *cmd, t_data *data);
+t_u8				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
 /**
  * exec_simple.c *
@@ -126,6 +127,7 @@ t_u8				execute(char *path, t_cmd *cmd, t_data *data);
  * redirection.c *
  */
 
-int					redirections_setup(t_cmd *cmd, t_data *data);
+void				redirections_setup(t_cmd *cmd, t_data *data);
+void				redirections_all_setup(t_cmd *cmd, t_data *data);
 
 #endif

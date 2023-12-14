@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 19:48:32 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:14:08 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 {
 	t_data	*data;
 
-	data = (t_data *)malloc(sizeof(t_data) * cmd->nbr_cmd);
-	init_data(data, state);
+	data = (t_data *)ft_malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (ft_strequal(cmd->argvs[0], "exit"))
 		exit_builtin(cmd->argvs);
 	else if (cmd->nbr_cmd == 0)
 		return (OK);
 	else if (cmd->type == pip)
-		execute_multi_cmd(cmd, data);
+		execute_multi_cmd(cmd, data, state);
 	else
 	{
+		init_data(data, state);
 		if (cmd->redir_nbr > 0)
 			// check here doc
 			execute_simple_cmd(cmd, data);

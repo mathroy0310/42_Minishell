@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/09 17:00:26 by maroy            ###   ########.fr        #
+#    Updated: 2023/12/12 17:32:21 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SLIB_RLINE 			= 	$(LIBRLINE_DIR)libreadline.a
 
 CC					=	gcc
 
-CFLAGS 				=	-Wall -Wextra -Werror -std=c17 -I${INCDIR}
+CFLAGS 				=	-Wall -Wextra -Werror -Wpedantic -std=c17 -I${INCDIR} -O3
 
 RLFLAGS				=	-L${LIBRLINE_DIR} -lreadline -lcurses -I${LIBRLINE_DIR}/inc
 

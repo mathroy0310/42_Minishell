@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 19:25:13 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:31:30 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static char	**get_env_(char **env_)
 	int		i;
 
 	i = -1;
-	env = (char **)malloc(sizeof(char *) * (ft_tablen(env_) + 1));
-	if (env == NULL)
-		exit(EXIT_FAILURE);
+	env = (char **)ft_malloc(sizeof(char *) * ((size_t)ft_tablen(env_) + 1));
 	while (++i < ft_tablen(env_))
 	{
 		env[i] = ft_strdup(env_[i]);
@@ -83,7 +81,7 @@ static void	sanitize(char **buff, t_lexer **lexer)
 	{
 		*lexer = init_lexer(*lexer);
 		(*lexer)->buffer = ft_strdup(*buff);
-		(*lexer)->bufsize = ft_strlen((*lexer)->buffer);
+		(*lexer)->bufsize = (int)ft_strlen((*lexer)->buffer);
 	}
 	ft_free(*buff);
 }

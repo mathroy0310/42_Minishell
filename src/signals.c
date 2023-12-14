@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 13:25:54 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 20:01:12 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:32:07 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	wait_children(void)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
-			g_global->exit_status = WEXITSTATUS(status);
+			g_global->exit_status = (t_u8)WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 		{
 			signal = WTERMSIG(status);
-			g_global->exit_status = signal + 128;
+			g_global->exit_status = (t_u8)(signal + 128);
 		}
 	}
 }
