@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/12 17:14:08 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/16 19:48:06 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_data(t_data *data, t_state *state)
 	if (state->path != NULL)
 		ft_free_tab(state->path);
 	state->path = get_path();
+	data->cmd_path = NULL;
 	data->saved_stdout_fd = dup(STDOUT_FILENO);
 	data->saved_stdin_fd = dup(STDIN_FILENO);
 	data->state = state;

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 02:31:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 20:44:15 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/16 18:37:07 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_u8	execute_regular_cmd(t_cmd *cmd, t_data *data)
 {
 	int ret;
-	char *path;
 
 	if (DEBUG)
 		ft_debug_printf(" -- execute_regular_cmd -- ");
@@ -24,14 +23,10 @@ t_u8	execute_regular_cmd(t_cmd *cmd, t_data *data)
 		return (ret);
 	if (is_builtin(cmd))
 		return (execute_builtin(cmd, data));
-	path = find_cmd_path(cmd, data);
-	if (!path)
-	{
-		ft_free(path);
+	data->cmd_path = find_cmd_path(cmd, data);
+	if (!data->cmd_path)
 		return (EXIT_FAILURE);
-	}
 	else
-		ret = execute(path, cmd, data);
-	ft_free(path);
-	return (EXIT_FAILURE);
+		ret = execute(data->cmd_path, cmd, data);
+	return (ret);
 }

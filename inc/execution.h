@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/12 17:13:42 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/16 18:29:54 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_data
 {
 	int				saved_stdout_fd;
 	int				saved_stdin_fd;
+	char			*cmd_path;
 	t_state			*state;
 	t_shell_red		*redir;
 }					t_data;

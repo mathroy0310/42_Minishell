@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:36:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/12 17:10:15 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/16 18:33:52 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void	check_valid_fd(t_data *data, char *filename, int fd)
 {
 	if (fd < 0)
 	{
-		ft_putstr_err(ERR_PROMPT);
+		ft_putstr_err(FT_RED ERR_PROMPT);
 		ft_putstr_err(filename);
-		ft_putstr_errnl(": No such file or directory");
+		ft_putstr_err(": No such file or directory");
+		ft_putstr_errnl(FT_COLOR_RESET);
 		data->redir->is_error = TRUE;
 		g_global->exit_status = EXIT_FAILURE;
 	}
@@ -33,7 +34,6 @@ static t_bool	setup_infiles(t_cmd *cmd, t_data *data, int i)
 		fd = open(cmd->redir[i].filename, O_RDWR);
 		data->redir->infile = fd;
 		check_valid_fd(data, cmd->redir[i].filename, fd);
-		ft_close(fd);
 	}
 	if (!data->redir->is_error)
 	{
