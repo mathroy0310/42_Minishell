@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/16 19:48:06 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/17 01:43:36 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 
 	data = (t_data *)ft_malloc(sizeof(t_data) * cmd->nbr_cmd);
 	if (ft_strequal(cmd->argvs[0], "exit"))
-		exit_builtin(cmd->argvs);
+			exit_builtin(cmd->argvs);
 	else if (cmd->nbr_cmd == 0)
 		return (OK);
 	else if (cmd->type == pip)
@@ -88,9 +88,7 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 			execute_simple_cmd(cmd, data);
 		else
 			execute_regular_cmd(cmd, data);
-		// ft_debug_printf("no redirection");
 	}
-	signals_init();
 	free_data(data, cmd);
 	return (OK);
 }

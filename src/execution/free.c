@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:20:59 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/16 18:56:12 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/17 01:34:28 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	free_data(t_data *data, t_cmd *cmd)
 
 	if (cmd->nbr_cmd == 1)
 	{
-		restore_std_fd(data);
 		ft_free(data->cmd_path);
 		ft_free(data->redir);
 		ft_free(data);

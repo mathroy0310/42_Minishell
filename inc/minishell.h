@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:49:41 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 03:40:19 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/17 01:32:47 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ extern t_global			*g_global;
 /*
  * -- Prototypes --
  */
-t_u8					minishell_master(char **env);
+t_u8					minishell_master(t_state *state);
 void					quit_minishell(char *buff);
 /*
  * debug.c *
@@ -125,9 +125,7 @@ int						get_str_from_char(char *str, char c, t_bool flag);
  * readline.c
  */
 
-char					*check_line(char *buff);
 void					use_history(void);
-void					add_to_history(char *buff);
 
 
 #endif

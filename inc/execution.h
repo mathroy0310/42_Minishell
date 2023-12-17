@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/16 18:29:54 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/17 01:16:30 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ t_u8				execution(t_cmd *cmd, t_state *state);
 t_u8				execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state);
 
 /**
+ * exec_multi_utils.c *
+ */
+
+void				close_pipe(int *fd);
+void				setup_pipes(t_cmd *cmd, t_data *data);
+void				close_all_pipes(int **fd, int nbr_cmd);
+void				handle_io_redirection(t_data *data);
+
+/**
  * exec_simple.c *
  */
 
@@ -130,5 +139,16 @@ t_u8				execute(char *path, t_cmd *cmd, t_data *data);
 
 void				redirections_setup(t_cmd *cmd, t_data *data);
 void				redirections_all_setup(t_cmd *cmd, t_data *data);
+void				check_valid_fd(t_data *data, char *filename, int fd);
+
+/**
+ * here_doc.c *
+ */
+void				check_for_heredoc(t_data *data, t_cmd *cmd);
+
+/**
+ * here_doc_utils.c *
+ */
+char	*envar_here_doc(char *buff, int i);
 
 #endif

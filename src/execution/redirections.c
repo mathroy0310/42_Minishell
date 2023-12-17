@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:36:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/16 18:33:52 by maroy            ###   ########.fr       */
+/*   Updated: 2023/12/17 01:48:31 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_valid_fd(t_data *data, char *filename, int fd)
 		ft_putstr_err(": No such file or directory");
 		ft_putstr_errnl(FT_COLOR_RESET);
 		data->redir->is_error = TRUE;
-		g_global->exit_status = EXIT_FAILURE;
+		g_global->exit_status = 127;
 	}
 }
 
@@ -83,7 +83,6 @@ void	redirections_all_setup(t_cmd *cmd, t_data *data)
 	while (++i < cmd->nbr_cmd)
 	{
 		j = -1;
-		//check_for_heredoc(&data[i], &cmd[i]);
 		while (++j < cmd[i].redir_nbr)
 		{
 			if (cmd[i].redir[j].type == less)
@@ -100,14 +99,13 @@ void	redirections_setup(t_cmd *cmd, t_data *data)
 {
 	int i;
 
-	i = 0;
-	while (i < cmd->redir_nbr)
+	i = -1;
+	while (++i < cmd->redir_nbr)
 	{
 		if (cmd->redir[i].type == less)
 			setup_infiles(cmd, data, i);
 		if ((cmd->redir[i].type == greater || cmd->redir[i].type == great)
 			&& !data->redir->is_error)
 			setup_outfiles(cmd, data, i);
-		i++;
 	}
 }

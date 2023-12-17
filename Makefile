@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/12 17:32:21 by maroy            ###   ########.fr        #
+#    Updated: 2023/12/17 01:41:29 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SRCS_PARSING 		= 	lexer.c \
 SRCS_EXECUT			=	error.c \
 						exec_main.c \
 						exec_multi.c \
+						exec_multi_utils.c \
 						exec_simple.c \
 						exec_regular.c \
 						exec_utils.c \
