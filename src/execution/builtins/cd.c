@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:00:20 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 22:27:05 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:52:58 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,41 +85,50 @@ static t_u8	change_dir(char *path, int i, char **argv)
 	return (OK);
 }
 
-static t_u8	exec_cd(char *path, int i, char **argv)
+static char	*cd_check_path(char **argv)
 {
-	char	*pwd;
+	char	*path;
+	int		len;
 
-	if (change_dir(path, i, argv) == OK)
-		return (OK);
-	pwd = get_env_var_by_key("PWD");
-	add_var_to_env("PWD", pwd);
-	free(pwd);
-	return (KO);
+	len = ft_tablen(argv);
+	if (len == 1 || len > 2)
+	{
+		path = get_env_var_by_key("HOME");
+		if (len > 2)
+		{
+			g_global->exit_status = EXIT_FAILURE;
+			ft_putstr_err(FT_RED ERR_PROMPT);
+			ft_putstr_errnl("cd: too many arguments" FT_COLOR_RESET);
+			return (NULL);
+		}
+		else if (len == 1 && !path)
+		{
+			g_global->exit_status = EXIT_FAILURE;
+			ft_putstr_err(FT_RED ERR_PROMPT);
+			ft_putstr_errnl("cd: HOME not set" FT_COLOR_RESET);
+			return (NULL);
+		}
+	}
+	else
+		path = argv[1];
+	return (path);
 }
 
 t_u8	cd_builtin(char **argv)
 {
-	char *path;
-	int i;
+	int		i;
+	char	*path;
+	char	*pwd;
 
 	i = 0;
 	g_global->exit_status = EXIT_SUCCESS;
-	if (argv[i + 1] == NULL )
-	{
-		path = get_env_var_by_key("HOME");
-		if (path == NULL)
-		{
-			g_global->exit_status = EXIT_FAILURE;
-			ft_putstr_err(FT_RED ERR_PROMPT "cd:");
-			ft_putstr_err(" HOME not set");
-			ft_putstr_errnl(FT_COLOR_RESET);
-			return (KO);
-		}
-		if (!ft_strcmp(path, ""))
-			return (KO);
-	}
-	else
-		path = argv[i + 1];
-	exec_cd(path, i, argv);
+	path = cd_check_path(argv);
+	if (!path)
+		return (KO);
+	if (change_dir(path, i, argv))
+		return (OK);
+	pwd = get_env_var_by_key("PWD");
+	add_var_to_env("PWD", pwd);
+	ft_free(pwd);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:21:46 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:41:06 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 01:21:47 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_u8	execute_simple_cmd(t_cmd *cmd, t_data *data)
 {
-	int ret;
+	int	ret;
 
 	if (DEBUG)
 		ft_debug_printf(" -- execute_simple_cmd -- ");
@@ -22,12 +22,17 @@ t_u8	execute_simple_cmd(t_cmd *cmd, t_data *data)
 	ret = check_error(cmd, data);
 	if (ret != EXIT_SUCCESS)
 		return (ret);
+	is_builtin(cmd, data);
+	if (data->is_builtin)
+		return (execute_builtin(cmd, data));
+	is_here_doc(cmd, data);
+	if (data->redir->is_here_doc)
+		return (execute_here_doc(cmd, data));
+	if (data->cmd_path)
+		ft_free(data->cmd_path);
 	data->cmd_path = find_cmd_path(cmd, data);
 	if (!data->cmd_path)
 		return (EXIT_FAILURE);
-	if (is_builtin(cmd))
-		return (execute_builtin(cmd, data));
-	else
-		ret = execute(data->cmd_path, cmd, data);
+	ret = execute(data->cmd_path, cmd, data);
 	return (ret);
 }

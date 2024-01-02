@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 15:20:11 by maroy             #+#    #+#             */
-/*   Updated: 2024/01/02 00:10:07 by maroy            ###   ########.fr       */
+/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-t_u8	env_builtin(t_data *data)
+int	main(int argc, char const *argv[])
 {
-	int	i;
+	int	pid;
 
-	(void)data;
-	g_global->exit_status = EXIT_SUCCESS;
-	i = -1;
-	while (g_global->env_var[++i] != NULL)
-		ft_putstr_nl(g_global->env_var[i]);
-	return (OK);
+	pid = fork();
+	open("infile", O_RDONLY);
+	while (1)
+	{
+		printf("Helloo miniHELL %i\n", pid);
+		sleep(1);
+	}
+	return (0);
 }

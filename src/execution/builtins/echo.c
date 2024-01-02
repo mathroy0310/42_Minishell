@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:22:40 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 19:58:35 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:10:14 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	check_n_option(char **args)
 
 t_u8	echo_builtin(char **args)
 {
-	int j;
+	int	j;
 
 	g_global->exit_status = EXIT_SUCCESS;
 	if (args[1] == NULL)

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 20:15:19 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 20:32:42 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:15:54 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static int	check_only_key(char *key)
 
 int	find_env_var_index(char *key, char **env_pointer)
 {
-	int index;
-	char *sub_env;
-	int i;
+	int		index;
+	char	*sub_env;
+	int		i;
 
 	i = -1;
 	if (!key)

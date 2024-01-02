@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:37:15 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:16:30 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 01:28:38 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	char			*cmd_path;
 	t_state			*state;
 	t_shell_red		*redir;
+	t_bool			is_builtin;
 }					t_data;
 
 /**
@@ -139,16 +140,11 @@ t_u8				execute(char *path, t_cmd *cmd, t_data *data);
 
 void				redirections_setup(t_cmd *cmd, t_data *data);
 void				redirections_all_setup(t_cmd *cmd, t_data *data);
-void				check_valid_fd(t_data *data, char *filename, int fd);
 
 /**
  * here_doc.c *
  */
-void				check_for_heredoc(t_data *data, t_cmd *cmd);
-
-/**
- * here_doc_utils.c *
- */
-char	*envar_here_doc(char *buff, int i);
+void				is_here_doc(t_cmd *cmd, t_data *data);
+t_u8				execute_here_doc(t_cmd *cmd, t_data *data);
 
 #endif

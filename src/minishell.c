@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:56:43 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:39:38 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:10:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_u8	minishell_master(t_state *state)
 {
 	t_lexer	*lexer;
 	char	*buff;
-	
+
 	while (!g_global->has_exited)
 	{
 		buff = NULL;

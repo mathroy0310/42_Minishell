@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:34:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 01:17:51 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:09:29 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ static void	set_or_modify(char *arg)
 		if (just_key == KO)
 			modify_env(arg, key);
 	}
-	free(key);
+	ft_free(key);
 }
 
 t_u8	export_builtin(char **args, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	g_global->exit_status = EXIT_SUCCESS;

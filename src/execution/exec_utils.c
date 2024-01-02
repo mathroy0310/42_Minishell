@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 00:49:46 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/12 17:33:39 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:14:18 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static char	*find_path(char *cmd, char **path)
 	{
 		temp = ft_strjoin(path[i], "/");
 		possible_path = ft_strjoin(temp, cmd);
-		//ft_debug_printf("possible_path: %s", possible_path);
 		ft_free(temp);
 		fd = open(possible_path, O_RDONLY);
 		if (fd >= 0)
@@ -84,7 +83,7 @@ char	*find_cmd_path(t_cmd *cmd, t_data *data)
 
 t_u8	execute(char *path, t_cmd *cmd, t_data *data)
 {
-	int ret;
+	int	ret;
 
 	ret = EXIT_FAILURE;
 	g_global->pid = fork();
@@ -95,7 +94,6 @@ t_u8	execute(char *path, t_cmd *cmd, t_data *data)
 		if (ft_strchr(path, '/'))
 			execve(path, cmd->argvs, g_global->env_var);
 		ret = error_message(path);
-		ft_free(path);
 		free_child(cmd, data);
 		exit(ret);
 	}

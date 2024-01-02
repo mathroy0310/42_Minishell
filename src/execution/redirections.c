@@ -6,15 +6,15 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:36:10 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:48:31 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:13:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_valid_fd(t_data *data, char *filename, int fd)
+static void	check_valid_fd(t_data *data, char *filename)
 {
-	if (fd < 0)
+	if (access(filename, F_OK) == -1)
 	{
 		ft_putstr_err(FT_RED ERR_PROMPT);
 		ft_putstr_err(filename);
@@ -22,6 +22,15 @@ void	check_valid_fd(t_data *data, char *filename, int fd)
 		ft_putstr_errnl(FT_COLOR_RESET);
 		data->redir->is_error = TRUE;
 		g_global->exit_status = 127;
+	}
+	if (access(filename, R_OK) == -1)
+	{
+		ft_putstr_err(FT_RED ERR_PROMPT);
+		ft_putstr_err(filename);
+		ft_putstr_err(": Permission denied");
+		ft_putstr_errnl(FT_COLOR_RESET);
+		data->redir->is_error = TRUE;
+		g_global->exit_status = 126;
 	}
 }
 
@@ -33,7 +42,7 @@ static t_bool	setup_infiles(t_cmd *cmd, t_data *data, int i)
 	{
 		fd = open(cmd->redir[i].filename, O_RDWR);
 		data->redir->infile = fd;
-		check_valid_fd(data, cmd->redir[i].filename, fd);
+		check_valid_fd(data, cmd->redir[i].filename);
 	}
 	if (!data->redir->is_error)
 	{
@@ -57,13 +66,13 @@ static t_bool	setup_outfiles(t_cmd *cmd, t_data *data, int i)
 	{
 		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
 		data->redir->outfile = fd;
-		check_valid_fd(data, cmd->redir[i].filename, fd);
+		check_valid_fd(data, cmd->redir[i].filename);
 	}
 	else if (cmd->redir[i].type == greater && !data->redir->is_error)
 	{
 		fd = open(cmd->redir[i].filename, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
 		data->redir->outfile = fd;
-		check_valid_fd(data, cmd->redir[i].filename, fd);
+		check_valid_fd(data, cmd->redir[i].filename);
 	}
 	if (!data->redir->is_error)
 	{
@@ -97,7 +106,7 @@ void	redirections_all_setup(t_cmd *cmd, t_data *data)
 
 void	redirections_setup(t_cmd *cmd, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < cmd->redir_nbr)

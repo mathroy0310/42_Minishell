@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:03:34 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/07 19:42:27 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 01:17:28 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	debug_print_tab(char **tab)
 			ft_debug_printf("tab[%d] -={ %s }=-", i, tab[i]);
 	}
 }
+
 void	debug_print_token(t_token *token)
 {
 	if (DEBUG == 0)
@@ -33,7 +34,7 @@ void	debug_print_token(t_token *token)
 	ft_debug_printf("#--------------------------------------#");
 }
 
-void debug_print_redir(t_redir *redir)
+void	debug_print_redir(t_redir *redir)
 {
 	if (DEBUG == 0)
 		return ;
@@ -55,9 +56,12 @@ void	debug_print_cmd(t_cmd *cmd)
 			if (cmd[i].argvs)
 				debug_print_tab(cmd[i].argvs);
 			ft_debug_printf("cmd[%d]->nbr_cmd -={ %d }=-", i, cmd[i].nbr_cmd);
-			ft_debug_printf("cmd[%d]->args_size -={ %d }=-", i, cmd[i].args_size);
-			ft_debug_printf("cmd[%d]->redir_nbr -={ %d }=-", i, cmd[i].redir_nbr);
-			ft_debug_printf("cmd[%d]->type -={ %s }=-", i, get_token_type(cmd[i].type));
+			ft_debug_printf("cmd[%d]->args_size -={ %d }=-", i,
+				cmd[i].args_size);
+			ft_debug_printf("cmd[%d]->redir_nbr -={ %d }=-", i,
+				cmd[i].redir_nbr);
+			ft_debug_printf("cmd[%d]->type -={ %s }=-", i,
+				get_token_type(cmd[i].type));
 			if (cmd[i].redir_nbr > 0)
 				debug_print_redir(cmd[i].redir);
 			ft_debug_printf("========================================");

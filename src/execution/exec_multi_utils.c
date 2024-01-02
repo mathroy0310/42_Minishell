@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 00:34:27 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 00:45:55 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:12:19 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	close_pipe(int *fd)
 	{
 		ft_close(fd[0]);
 		ft_close(fd[1]);
-	}	
-		
+	}
 }
 
 void	close_all_pipes(int **fd, int nbr_cmd)

@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 02:31:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 00:43:34 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:13:14 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,25 @@ void	execute_process(t_cmd *cmd, t_data *data, int *pipe_fd)
 {
 	int	ret;
 
-	if (data->cmd_path == NULL)
-		return ;
 	g_global->pid = fork();
 	if (g_global->pid == 0)
 	{
 		handle_io_redirection(data);
-		if (is_builtin(cmd))
+		if (data->is_builtin)
 		{
 			execute_builtin(cmd, data);
 			close_pipe(pipe_fd);
 			ret = g_global->exit_status;
-			free_child(cmd, data);
-			exit(ret);
 		}
 		else
-			execute_cmd_path(cmd, data, pipe_fd);
+		{
+			if (ft_strchr(data->cmd_path, '/'))
+				execve(data->cmd_path, cmd->argvs, g_global->env_var);
+			close_pipe(pipe_fd);
+			ret = error_message(data->cmd_path);
+		}
+		free_child(cmd, data);
+		exit(ret);
 	}
 }
 
@@ -56,6 +59,7 @@ void	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 	data->state->read_end = 0;
 	while (++i < cmd->nbr_cmd - 1)
 	{
+		is_builtin(&cmd[i], &data[i]);
 		pipe(data->redir->pipe_fd[i]);
 		data->state->write_end = data->redir->pipe_fd[i][1];
 		execute_process(&cmd[i], &data[i], data->redir->pipe_fd[i]);
@@ -65,7 +69,10 @@ void	execute_pipe_cmd(t_cmd *cmd, t_data *data)
 		data->state->read_end = data->redir->pipe_fd[i][0];
 	}
 	data->state->write_end = 1;
-	execute_process(&cmd[i], &data[i], NULL);
+	if (data->is_builtin)
+		execute_builtin(&cmd[i], &data[i]);
+	else
+		execute_process(&cmd[i], &data[i], NULL);
 }
 
 void	execute_pipe_redir_cmd(t_cmd *cmd, t_data *data)
@@ -78,6 +85,7 @@ void	execute_pipe_redir_cmd(t_cmd *cmd, t_data *data)
 	data->state->read_end = 0;
 	while (++i < cmd->nbr_cmd - 1)
 	{
+		is_builtin(&cmd[i], &data[i]);
 		pipe(data->redir->pipe_fd[i]);
 		data->state->write_end = data->redir->pipe_fd[i][1];
 		execute_process(&cmd[i], &data[i], data->redir->pipe_fd[i]);
@@ -92,16 +100,18 @@ void	execute_pipe_redir_cmd(t_cmd *cmd, t_data *data)
 
 t_u8	execute_multi_cmd(t_cmd *cmd, t_data *data, t_state *state)
 {
-	int i;
-	int ret;
+	int	i;
+	int	ret;
 
 	ret = EXIT_SUCCESS;
 	i = -1;
 	if (DEBUG)
 		ft_debug_printf(" -- execute_multi_cmd -- ");
-	while (cmd->nbr_cmd > ++i)
+	while (++i < cmd->nbr_cmd)
 	{
 		init_data(&data[i], state);
+		if (data[i].cmd_path)
+			ft_free(data[i].cmd_path);
 		data[i].cmd_path = find_cmd_path(&cmd[i], &data[i]);
 	}
 	if (cmd->redir_nbr > 0)

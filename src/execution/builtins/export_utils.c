@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:17:33 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 20:01:24 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:09:39 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ void	modify_env(char *arg, char *key)
 		new_value = ft_strdup(arg);
 		tmp = g_global->env_var[i];
 		g_global->env_var[i] = new_value;
-		free(tmp);
+		ft_free(tmp);
 	}
 }
 
 char	**dup_env(void)
 {
-	char **dup;
-	int i;
+	char	**dup;
+	int		i;
 
 	i = env_count();
 	dup = (char **)malloc(sizeof(char *) * (i + 1));

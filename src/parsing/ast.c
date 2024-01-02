@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:29:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:35:58 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:12:06 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_cmdargs(t_ast *ast, t_cmd *cmd, int n)
 		cmd[n].argvs = ft_malloc(sizeof(char *) * (cmd[n].args_size + 1));
 }
 
-static void cmd_args_size(int n, t_cmd *cmd, int l)
+static void	cmd_args_size(int n, t_cmd *cmd, int l)
 {
 	if (l != 0)
 	{
@@ -39,7 +39,7 @@ static void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 	if ((ast->args_size - 1) == (ast->redir_nbr * 2))
 		cmd[n].argvs = NULL;
 	while (x.k < ast->args_size - 1 && (ast->args[x.k]->type != eof
-		|| ast->args[x.k]->type != pip))
+			|| ast->args[x.k]->type != pip))
 	{
 		if (ast->args[x.k]->type == id && ast->args[x.k]->value)
 			cmd[n].argvs[x.l++] = ft_strdup(ast->args[x.k++]->value);
@@ -51,7 +51,7 @@ static void	populate_cmd_from_ast(t_ast *ast, t_cmd *cmd, int n)
 				cmd[n].redir[x.m].type = ast->args[x.k - 1]->type;
 				cmd[n].redir[x.m].is_quoted = ast->args[x.k]->is_quoted;
 				cmd[n].redir[x.m++].filename = \
-				ft_strdup(ast->args[x.k++]->value);
+					ft_strdup(ast->args[x.k++]->value);
 			}
 		}
 	}

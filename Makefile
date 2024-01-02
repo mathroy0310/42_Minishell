@@ -6,7 +6,7 @@
 #    By: maroy <maroy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 15:41:11 by maroy             #+#    #+#              #
-#    Updated: 2023/12/17 01:41:29 by maroy            ###   ########.fr        #
+#    Updated: 2024/01/02 02:21:02 by maroy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ SRCS_EXECUT			=	error.c \
 						free.c \
 						utils.c \
 						redirections.c \
+						here_doc.c \
 						
 
 SRCS_BUILTINS		= 	builtins.c \

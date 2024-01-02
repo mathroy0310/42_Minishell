@@ -6,12 +6,11 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:21:18 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/05 16:46:27 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:07:34 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	print_error_msg(char *str, char *var)
 {

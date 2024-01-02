@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:12:50 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:43:36 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 01:43:37 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_data(t_data *data, t_state *state)
 		ft_free_tab(state->path);
 	state->path = get_path();
 	data->cmd_path = NULL;
+	data->is_builtin = FALSE;
 	data->saved_stdout_fd = dup(STDOUT_FILENO);
 	data->saved_stdin_fd = dup(STDIN_FILENO);
 	data->state = state;
@@ -74,8 +75,11 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 	t_data	*data;
 
 	data = (t_data *)ft_malloc(sizeof(t_data) * cmd->nbr_cmd);
-	if (ft_strequal(cmd->argvs[0], "exit"))
-			exit_builtin(cmd->argvs);
+	if (cmd->args_size > 0 && ft_strequal(cmd->argvs[0], "exit"))
+	{
+		init_data(data, state);
+		exit_builtin(cmd->argvs);
+	}
 	else if (cmd->nbr_cmd == 0)
 		return (OK);
 	else if (cmd->type == pip)
@@ -84,7 +88,6 @@ t_u8	execution(t_cmd *cmd, t_state *state)
 	{
 		init_data(data, state);
 		if (cmd->redir_nbr > 0)
-			// check here doc
 			execute_simple_cmd(cmd, data);
 		else
 			execute_regular_cmd(cmd, data);

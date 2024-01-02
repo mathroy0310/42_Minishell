@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:38:29 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 20:30:43 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:16:08 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	add_to_env(char *arg, t_data *data)
 
 int	env_count(void)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (g_global->env_var[i])

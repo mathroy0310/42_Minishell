@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:30:21 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/09 01:46:16 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/01 22:12:07 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * builtins.c *
  */
 
-t_bool	is_builtin(t_cmd *cmd);
+void	is_builtin(t_cmd *cmd, t_data *data);
 
 t_u8	execute_builtin(t_cmd *cmd, t_data *data);
 

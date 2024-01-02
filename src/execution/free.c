@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:20:59 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/17 01:34:28 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:14:36 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ static void	restore_std_fd(t_data *data)
 	ft_close(data->saved_stdout_fd);
 	ft_close(data->saved_stdin_fd);
 }
+
 static void	pipe_free(int **pipe_fd, int nbr_cmd)
 {
 	int	i;
 
 	i = nbr_cmd - 2;
 	while (i >= 0)
-	{
-		ft_free(pipe_fd[i]);
-		i--;
-	}
+		ft_free(pipe_fd[i--]);
 	ft_free(pipe_fd);
 }
 
@@ -38,6 +36,7 @@ void	free_data(t_data *data, t_cmd *cmd)
 
 	if (cmd->nbr_cmd == 1)
 	{
+		restore_std_fd(data);
 		ft_free(data->cmd_path);
 		ft_free(data->redir);
 		ft_free(data);

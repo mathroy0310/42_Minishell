@@ -6,7 +6,7 @@
 /*   By: maroy <maroy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:21:04 by maroy             #+#    #+#             */
-/*   Updated: 2023/12/08 21:07:06 by maroy            ###   ########.fr       */
+/*   Updated: 2024/01/02 00:15:36 by maroy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,16 @@ t_u8	execute_builtin(t_cmd *cmd, t_data *data)
 	return (KO);
 }
 
-t_bool	is_builtin(t_cmd *cmd)
+void	is_builtin(t_cmd *cmd, t_data *data)
 {
-	char **argvs;
-
 	if (!cmd->argvs)
-		return (FALSE);
-	argvs = cmd->argvs;
-	if ((ft_strequal(argvs[0], "echo")) || (ft_strequal(argvs[0], "cd"))
-		|| (ft_strequal(argvs[0], "pwd")) || (ft_strequal(argvs[0], "export"))
-		|| (ft_strequal(argvs[0], "unset")) || (ft_strequal(argvs[0], "env"))
-		|| (ft_strequal(argvs[0], "exit")))
-		return (TRUE);
-	else
-		return (FALSE);
+		return ;
+	if (ft_strequal(cmd->argvs[0], "echo")
+		|| ft_strequal(cmd->argvs[0], "cd")
+		|| ft_strequal(cmd->argvs[0], "pwd")
+		|| ft_strequal(cmd->argvs[0], "export")
+		|| ft_strequal(cmd->argvs[0], "unset")
+		|| ft_strequal(cmd->argvs[0], "env"))
+		data->is_builtin = TRUE;
+	return ;
 }
